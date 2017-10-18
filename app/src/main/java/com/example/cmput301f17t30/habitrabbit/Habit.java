@@ -8,13 +8,18 @@ import java.util.ArrayList;
 
 public class Habit {
     public String Title;
-    public String Name;
+    public String Reason;
     public ArrayList<Boolean> days;
 
 
-    public Habit(String title, String name, ArrayList<Boolean> days) {
+    public Habit(String title, String reason, ArrayList<Boolean> days) {
         Title = title;
-        Name = name;
+        Reason = reason;
+        this.days = days;
+    }
+
+    public Habit(String title, ArrayList<Boolean> days) {
+        Title = title;
         this.days = days;
     }
 
@@ -26,12 +31,12 @@ public class Habit {
         Title = title;
     }
 
-    public String getName() {
-        return Name;
+    public String getReason() {
+        return Reason;
     }
 
-    public void setName(String name) {
-        Name = name;
+    public void setReason(String reason) {
+        Reason = reason;
     }
 
     public ArrayList<Boolean> getDays() {
@@ -41,4 +46,6 @@ public class Habit {
     public void setDays(ArrayList<Boolean> days) {
         this.days = days;
     }
+
+
 }

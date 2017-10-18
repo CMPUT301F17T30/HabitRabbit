@@ -36,4 +36,24 @@ public class HabitTest extends ActivityInstrumentationTestCase2{
         habit.setTitle("new title");
         assertEquals(habit.getTitle(), "new title");
     }
+
+
+    public void TestGetReason(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        assertEquals(habit.getReason(),"test");
+    }
+
+    public void TestSetReason(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        habit.setReason("new reason");
+        assertEquals(habit.getReason(),"new reason");
+
+    }
+    public void TestGetDays(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        assertEquals(daylist,habit.getDays());
+    }
 }
