@@ -2,6 +2,8 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import java.util.ArrayList;
+
 /**
  * Created by arankin on 10/18/17.
  */
@@ -13,13 +15,15 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
     }
 
     public void TestGetComment(){
-        Habit habit = new Habit;
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
         HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
         assertEquals("a comment", event.getComment());
     }
-    
+
     public void TestSetComment(){
-        Habit habit = new Habit;
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
         HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
         event.setComment("new comment");
         assertEquals("new comment", event.getComment());
