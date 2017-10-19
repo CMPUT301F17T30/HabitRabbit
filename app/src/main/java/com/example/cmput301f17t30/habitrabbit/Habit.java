@@ -24,26 +24,32 @@ public class Habit {
     }
 
     public String getTitle() {
+
         return Title;
     }
 
     public void setTitle(String title) {
+
         Title = title;
     }
 
     public String getReason() {
+
         return Reason;
     }
 
     public void setReason(String reason) {
+
         Reason = reason;
     }
 
     public ArrayList<Boolean> getDays() {
+
         return days;
     }
 
     public void setDays(ArrayList<Boolean> days) {
+
         this.days = days;
     }
 
