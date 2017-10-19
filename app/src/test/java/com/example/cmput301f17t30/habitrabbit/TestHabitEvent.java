@@ -28,4 +28,23 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
         event.setComment("new comment");
         assertEquals("new comment", event.getComment());
     }
+
+    public void TestGetHabitType(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
+        assertEquals(habit,event.getHabitType());
+
+    }
+
+    public void TestSetHabitType(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
+        ArrayList daylist1 = new ArrayList<Boolean>();
+        Habit habit1 = new Habit("title 1","test",daylist);
+        event.setHabitType(habit1);
+        assertEquals(habit1,event.getHabitType());
+
+    }
 }
