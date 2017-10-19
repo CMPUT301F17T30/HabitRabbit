@@ -14,14 +14,14 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
         super(HabitEvent.class);
     }
 
-    public void TestGetComment(){
+    public void testGetComment(){
         ArrayList daylist = new ArrayList<Boolean>();
         Habit habit = new Habit("title 1","test",daylist);
         HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
         assertEquals("a comment", event.getComment());
     }
 
-    public void TestSetComment(){
+    public void testSetComment(){
         ArrayList daylist = new ArrayList<Boolean>();
         Habit habit = new Habit("title 1","test",daylist);
         HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
@@ -29,7 +29,7 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
         assertEquals("new comment", event.getComment());
     }
 
-    public void TestGetHabitType(){
+    public void testGetHabitType(){
         ArrayList daylist = new ArrayList<Boolean>();
         Habit habit = new Habit("title 1","test",daylist);
         HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
@@ -37,7 +37,7 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
 
     }
 
-    public void TestSetHabitType(){
+    public void testSetHabitType(){
         ArrayList daylist = new ArrayList<Boolean>();
         Habit habit = new Habit("title 1","test",daylist);
         HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
