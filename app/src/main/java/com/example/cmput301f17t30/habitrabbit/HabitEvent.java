@@ -8,6 +8,7 @@ public class HabitEvent {
     public String Comment;
     public Habit habitType;
     public String Location;
+    public Boolean wasFailed;
 
     public HabitEvent(Habit habitType, String location, String comment) {
         Comment = comment;
@@ -42,5 +43,13 @@ public class HabitEvent {
 
     public void setLocation(String location) {
         Location = location;
+    }
+
+    public Boolean getWasFailed() {
+        return wasFailed;
+    }
+
+    public void setWasFailed(Boolean wasFailed) {
+        this.wasFailed = wasFailed;
     }
 }

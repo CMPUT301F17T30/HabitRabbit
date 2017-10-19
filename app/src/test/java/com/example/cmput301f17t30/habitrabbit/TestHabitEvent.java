@@ -47,4 +47,5 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
         assertEquals(habit1,event.getHabitType());
 
     }
+
 }
