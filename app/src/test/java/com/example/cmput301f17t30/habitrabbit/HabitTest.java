@@ -9,7 +9,7 @@ import junit.framework.TestCase;
 import java.util.ArrayList;
 
 /**
- * Created by resplendent_lord_of_conquest on 18/10/17.
+ * Created by arankin on 18/10/17.
  */
 
 public class HabitTest extends ActivityInstrumentationTestCase2{

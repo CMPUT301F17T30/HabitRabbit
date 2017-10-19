@@ -18,6 +18,7 @@ public class TestFriend extends ActivityInstrumentationTestCase2 {
         assertEquals(ID, friend.getId());
     }
 
+
     public void testGetId(){
         Integer ID = 5;
         Friend friend = new Friend(ID);
