@@ -13,16 +13,16 @@ public class TestFriend extends ActivityInstrumentationTestCase2 {
     }
 
     public void testSetId(){
-        Integer ID = 5;
+        String ID = "bob";
         Friend friend = new Friend(ID);
         assertEquals(ID, friend.getId());
     }
 
 
     public void testGetId(){
-        Integer ID = 5;
+        String ID = "bob";
         Friend friend = new Friend(ID);
-        Integer newID = 7;
+        String newID = "tim";
         friend.setId(newID);
         assertEquals(newID, friend.getId());
 
