@@ -10,17 +10,23 @@ public class Habit {
     public String Title;
     public String Reason;
     public ArrayList<Boolean> days;
+    public Integer timesFailed;
+    public Integer timesCompleted;
 
 
     public Habit(String title, String reason, ArrayList<Boolean> days) {
         Title = title;
         Reason = reason;
         this.days = days;
+        timesCompleted = 0;
+        timesFailed =0;
     }
 
     public Habit(String title, ArrayList<Boolean> days) {
         Title = title;
         this.days = days;
+        timesCompleted = 0;
+        timesFailed = 0;
     }
 
     public String getTitle() {
@@ -52,6 +58,54 @@ public class Habit {
 
         this.days = days;
     }
+
+    public Boolean isDueToday(){
+
+        return Boolean.FALSE;
+    }
+
+    public double getPercentCompletion(){
+
+        return 0.0;
+    }
+
+    public Integer getTimesFailed() {
+        return timesFailed;
+    }
+
+    public void setTimesFailed(Integer timesFailed) {
+        this.timesFailed = timesFailed;
+    }
+
+    public Integer getTimesCompleted() {
+        return timesCompleted;
+    }
+
+    public void setTimesCompleted(Integer timesCompleted) {
+        this.timesCompleted = timesCompleted;
+    }
+
+    public void incrementTimesFailed(){
+        this.timesFailed +=1;
+
+    }
+
+    public void decrementTimesFailed(){
+        this.timesFailed -=1;
+
+    }
+
+    public void incrementTimesCompleted(){
+        this.timesCompleted +=1;
+
+    }
+
+    public void decrementTimesCompleted(){
+        this.timesCompleted -=1;
+
+    }
+
+
 
 
 }

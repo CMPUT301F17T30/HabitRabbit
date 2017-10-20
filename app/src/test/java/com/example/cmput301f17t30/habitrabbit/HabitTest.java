@@ -53,4 +53,82 @@ public class HabitTest extends ActivityInstrumentationTestCase2{
         Habit habit = new Habit("title 1","test",daylist);
         assertEquals(daylist,habit.getDays());
     }
+
+    public void testIsDueToday(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        assertEquals(Boolean.TRUE,habit.isDueToday());
+
+    }
+
+
+    public void testGetTimesFailed(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        assertEquals((Integer) 0,habit.getTimesFailed());
+    }
+
+    public void testSetTimesFailed(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        habit.setTimesFailed(5);
+        assertEquals((Integer) 5,habit.getTimesFailed());
+    }
+
+    public void testGetTimesCompleted(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        assertEquals((Integer) 0,habit.getTimesCompleted());
+    }
+
+    public void testSetTimesCompleted(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        habit.setTimesCompleted(5);
+        assertEquals((Integer) 5,habit.getTimesCompleted());
+    }
+
+    public void testIncrementTimesFailed(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        habit.incrementTimesFailed();
+        assertEquals((Integer) 1,habit.getTimesFailed());
+
+    }
+
+    public void testDecrementTimesFailed(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        habit.setTimesFailed(5);
+        habit.decrementTimesFailed();
+        assertEquals((Integer) 4,habit.getTimesFailed());
+
+    }
+
+    public void testIncrementTimesCompleted(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        habit.incrementTimesCompleted();
+        assertEquals((Integer) 1,habit.getTimesCompleted());
+
+    }
+
+    public void testDecrementTimesCompleted(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        habit.setTimesCompleted(5);
+        habit.decrementTimesCompleted();
+        assertEquals((Integer) 4,habit.getTimesCompleted());
+
+    }
+
+    public void testGetPercentCompletion(){
+        ArrayList daylist = new ArrayList<Boolean>();
+        Habit habit = new Habit("title 1","test",daylist);
+        habit.setTimesCompleted(5);
+        habit.setTimesFailed(5);
+        assertEquals(0.5,habit.getPercentCompletion());
+
+    }
+
 }
