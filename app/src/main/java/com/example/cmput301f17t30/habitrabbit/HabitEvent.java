@@ -1,5 +1,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.media.Image;
+
 /**
  * Created by arankin on 10/18/17.
  */
@@ -8,7 +10,7 @@ public class HabitEvent {
     public String Comment;
     public Habit habitType;
     public String Location;
-    public Boolean wasFailed;
+    public Image image;
 
     public HabitEvent(Habit habitType, String location, String comment) {
         Comment = comment;
@@ -30,26 +32,30 @@ public class HabitEvent {
     }
 
     public Habit getHabitType() {
+
         return habitType;
     }
 
     public void setHabitType(Habit habitType) {
+
         this.habitType = habitType;
     }
 
     public String getLocation() {
+
         return Location;
     }
 
     public void setLocation(String location) {
+
         Location = location;
     }
 
-    public Boolean getWasFailed() {
-        return wasFailed;
+    public Image getImage() {
+        return image;
     }
 
-    public void setWasFailed(Boolean wasFailed) {
-        this.wasFailed = wasFailed;
+    public void setImage(Image image) {
+        this.image = image;
     }
 }

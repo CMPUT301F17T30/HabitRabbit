@@ -65,8 +65,9 @@ public class Habit {
     }
 
     public double getPercentCompletion(){
+        double percentage = (timesFailed+timesCompleted)/timesCompleted;
 
-        return 0.0;
+        return percentage;
     }
 
     public Integer getTimesFailed() {
@@ -104,8 +105,6 @@ public class Habit {
         this.timesCompleted -=1;
 
     }
-
-
 
 
 }
