@@ -20,17 +20,20 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
     private ArrayList<Habit> habitList;
 
+
     public HabitLayoutAdapter(ArrayList<Habit> habitList, Context context) {
         this.habitList = habitList;
 
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-
+        private TextView habitName;
 
         public ViewHolder(View itemView) {
             super(itemView);
+
             itemView.setOnClickListener(this);
+            habitName = itemView.findViewById(R.id.habitNameTextView);
         }
 
         @Override
@@ -52,9 +55,9 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         String title = habit.getTitle();
 
 
+
         /**
-         * // this is a button that appears on each habit item
-        Button button1 = holder.itemView.findViewById(R.id.button1);
+        Button delete = holder.itemView.findViewById(R.id.deleteHabitButton);
 
         button1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -64,9 +67,8 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
             }
         });
-
-        holder.title.setText(title);
         **/
+        holder.habitName.setText(title);
     }
 
 
