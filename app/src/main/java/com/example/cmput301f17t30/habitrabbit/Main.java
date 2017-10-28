@@ -13,6 +13,7 @@ public class Main extends AppCompatActivity {
     private HabitLayoutAdapter adapter;
     ArrayList daylist = new ArrayList<Boolean>();
     Habit habit = new Habit("title 1","test",daylist);
+    Habit habit2 = new Habit("title 2","test2",daylist);
 
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
 
@@ -25,6 +26,7 @@ public class Main extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         habitList.add(habit);
+        habitList.add(habit2);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
@@ -41,6 +43,7 @@ public class Main extends AppCompatActivity {
         super.onStart();
 
         habitList.add(habit);
+        habitList.add(habit2);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);

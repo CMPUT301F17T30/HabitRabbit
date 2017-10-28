@@ -28,12 +28,14 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
     public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitName;
+        private TextView habitReason;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             itemView.setOnClickListener(this);
             habitName = itemView.findViewById(R.id.habitNameTextView);
+            habitReason = itemView.findViewById(R.id.habitReasonTextView);
         }
 
         @Override
@@ -53,8 +55,10 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
     public void onBindViewHolder(HabitLayoutAdapter.ViewHolder holder, final int position) {
         final Habit habit = habitList.get(position);
         String title = habit.getTitle();
+        String reason = habit.getReason();
 
         holder.habitName.setText(title);
+        holder.habitReason.setText(reason);
 
 
 
