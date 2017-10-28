@@ -11,18 +11,48 @@ public class Main extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
+    ArrayList daylist = new ArrayList<Boolean>();
+    Habit habit = new Habit("title 1","test",daylist);
 
-    private ArrayList<Habit> habitList;
+    private ArrayList<Habit> habitList = new ArrayList<Habit>();
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        habitList.add(habit);
+
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new HabitLayoutAdapter(habitList, this);
         recyclerView.setAdapter(adapter);
+
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        habitList.add(habit);
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new HabitLayoutAdapter(habitList, this);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
     }
 }

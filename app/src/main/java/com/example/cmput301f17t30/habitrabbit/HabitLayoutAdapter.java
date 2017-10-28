@@ -38,7 +38,7 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
         @Override
         public void onClick(View view) {
-            //this is for clicking on the habit items itself
+            //this is for clicking on the habit item itself
         }
     }
 
@@ -54,6 +54,8 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         final Habit habit = habitList.get(position);
         String title = habit.getTitle();
 
+        holder.habitName.setText(title);
+
 
 
         /**
@@ -68,7 +70,7 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
             }
         });
         **/
-        holder.habitName.setText(title);
+
     }
 
 
