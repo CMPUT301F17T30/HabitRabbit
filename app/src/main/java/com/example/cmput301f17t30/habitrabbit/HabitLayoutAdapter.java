@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -19,14 +20,16 @@ import java.util.ArrayList;
 public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.ViewHolder>  {
 
     private ArrayList<Habit> habitList;
+    private Context mainContext;
 
 
     public HabitLayoutAdapter(ArrayList<Habit> habitList, Context context) {
         this.habitList = habitList;
+        this.mainContext = context;
 
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitName;
         private TextView habitReason;
 
@@ -40,7 +43,9 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
         @Override
         public void onClick(View view) {
-            //this is for clicking on the habit item itself
+            //this is for clicking on the habit item itself as oppsed to any particular button
+            Toast.makeText(mainContext, "clicking here will bring up new activity",
+                    Toast.LENGTH_LONG).show();
         }
     }
 
