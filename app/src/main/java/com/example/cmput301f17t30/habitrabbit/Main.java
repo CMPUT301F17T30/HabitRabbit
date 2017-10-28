@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -34,6 +37,33 @@ public class Main extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new HabitLayoutAdapter(habitList, this);
         recyclerView.setAdapter(adapter);
+
+        Button button1 = (Button) findViewById(R.id.button1);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 1",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button button2 = (Button) findViewById(R.id.button2);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 2",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button button3 = (Button) findViewById(R.id.button3);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 3",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
     }
