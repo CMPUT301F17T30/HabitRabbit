@@ -4,18 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cmput301f17t30.habitrabbit.MainActivity">
+    tools:context="com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView1"
-        android:layout_width="0dp"
-        android:layout_height="495dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
+
+
+
+
+
+
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -23,42 +19,51 @@
         android:layout_width="0dp"
         android:layout_height="70dp"
         android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteX="8dp">
 
 
         <Button
-            android:id="@+id/addHabitButton"
+            android:id="@+id/button7"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add"
+            android:text="Button1"
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="482dp" />
 
         <Button
-            android:id="@+id/habitHistoryButton"
+            android:id="@+id/button8"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="History"
+            android:text="Button2"
             tools:layout_editor_absoluteX="173dp"
             tools:layout_editor_absoluteY="482dp" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button9"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3"
+            android:text="Button3"
             tools:layout_editor_absoluteX="241dp"
             tools:layout_editor_absoluteY="482dp" />
 
     </LinearLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerViewHabitEvent"
+        android:layout_width="0dp"
+        android:layout_height="417dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp" />
 
 </android.support.constraint.ConstraintLayout>
