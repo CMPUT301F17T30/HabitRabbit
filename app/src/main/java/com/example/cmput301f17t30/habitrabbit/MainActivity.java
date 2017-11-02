@@ -1,5 +1,6 @@
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +11,11 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class Main extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity {
+
+    private int ADD_HABIT_REQUEST = 0;
+    private int HABIT_HISTORY_REQUEST = 1;
+
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
@@ -38,8 +43,8 @@ public class Main extends AppCompatActivity {
         adapter = new HabitLayoutAdapter(habitList, this);
         recyclerView.setAdapter(adapter);
 
-        Button button1 = (Button) findViewById(R.id.button1);
-        button1.setOnClickListener(new View.OnClickListener() {
+        Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
+        addHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 1",
@@ -47,12 +52,12 @@ public class Main extends AppCompatActivity {
             }
         });
 
-        Button button2 = (Button) findViewById(R.id.button2);
-        button2.setOnClickListener(new View.OnClickListener() {
+        Button habitHistoryButton = (Button) findViewById(R.id.habitHistoryButton);
+        habitHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 2",
-                        Toast.LENGTH_SHORT).show();
+                Intent counterPage = new Intent(MainActivity.this, HabitHistoryActivity.class);
+                startActivityForResult(counterPage, HABIT_HISTORY_REQUEST);
             }
         });
 
