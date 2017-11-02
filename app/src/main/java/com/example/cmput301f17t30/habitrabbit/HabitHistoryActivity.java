@@ -17,11 +17,11 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
     ArrayList daylist = new ArrayList<Boolean>();
     Habit habit = new Habit("title 1","test",daylist);
-    HabitEvent event = new HabitEvent(habit, "somewhere", "a comment");
+    HabitEvent event = new HabitEvent(habit, "a comment");
 
     ArrayList daylist2 = new ArrayList<Boolean>();
     Habit habit1 = new Habit("title 1","test",daylist);
-    HabitEvent event1 = new HabitEvent(habit, "somewhere", "another comment");
+    HabitEvent event1 = new HabitEvent(habit, "another comment");
 
 
     @Override

@@ -11,27 +11,22 @@ import java.util.Date;
 public class HabitEvent {
     public String Comment;
     public Habit habitType;
-    public String Location;
+    public Double Latitude;
+    public Double Longitude;
     public Date date;
     public Image image;
 
-    public HabitEvent(Habit habitType, String location, String comment) {
+    public HabitEvent(Habit habitType,  String comment) {
         Comment = comment;
         this.habitType = habitType;
-        Location = location;
+        //Latitude = get current latitude
+        //lonmgitude - get current long
         date = new Date();
     }
 
     public HabitEvent(Habit habitType) {
         this.habitType = habitType;
         date = new Date();
-    }
-
-    public HabitEvent(Habit habitType, String location) {
-        this.habitType = habitType;
-        Location = location;
-        date = new Date();
-
     }
 
     public Date getDate(){
@@ -55,14 +50,24 @@ public class HabitEvent {
         this.habitType = habitType;
     }
 
-    public String getLocation() {
-
-        return Location;
+    public Double getLatitude() {
+        return Latitude;
     }
 
-    public void setLocation(String location) {
+    public void setLatitude(Double latitude) {
+        Latitude = latitude;
+    }
 
-        Location = location;
+    public Double getLongitude() {
+        return Longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        Longitude = longitude;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
     }
 
     public Image getImage() {
