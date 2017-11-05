@@ -1,6 +1,6 @@
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.media.Image;
+import android.graphics.Bitmap;
 
 import java.util.Date;
 
@@ -9,19 +9,26 @@ import java.util.Date;
  */
 
 public class HabitEvent {
-    public String Comment;
-    public Habit habitType;
-    public Double Latitude;
-    public Double Longitude;
-    public Date date;
-    public Image image;
+    private String Comment;
+    private Habit habitType;
 
-    public HabitEvent(Habit habitType,  String comment) {
+    private Date date;
+    private Bitmap image;
+
+    private String Location;
+    private double logitude;
+    private double latitude;
+
+
+    public HabitEvent(Habit habitType, String location, String comment, double logitude, double latitude, Bitmap bitmap) {
         Comment = comment;
         this.habitType = habitType;
-        //Latitude = get current latitude
-        //lonmgitude - get current long
+        Location = location;
         date = new Date();
+
+        this.logitude = logitude;
+        this.latitude = latitude;
+        this.image = bitmap;
     }
 
     public HabitEvent(Habit habitType) {
@@ -29,9 +36,17 @@ public class HabitEvent {
         date = new Date();
     }
 
+   /* public HabitEvent(Habit habitType, String location) {
+        this.habitType = habitType;
+        Location = location;
+        date = new Date();
+
+    }*/
+
     public Date getDate(){
         return date;
     }
+
     public String getComment() {
         return Comment;
     }
@@ -41,40 +56,40 @@ public class HabitEvent {
     }
 
     public Habit getHabitType() {
-
         return habitType;
     }
 
     public void setHabitType(Habit habitType) {
-
         this.habitType = habitType;
     }
 
-    public Double getLatitude() {
-        return Latitude;
+    public String getLocation() {
+        return Location;
+    }
+    public void setCoordinate(double logitude, double latitude) {
+        this.logitude = logitude;
+        this.latitude = latitude;
     }
 
-    public void setLatitude(Double latitude) {
-        Latitude = latitude;
+    public double getLogitude() {
+        return logitude;
     }
 
-    public Double getLongitude() {
-        return Longitude;
+    public double getLatitude() {
+        return latitude;
     }
 
-    public void setLongitude(Double longitude) {
-        Longitude = longitude;
+    public void setLocation(String location) {
+
+        Location = location;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
 
-    public Image getImage() {
+    public Bitmap getImage() {
         return image;
     }
 
-    public void setImage(Image image) {
+    public void setImage(Bitmap image) {
         this.image = image;
     }
 }
