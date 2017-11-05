@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="520dp"
+        >
+
+
+        <EditText
+            android:id="@+id/comment"
+            android:layout_width="379dp"
+            android:layout_height="47dp"
+            android:hint="enter comment here"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            android:layout_marginBottom="472dp" />
+
+        <Button
+            android:id="@+id/gps"
+            android:layout_width="38dp"
+            android:layout_height="37dp"
+            android:layout_gravity="bottom"
+            android:background="@android:drawable/ic_menu_mylocation"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.953"
+            android:layout_marginBottom="241dp" />
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="98dp"
+            android:layout_height="103dp"
+            app:srcCompat="@mipmap/ic_launcher"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="347dp" />
+
+
+        <Button
+            android:id="@+id/add_image"
+            android:layout_width="109dp"
+            android:layout_height="47dp"
+            android:layout_gravity="bottom"
+            android:text="image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.501"
+            android:layout_marginBottom="288dp" />
+
+        <Button
+            android:id="@+id/save_event"
+            android:layout_width="104dp"
+            android:layout_height="0dp"
+            android:layout_gravity="bottom"
+            android:text="save"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_marginBottom="0dp" />
+
+        <EditText
+            android:id="@+id/enter_location"
+            android:layout_width="369dp"
+            android:layout_height="57dp"
+            android:hint="enter locatoin here"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginBottom="231dp" />
+
+        <Button
+            android:id="@+id/search_location"
+            android:layout_width="32dp"
+            android:layout_height="35dp"
+            android:layout_gravity="bottom"
+            android:background="@android:drawable/ic_menu_search"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintHorizontal_bias="0.846"
+            android:layout_marginBottom="242dp" />
+
+        <ListView
+                android:id="@+id/serchout"
+                android:layout_width="371dp"
+                android:layout_height="179dp"
+                android:layout_marginBottom="48dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+
+    </android.support.constraint.ConstraintLayout>
+    </LinearLayout>
+
+</ScrollView>
+
