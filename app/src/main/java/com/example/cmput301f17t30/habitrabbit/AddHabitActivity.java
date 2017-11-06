@@ -29,8 +29,8 @@ public class AddHabitActivity extends AppCompatActivity {
     private static final int SATURDAY = 5;
     private static final int SUNDAY = 6;
 
-    EditText name = (EditText) findViewById(R.id.addHabitName);
-    EditText reason = (EditText) findViewById(R.id.addHabitReason);
+    EditText name;
+    EditText reason;
 
 
 
@@ -43,6 +43,10 @@ public class AddHabitActivity extends AppCompatActivity {
         for(int i = 0; i < 7; i++){
             days.add(FALSE);
         }
+
+        name = (EditText) findViewById(R.id.addHabitName);
+        reason = (EditText) findViewById(R.id.addHabitReason);
+
 
 
         RadioButton mondayButton = (RadioButton) findViewById(R.id.mondayCheck);
