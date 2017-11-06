@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static java.lang.Boolean.FALSE;
+
 public class MainActivity extends AppCompatActivity {
 
     private int ADD_HABIT_REQUEST = 0;
@@ -92,5 +94,23 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == ADD_HABIT_REQUEST){
+            if (resultCode == RESULT_OK){
+                Habit newHabit = new Habit(data.getStringExtra(AddHabitActivity.ADD_HABIT_NAME),
+                        (ArrayList<Boolean>) data.getSerializableExtra(AddHabitActivity.ADD_HABIT_DAYS));
+
+                if (!data.getStringExtra(AddHabitActivity.ADD_HABIT_REASON).isEmpty()){
+                    newHabit.setReason(data.getStringExtra(AddHabitActivity.ADD_HABIT_REASON));
+                }
+
+                habitList.add(newHabit);
+                adapter.notifyDataSetChanged();
+
+            }
+        }
     }
 }
