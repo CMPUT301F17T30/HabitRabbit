@@ -11,7 +11,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import static java.lang.Boolean.FALSE;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static final String ADD_HABIT_NAME = "AddHabitName";
+    public static final String ADD_HABIT_REASON = "AddHabitReason";
+    public static final String ADD_HABIT_DAYS = "AddHabitDays";
+
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
@@ -20,8 +27,8 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
     ArrayList daylist = new ArrayList<Boolean>();
-    Habit habit = new Habit("title 1","test",daylist);
-    Habit habit2 = new Habit("title 2","test2",daylist);
+  //  Habit habit = new Habit("title 1","test",daylist);
+    // Habit habit2 = new Habit("title 2","test2",daylist);
 
     private ArrayList<Habit> habitList = new ArrayList<Habit>();
 
@@ -33,8 +40,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        habitList.add(habit);
-        habitList.add(habit2);
+       // habitList.add(habit);
+       // habitList.add(habit2);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
@@ -47,8 +54,8 @@ public class MainActivity extends AppCompatActivity {
         addHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 1",
-                        Toast.LENGTH_SHORT).show();
+                Intent newHabit = new Intent(MainActivity.this, AddHabitActivity.class);
+                startActivityForResult(newHabit, ADD_HABIT_REQUEST);
             }
         });
 
@@ -77,8 +84,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-        habitList.add(habit);
-        habitList.add(habit2);
+     //   habitList.add(habit);
+     //   habitList.add(habit2);
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -92,5 +99,29 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data){
+        if (requestCode == ADD_HABIT_REQUEST){
+            if (resultCode == RESULT_OK){
+
+                String name = data.getStringExtra(ADD_HABIT_NAME);
+                String reason = data.getStringExtra(ADD_HABIT_REASON);
+                ArrayList<Boolean> days = (ArrayList<Boolean>) data.getSerializableExtra(ADD_HABIT_DAYS);
+
+                Habit newHabit = new Habit(name, days);
+
+                if (!reason.isEmpty()){
+                    newHabit.setReason(reason);
+                }
+
+                habitList.add(newHabit);
+                adapter.notifyDataSetChanged();
+
+
+
+            }
+        }
     }
 }
