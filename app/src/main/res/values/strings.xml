@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Habit Rabbit</string>
+    <string name="monday">Monday</string>
+    <string name="tuesday">Tuesday</string>
+    <string name="wednesday">Wednesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="friday">Friday</string>
+    <string name="saturday">Saturday</string>
+    <string name="sunday">Sunday</string>
+    <string name="done">DONE</string>
+    <string name="nameHint">Name</string>
+    <string name="reasonHint">Reason</string>
+    <string name="daySelectPrompt">Please select days this habit is due:</string>
 </resources>

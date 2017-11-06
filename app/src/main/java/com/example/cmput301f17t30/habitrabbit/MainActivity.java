@@ -47,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
         addHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 1",
-                        Toast.LENGTH_SHORT).show();
+                Intent newHabit = new Intent(MainActivity.this, AddHabitActivity.class);
+                startActivityForResult(newHabit, ADD_HABIT_REQUEST);
             }
         });
 
