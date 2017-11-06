@@ -15,6 +15,11 @@ import static java.lang.Boolean.FALSE;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String ADD_HABIT_NAME = "AddHabitName";
+    public static final String ADD_HABIT_REASON = "AddHabitReason";
+    public static final String ADD_HABIT_DAYS = "AddHabitDays";
+
+
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
 
@@ -100,15 +105,21 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
-                Habit newHabit = new Habit(data.getStringExtra(AddHabitActivity.ADD_HABIT_NAME),
-                        (ArrayList<Boolean>) data.getSerializableExtra(AddHabitActivity.ADD_HABIT_DAYS));
 
-                if (!data.getStringExtra(AddHabitActivity.ADD_HABIT_REASON).isEmpty()){
-                    newHabit.setReason(data.getStringExtra(AddHabitActivity.ADD_HABIT_REASON));
+                String name = data.getStringExtra(ADD_HABIT_NAME);
+                String reason = data.getStringExtra(ADD_HABIT_REASON);
+                ArrayList<Boolean> days = (ArrayList<Boolean>) data.getSerializableExtra(ADD_HABIT_DAYS);
+
+                Habit newHabit = new Habit(name, days);
+
+                if (!reason.isEmpty()){
+                    newHabit.setReason(reason);
                 }
 
                 habitList.add(newHabit);
                 adapter.notifyDataSetChanged();
+
+
 
             }
         }

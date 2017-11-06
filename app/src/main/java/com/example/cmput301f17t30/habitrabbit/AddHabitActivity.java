@@ -16,7 +16,7 @@ import static java.lang.Boolean.FALSE;
 public class AddHabitActivity extends AppCompatActivity {
 
     public static final String ADD_HABIT_NAME = "AddHabitName";
-    public static final String ADD_HABIT_REASON = "AddHabitReason";
+    public static final String  ADD_HABIT_REASON = "AddHabitReason";
     public static final String ADD_HABIT_DAYS = "AddHabitDays";
 
     ArrayList<Boolean> days = new ArrayList<>();
@@ -125,8 +125,8 @@ public class AddHabitActivity extends AppCompatActivity {
         try{
             Intent returnToMain = new Intent();
 
-            String habitName = name.toString();
-            String habitReason = reason.toString();
+            String habitName = name.getText().toString();
+            String habitReason = reason.getText().toString();
 
             returnToMain.putExtra(ADD_HABIT_NAME, habitName);
             returnToMain.putExtra(ADD_HABIT_REASON, habitReason);
