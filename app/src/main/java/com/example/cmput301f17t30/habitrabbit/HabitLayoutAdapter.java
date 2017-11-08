@@ -1,6 +1,8 @@
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -40,9 +42,26 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
         @Override
         public void onClick(View view) {
-            //this is for clicking on the habit item itself as oppsed to any particular button
-            Toast.makeText(mainContext, "clicking here will bring up new activity",
-                    Toast.LENGTH_LONG).show();
+
+            final String EDIT_HABIT_NAME = "EditHabitName";
+            final String  EDIT_HABIT_REASON = "EditHabitReason";
+            final String EDIT_HABIT_DAYS = "EditHabitDays";
+            final String EDIT_HABIT_POSITION = "EditHabitPosition";
+
+
+
+            Intent editHabit = new Intent(mainContext, EditHabitActivity.class);
+            String name = habitList.get(getPosition()).getTitle();
+            String reason = habitList.get(getPosition()).getReason();
+            ArrayList<Boolean> days = habitList.get(getPosition()).getDays();
+
+            editHabit.putExtra(EDIT_HABIT_NAME, name);
+            editHabit.putExtra(EDIT_HABIT_REASON, reason);
+            editHabit.putExtra(EDIT_HABIT_DAYS, days);
+            editHabit.putExtra(EDIT_HABIT_POSITION, getPosition());
+
+
+            ((Activity)mainContext).startActivityForResult(editHabit, 2);
         }
     }
 

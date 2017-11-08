@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cmput301f17t30.habitrabbit.AddHabitActivity">
+    tools:context="com.example.cmput301f17t30.habitrabbit.EditHabitActivity">
 
     <CheckBox
-        android:id="@+id/addHabitSundayCheck"
+        android:id="@+id/editHabitSundayCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -15,10 +15,10 @@
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitSaturdayCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitSaturdayCheck" />
 
     <CheckBox
-        android:id="@+id/addHabitSaturdayCheck"
+        android:id="@+id/editHabitSaturdayCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -26,10 +26,10 @@
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitFridayCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitFridayCheck" />
 
     <CheckBox
-        android:id="@+id/addHabitMondayCheck"
+        android:id="@+id/editHabitMondayCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -39,10 +39,10 @@
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitDaySelectTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitDaySelectTextView" />
 
     <CheckBox
-        android:id="@+id/addHabitTuesdayCheck"
+        android:id="@+id/editHabitTuesdayCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/tuesday"
@@ -50,10 +50,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitMondayCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitMondayCheck" />
 
     <EditText
-        android:id="@+id/addHabitName"
+        android:id="@+id/editHabitName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="26dp"
@@ -66,7 +66,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/addHabitReason"
+        android:id="@+id/editHabitReason"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -76,10 +76,10 @@
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitName" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitName" />
 
     <CheckBox
-        android:id="@+id/addHabitWednesdayCheck"
+        android:id="@+id/editHabitWednesdayCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/wednesday"
@@ -87,10 +87,10 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitTuesdayCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitTuesdayCheck" />
 
     <CheckBox
-        android:id="@+id/addHabitThursdayCheck"
+        android:id="@+id/editHabitThursdayCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -98,10 +98,10 @@
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitWednesdayCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitWednesdayCheck" />
 
     <CheckBox
-        android:id="@+id/addHabitFridayCheck"
+        android:id="@+id/editHabitFridayCheck"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -109,10 +109,10 @@
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitThursdayCheck" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitThursdayCheck" />
 
     <Button
-        android:id="@+id/addHabitDone"
+        android:id="@+id/editHabitDone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -122,7 +122,7 @@
         app:layout_constraintRight_toRightOf="parent" />
 
     <TextView
-        android:id="@+id/addHabitDaySelectTextView"
+        android:id="@+id/editHabitDaySelectTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -130,6 +130,6 @@
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/addHabitReason" />
+        app:layout_constraintTop_toBottomOf="@+id/editHabitReason" />
 
 </android.support.constraint.ConstraintLayout>
