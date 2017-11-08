@@ -13,7 +13,7 @@ public class Habit {
     public Integer timesFailed;
     public Integer timesCompleted;
 
-
+/**
     public Habit(String title, String reason, ArrayList<Boolean> days) {
         Title = title;
         Reason = reason;
@@ -21,6 +21,7 @@ public class Habit {
         timesCompleted = 0;
         timesFailed =0;
     }
+ **/
 
     public Habit(String title, ArrayList<Boolean> days) {
         Title = title;
