@@ -11,13 +11,13 @@ import android.widget.CheckBox;
 
 import java.util.ArrayList;
 
-import static java.lang.Boolean.FALSE;
+public class EditHabitActivity extends AppCompatActivity {
 
-public class AddHabitActivity extends AppCompatActivity {
+    public static final String EDIT_HABIT_NAME = "EditHabitName";
+    public static final String  EDIT_HABIT_REASON = "EditHabitReason";
+    public static final String EDIT_HABIT_DAYS = "EditHabitDays";
+    public static final String EDIT_HABIT_POSITION = "EditHabitPosition";
 
-    public static final String ADD_HABIT_NAME = "AddHabitName";
-    public static final String  ADD_HABIT_REASON = "AddHabitReason";
-    public static final String ADD_HABIT_DAYS = "AddHabitDays";
 
     ArrayList<Boolean> days = new ArrayList<>();
 
@@ -38,55 +38,67 @@ public class AddHabitActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_habit);
+        setContentView(R.layout.activity_edit_habit);
 
-        for(int i = 0; i < 7; i++){
-            days.add(FALSE);
-        }
-
-        name = (EditText) findViewById(R.id.addHabitName);
-        reason = (EditText) findViewById(R.id.addHabitReason);
+        days = (ArrayList<Boolean>) getIntent().getSerializableExtra(EDIT_HABIT_DAYS);
+        String oldName = getIntent().getStringExtra(EDIT_HABIT_NAME);
+        String oldReason = getIntent().getStringExtra(EDIT_HABIT_REASON);
 
 
+        name = (EditText) findViewById(R.id.editHabitName);
+        reason = (EditText) findViewById(R.id.editHabitReason);
 
-        CheckBox mondayButton = (CheckBox) findViewById(R.id.addHabitMondayCheck);
-        CheckBox tuesdayButton = (CheckBox) findViewById(R.id.addHabitTuesdayCheck);
-        CheckBox wednesdayButton = (CheckBox) findViewById(R.id.addHabitWednesdayCheck);
-        CheckBox thursdayButton = (CheckBox) findViewById(R.id.addHabitThursdayCheck);
-        CheckBox fridayButton = (CheckBox) findViewById(R.id.addHabitFridayCheck);
-        CheckBox saturdayButton = (CheckBox) findViewById(R.id.addHabitSaturdayCheck);
-        CheckBox sundayButton = (CheckBox) findViewById(R.id.addHabitSundayCheck);
+        name.setText(oldName);
+        reason.setText(oldReason);
+
+
+
+        CheckBox mondayButton = (CheckBox) findViewById(R.id.editHabitMondayCheck);
+        CheckBox tuesdayButton = (CheckBox) findViewById(R.id.editHabitTuesdayCheck);
+        CheckBox wednesdayButton = (CheckBox) findViewById(R.id.editHabitWednesdayCheck);
+        CheckBox thursdayButton = (CheckBox) findViewById(R.id.editHabitThursdayCheck);
+        CheckBox fridayButton = (CheckBox) findViewById(R.id.editHabitFridayCheck);
+        CheckBox saturdayButton = (CheckBox) findViewById(R.id.editHabitSaturdayCheck);
+        CheckBox sundayButton = (CheckBox) findViewById(R.id.editHabitSundayCheck);
+
+        mondayButton.setChecked(days.get(MONDAY));
+        tuesdayButton.setChecked(days.get(TUESDAY));
+        wednesdayButton.setChecked(days.get(WEDNESDAY));
+        thursdayButton.setChecked(days.get(THURSDAY));
+        fridayButton.setChecked(days.get(FRIDAY));
+        saturdayButton.setChecked(days.get(SATURDAY));
+        sundayButton.setChecked(days.get(SUNDAY));
 
 
         CompoundButton.OnCheckedChangeListener dayCheckListener = new CompoundButton.OnCheckedChangeListener() {
 
             public void onCheckedChanged(CompoundButton day, boolean isChecked) {
                 switch (day.getId()){
-                    case R.id.addHabitMondayCheck:
+                    case R.id.editHabitMondayCheck:
                         days.set(MONDAY, isChecked);
                         break;
 
-                    case R.id.addHabitTuesdayCheck:
+                    case R.id.editHabitTuesdayCheck:
                         days.set(TUESDAY, isChecked);
                         break;
 
-                    case R.id.addHabitWednesdayCheck:
+                    case R.id.editHabitWednesdayCheck:
                         days.set(WEDNESDAY, isChecked);
                         break;
 
-                    case R.id.addHabitThursdayCheck:
+                    case R.id.editHabitThursdayCheck:
                         days.set(THURSDAY, isChecked);
                         break;
 
-                    case R.id.addHabitFridayCheck:
+                    case R.id.editHabitFridayCheck:
                         days.set(FRIDAY, isChecked);
                         break;
 
-                    case R.id.addHabitSaturdayCheck:
+                    case R.id.editHabitSaturdayCheck:
                         days.set(SATURDAY, isChecked);
                         break;
 
-                    case R.id.addHabitSundayCheck:
+                    case R.id.editHabitSundayCheck:
                         days.set(SUNDAY, isChecked);
                         break;
                 }
@@ -103,7 +115,7 @@ public class AddHabitActivity extends AppCompatActivity {
         sundayButton.setOnCheckedChangeListener(dayCheckListener);
 
 
-        Button doneButton = (Button) findViewById(R.id.addHabitDone);
+        Button doneButton = (Button) findViewById(R.id.editHabitDone);
         doneButton.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -113,7 +125,7 @@ public class AddHabitActivity extends AppCompatActivity {
                 }
 
                 else {
-                    addHabitDone();
+                    editHabitDone();
                 }
             }
 
@@ -121,16 +133,18 @@ public class AddHabitActivity extends AppCompatActivity {
 
     }
 
-    public void addHabitDone(){
+    public void editHabitDone(){
         try{
             Intent returnToMain = new Intent();
 
             String habitName = name.getText().toString();
             String habitReason = reason.getText().toString();
+            int position = getIntent().getIntExtra(EDIT_HABIT_POSITION, 0);
 
-            returnToMain.putExtra(ADD_HABIT_NAME, habitName);
-            returnToMain.putExtra(ADD_HABIT_REASON, habitReason);
-            returnToMain.putExtra(ADD_HABIT_DAYS, days);
+            returnToMain.putExtra(EDIT_HABIT_NAME, habitName);
+            returnToMain.putExtra(EDIT_HABIT_REASON, habitReason);
+            returnToMain.putExtra(EDIT_HABIT_DAYS, days);
+            returnToMain.putExtra(EDIT_HABIT_POSITION, position);
 
             setResult(RESULT_OK, returnToMain);
 

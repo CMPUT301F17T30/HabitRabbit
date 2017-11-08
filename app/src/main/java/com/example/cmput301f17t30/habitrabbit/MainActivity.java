@@ -19,9 +19,17 @@ public class MainActivity extends AppCompatActivity {
     public static final String ADD_HABIT_REASON = "AddHabitReason";
     public static final String ADD_HABIT_DAYS = "AddHabitDays";
 
+    public static final String EDIT_HABIT_NAME = "EditHabitName";
+    public static final String  EDIT_HABIT_REASON = "EditHabitReason";
+    public static final String EDIT_HABIT_DAYS = "EditHabitDays";
+    public static final String EDIT_HABIT_POSITION = "EditHabitPosition";
+
+
+
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
+    private int EDIT_HABIT_REQUEST = 2;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -123,5 +131,25 @@ public class MainActivity extends AppCompatActivity {
 
             }
         }
+
+        if (requestCode == EDIT_HABIT_REQUEST){
+            if (resultCode == RESULT_OK){
+
+                String name = data.getStringExtra(EDIT_HABIT_NAME);
+                String reason = data.getStringExtra(EDIT_HABIT_REASON);
+                ArrayList<Boolean> days = (ArrayList<Boolean>) data.getSerializableExtra(EDIT_HABIT_DAYS);
+                int position = data.getIntExtra(EDIT_HABIT_POSITION, 0);
+
+
+                habitList.get(position).setTitle(name);
+                habitList.get(position).setReason(reason);
+                habitList.get(position).setDays(days);
+
+                adapter.notifyDataSetChanged();
+
+
+            }
+        }
+
     }
 }
