@@ -181,7 +181,10 @@ public class EditEvent extends AppCompatActivity {
 
                 String locationName = locationInput.getText().toString();
 
+
+
                 // user did not input anything
+                //TODO this will always evaluate to false, check if string length 0 instead
                 if (locationName == null) {
                     Toast.makeText(getApplicationContext(), "Please enter location.", Toast.LENGTH_LONG).show();
                 } else {

@@ -7,8 +7,8 @@ import java.util.ArrayList;
  */
 
 public class Friend {
-    public String id;
-    public ArrayList<HabitEvent> recentEvents;
+    private String id;
+    private ArrayList<HabitEvent> recentEvents;
 
     public Friend(String id) {
         this.id = id;

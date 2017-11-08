@@ -7,11 +7,11 @@ import java.util.ArrayList;
  */
 
 public class Habit {
-    public String Title;
-    public String Reason;
-    public ArrayList<Boolean> days;
-    public Integer timesFailed;
-    public Integer timesCompleted;
+    private String Title;
+    private String Reason;
+    private ArrayList<Boolean> days;
+    private Integer timesFailed;
+    private Integer timesCompleted;
 
 
     public Habit(String title, String reason, ArrayList<Boolean> days) {
@@ -66,9 +66,8 @@ public class Habit {
     }
 
     public double getPercentCompletion(){
-        double percentage = (timesFailed+timesCompleted)/timesCompleted;
 
-        return percentage;
+        return (double) ((timesFailed+timesCompleted)/timesCompleted);
     }
 
     public Integer getTimesFailed() {

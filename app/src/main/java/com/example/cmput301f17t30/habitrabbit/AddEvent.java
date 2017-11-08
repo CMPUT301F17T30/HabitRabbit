@@ -47,7 +47,7 @@ public class AddEvent extends AppCompatActivity {
     // mockup habit event here
     // use intent to pass habit for actual code
     ArrayList daylist = new ArrayList<Boolean>();
-    Habit habit = new Habit("title 1", "test", daylist);
+    private Habit habit = new Habit("title 1", "test", daylist);
     private HabitEvent newHabitEvent = new HabitEvent(habit);
 
     //indicator
@@ -135,8 +135,8 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
-        /**
-         * select location from search result
+        /*
+          select location from search result
          */
         locationOuput.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -173,6 +173,8 @@ public class AddEvent extends AppCompatActivity {
                 String locationName = locationInput.getText().toString();
 
                 // user did not input anything
+
+                //TODO this will always evaluate to false. Need to check is blank instead
                 if (locationName == null) {
                     Toast.makeText(getApplicationContext(), "Please enter location.", Toast.LENGTH_LONG).show();
                 } else {
