@@ -3,7 +3,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import java.util.ArrayList;
 
 /**
- * Created by resplendent_lord_of_conquest on 08/11/17.
+ * Created by arankin on 08/11/17.
  */
 
 public class MockHabit extends Habit {
