@@ -1,5 +1,7 @@
 # Built application files
 /*/build/
+/build/
+build/
 
 # Crashlytics configuations
 com_crashlytics_export_strings.xml
@@ -35,9 +37,5 @@ local.properties
 .Trashes
 ehthumbs.db
 Thumbs.db
-build/android-profile/profile-2017-11-02-17-11-48-844.rawproto
-build/android-profile/profile-2017-11-02-17-11-37-300.json
-build/android-profile/profile-2017-11-02-17-11-37-300.rawproto
-build/android-profile/profile-2017-11-02-17-11-48-844.rawproto
-build/android-profile/profile-2017-11-02-17-12-11-263.rawproto
-build/android-profile/profile-2017-11-04-18-25-26-013.json
+
+
