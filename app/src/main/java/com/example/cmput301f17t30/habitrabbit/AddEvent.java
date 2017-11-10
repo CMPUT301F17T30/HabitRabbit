@@ -57,7 +57,7 @@ public class AddEvent extends AppCompatActivity {
 
     // mockup habit event here
     // use intent to pass habit for actual code
-    ArrayList daylist = new ArrayList<Boolean>();
+    ArrayList<Boolean> daylist = new ArrayList<>();
     private Habit habit = new Habit("title 1", "test", daylist, new Date());
 
     //indicator

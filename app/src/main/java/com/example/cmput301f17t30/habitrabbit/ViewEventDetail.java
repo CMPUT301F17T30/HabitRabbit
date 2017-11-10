@@ -38,7 +38,7 @@ import java.util.Date;
 public class ViewEventDetail extends AppCompatActivity {
 
     //build fake info
-    ArrayList daylist = new ArrayList<Boolean>();
+    ArrayList<Boolean> daylist = new ArrayList<Boolean>();
     Habit habit = new Habit("title 1","test",daylist, new Date());
     HabitEvent event = new HabitEvent(habit);
 
