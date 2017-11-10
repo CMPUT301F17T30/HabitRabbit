@@ -3,6 +3,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by arankin on 10/18/17.
@@ -64,6 +65,22 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
         assertEquals(30, event.getLatitude());
     }
 
+
+    public void testGetDate() {
+        Habit habit = new MockHabit();
+        HabitEvent event = new HabitEvent(habit);
+        Date date = new Date();
+        event.setDate(date);
+        assertEquals(date,event.getDate());
+    }
+
+    public void testSetDate() {
+        Habit habit = new MockHabit();
+        HabitEvent event = new HabitEvent(habit);
+        Date date = new Date();
+        event.setDate(date);
+        assertEquals(date,event.getDate());
+    }
 
 
 
