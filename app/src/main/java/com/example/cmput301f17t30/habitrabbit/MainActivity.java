@@ -14,6 +14,10 @@ import java.util.ArrayList;
 import static java.lang.Boolean.FALSE;
 
 public class MainActivity extends AppCompatActivity {
+    
+    // create a global eventlist and eventcontroller
+    public static final HabitEventList eventList = new HabitEventList();
+    public static final HabitEventController eventController = new HabitEventController();
 
     public static final String ADD_HABIT_NAME = "AddHabitName";
     public static final String ADD_HABIT_REASON = "AddHabitReason";

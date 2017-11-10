@@ -32,6 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
+
 /**
  * the activity for edit the habit event object and save
  *
@@ -42,13 +44,7 @@ import java.util.Locale;
 public class EditEvent extends AppCompatActivity {
     private EditText comment, locationInput;
     private Intent intent;
-
-
-    // mockup habit event here
-    // use intent to pass habit for actual code
-    ArrayList daylist = new ArrayList<Boolean>();
-    Habit habit = new Habit("title 1", "test", daylist);
-    private HabitEvent newHabitEvent = new HabitEvent(habit);
+    private int index;
 
     //indicator
     private static int IMG_RESULT = 1;
@@ -60,6 +56,8 @@ public class EditEvent extends AppCompatActivity {
     private String ImageDecode;
     private Bitmap selectImage;
 
+    private ImageController imageController = new ImageController();
+
 
     private View layout;
 
@@ -69,28 +67,19 @@ public class EditEvent extends AppCompatActivity {
 
     private ArrayAdapter<String> adapter;
 
-    private Geocoder geocoder;
-    final static int maxResults = 2;
-    private List<Address> locationList;
     private List<String> locationNameList;
 
 
 
 
     //location
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-    private Location location;
-    private Address a;
-    private int addressIndex;
     private double latitude;
     private double longitude;
     private String addressName;
 
-    //GPS
-    boolean isGPSenable;
-    float minDistanceChanged = 5;
-    long minTime = 1000 * 60 * 1;
+    private LocationController locationController;
+
+
 
 
     @Override
@@ -105,12 +94,15 @@ public class EditEvent extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.ivImage);
         comment = (EditText) findViewById(R.id.comment);
         // set the information
-        if (newHabitEvent.getImage() != null ){
-            image.setImageBitmap(newHabitEvent.getImage());
+        selectImage = eventController.getImage(index);
+        if (selectImage != null ){
+            image.setImageBitmap(selectImage);
         }
 
-        comment.setText(newHabitEvent.getComment());
+        comment.setText(eventController.getComment(index));
 
+        // pass activity to location controller
+        locationController = new LocationController(this);
 
 
 
@@ -118,13 +110,15 @@ public class EditEvent extends AppCompatActivity {
         searchButton = (Button) findViewById(R.id.search_location);
         locationOuput = (ListView) findViewById(R.id.serchout);
         // set the information
-        if (newHabitEvent.getLocation() != null) {
-            locationInput.setText(newHabitEvent.getLocation());
+        addressName = eventController.getLocation(index);
+        if (addressName != "") {
+            locationInput.setText(addressName);
         }
+        latitude = eventController.getLatitude(index);
+        longitude = eventController.getLogitude(index);
 
-        //searchButton.setOnClickListener(searchButtonOnClickListener);
 
-        geocoder = new Geocoder(this, Locale.ENGLISH);
+
 
         locationNameList = new ArrayList<String>(); //empty in start
         adapter = new ArrayAdapter<String>(this, R.layout.list_location, locationNameList);
@@ -151,17 +145,14 @@ public class EditEvent extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView parentView, View childView,
                                     int position, long id) {
-                addressIndex = position;
-                a = locationList.get(addressIndex);
-                longitude = locationList.get(addressIndex).getLongitude();
-                latitude = locationList.get(addressIndex).getLatitude();
-                addressName = a.getAddressLine(0) + a.getAddressLine(1) + a.getAddressLine(2);
-                locationInput.setText(a.getFeatureName() + ", " + a.getLocality());
 
-                // set longitude and latitude and location name to new habit event
-                newHabitEvent.setCoordinate(longitude, latitude);
-                newHabitEvent.setLocation(addressName);
+                addressName = locationController.setLocationName(position);
+                longitude = locationController.getLongitude();
+                latitude = locationController.getLatitude();
+                eventController.setCoordinate(longitude, latitude);
+                eventController.setLocationName(addressName);
 
+                locationInput.setText(addressName);
                 // clear the search history
                 locationNameList.clear();
                 adapter.notifyDataSetChanged();
@@ -177,47 +168,10 @@ public class EditEvent extends AppCompatActivity {
          */
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View arg0) {
-
+            public void onClick(View v) {
                 String locationName = locationInput.getText().toString();
-
-                // user did not input anything
-                if (locationName == null) {
-                    Toast.makeText(getApplicationContext(), "Please enter location.", Toast.LENGTH_LONG).show();
-                } else {
-                    try {
-                        // user inputed location name
-                        // use geocoder to search
-                        locationList = geocoder.getFromLocationName(locationName, maxResults);
-
-                        if (locationList == null) {
-                            Toast.makeText(getApplicationContext(), "Cannot get location", Toast.LENGTH_LONG).show();
-                        } else {
-                            if (locationList.isEmpty()) {
-                                Toast.makeText(getApplicationContext(), "No location is found", Toast.LENGTH_LONG).show();
-                            } else {
-                                locationNameList.clear();
-                                for (Address i : locationList) {
-                                    if (i.getFeatureName() == null) {
-                                        locationNameList.add("Unknown location");
-                                    } else {
-                                        String addressline = i.getFeatureName() + '\n'
-                                                + i.getAddressLine(0) + i.getAddressLine(1) + ", " + i.getAddressLine(2);
-                                        locationNameList.add(addressline);
-                                    }
-                                }
-                                adapter.notifyDataSetChanged();
-                            }
-                        }
-
-
-                    } catch (IOException e) {
-                        Toast.makeText(getApplicationContext(), "Network unavailable or any issues occurred.",
-                                Toast.LENGTH_LONG).show();
-                        e.printStackTrace();
-                    }
-                }
-
+                locationNameList.addAll(locationController.getLocationList(v.getContext(), locationName));
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -227,7 +181,18 @@ public class EditEvent extends AppCompatActivity {
         gpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getGPSlocation();
+                int flag = locationController.getGPS(v.getContext());
+                if (flag == 1) {
+                    checkPermission(GPS_REQUEST_CODE);
+                    addressName = locationController.getGpsAddressName(v.getContext());
+                    eventController.setLocationName(addressName);
+                    longitude = locationController.getGpsLongitude();
+                    latitude = locationController.getGpsLatitude();
+                    eventController.setCoordinate(longitude, latitude);
+                    locationInput.setText(addressName);
+                } else {
+                    Toast.makeText(getApplicationContext(), "please turn on GPS", Toast.LENGTH_LONG).show();
+                }
             }
         });
 
@@ -240,8 +205,9 @@ public class EditEvent extends AppCompatActivity {
                 String theComment = comment.getText().toString();
                 if (theComment.length() > 0) {
                     if (theComment.length() < 20) {
-                        newHabitEvent.setComment(theComment);
-                        // pass the changed information through intent here!!
+                        eventController.setComment(theComment);
+                        eventController.saveEditEvent(1);
+                        // save in file function here or habit event will gone
 
                     } else {
                         Toast.makeText(getApplicationContext(), "Please keep comment under 20 characters.",
@@ -249,83 +215,14 @@ public class EditEvent extends AppCompatActivity {
                     }
                 }
                 else{
-                    newHabitEvent.setComment("");
-                    // pass the changed information through intent here!!
+                    eventController.saveEditEvent(1);
+                    // save in file function here or habit event will gone
                 }
-
 
             }
         });
     }
 
-    /**
-     * get gps service and check permission
-     * if the location is gotten, get the name of location
-     */
-    private void getGPSlocation() {
-        locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-        isGPSenable = locationManager.isProviderEnabled("gps");
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                if (location != null){
-                    longitude = location.getLongitude();
-                    latitude = location.getLatitude();
-                    // set longitude and latitude for new habit event
-                    newHabitEvent.setCoordinate(longitude, latitude);
-                }
-                else{
-                    Toast.makeText(getApplicationContext(), "Cannot get current locatoin.",Toast.LENGTH_LONG).show();
-                }
-
-
-            }
-
-            @Override
-            public void onStatusChanged(String s, int i, Bundle bundle) {
-            }
-
-            @Override
-            public void onProviderEnabled(String s) {
-            }
-
-            @Override
-            public void onProviderDisabled(String s) {
-
-            }
-        };
-        // check if the gps provider is available
-        if (isGPSenable) {
-            // call to check permission to access gps
-            checkPermission(GPS_REQUEST_CODE);
-            // try to get location name
-            try {
-                List<Address> result = geocoder.getFromLocation(latitude, longitude, maxResults);
-                if (result == null) {
-                    Toast.makeText(getApplicationContext(), "Cannot get location name.",
-                            Toast.LENGTH_LONG).show();
-                } else {
-                    if (result.isEmpty()) {
-                        Toast.makeText(getApplicationContext(), "No location is found.",
-                                Toast.LENGTH_LONG).show();
-                    } else {
-                        a = result.get(0);
-                        addressName = a.getAddressLine(0) + a.getAddressLine(1) + a.getAddressLine(2);
-                        locationInput.setText(a.getFeatureName() + ", " + a.getLocality());
-                        // set location name in habit event
-                        newHabitEvent.setLocation(addressName);
-                    }
-                }
-            }catch (IOException e) {
-                Toast.makeText(getApplicationContext(), "Network unavailable to get location name.",
-                        Toast.LENGTH_LONG).show();
-                e.printStackTrace();
-            }
-        }else {
-            Toast.makeText(getApplicationContext(), "please turn on GPS",Toast.LENGTH_LONG).show();
-        }
-
-    }
 
     /**
      * call this function to open photo gallery outside the app
@@ -361,59 +258,6 @@ public class EditEvent extends AppCompatActivity {
 
     }
 
-    /**
-     * get the image from the file path and compress it
-     * then resize and compress it to desire file size
-     * then set it to image view to show it
-     *
-     * @param filePath the file path of image in phone
-     */
-    public void decodeFile(String filePath) {
-        //set max image file size
-        int maxSize = 65536;
-
-        // get the original image size
-        BitmapFactory.Options option = new BitmapFactory.Options();
-        option.inJustDecodeBounds = true;
-        BitmapFactory.decodeFile(filePath, option);
-
-        // The new size we want to scale to 500
-        final int REQUIRED_SIZE = 500;
-        // Find the correct scale value. It should be the power of 2.
-        int width_origin = option.outWidth, height_origin = option.outHeight;
-        int scale = 1;
-        while (true) {
-            if (width_origin < REQUIRED_SIZE && height_origin < REQUIRED_SIZE)
-                break;
-            width_origin /= 2;
-            height_origin /= 2;
-            scale *= 2;
-        }
-
-        // get image with desired size
-        BitmapFactory.Options optionSet = new BitmapFactory.Options();
-        optionSet.inSampleSize = scale;
-        selectImage = BitmapFactory.decodeFile(filePath, optionSet);
-
-        // compress the image to desired file size
-        int compressQuality = 100;
-        int streamLength = maxSize;
-
-        while (streamLength >= maxSize) {
-            compressQuality -= 1;
-            ByteArrayOutputStream bmpStream = new ByteArrayOutputStream();
-            selectImage.compress(Bitmap.CompressFormat.JPEG, compressQuality, bmpStream);
-
-            byte[] bmpPicByteArray = bmpStream.toByteArray();
-            streamLength = bmpPicByteArray.length;
-        }
-
-        // set the image to image view
-        image.setImageBitmap(selectImage);
-        // set image to new habit event
-        newHabitEvent.setImage(selectImage);
-
-    }
 
     /**
      * Ask user for permission at runtime
@@ -441,9 +285,7 @@ public class EditEvent extends AppCompatActivity {
                     }
                 } else {
                     // has permission, get gps
-                    locationManager.requestLocationUpdates("gps", minTime, minDistanceChanged, locationListener);
-                    location = locationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-                    locationListener.onLocationChanged(location);
+                    locationController.getGpsCoordinate(EditEvent.this);
 
                 }
                 return;
@@ -463,7 +305,9 @@ public class EditEvent extends AppCompatActivity {
                     }
                 } else {
                     // has permission, get the image
-                    decodeFile(ImageDecode);
+                    selectImage = imageController.decodeFile(ImageDecode);
+                    image.setImageBitmap(selectImage);
+                    eventController.setImage(selectImage);
                 }
                 return;
 
@@ -490,7 +334,9 @@ public class EditEvent extends AppCompatActivity {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    decodeFile(ImageDecode);
+                    selectImage = imageController.decodeFile(ImageDecode);
+                    image.setImageBitmap(selectImage);
+                    eventController.setImage(selectImage);
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
 
@@ -522,6 +368,11 @@ public class EditEvent extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart(){
+        super.onStart();
+        eventController.editEvent(index);
+    }
 
 }
 

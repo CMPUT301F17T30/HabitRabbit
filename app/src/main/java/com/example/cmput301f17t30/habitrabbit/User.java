@@ -5,17 +5,17 @@ package com.example.cmput301f17t30.habitrabbit;
  */
 
 public class User {
-    public String userId;
+    private  String userId;
 
-    public User(String userId) {
+    private  User(String userId) {
         this.userId = userId;
     }
 
-    public String getUserId() {
+    private String getUserId() {
         return userId;
     }
 
-    public void setUserId(String userId) {
+    private void setUserId(String userId) {
         this.userId = userId;
     }
 }
