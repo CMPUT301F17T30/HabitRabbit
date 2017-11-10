@@ -9,15 +9,20 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CheckBox;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 public class AddHabitActivity extends AppCompatActivity {
 
     public static final String ADD_HABIT_NAME = "AddHabitName";
     public static final String  ADD_HABIT_REASON = "AddHabitReason";
     public static final String ADD_HABIT_DAYS = "AddHabitDays";
+    public static final String ADD_HABIT_DATE = "AddHabitDate";
 
     ArrayList<Boolean> days = new ArrayList<>();
 
@@ -31,6 +36,7 @@ public class AddHabitActivity extends AppCompatActivity {
 
     EditText name;
     EditText reason;
+    EditText date;
 
 
 
@@ -46,7 +52,7 @@ public class AddHabitActivity extends AppCompatActivity {
 
         name = (EditText) findViewById(R.id.addHabitName);
         reason = (EditText) findViewById(R.id.addHabitReason);
-
+        date = (EditText) findViewById(R.id.addHabitStartDate);
 
 
         CheckBox mondayButton = (CheckBox) findViewById(R.id.addHabitMondayCheck);
@@ -108,11 +114,32 @@ public class AddHabitActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
+                Boolean dateFormat = FALSE;
+
+                try {
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                    format.setLenient(FALSE);
+                    Date startDate = format.parse(date.getText().toString());
+                    if (startDate.after(new Date())) {
+                        dateFormat = TRUE;
+                    }
+                    else {
+                        date.setError("Date must be after current date");
+                    }
+                }
+
+                catch (Exception e){
+                    date.setError("Valid date required");
+                }
+
                 if (name.getText().toString().isEmpty()){
                     name.setError("Habit name required");
                 }
+                if (date.getText().toString().isEmpty()){
+                    date.setError("Valid date required");
+                }
 
-                else {
+                else if (dateFormat == TRUE){
                     addHabitDone();
                 }
             }
@@ -128,9 +155,14 @@ public class AddHabitActivity extends AppCompatActivity {
             String habitName = name.getText().toString();
             String habitReason = reason.getText().toString();
 
+            SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+            format.setLenient(FALSE);
+            Date startDate = format.parse(date.getText().toString());
+
             returnToMain.putExtra(ADD_HABIT_NAME, habitName);
             returnToMain.putExtra(ADD_HABIT_REASON, habitReason);
             returnToMain.putExtra(ADD_HABIT_DAYS, days);
+            returnToMain.putExtra(ADD_HABIT_DATE, startDate);
 
             setResult(RESULT_OK, returnToMain);
 

@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import static java.lang.Boolean.FALSE;
 
@@ -22,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String ADD_HABIT_NAME = "AddHabitName";
     public static final String ADD_HABIT_REASON = "AddHabitReason";
     public static final String ADD_HABIT_DAYS = "AddHabitDays";
+    public static final String ADD_HABIT_DATE = "AddHabitDate";
+
 
     public static final String EDIT_HABIT_NAME = "EditHabitName";
     public static final String  EDIT_HABIT_REASON = "EditHabitReason";
@@ -121,8 +124,9 @@ public class MainActivity extends AppCompatActivity {
                 String name = data.getStringExtra(ADD_HABIT_NAME);
                 String reason = data.getStringExtra(ADD_HABIT_REASON);
                 ArrayList<Boolean> days = (ArrayList<Boolean>) data.getSerializableExtra(ADD_HABIT_DAYS);
+                Date date = (Date) data.getSerializableExtra(ADD_HABIT_DATE);
 
-                Habit newHabit = new Habit(name, days);
+                Habit newHabit = new Habit(name, days, date);
 
                 if (!reason.isEmpty()){
                     newHabit.setReason(reason);

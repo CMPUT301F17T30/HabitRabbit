@@ -11,5 +11,5 @@
     <string name="nameHint">Name</string>
     <string name="reasonHint">Reason</string>
     <string name="daySelectPrompt">Please select days this habit is due:</string>
-    <string name="startDate">Start Date</string>
+    <string name="startDate">Start Date (DD-MM-YYYY)</string>
 </resources>

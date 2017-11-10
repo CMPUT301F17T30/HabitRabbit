@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 
 import java.util.Date;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Created by arankin on 10/18/17.
  */

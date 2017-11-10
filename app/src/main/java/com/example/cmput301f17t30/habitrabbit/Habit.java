@@ -1,6 +1,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by arankin on 18/10/17.
@@ -12,31 +13,40 @@ public class Habit {
     private ArrayList<Boolean> days;
     private Integer timesFailed;
     private Integer timesCompleted;
+    private Date startDate;
+    private Date lastCompleted;
 
     /**
      *
      * @param title A unique identifier string for a type of habit
      * @param reason optional string, the reason for doing the habit
      * @param days the days of each week that the habit will be due
+     * @param date the starting date of the habit
      */
-    public Habit(String title, String reason, ArrayList<Boolean> days) {
+    public Habit(String title, String reason, ArrayList<Boolean> days, Date date) {
         Title = title;
         Reason = reason;
         this.days = days;
         timesCompleted = 0;
         timesFailed =0;
+        startDate = date;
+        lastCompleted = null;
     }
 
     /**
      *
      * @param title A unique identifier string for a type of habit
      * @param days the days of each week that the habit will be due
+     * @param date the starting date of the habit
      */
-    public Habit(String title, ArrayList<Boolean> days) {
+    public Habit(String title, ArrayList<Boolean> days, Date date) {
         Title = title;
         this.days = days;
         timesCompleted = 0;
         timesFailed = 0;
+        startDate = date;
+        lastCompleted = null;
+
     }
 
     /**
@@ -175,6 +185,23 @@ public class Habit {
         this.timesCompleted -=1;
 
     }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getLastCompleted() {
+        return lastCompleted;
+    }
+
+    public void setLastCompleted(Date lastCompleted) {
+        this.lastCompleted = lastCompleted;
+    }
+
 
 
 }
