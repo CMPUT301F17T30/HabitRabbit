@@ -33,7 +33,7 @@ public class Friend {
      */
     public Friend(String id) {
         this.id = id;
-        this.recentEvents= new ArrayList<HabitEvent>();
+        this.recentEvents= new ArrayList<>();
     }
 
     /**

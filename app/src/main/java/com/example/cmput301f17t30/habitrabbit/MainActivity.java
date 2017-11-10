@@ -29,8 +29,6 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import static java.lang.Boolean.FALSE;
-
 public class MainActivity extends AppCompatActivity {
     
     // create a global eventlist and eventcontroller
@@ -60,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
   //  Habit habit = new Habit("title 1","test",daylist);
     // Habit habit2 = new Habit("title 2","test2",daylist);
 
-    private ArrayList<Habit> habitList = new ArrayList<Habit>();
+    private ArrayList<Habit> habitList = new ArrayList<>();
 
 
 

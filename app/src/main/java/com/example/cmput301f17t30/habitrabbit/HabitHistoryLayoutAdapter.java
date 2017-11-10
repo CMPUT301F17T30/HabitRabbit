@@ -23,7 +23,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -78,7 +77,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
 
 
-        /**
+        /*
          Button delete = holder.itemView.findViewById(R.id.deleteHabitEventButton);
 
          button1.setOnClickListener(new View.OnClickListener() {
@@ -89,7 +88,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
         }
         });
-         **/
+         */
 
     }
 

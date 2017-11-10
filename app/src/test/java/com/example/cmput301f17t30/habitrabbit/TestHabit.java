@@ -18,11 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import org.junit.Assert;
-import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-
-import junit.framework.TestCase;
 
 import java.util.ArrayList;
 

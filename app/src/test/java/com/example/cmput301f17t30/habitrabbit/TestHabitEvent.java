@@ -20,7 +20,6 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**

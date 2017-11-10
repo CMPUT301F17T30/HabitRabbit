@@ -122,8 +122,8 @@ public class Habit {
     }
 
     /**
-     *
-     * @return percentage of possible due dates that the habit was completed
+     * calculates the total percentage completion of this habit's related events
+     * @return percentage of completion
      */
     public double getPercentCompletion(){
 
