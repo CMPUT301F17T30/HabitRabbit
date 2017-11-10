@@ -10,21 +10,21 @@ public class User {
     /**
      * @param userId A unique identifier for the user
      */
-    private  User(String userId) {
+    public  User(String userId) {
         this.userId = userId;
     }
 
     /**
      * @return The unique identifier for the user
      */
-    private String getUserId() {
+    public String getUserId() {
         return userId;
     }
 
     /**
      * @param userId A unique identifier for the user
      */
-    private void setUserId(String userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 }
