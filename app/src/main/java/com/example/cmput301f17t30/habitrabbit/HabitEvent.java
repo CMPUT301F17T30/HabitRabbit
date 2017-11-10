@@ -18,6 +18,11 @@ public class HabitEvent {
     private String Location;
     private double logitude;
     private double latitude;
+    
+    // use for elasticsearch later.
+    @JestId
+    private String id;
+
 
     /**
      * @param habitType The type of habit that this event is an instance of
@@ -52,6 +57,14 @@ public class HabitEvent {
         date = new Date();
 
     }*/
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId(){
+        return id;
+    }
+
 
     /**
      * @return the date that this habitevent was completed

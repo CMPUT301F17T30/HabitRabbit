@@ -10,21 +10,34 @@ public class Friend {
     private String id;
     private ArrayList<HabitEvent> recentEvents;
 
+    /**
+     * @param id The unique identifier for the friend
+     */
     public Friend(String id) {
         this.id = id;
         this.recentEvents= new ArrayList<HabitEvent>();
     }
 
+    /**
+     * @return The unique identifier for the friend
+     */
     public String getId() {
 
         return id;
     }
 
+    /**
+     * @param id The unique identifier for the friend
+     */
     public void setId(String id) {
 
         this.id = id;
     }
 
+    /**
+     *
+     * @return The list of events that this friend has recently completed
+     */
     public ArrayList<HabitEvent> getRecentEvents(){
         return recentEvents;
     }

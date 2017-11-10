@@ -12,9 +12,9 @@ import java.util.ArrayList;
  * Created by arankin on 18/10/17.
  */
 
-public class HabitTest extends ActivityInstrumentationTestCase2{
+public class TestHabit extends ActivityInstrumentationTestCase2{
 
-    public HabitTest() {
+    public TestHabit() {
         super(Habit.class);
     }
 
@@ -60,7 +60,6 @@ public class HabitTest extends ActivityInstrumentationTestCase2{
         assertEquals(Boolean.TRUE,habit.isDueToday());
 
     }
-
 
     public void testGetTimesFailed(){
         ArrayList daylist = new ArrayList<Boolean>();
