@@ -19,6 +19,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created by arankin on 08/11/17.
@@ -34,7 +35,7 @@ public class MockHabit extends Habit {
 
 
     public MockHabit(){
-        super("bob", new ArrayList<Boolean>());
+        super("bob", new ArrayList<Boolean>(), new Date());
 
         Title = "Testhabit";
         Reason = "for testing";

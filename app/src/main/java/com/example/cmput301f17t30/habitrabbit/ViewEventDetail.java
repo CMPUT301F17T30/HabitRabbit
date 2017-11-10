@@ -29,6 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * This class is used to display event detail.
@@ -38,7 +39,7 @@ public class ViewEventDetail extends AppCompatActivity {
 
     //build fake info
     ArrayList daylist = new ArrayList<Boolean>();
-    Habit habit = new Habit("title 1","test",daylist);
+    Habit habit = new Habit("title 1","test",daylist, new Date());
     HabitEvent event = new HabitEvent(habit);
 
     private Bitmap selectImage;
