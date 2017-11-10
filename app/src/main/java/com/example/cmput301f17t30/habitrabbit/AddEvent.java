@@ -39,6 +39,7 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
@@ -57,7 +58,7 @@ public class AddEvent extends AppCompatActivity {
     // mockup habit event here
     // use intent to pass habit for actual code
     ArrayList daylist = new ArrayList<Boolean>();
-    private Habit habit = new Habit("title 1", "test", daylist);
+    private Habit habit = new Habit("title 1", "test", daylist, new Date());
 
     //indicator
     private static int IMG_RESULT = 1;
