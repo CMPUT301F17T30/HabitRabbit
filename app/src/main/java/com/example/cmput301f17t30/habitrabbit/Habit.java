@@ -59,8 +59,8 @@ public class Habit {
         timesCompleted = 0;
         timesFailed =0;
         startDate = date;
-        lastCompleted = date;
-        lastCalculated = date;
+        lastCompleted = null;
+        lastCalculated = null;
     }
 
     /**
@@ -75,8 +75,8 @@ public class Habit {
         timesCompleted = 0;
         timesFailed = 0;
         startDate = date;
-        lastCompleted = date;
-        lastCalculated = date;
+        lastCompleted = null;
+        lastCalculated = null;
 
     }
 
@@ -146,7 +146,7 @@ public class Habit {
 
         Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
 
-        return (days.get(day));
+        return (days.get(day-1));
     }
 
     /**
