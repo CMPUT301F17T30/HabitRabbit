@@ -22,6 +22,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -32,6 +33,7 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -104,18 +106,31 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         final Habit habit = habitList.get(position);
         String title = habit.getTitle();
         String reason = habit.getReason();
+        Bitmap light;
         Date todayDate = new Date();
-        Date dueDate;
+        Date lastCompleteDate = habit.getLastCompleted();
 
-        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
-        //if (fmt.format(todayDate).equals(fmt.format(dueDate)))
-        //    Bitmap light = greenlight.png
 
+        Calendar calToday = Calendar.getInstance();
+        Calendar calLast = Calendar.getInstance();
+        calToday.setTime(todayDate);
+        calLast.setTime(lastCompleteDate);
+        Boolean sameDay = calToday.get(Calendar.YEAR) == calLast.get(Calendar.YEAR) &&
+                calToday.get(Calendar.DAY_OF_YEAR) == calLast.get(Calendar.DAY_OF_YEAR);
+
+
+        if (habit.isDueToday() && (sameDay == Boolean.TRUE) )
+            light = BitmapFactory.decodeResource(mainContext.getResources(), R.drawable.greenlight);
+        else if (habit.isDueToday() && (sameDay == Boolean.FALSE))
+            light = BitmapFactory.decodeResource(mainContext.getResources(),R.drawable.redlight);
+        else
+            light = BitmapFactory.decodeResource(mainContext.getResources(),R.drawable.yellowlight);
+        
 
 
         holder.habitName.setText(title);
         holder.habitReason.setText(reason);
-        //holder.lightImage.setImageBitmap(light);
+        holder.lightImage.setImageBitmap(light);
 
 
 
