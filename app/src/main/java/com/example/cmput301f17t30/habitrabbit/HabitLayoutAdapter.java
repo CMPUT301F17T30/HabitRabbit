@@ -125,7 +125,7 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
             light = BitmapFactory.decodeResource(mainContext.getResources(),R.drawable.redlight);
         else
             light = BitmapFactory.decodeResource(mainContext.getResources(),R.drawable.yellowlight);
-        
+
 
 
         holder.habitName.setText(title);

@@ -222,22 +222,38 @@ public class Habit {
 
     }
 
+    /**
+     * @return the start date of this habit
+     */
     public Date getStartDate() {
         return startDate;
     }
 
+    /**
+     * @param startDate the start date of this habit
+     */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     * @return the last time this habit was successfully completed
+     */
     public Date getLastCompleted() {
         return lastCompleted;
     }
 
+    /**
+     * @param lastCompleted the last time this habit was successfully completed
+     */
     public void setLastCompleted(Date lastCompleted) {
         this.lastCompleted = lastCompleted;
     }
 
+    /**
+     * Increments the isFailed counter by 1
+     * @param isFailed whether or not the habit has failed
+     */
     public void addFailed(Boolean isFailed){
         if (isFailed == Boolean.TRUE){
             timesFailed += 1;
