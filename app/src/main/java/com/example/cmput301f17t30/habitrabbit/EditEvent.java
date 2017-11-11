@@ -129,7 +129,7 @@ public class EditEvent extends AppCompatActivity {
         locationOuput = (ListView) findViewById(R.id.serchout);
         // set the information
         addressName = eventController.getLocation(index);
-        if (addressName != "") {
+        if (addressName.trim().length() >= 0) {
             locationInput.setText(addressName);
         }
         latitude = eventController.getLatitude(index);
@@ -156,8 +156,8 @@ public class EditEvent extends AppCompatActivity {
             }
         });
 
-        /** select location from search result
-         *
+        /* select location from search result
+
          */
         locationOuput.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -180,9 +180,9 @@ public class EditEvent extends AppCompatActivity {
 
         });
 
-        /**
-         * reponse to the search button
-         * search location
+        /*
+          reponse to the search button
+          search location
          */
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -193,8 +193,8 @@ public class EditEvent extends AppCompatActivity {
             }
         });
 
-        /** response to gps button clicked
-         * call getGPSlocation() to get gps service
+        /* response to gps button clicked
+          call getGPSlocation() to get gps service
          */
         gpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -214,8 +214,8 @@ public class EditEvent extends AppCompatActivity {
             }
         });
 
-        /** create a habit event object and save
-         *
+        /* create a habit event object and save
+
          */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
