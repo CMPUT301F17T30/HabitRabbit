@@ -46,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
     public static final String  EDIT_HABIT_REASON = "EditHabitReason";
     public static final String EDIT_HABIT_DAYS = "EditHabitDays";
     public static final String EDIT_HABIT_POSITION = "EditHabitPosition";
+    public static final String EDIT_HABIT_DATE = "EditHabitDate";
+
 
 
 
@@ -163,11 +165,13 @@ public class MainActivity extends AppCompatActivity {
                 String reason = data.getStringExtra(EDIT_HABIT_REASON);
                 ArrayList<Boolean> days = (ArrayList<Boolean>) data.getSerializableExtra(EDIT_HABIT_DAYS);
                 int position = data.getIntExtra(EDIT_HABIT_POSITION, 0);
+                Date date = (Date) data.getSerializableExtra(EDIT_HABIT_DATE);
 
 
                 habitList.get(position).setTitle(name);
                 habitList.get(position).setReason(reason);
                 habitList.get(position).setDays(days);
+                habitList.get(position).setStartDate(date);
 
                 adapter.notifyDataSetChanged();
 

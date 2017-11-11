@@ -27,7 +27,12 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.CheckBox;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+
+import static java.lang.Boolean.FALSE;
+import static java.lang.Boolean.TRUE;
 
 public class EditHabitActivity extends AppCompatActivity {
 
@@ -35,6 +40,7 @@ public class EditHabitActivity extends AppCompatActivity {
     public static final String  EDIT_HABIT_REASON = "EditHabitReason";
     public static final String EDIT_HABIT_DAYS = "EditHabitDays";
     public static final String EDIT_HABIT_POSITION = "EditHabitPosition";
+    public static final String EDIT_HABIT_DATE = "EditHabitDate";
 
 
     ArrayList<Boolean> days = new ArrayList<>();
@@ -49,6 +55,11 @@ public class EditHabitActivity extends AppCompatActivity {
 
     EditText name;
     EditText reason;
+    EditText date;
+
+    SimpleDateFormat format;
+
+
 
 
 
@@ -61,13 +72,22 @@ public class EditHabitActivity extends AppCompatActivity {
         days = (ArrayList<Boolean>) getIntent().getSerializableExtra(EDIT_HABIT_DAYS);
         String oldName = getIntent().getStringExtra(EDIT_HABIT_NAME);
         String oldReason = getIntent().getStringExtra(EDIT_HABIT_REASON);
+        Date oldDate = (Date) getIntent().getSerializableExtra(EDIT_HABIT_DATE);
 
 
         name = (EditText) findViewById(R.id.editHabitName);
         reason = (EditText) findViewById(R.id.editHabitReason);
+        date = (EditText) findViewById(R.id.editHabitStartDate);
+
+        format = new SimpleDateFormat("dd-MM-yyyy");
+        format.setLenient(FALSE);
+
+        String startDate = format.format(oldDate);
 
         name.setText(oldName);
         reason.setText(oldReason);
+        date.setText(startDate);
+
 
 
 
@@ -138,11 +158,30 @@ public class EditHabitActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
+                Boolean dateFormat = FALSE;
+
+                try {
+                    Date startDate = format.parse(date.getText().toString());
+                    if (startDate.after(new Date())) {
+                        dateFormat = TRUE;
+                    }
+                    else {
+                        date.setError("Date must be after current date");
+                    }
+                }
+
+                catch (Exception e){
+                    date.setError("Valid date required");
+                }
+
                 if (name.getText().toString().isEmpty()){
                     name.setError("Habit name required");
                 }
+                if (date.getText().toString().isEmpty()){
+                    date.setError("Valid date required");
+                }
 
-                else {
+                else if (dateFormat == TRUE){
                     editHabitDone();
                 }
             }
@@ -158,11 +197,14 @@ public class EditHabitActivity extends AppCompatActivity {
             String habitName = name.getText().toString();
             String habitReason = reason.getText().toString();
             int position = getIntent().getIntExtra(EDIT_HABIT_POSITION, 0);
+            Date startDate = format.parse(date.getText().toString());
 
             returnToMain.putExtra(EDIT_HABIT_NAME, habitName);
             returnToMain.putExtra(EDIT_HABIT_REASON, habitReason);
             returnToMain.putExtra(EDIT_HABIT_DAYS, days);
             returnToMain.putExtra(EDIT_HABIT_POSITION, position);
+            returnToMain.putExtra(EDIT_HABIT_DATE, startDate);
+
 
             setResult(RESULT_OK, returnToMain);
 

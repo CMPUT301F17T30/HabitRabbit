@@ -19,6 +19,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 /**
@@ -26,6 +27,15 @@ import java.util.Date;
  */
 
 public class Habit {
+    private static final int MONDAY = 0;
+    private static final int TUESDAY = 1;
+    private static final int WEDNESDAY = 2;
+    private static final int THURSDAY = 3;
+    private static final int FRIDAY = 4;
+    private static final int SATURDAY = 5;
+    private static final int SUNDAY = 6;
+
+
     private String Title;
     private String Reason;
     private ArrayList<Boolean> days;
@@ -33,6 +43,7 @@ public class Habit {
     private Integer timesCompleted;
     private Date startDate;
     private Date lastCompleted;
+    private Date lastCalculated;
 
     /**
      *
@@ -48,7 +59,8 @@ public class Habit {
         timesCompleted = 0;
         timesFailed =0;
         startDate = date;
-        lastCompleted = null;
+        lastCompleted = date;
+        lastCalculated = date;
     }
 
     /**
@@ -63,7 +75,8 @@ public class Habit {
         timesCompleted = 0;
         timesFailed = 0;
         startDate = date;
-        lastCompleted = null;
+        lastCompleted = date;
+        lastCalculated = date;
 
     }
 
@@ -218,6 +231,65 @@ public class Habit {
 
     public void setLastCompleted(Date lastCompleted) {
         this.lastCompleted = lastCompleted;
+    }
+
+    public void addFailed(Boolean isFailed){
+        if (isFailed == Boolean.TRUE){
+            timesFailed += 1;
+        }
+    }
+
+    public void updateFailed () {
+        Calendar lastCal = Calendar.getInstance();
+        lastCal.setTime(lastCalculated);
+
+        Calendar newCal = Calendar.getInstance();
+        newCal.setTime(new Date());
+
+        if (lastCal.getTimeInMillis() == newCal.getTimeInMillis()){
+
+        }
+        else {
+            while (lastCal.getTimeInMillis() < newCal.getTimeInMillis()) {
+                lastCal.add(Calendar.DAY_OF_MONTH, 1);
+
+                switch (lastCal.get(Calendar.DAY_OF_WEEK)){
+                    case Calendar.MONDAY:
+                        addFailed(days.get(MONDAY));
+                        break;
+
+                    case Calendar.TUESDAY:
+                        addFailed(days.get(TUESDAY));
+                        break;
+
+                    case Calendar.WEDNESDAY:
+                        addFailed(days.get(WEDNESDAY));
+                        break;
+
+                    case Calendar.THURSDAY:
+                        addFailed(days.get(THURSDAY));
+                        break;
+
+                    case Calendar.FRIDAY:
+                        addFailed(days.get(FRIDAY));
+                        break;
+
+                    case Calendar.SATURDAY:
+                        addFailed(days.get(SATURDAY));
+                        break;
+
+                    case Calendar.SUNDAY:
+                        addFailed(days.get(SUNDAY));
+                        break;
+                }
+
+            }
+
+            lastCalculated = newCal.getTime();
+
+        }
+
+
     }
 
 

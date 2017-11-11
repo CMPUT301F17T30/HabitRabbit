@@ -71,6 +71,7 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
             final String  EDIT_HABIT_REASON = "EditHabitReason";
             final String EDIT_HABIT_DAYS = "EditHabitDays";
             final String EDIT_HABIT_POSITION = "EditHabitPosition";
+            final String EDIT_HABIT_DATE = "EditHabitDate";
 
 
 
@@ -78,11 +79,13 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
             String name = habitList.get(getPosition()).getTitle();
             String reason = habitList.get(getPosition()).getReason();
             ArrayList<Boolean> days = habitList.get(getPosition()).getDays();
+            Date date = habitList.get(getPosition()).getStartDate();
 
             editHabit.putExtra(EDIT_HABIT_NAME, name);
             editHabit.putExtra(EDIT_HABIT_REASON, reason);
             editHabit.putExtra(EDIT_HABIT_DAYS, days);
             editHabit.putExtra(EDIT_HABIT_POSITION, getPosition());
+            editHabit.putExtra(EDIT_HABIT_DATE, date);
 
 
             ((Activity)mainContext).startActivityForResult(editHabit, 2);
