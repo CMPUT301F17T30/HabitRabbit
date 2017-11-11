@@ -174,7 +174,7 @@ public class EditHabitActivity extends AppCompatActivity {
                     date.setError("Valid date required");
                 }
 
-                if (name.getText().toString().isEmpty()){
+                if (name.getText().toString().trim().isEmpty()){
                     name.setError("Habit name required");
                 }
                 if (date.getText().toString().isEmpty()){
