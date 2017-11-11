@@ -141,7 +141,12 @@ public class Habit {
     //TODO implement this method
     public Boolean isDueToday(){
 
-        return Boolean.FALSE;
+        Calendar todayCal = Calendar.getInstance();
+        todayCal.setTime(new Date());
+
+        Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
+
+        return (days.get(day));
     }
 
     /**
@@ -239,6 +244,8 @@ public class Habit {
         }
     }
 
+
+    //TODO needs javadoc
     public void updateFailed () {
         Calendar lastCal = Calendar.getInstance();
         lastCal.setTime(lastCalculated);
@@ -288,9 +295,8 @@ public class Habit {
             lastCalculated = newCal.getTime();
 
         }
-
-
     }
+
 
 
 

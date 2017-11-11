@@ -69,13 +69,6 @@ public class TestHabit extends ActivityInstrumentationTestCase2{
         assertEquals(daylist,habit.getDays());
     }
 
-    public void testIsDueToday(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
-        Habit habit = new Habit("title 1","test",daylist,new Date());
-        assertEquals(Boolean.TRUE,habit.isDueToday());
-
-    }
-
     public void testGetTimesFailed(){
         ArrayList<Boolean> daylist = new ArrayList<Boolean>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
@@ -142,6 +135,34 @@ public class TestHabit extends ActivityInstrumentationTestCase2{
         habit.setTimesCompleted(5);
         habit.setTimesFailed(5);
         assertEquals(0.5,habit.getPercentCompletion());
+
+    }
+
+    public void testIsDueTodayTrue(){
+        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        daylist.set(0,Boolean.TRUE);
+        daylist.set(1,Boolean.TRUE);
+        daylist.set(2,Boolean.TRUE);
+        daylist.set(3,Boolean.TRUE);
+        daylist.set(4,Boolean.TRUE);
+        daylist.set(5,Boolean.TRUE);
+        daylist.set(6,Boolean.TRUE);
+        Habit habit = new Habit("title 1","test",daylist,new Date());
+        assertTrue(habit.isDueToday());
+
+    }
+
+    public void testIsDueTodayFalse(){
+        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        daylist.set(0,Boolean.FALSE);
+        daylist.set(1,Boolean.FALSE);
+        daylist.set(2,Boolean.FALSE);
+        daylist.set(3,Boolean.FALSE);
+        daylist.set(4,Boolean.FALSE);
+        daylist.set(5,Boolean.FALSE);
+        daylist.set(6,Boolean.FALSE);
+        Habit habit = new Habit("title 1","test",daylist,new Date());
+        assertFalse(habit.isDueToday());
 
     }
 
