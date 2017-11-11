@@ -87,7 +87,7 @@ public class LocationController {
 
         locationNameList.clear();
         // user did not input anything
-        if (locationName.toString().trim().length() == 0) {
+        if (locationName.trim().length() == 0) {
             Toast.makeText(context, "Please enter location.", Toast.LENGTH_LONG).show();
         } else {
             try {
