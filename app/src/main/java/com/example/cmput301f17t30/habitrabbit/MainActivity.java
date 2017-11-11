@@ -36,6 +36,9 @@ public class MainActivity extends AppCompatActivity {
     public static final HabitEventList eventList = new HabitEventList();
     public static final HabitEventController eventController = new HabitEventController();
 
+    //public static final HabitList habitList = new HabitList();
+    //public static final HabitController habitController = new HabitController();
+
     public static final String ADD_HABIT_NAME = "AddHabitName";
     public static final String ADD_HABIT_REASON = "AddHabitReason";
     public static final String ADD_HABIT_DAYS = "AddHabitDays";
