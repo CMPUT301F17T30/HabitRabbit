@@ -159,9 +159,9 @@ public class AddEvent extends AppCompatActivity {
 
         });
 
-        /**
-         * reponse to the search button
-         * search location
+        /*
+          reponse to the search button
+          search location
          */
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,9 +172,9 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
-        /**
-         *  response to gps button clicked
-         *  call getGPSlocation() to get gps service
+        /*
+           response to gps button clicked
+           call getGPSlocation() to get gps service
          */
         gpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,8 +194,8 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
-        /**
-         * set up the habit event object and save
+        /*
+          set up the habit event object and save
          */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

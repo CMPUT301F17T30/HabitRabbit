@@ -59,8 +59,8 @@ public class Habit {
         timesCompleted = 0;
         timesFailed =0;
         startDate = date;
-        lastCompleted = date;
-        lastCalculated = date;
+        lastCompleted = null;
+        lastCalculated = null;
     }
 
     /**
@@ -75,8 +75,8 @@ public class Habit {
         timesCompleted = 0;
         timesFailed = 0;
         startDate = date;
-        lastCompleted = date;
-        lastCalculated = date;
+        lastCompleted = null;
+        lastCalculated = null;
 
     }
 
@@ -141,7 +141,12 @@ public class Habit {
     //TODO implement this method
     public Boolean isDueToday(){
 
-        return Boolean.FALSE;
+        Calendar todayCal = Calendar.getInstance();
+        todayCal.setTime(new Date());
+
+        Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
+
+        return (days.get(day-1));
     }
 
     /**
@@ -217,28 +222,46 @@ public class Habit {
 
     }
 
+    /**
+     * @return the start date of this habit
+     */
     public Date getStartDate() {
         return startDate;
     }
 
+    /**
+     * @param startDate the start date of this habit
+     */
     public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
+    /**
+     * @return the last time this habit was successfully completed
+     */
     public Date getLastCompleted() {
         return lastCompleted;
     }
 
+    /**
+     * @param lastCompleted the last time this habit was successfully completed
+     */
     public void setLastCompleted(Date lastCompleted) {
         this.lastCompleted = lastCompleted;
     }
 
+    /**
+     * Increments the isFailed counter by 1
+     * @param isFailed whether or not the habit has failed
+     */
     public void addFailed(Boolean isFailed){
         if (isFailed == Boolean.TRUE){
             timesFailed += 1;
         }
     }
 
+
+    //TODO needs javadoc
     public void updateFailed () {
         Calendar lastCal = Calendar.getInstance();
         lastCal.setTime(lastCalculated);
@@ -288,9 +311,8 @@ public class Habit {
             lastCalculated = newCal.getTime();
 
         }
-
-
     }
+
 
 
 
