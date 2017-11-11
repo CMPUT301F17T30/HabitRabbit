@@ -21,13 +21,18 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * arankin on 26/10/17.
@@ -48,6 +53,7 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitName;
         private TextView habitReason;
+        private ImageView lightImage;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -55,6 +61,7 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
             itemView.setOnClickListener(this);
             habitName = itemView.findViewById(R.id.habitNameTextView);
             habitReason = itemView.findViewById(R.id.habitEventCommentTextView);
+            lightImage = itemView.findViewById(R.id.trafficLightImage);
         }
 
         @Override
@@ -94,9 +101,18 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         final Habit habit = habitList.get(position);
         String title = habit.getTitle();
         String reason = habit.getReason();
+        Date todayDate = new Date();
+        Date dueDate;
+
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        //if (fmt.format(todayDate).equals(fmt.format(dueDate)))
+        //    Bitmap light = greenlight.png
+
+
 
         holder.habitName.setText(title);
         holder.habitReason.setText(reason);
+        //holder.lightImage.setImageBitmap(light);
 
 
 
