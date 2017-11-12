@@ -131,6 +131,12 @@ public class HabitEvent {
     /**
      * @return The location at which this event was completed
      */
+
+    public void setLocation(String location) {
+
+        this.Location = location;
+    }
+
     public String getLocation() {
         return Location;
     }
@@ -162,10 +168,7 @@ public class HabitEvent {
     /**
      * @param location The location at which this event was completed
      */
-    public void setLocation(String location) {
 
-        Location = location;
-    }
 
     /**
      *
