@@ -133,17 +133,44 @@ public class Habit {
     }
 
     /**
-     *
+     * @param date the date to use for 'today', default is today's actual date
+     * @return whether not not the habit is due to be completed at the supplied date
+     */
+    public Boolean isDueToday(Date date){
+
+        Calendar todayCal = Calendar.getInstance();
+        todayCal.setTime(date);
+
+        Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
+
+        return (daylistWrapper(day));
+    }
+
+    /**
+     * default behavior is to run thsi methods suing current date
      * @return whether not not the habit is due to be completed today
      */
     public Boolean isDueToday(){
 
-        Calendar todayCal = Calendar.getInstance();
-        todayCal.setTime(new Date());
+        return isDueToday(new Date());
+    }
 
-        Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
-
-        return (days.get(day-1));
+    public Boolean daylistWrapper(Integer i){
+        if (i == 7)
+            return days.get(5);
+        if (i == 6)
+            return days.get(4);
+        if (i == 5)
+            return days.get(3);
+        if (i == 4)
+            return days.get(2);
+        if (i == 3)
+            return days.get(1);
+        if (i == 2)
+            return days.get(0);
+        if (i == 1)
+            return days.get(6);
+        return Boolean.FALSE;
     }
 
     /**
@@ -151,8 +178,9 @@ public class Habit {
      * @return percentage of completion
      */
     public double getPercentCompletion(){
+        double percent = ((double)timesCompleted/(timesFailed+timesCompleted));
 
-        return (float) (timesCompleted/(timesFailed+timesCompleted));
+        return percent;
     }
 
     /**

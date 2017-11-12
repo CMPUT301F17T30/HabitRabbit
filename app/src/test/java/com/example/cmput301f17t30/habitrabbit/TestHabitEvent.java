@@ -40,6 +40,7 @@ public class TestHabitEvent {
     public void testGetComment(){
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
+        event.setComment("a comment");
         assertEquals("a comment", event.getComment());
     }
 
@@ -74,7 +75,7 @@ public class TestHabitEvent {
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
         event.setLocation("university of alberta");
-        assertEquals("university of alberta", event.getComment());
+        assertEquals("university of alberta", event.getLocation());
     }
 
     @Test

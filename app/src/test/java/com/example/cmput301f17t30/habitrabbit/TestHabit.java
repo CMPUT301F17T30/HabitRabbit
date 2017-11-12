@@ -193,10 +193,12 @@ public class TestHabit {
         daylist.set(5,Boolean.FALSE);
         daylist.set(6,Boolean.TRUE);
 
-        Calendar myCalendar = new GregorianCalendar(2017, 10, 12);
+        GregorianCalendar myCalendar = new GregorianCalendar(2017, 10, 12);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
@@ -213,10 +215,18 @@ public class TestHabit {
         daylist.set(5,Boolean.TRUE);
         daylist.set(6,Boolean.FALSE);
 
-        Calendar myCalendar = new GregorianCalendar(2017, 10, 11);
+        Calendar todayCal = Calendar.getInstance();
+        todayCal.setTime(new Date());
+
+        Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
+
+        Boolean bol = (daylist.get(day-2));
+
+        GregorianCalendar myCalendar = new GregorianCalendar(2017, 10, 11);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+        Boolean bool = habit.isDueToday();
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
@@ -236,7 +246,7 @@ public class TestHabit {
         Calendar myCalendar = new GregorianCalendar(2017, 10, 10);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1", "test", daylist, testDate);
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
@@ -256,7 +266,7 @@ public class TestHabit {
         Calendar myCalendar = new GregorianCalendar(2017, 10, 9);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
@@ -276,7 +286,7 @@ public class TestHabit {
         Calendar myCalendar = new GregorianCalendar(2017, 10, 8);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
 
@@ -297,7 +307,7 @@ public class TestHabit {
         Calendar myCalendar = new GregorianCalendar(2017, 10, 13);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
