@@ -31,7 +31,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.EDIT_HABIT_NAME;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;

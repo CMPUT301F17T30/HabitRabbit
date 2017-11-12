@@ -281,12 +281,15 @@ public class Habit {
      */
     public void addFailed(Boolean isFailed){
         if (isFailed == Boolean.TRUE){
-            timesFailed += 1;
+            incrementTimesFailed();
         }
     }
 
 
-    //TODO needs javadoc
+    /**
+     *  Updates the timesFailed count to add the number of failures since the user last completed the
+     *  habit.
+     */
     public void updateFailed() {
         Calendar lastCal = Calendar.getInstance();
 
