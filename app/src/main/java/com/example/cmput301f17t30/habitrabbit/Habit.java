@@ -154,7 +154,7 @@ public class Habit {
      */
     public double getPercentCompletion(){
 
-        return (double) ((timesFailed+timesCompleted)/timesCompleted);
+        return (float) (timesCompleted/(timesFailed+timesCompleted));
     }
 
     /**
@@ -263,7 +263,12 @@ public class Habit {
     //TODO needs javadoc
     public void updateFailed () {
         Calendar lastCal = Calendar.getInstance();
-        lastCal.setTime(lastCalculated);
+
+        if (lastCalculated != null)
+            lastCal.setTime(lastCalculated);
+        else
+            lastCalculated = new Date();
+
 
         Calendar newCal = Calendar.getInstance();
         newCal.setTime(new Date());
