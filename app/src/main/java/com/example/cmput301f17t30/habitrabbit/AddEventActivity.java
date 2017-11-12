@@ -216,7 +216,7 @@ public class AddEventActivity extends AppCompatActivity {
                 }
 
                 eventController.saveAddEvent();
-                addEventDone();
+                //addEventDone();
 
                 Intent returnToMain = new Intent();
                 setResult(RESULT_OK, returnToMain);

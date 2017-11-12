@@ -25,10 +25,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.habitEventController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
 /**
  * Created by arankin on 11/2/17.
@@ -46,10 +48,15 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+        private TextView eventLocation;
+        private TextView eventComment;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
+
+            eventLocation = itemView.findViewById(R.id.habitEventLocationTextView);
+            eventComment = itemView.findViewById(R.id.habitEventCommentTextView);
 
             itemView.setOnClickListener(this);
 
@@ -74,11 +81,15 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
     @Override
     public void onBindViewHolder(HabitHistoryLayoutAdapter.ViewHolder holder, final int position) {
-        final HabitEvent habitEvent = habitHistoryList.get(position);
+        final HabitEvent habitEvent = eventList.getEvent(position);
+
+        String comment = habitEvent.getComment();
+        String location = habitEvent.getLocation();
 
 
 
-
+        holder.eventLocation.setText(location);
+        holder.eventComment.setText(comment);
 
 
         /*
