@@ -227,8 +227,8 @@ public class Habit {
      * Decrements the times failed counter
      */
     public void decrementTimesFailed(){
-        this.timesFailed -=1;
-
+        if (this.timesFailed != 0)
+            this.timesFailed -=1;
     }
 
     /**
@@ -243,7 +243,8 @@ public class Habit {
      * Decrements the times completed counter
      */
     public void decrementTimesCompleted(){
-        this.timesCompleted -=1;
+        if (this.timesCompleted != 0)
+            this.timesCompleted -=1;
 
     }
 
