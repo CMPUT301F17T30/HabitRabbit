@@ -18,26 +18,32 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.test.ActivityInstrumentationTestCase2;
+import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by arankin on 10/18/17.
  */
 
-public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
+public class TestHabitEvent {
 
     public TestHabitEvent() {
-        super(HabitEvent.class);
-    }
 
+    }
+    @Test
     public void testGetComment(){
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
         assertEquals("a comment", event.getComment());
     }
 
+    @Test
     public void testSetComment(){
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
@@ -45,6 +51,7 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
         assertEquals("new comment", event.getComment());
     }
 
+    @Test
     public void testGetHabitType(){
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
@@ -52,6 +59,7 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
 
     }
 
+    @Test
     public void testSetHabitType(){
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
@@ -61,6 +69,7 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
 
     }
 
+    @Test
     public void testGetLocation(){
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
@@ -68,21 +77,23 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
         assertEquals("university of alberta", event.getComment());
     }
 
+    @Test
     public void testGetLogitude(){
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
         event.setCoordinate(-100.1, 30);
-        assertEquals(-100.1, event.getLogitude());
+        assertEquals(-100.1, event.getLogitude(),0.01);
     }
 
+    @Test
     public void testGetLatitude(){
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
         event.setCoordinate(-100.1, 30);
-        assertEquals(30, event.getLatitude());
+        assertEquals(30, event.getLatitude(),0.01);
     }
 
-
+    @Test
     public void testGetDate() {
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);
@@ -91,6 +102,7 @@ public class TestHabitEvent extends ActivityInstrumentationTestCase2 {
         assertEquals(date,event.getDate());
     }
 
+    @Test
     public void testSetDate() {
         Habit habit = new MockHabit();
         HabitEvent event = new HabitEvent(habit);

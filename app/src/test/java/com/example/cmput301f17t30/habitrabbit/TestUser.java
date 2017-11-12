@@ -18,23 +18,26 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.test.ActivityInstrumentationTestCase2;
+
+import org.junit.Test;
+
+import static org.junit.Assert.*;
 
 /**
  * Created by arankin on 20/10/17.
  */
 
-public class TestUser extends ActivityInstrumentationTestCase2 {
+public class TestUser  {
 
     public TestUser(){
-        super (User.class);
+        super ();
     }
-
+    @Test
     public void testGetId(){
         User user = new User("bob");
         assertEquals("bob",user.getUserId());
     }
-
+    @Test
     public void testSetId(){
         User user = new User("bob");
         user.setUserId("timmy");
