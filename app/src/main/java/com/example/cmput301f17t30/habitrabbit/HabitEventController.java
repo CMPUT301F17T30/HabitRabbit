@@ -31,6 +31,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 public class HabitEventController {
 
     private HabitEvent habitEvent;
+    private int position;
 
     public HabitEventController(){
     }
@@ -105,8 +106,8 @@ public class HabitEventController {
         habitEvent.getHabitType().decrementTimesCompleted();
     }
 
-    public void saveEditEvent(int index){
-        eventList.editEvent(index, habitEvent);
+    public void saveEditEvent(){
+        eventList.editEvent(position, habitEvent);
 
     }
 

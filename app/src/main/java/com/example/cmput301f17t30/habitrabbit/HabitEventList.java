@@ -46,4 +46,8 @@ public class HabitEventList {
     public HabitEvent getEvent(int index){
         return eventList.get(index);
     }
+
+    public ArrayList<HabitEvent> getList(){
+        return eventList;
+    }
 }

@@ -129,8 +129,14 @@ public class EditEvent extends AppCompatActivity {
         locationOuput = (ListView) findViewById(R.id.serchout);
         // set the information
         addressName = eventController.getLocation(index);
-        if (addressName.trim().length() >= 0) {
-            locationInput.setText(addressName);
+
+        try {
+            if (addressName.trim().length() >= 0) {
+                locationInput.setText(addressName);
+            }
+        }
+        catch (NullPointerException exception)  {
+            //handle error
         }
         latitude = eventController.getLatitude(index);
         longitude = eventController.getLogitude(index);
@@ -224,7 +230,7 @@ public class EditEvent extends AppCompatActivity {
                 if (theComment.length() > 0) {
                     if (theComment.length() < 20) {
                         eventController.setComment(theComment);
-                        eventController.saveEditEvent(1);
+                        eventController.saveEditEvent();
                         // save in file function here or habit event will gone
 
                     } else {
@@ -233,7 +239,7 @@ public class EditEvent extends AppCompatActivity {
                     }
                 }
                 else{
-                    eventController.saveEditEvent(1);
+                    eventController.saveEditEvent();
                     // save in file function here or habit event will gone
                 }
 

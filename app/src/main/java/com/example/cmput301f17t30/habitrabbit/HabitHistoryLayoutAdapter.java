@@ -18,7 +18,9 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,6 +28,8 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.habitEventController;
 
 /**
  * Created by arankin on 11/2/17.
@@ -54,11 +58,12 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
         @Override
         public void onClick(View view) {
-            //this is for clicking on the history item itself as oppsed to any particular button
-            Toast.makeText(historyContext, "clicking here will bring up new activity",
-                    Toast.LENGTH_LONG).show();
-
+            Intent editEvent = new Intent(historyContext, EditEvent.class);
+            habitEventController.editEvent(getPosition());
+            ((Activity)historyContext).startActivityForResult(editEvent, 7);
         }
+
+
     }
 
     @Override
