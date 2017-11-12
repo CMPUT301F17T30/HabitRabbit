@@ -76,7 +76,9 @@ public class HabitEvent {
         Location = location;
         date = new Date();
 
-    }*/
+    }
+    */
+
     public void setId(String id) {
         this.id = id;
     }

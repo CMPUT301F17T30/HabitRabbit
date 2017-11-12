@@ -155,6 +155,11 @@ public class Habit {
         return isDueToday(new Date());
     }
 
+    /**
+     *  a wrapper function to covnert from the Calendar format to our days list
+     * @param i the day of the week from the Calendar
+     * @return  whether or not the day has an event due
+     */
     public Boolean daylistWrapper(Integer i){
         if (i == 7)
             return days.get(5);
@@ -286,7 +291,10 @@ public class Habit {
     }
 
 
-    //TODO needs javadoc
+    /**
+     * updates the number of failed habit events on this habit. Iterates through the time between
+     * today and the last time that this was checked.
+     */
     public void updateFailed() {
         Calendar lastCal = Calendar.getInstance();
 
