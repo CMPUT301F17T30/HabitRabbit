@@ -44,22 +44,11 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
 
-    ArrayList<Boolean> daylist = new ArrayList<Boolean>();
-    Habit habit = new Habit("title 1","test",daylist, new Date());
-    HabitEvent event = new HabitEvent(habit);
-
-    ArrayList<Boolean> daylist2 = new ArrayList<Boolean>();
-    Habit habit1 = new Habit("title 1","test",daylist,new Date());
-    HabitEvent event1 = new HabitEvent(habit);
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_history);
-
-        eventList.addEvent(event);
-        eventList.addEvent(event1);
 
         habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
         habitEventlinearLayoutManager = new LinearLayoutManager(this);
