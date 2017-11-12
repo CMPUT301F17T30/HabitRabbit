@@ -18,6 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -43,7 +44,6 @@ public class Habit {
     private Integer timesCompleted;
     private Date startDate;
     private Date lastCompleted;
-    private Date lastCalculated;
 
     /**
      *
@@ -60,7 +60,6 @@ public class Habit {
         timesFailed =0;
         startDate = date;
         lastCompleted = null;
-        lastCalculated = null;
     }
 
     /**
@@ -76,7 +75,6 @@ public class Habit {
         timesFailed = 0;
         startDate = date;
         lastCompleted = null;
-        lastCalculated = null;
 
     }
 
@@ -264,16 +262,18 @@ public class Habit {
     public void updateFailed() {
         Calendar lastCal = Calendar.getInstance();
 
-        if (lastCalculated != null)
-            lastCal.setTime(lastCalculated);
+        if (lastCompleted!= null)
+            lastCal.setTime(lastCompleted);
         else
-            lastCalculated = new Date();
+            lastCompleted = new Date();
+
+        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
 
 
         Calendar newCal = Calendar.getInstance();
         newCal.setTime(new Date());
 
-        if (lastCal.getTimeInMillis() == newCal.getTimeInMillis()){
+        if (format.format(lastCal.getTime()).matches(format.format(newCal.getTime()))){
 
         }
         else {
@@ -312,7 +312,7 @@ public class Habit {
 
             }
 
-            lastCalculated = newCal.getTime();
+            lastCompleted = newCal.getTime();
 
         }
     }
