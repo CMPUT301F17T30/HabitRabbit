@@ -149,6 +149,12 @@ public class AddHabitActivity extends AppCompatActivity {
                 if (name.getText().toString().trim().isEmpty()){
                     name.setError("Habit name required");
                 }
+                if (name.getText().toString().length() > 20){
+                    name.setError("Habit name too long");
+                }
+                if (reason.getText().toString().length() > 30){
+                    reason.setError("Reason text too long");
+                }
                 if (date.getText().toString().isEmpty()){
                     date.setError("Valid date required");
                 }
