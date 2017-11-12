@@ -18,8 +18,8 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * Created by Adam on 11-Nov-17.
+/*
+  Created by Adam on 11-Nov-17.
  */
 
 import org.junit.Test;

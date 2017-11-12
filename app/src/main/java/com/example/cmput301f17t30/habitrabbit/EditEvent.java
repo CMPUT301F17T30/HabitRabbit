@@ -55,7 +55,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventControlle
 /**
  * the activity for edit the habit event object and save
  *
- * @version: 1
+ * @version 1
  *
  */
 

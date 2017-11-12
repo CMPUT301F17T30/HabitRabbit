@@ -72,8 +72,8 @@ public class HabitController {
         habitList.editEvent(position, habit);
     }
 
-    /**
-     * @// TODO: 2017-11-11 make grade images
+    /*
+      @// TODO: 2017-11-11 make grade images
      * @param position
      * @return
      */

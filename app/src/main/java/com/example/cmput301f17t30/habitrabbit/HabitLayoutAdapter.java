@@ -23,7 +23,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.Image;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -31,14 +30,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.EDIT_HABIT_DATE;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.EDIT_HABIT_DAYS;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.EDIT_HABIT_POSITION;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 
 /**

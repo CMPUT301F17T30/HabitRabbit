@@ -178,9 +178,8 @@ public class Habit {
      * @return percentage of completion
      */
     public double getPercentCompletion(){
-        double percent = ((double)timesCompleted/(timesFailed+timesCompleted));
 
-        return percent;
+        return ((double)timesCompleted/(timesFailed+timesCompleted));
     }
 
     /**
