@@ -193,7 +193,7 @@ public class TestHabit {
         daylist.set(5,Boolean.FALSE);
         daylist.set(6,Boolean.TRUE);
 
-        Calendar myCalendar = new GregorianCalendar(2017, 10, 12);
+        GregorianCalendar myCalendar = new GregorianCalendar(2017, 10, 12);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
         assertTrue(habit.isDueToday());
@@ -213,9 +213,17 @@ public class TestHabit {
         daylist.set(5,Boolean.TRUE);
         daylist.set(6,Boolean.FALSE);
 
-        Calendar myCalendar = new GregorianCalendar(2017, 10, 11);
+        Calendar todayCal = Calendar.getInstance();
+        todayCal.setTime(new Date());
+
+        Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
+
+        Boolean bol = (daylist.get(day-2));
+
+        GregorianCalendar myCalendar = new GregorianCalendar(2017, 10, 11);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
+        Boolean bool = habit.isDueToday();
         assertTrue(habit.isDueToday());
     }
 
