@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     public static final HabitEventList eventList = new HabitEventList();
     public static final HabitEventController eventController = new HabitEventController();
 
-    //public static final HabitList habitList = new HabitList();
-    //public static final HabitController habitController = new HabitController();
+    public static final HabitList habitList = new HabitList();
+    public static final HabitController habitController = new HabitController();
 
     public static final String ADD_HABIT_NAME = "AddHabitName";
     public static final String ADD_HABIT_REASON = "AddHabitReason";
@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
   //  Habit habit = new Habit("title 1","test",daylist);
     // Habit habit2 = new Habit("title 2","test2",daylist);
 
-    private ArrayList<Habit> habitList = new ArrayList<>();
+    private ArrayList<Habit> habitList2 = new ArrayList<>();
 
 
 
@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new HabitLayoutAdapter(habitList, this);
+        adapter = new HabitLayoutAdapter(habitList2, this);
         recyclerView.setAdapter(adapter);
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new HabitLayoutAdapter(habitList, this);
+        adapter = new HabitLayoutAdapter(habitList2, this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -153,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
                     newHabit.setReason(reason);
                 }
 
-                habitList.add(newHabit);
+                habitList2.add(newHabit);
                 adapter.notifyDataSetChanged();
 
 
@@ -171,10 +171,10 @@ public class MainActivity extends AppCompatActivity {
                 Date date = (Date) data.getSerializableExtra(EDIT_HABIT_DATE);
 
 
-                habitList.get(position).setTitle(name);
-                habitList.get(position).setReason(reason);
-                habitList.get(position).setDays(days);
-                habitList.get(position).setStartDate(date);
+                habitList2.get(position).setTitle(name);
+                habitList2.get(position).setReason(reason);
+                habitList2.get(position).setDays(days);
+                habitList2.get(position).setStartDate(date);
 
                 adapter.notifyDataSetChanged();
 

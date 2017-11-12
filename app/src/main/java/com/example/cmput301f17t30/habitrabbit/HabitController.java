@@ -22,7 +22,7 @@ public class HabitController {
     }
 
     public void editHabit(int position){
-        habit = habitList.get(position);
+        habit = habitList.getHabit(position);
     }
 
     public void setTitle(String title){
@@ -38,27 +38,27 @@ public class HabitController {
     }
 
     public String getTitle(int position){
-        habit = habitList.get(position);
+        habit = habitList.getHabit(position);
         return habit.getTitle();
     }
 
     public String getReason(int position){
-        habit = habitList.get(position);
+        habit = habitList.getHabit(position);
         return habit.getReason();
     }
 
     public ArrayList<Boolean> getDays(int position){
-        habit = habitList.get(position);
+        habit = habitList.getHabit(position);
         return habit.getDays();
     }
 
     public Date getStartDate(int position){
-        habit = habitList.get(position);
+        habit = habitList.getHabit(position);
         return habit.getStartDate();
     }
 
     public double getPercentageCompletion(int position){
-        habit = habitList.get(position);
+        habit = habitList.getHabit(position);
         habit.updateFailed();
         return habit.getPercentCompletion();
     }
@@ -68,8 +68,7 @@ public class HabitController {
      * @param position
      * @return
      */
-    public Image getGrade(int position){
-
-    }
+   // public Image getGrade(int position){
+   // }
 
 }
