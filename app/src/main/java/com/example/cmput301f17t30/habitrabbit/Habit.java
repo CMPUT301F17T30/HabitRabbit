@@ -138,7 +138,6 @@ public class Habit {
      *
      * @return whether not not the habit is due to be completed today
      */
-    //TODO implement this method
     public Boolean isDueToday(){
 
         Calendar todayCal = Calendar.getInstance();
