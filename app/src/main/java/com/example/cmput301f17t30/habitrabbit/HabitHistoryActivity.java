@@ -23,6 +23,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -63,6 +66,38 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
         habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
+
+
+        Button addEventButton = (Button) findViewById(R.id.addEventButton);
+        addEventButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent newEvent = new Intent(HabitHistoryActivity.this, AddEvent.class);
+                startActivityForResult(newEvent, ADD_HABIT_EVENT_REQUEST);
+
+
+            }
+        });
+
+        Button button2 = (Button) findViewById(R.id.button8);
+        button2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 2",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button button3 = (Button) findViewById(R.id.button9);
+        button3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 3",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
     }
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
