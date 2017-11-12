@@ -103,7 +103,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_EVENT_REQUEST){
             if (resultCode == RESULT_OK){
-                habitEventController.saveAddEvent();
+                //habitEventController.saveAddEvent();
                 habitEventadapter.notifyDataSetChanged();
             }
         }

@@ -38,11 +38,13 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
+import static java.lang.Boolean.FALSE;
 
 
 /**
@@ -212,13 +214,34 @@ public class AddEventActivity extends AppCompatActivity {
                                 Toast.LENGTH_LONG).show();
                     }
                 }
-                else{
-                    eventController.saveAddEvent();
-                    // save in file function here or habit event will gone
-                }
+
+                eventController.saveAddEvent();
+                addEventDone();
+
+                Intent returnToMain = new Intent();
+                setResult(RESULT_OK, returnToMain);
+
+                finish();
+                // save in file function here or habit event will gone
+
 
             }
         });
+    }
+
+    public void addEventDone(){
+        try{
+
+
+            Intent returnToMain = new Intent();
+            setResult(RESULT_OK, returnToMain);
+
+            finish();
+
+        }
+        catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
 
