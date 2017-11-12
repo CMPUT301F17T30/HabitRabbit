@@ -12,6 +12,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
 public class HabitController {
     private Habit habit;
+    private int position;
 
     public HabitController(){
 
@@ -23,6 +24,7 @@ public class HabitController {
 
     public void editHabit(int position){
         habit = habitList.getHabit(position);
+        this.position = position;
     }
 
     public void setTitle(String title){
@@ -37,30 +39,37 @@ public class HabitController {
         habit.setDays(days);
     }
 
-    public String getTitle(int position){
-        habit = habitList.getHabit(position);
+    public void setDate(Date date){
+        habit.setStartDate(date);
+    }
+
+    public String getTitle(){
         return habit.getTitle();
     }
 
-    public String getReason(int position){
-        habit = habitList.getHabit(position);
+    public String getReason(){
         return habit.getReason();
     }
 
-    public ArrayList<Boolean> getDays(int position){
-        habit = habitList.getHabit(position);
+    public ArrayList<Boolean> getDays(){
         return habit.getDays();
     }
 
-    public Date getStartDate(int position){
-        habit = habitList.getHabit(position);
+    public Date getStartDate(){
         return habit.getStartDate();
     }
 
-    public double getPercentageCompletion(int position){
-        habit = habitList.getHabit(position);
+    public double getPercentageCompletion(){
         habit.updateFailed();
         return habit.getPercentCompletion();
+    }
+
+    public void saveAddHabit(){
+        habitList.addHabit(habit);
+    }
+
+    public void saveEditHabit(){
+        habitList.editEvent(position, habit);
     }
 
     /**

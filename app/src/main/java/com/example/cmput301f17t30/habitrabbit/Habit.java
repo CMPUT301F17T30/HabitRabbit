@@ -262,7 +262,7 @@ public class Habit {
 
 
     //TODO needs javadoc
-    public void updateFailed () {
+    public void updateFailed() {
         Calendar lastCal = Calendar.getInstance();
         lastCal.setTime(lastCalculated);
 

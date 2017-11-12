@@ -31,4 +31,12 @@ public class HabitList {
         return habitList.get(position);
     }
 
+    public int getSize(){
+        return habitList.size();
+    }
+
+    public ArrayList<Habit> getList(){
+        return habitList;
+    }
+
 }

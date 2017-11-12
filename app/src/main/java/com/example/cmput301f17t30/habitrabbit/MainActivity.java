@@ -63,8 +63,6 @@ public class MainActivity extends AppCompatActivity {
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
     ArrayList daylist = new ArrayList<Boolean>();
-  //  Habit habit = new Habit("title 1","test",daylist);
-    // Habit habit2 = new Habit("title 2","test2",daylist);
 
     private ArrayList<Habit> habitList2 = new ArrayList<>();
 
@@ -76,14 +74,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       // habitList.add(habit);
-       // habitList.add(habit2);
+       //habitList.addHabit("one", daylist, new Date());
+       //habitList.add(habit2);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new HabitLayoutAdapter(habitList2, this);
+        adapter = new HabitLayoutAdapter(habitList.getList(), this);
         recyclerView.setAdapter(adapter);
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
@@ -92,6 +90,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent newHabit = new Intent(MainActivity.this, AddHabitActivity.class);
                 startActivityForResult(newHabit, ADD_HABIT_REQUEST);
+
+
             }
         });
 
@@ -126,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new HabitLayoutAdapter(habitList2, this);
+        adapter = new HabitLayoutAdapter(habitList.getList(), this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -141,43 +141,15 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
-
-                String name = data.getStringExtra(ADD_HABIT_NAME);
-                String reason = data.getStringExtra(ADD_HABIT_REASON);
-                ArrayList<Boolean> days = (ArrayList<Boolean>) data.getSerializableExtra(ADD_HABIT_DAYS);
-                Date date = (Date) data.getSerializableExtra(ADD_HABIT_DATE);
-
-                Habit newHabit = new Habit(name, days, date);
-
-                if (!reason.isEmpty()){
-                    newHabit.setReason(reason);
-                }
-
-                habitList2.add(newHabit);
+                habitController.saveAddHabit();
                 adapter.notifyDataSetChanged();
-
-
-
             }
         }
 
         if (requestCode == EDIT_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
-
-                String name = data.getStringExtra(EDIT_HABIT_NAME);
-                String reason = data.getStringExtra(EDIT_HABIT_REASON);
-                ArrayList<Boolean> days = (ArrayList<Boolean>) data.getSerializableExtra(EDIT_HABIT_DAYS);
-                int position = data.getIntExtra(EDIT_HABIT_POSITION, 0);
-                Date date = (Date) data.getSerializableExtra(EDIT_HABIT_DATE);
-
-
-                habitList2.get(position).setTitle(name);
-                habitList2.get(position).setReason(reason);
-                habitList2.get(position).setDays(days);
-                habitList2.get(position).setStartDate(date);
-
+                habitController.saveEditHabit();
                 adapter.notifyDataSetChanged();
-
 
             }
         }

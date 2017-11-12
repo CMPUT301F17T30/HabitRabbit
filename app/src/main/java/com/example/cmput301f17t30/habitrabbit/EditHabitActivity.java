@@ -31,17 +31,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.EDIT_HABIT_NAME;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class EditHabitActivity extends AppCompatActivity {
-
-    public static final String EDIT_HABIT_NAME = "EditHabitName";
-    public static final String  EDIT_HABIT_REASON = "EditHabitReason";
-    public static final String EDIT_HABIT_DAYS = "EditHabitDays";
-    public static final String EDIT_HABIT_POSITION = "EditHabitPosition";
-    public static final String EDIT_HABIT_DATE = "EditHabitDate";
-
 
     ArrayList<Boolean> days = new ArrayList<>();
 
@@ -69,10 +64,10 @@ public class EditHabitActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_habit);
 
-        days = (ArrayList<Boolean>) getIntent().getSerializableExtra(EDIT_HABIT_DAYS);
-        String oldName = getIntent().getStringExtra(EDIT_HABIT_NAME);
-        String oldReason = getIntent().getStringExtra(EDIT_HABIT_REASON);
-        Date oldDate = (Date) getIntent().getSerializableExtra(EDIT_HABIT_DATE);
+        days = habitController.getDays();
+        String oldName = habitController.getTitle();
+        String oldReason = habitController.getReason();
+        Date oldDate = habitController.getStartDate();
 
 
         name = (EditText) findViewById(R.id.editHabitName);
@@ -192,20 +187,17 @@ public class EditHabitActivity extends AppCompatActivity {
 
     public void editHabitDone(){
         try{
-            Intent returnToMain = new Intent();
 
             String habitName = name.getText().toString();
             String habitReason = reason.getText().toString();
-            int position = getIntent().getIntExtra(EDIT_HABIT_POSITION, 0);
             Date startDate = format.parse(date.getText().toString());
 
-            returnToMain.putExtra(EDIT_HABIT_NAME, habitName);
-            returnToMain.putExtra(EDIT_HABIT_REASON, habitReason);
-            returnToMain.putExtra(EDIT_HABIT_DAYS, days);
-            returnToMain.putExtra(EDIT_HABIT_POSITION, position);
-            returnToMain.putExtra(EDIT_HABIT_DATE, startDate);
+            habitController.setTitle(habitName);
+            habitController.setReason(habitReason);
+            habitController.setDays(days);
+            habitController.setDate(startDate);
 
-
+            Intent returnToMain = new Intent();
             setResult(RESULT_OK, returnToMain);
 
             finish();

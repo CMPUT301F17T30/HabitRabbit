@@ -36,6 +36,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.EDIT_HABIT_DATE;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.EDIT_HABIT_DAYS;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.EDIT_HABIT_POSITION;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+
 /**
  * arankin on 26/10/17.
  */
@@ -68,28 +73,8 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
         @Override
         public void onClick(View view) {
-
-            final String EDIT_HABIT_NAME = "EditHabitName";
-            final String  EDIT_HABIT_REASON = "EditHabitReason";
-            final String EDIT_HABIT_DAYS = "EditHabitDays";
-            final String EDIT_HABIT_POSITION = "EditHabitPosition";
-            final String EDIT_HABIT_DATE = "EditHabitDate";
-
-
-
             Intent editHabit = new Intent(mainContext, EditHabitActivity.class);
-            String name = habitList.get(getPosition()).getTitle();
-            String reason = habitList.get(getPosition()).getReason();
-            ArrayList<Boolean> days = habitList.get(getPosition()).getDays();
-            Date date = habitList.get(getPosition()).getStartDate();
-
-            editHabit.putExtra(EDIT_HABIT_NAME, name);
-            editHabit.putExtra(EDIT_HABIT_REASON, reason);
-            editHabit.putExtra(EDIT_HABIT_DAYS, days);
-            editHabit.putExtra(EDIT_HABIT_POSITION, getPosition());
-            editHabit.putExtra(EDIT_HABIT_DATE, date);
-
-
+            habitController.editHabit(getPosition());
             ((Activity)mainContext).startActivityForResult(editHabit, 2);
         }
     }

@@ -32,15 +32,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
 public class AddHabitActivity extends AppCompatActivity {
-
-    public static final String ADD_HABIT_NAME = "AddHabitName";
-    public static final String  ADD_HABIT_REASON = "AddHabitReason";
-    public static final String ADD_HABIT_DAYS = "AddHabitDays";
-    public static final String ADD_HABIT_DATE = "AddHabitDate";
 
     ArrayList<Boolean> days = new ArrayList<>();
 
@@ -168,7 +164,6 @@ public class AddHabitActivity extends AppCompatActivity {
 
     public void addHabitDone(){
         try{
-            Intent returnToMain = new Intent();
 
             String habitName = name.getText().toString();
             String habitReason = reason.getText().toString();
@@ -177,11 +172,13 @@ public class AddHabitActivity extends AppCompatActivity {
             format.setLenient(FALSE);
             Date startDate = format.parse(date.getText().toString());
 
-            returnToMain.putExtra(ADD_HABIT_NAME, habitName);
-            returnToMain.putExtra(ADD_HABIT_REASON, habitReason);
-            returnToMain.putExtra(ADD_HABIT_DAYS, days);
-            returnToMain.putExtra(ADD_HABIT_DATE, startDate);
+            habitController.addHabit(habitName, days, startDate);
 
+            if (!habitReason.trim().isEmpty()){
+                habitController.setReason(habitReason);
+            }
+
+            Intent returnToMain = new Intent();
             setResult(RESULT_OK, returnToMain);
 
             finish();
