@@ -44,20 +44,18 @@
             tools:text="name" />
 
         <Button
-            android:id="@+id/buttonDeleteHabitEvent"
-            android:layout_width="50dp"
+            android:id="@+id/buttonAddHabitEvent"
+            android:layout_width="wrap_content"
             android:layout_height="49dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="43dp"
             android:layout_marginTop="8dp"
-            android:text="DEL"
+            android:text="ADD EVENT"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/habitEventCommentTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="43dp" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/habitEventCommentTextView"
@@ -69,7 +67,7 @@
             android:layout_marginTop="8dp"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonDeleteHabitEvent"
+            app:layout_constraintEnd_toStartOf="@+id/buttonAddHabitEvent"
             app:layout_constraintStart_toEndOf="@+id/habitNameTextView"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="reason" />
