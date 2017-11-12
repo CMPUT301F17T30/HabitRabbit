@@ -202,19 +202,16 @@ public class AddEventActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String theComment = comment.getText().toString();
-                if (theComment.length() > 0) {
-                    if (theComment.length() < 20) {
-                        eventController.setComment(theComment);
-                        eventController.saveAddEvent();
-                        // save in file function here or habit event will gone
+            String theComment = comment.getText().toString();
 
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Please keep comment under 20 characters.",
-                                Toast.LENGTH_LONG).show();
-                    }
-                }
+            if (theComment.length() > 20) {
+                Toast.makeText(getApplicationContext(), "Please keep comment under 20 characters.",
+                        Toast.LENGTH_LONG).show();
+            }
 
+            else
+                eventController.setComment(theComment);
+                eventController.setLocationName(addressName);
                 eventController.saveAddEvent();
                 //addEventDone();
 
