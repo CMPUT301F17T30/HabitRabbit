@@ -55,7 +55,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventControlle
 /**
  * the activity for edit the habit event object and save
  *
- * @version: 1
+ * @version 1
  *
  */
 
@@ -244,7 +244,7 @@ public class EditEvent extends AppCompatActivity {
 
     /**
      * call this function to open photo gallery outside the app
-     * then once the user select the image, gey the path of the image
+     * then once the user select the image, get the path of the image
      * to use the path, call permission to access external storage
      *
      * @param requestCode the indicator for select image operation

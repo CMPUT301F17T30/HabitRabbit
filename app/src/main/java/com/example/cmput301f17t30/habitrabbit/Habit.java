@@ -155,6 +155,11 @@ public class Habit {
         return isDueToday(new Date());
     }
 
+    /**
+     *  a wrapper function to covnert from the Calendar format to our days list
+     * @param i the day of the week from the Calendar
+     * @return  whether or not the day has an event due
+     */
     public Boolean daylistWrapper(Integer i){
         if (i == 7)
             return days.get(5);
@@ -178,9 +183,8 @@ public class Habit {
      * @return percentage of completion
      */
     public double getPercentCompletion(){
-        double percent = ((double)timesCompleted/(timesFailed+timesCompleted));
 
-        return percent;
+        return ((double)timesCompleted/(timesFailed+timesCompleted));
     }
 
     /**
@@ -227,8 +231,8 @@ public class Habit {
      * Decrements the times failed counter
      */
     public void decrementTimesFailed(){
-        this.timesFailed -=1;
-
+        if (this.timesFailed != 0)
+            this.timesFailed -=1;
     }
 
     /**
@@ -243,7 +247,8 @@ public class Habit {
      * Decrements the times completed counter
      */
     public void decrementTimesCompleted(){
-        this.timesCompleted -=1;
+        if (this.timesCompleted != 0)
+            this.timesCompleted -=1;
 
     }
 
@@ -287,8 +292,8 @@ public class Habit {
 
 
     /**
-     *  Updates the timesFailed count to add the number of failures since the user last completed the
-     *  habit.
+     * updates the number of failed habit events on this habit. Iterates through the time between
+     * today and the last time that this was checked.
      */
     public void updateFailed() {
         Calendar lastCal = Calendar.getInstance();

@@ -30,20 +30,18 @@
 
         <TextView
             android:id="@+id/habitNameTextView"
-            android:layout_width="99dp"
-            android:layout_height="54dp"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="52dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="name"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/habitEventCommentTextView"
             app:layout_constraintStart_toEndOf="@+id/trafficLightImage"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="52dp" />
+            tools:text="name" />
 
         <Button
             android:id="@+id/buttonDeleteHabitEvent"
@@ -63,18 +61,18 @@
 
         <TextView
             android:id="@+id/habitEventCommentTextView"
-            android:layout_width="81dp"
+            android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Reason"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonDeleteHabitEvent"
             app:layout_constraintStart_toEndOf="@+id/habitNameTextView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="reason" />
 
         <ImageView
             android:id="@+id/trafficLightImage"

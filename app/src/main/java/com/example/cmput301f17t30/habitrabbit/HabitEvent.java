@@ -76,7 +76,9 @@ public class HabitEvent {
         Location = location;
         date = new Date();
 
-    }*/
+    }
+    */
+
     public void setId(String id) {
         this.id = id;
     }
@@ -129,14 +131,17 @@ public class HabitEvent {
     }
 
     /**
-     * @return The location at which this event was completed
+     *
+     * @param location The location at which this event was completed
      */
-
     public void setLocation(String location) {
 
         this.Location = location;
     }
 
+    /**
+     * @return The location at which this event was completed
+     */
     public String getLocation() {
         return Location;
     }
@@ -165,8 +170,8 @@ public class HabitEvent {
         return latitude;
     }
 
-    /**
-     * @param location The location at which this event was completed
+    /*
+      @param location The location at which this event was completed
      */
 
 

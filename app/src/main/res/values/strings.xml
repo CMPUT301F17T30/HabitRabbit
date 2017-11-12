@@ -30,4 +30,6 @@
     <string name="reasonHint">Reason</string>
     <string name="daySelectPrompt">Please select days this habit is due:</string>
     <string name="startDate">Start Date (DD-MM-YYYY)</string>
+    <string name="addHabit">Add</string>
+    <string name="goToHistory">History</string>
 </resources>
