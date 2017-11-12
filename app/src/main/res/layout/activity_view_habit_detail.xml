@@ -25,7 +25,8 @@
         android:layout_marginTop="8dp"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewHabitDetailTitle" />
+        app:layout_constraintTop_toBottomOf="@+id/viewHabitDetailTitle"
+        android:layout_marginStart="8dp" />
 
     <RatingBar
         android:id="@+id/viewHabitDetailRating"

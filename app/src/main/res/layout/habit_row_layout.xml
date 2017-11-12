@@ -36,12 +36,12 @@
             android:layout_marginEnd="52dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="name"
             android:textSize="30sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/habitEventCommentTextView"
             app:layout_constraintStart_toEndOf="@+id/trafficLightImage"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="name" />
 
         <Button
             android:id="@+id/buttonDeleteHabitEvent"
@@ -67,12 +67,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:text="Reason"
             android:textSize="18sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/buttonDeleteHabitEvent"
             app:layout_constraintStart_toEndOf="@+id/habitNameTextView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="reason" />
 
         <ImageView
             android:id="@+id/trafficLightImage"
