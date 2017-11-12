@@ -50,6 +50,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView eventLocation;
         private TextView eventComment;
+        private TextView eventType;
 
 
         public ViewHolder(View itemView) {
@@ -57,6 +58,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
             eventLocation = itemView.findViewById(R.id.habitEventLocationTextView);
             eventComment = itemView.findViewById(R.id.habitEventCommentTextView);
+            eventType = itemView.findViewById(R.id.eventTypeTextView);
 
             itemView.setOnClickListener(this);
 
@@ -85,11 +87,11 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
         String comment = habitEvent.getComment();
         String location = habitEvent.getLocation();
-
-
+        String type = habitEvent.getHabitType().getTitle();
 
         holder.eventLocation.setText(location);
         holder.eventComment.setText(comment);
+        holder.eventType.setText(type);
 
 
         /*
