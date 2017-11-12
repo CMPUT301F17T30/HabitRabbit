@@ -25,7 +25,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -58,7 +57,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
         @Override
         public void onClick(View view) {
-            Intent editEvent = new Intent(historyContext, EditEvent.class);
+            Intent editEvent = new Intent(historyContext, EditEventActivity.class);
             habitEventController.editEvent(getPosition());
             ((Activity)historyContext).startActivityForResult(editEvent, 7);
         }

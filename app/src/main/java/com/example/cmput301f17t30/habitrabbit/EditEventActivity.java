@@ -24,11 +24,11 @@ import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -39,26 +39,21 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
-
+import java.util.List;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 
-
 /**
- *  the activity to create new habit event object and save
+ * the activity for edit the habit event object and save
  *
- *  @version : 1
+ * @version 1
  *
  */
-public class AddEvent extends AppCompatActivity {
+
+public class EditEventActivity extends AppCompatActivity {
     private EditText comment, locationInput;
     private Intent intent;
-
-    // mockup habit event here
-    // use intent to pass habit for actual code
-    ArrayList<Boolean> daylist = new ArrayList<>();
-    private Habit habit = new Habit("title 1", "test", daylist, new Date());
+    private int index;
 
     //indicator
     private static int IMG_RESULT = 1;
@@ -69,6 +64,7 @@ public class AddEvent extends AppCompatActivity {
     private ImageView image;
     private String ImageDecode;
     private Bitmap selectImage;
+
     private ImageController imageController = new ImageController();
 
 
@@ -80,7 +76,7 @@ public class AddEvent extends AppCompatActivity {
 
     private ArrayAdapter<String> adapter;
 
-    private ArrayList<String> locationNameList;
+    private List<String> locationNameList;
 
 
 
@@ -90,16 +86,15 @@ public class AddEvent extends AppCompatActivity {
     private double longitude;
     private String addressName;
 
-
     private LocationController locationController;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add_event);
-
-        // pass activity to location controller
-        locationController = new LocationController(this);
+        setContentView(R.layout.activity_edit_event);
 
 
         final Button addImage = (Button) findViewById(R.id.add_image);
@@ -107,17 +102,40 @@ public class AddEvent extends AppCompatActivity {
         final Button gpsButton = (Button) findViewById(R.id.gps);
         image = (ImageView) findViewById(R.id.ivImage);
         comment = (EditText) findViewById(R.id.comment);
+        // set the information
+        selectImage = eventController.getImage(index);
+        if (selectImage != null ){
+            image.setImageBitmap(selectImage);
+        }
+
+        comment.setText(eventController.getComment(index));
+
+        // pass activity to location controller
+        locationController = new LocationController(this);
 
 
 
         locationInput = (EditText) findViewById(R.id.enter_location);
         searchButton = (Button) findViewById(R.id.search_location);
         locationOuput = (ListView) findViewById(R.id.serchout);
+        // set the information
+        addressName = eventController.getLocation(index);
+
+        try {
+            if (addressName.trim().length() >= 0) {
+                locationInput.setText(addressName);
+            }
+        }
+        catch (NullPointerException exception)  {
+            //handle error
+        }
+        latitude = eventController.getLatitude(index);
+        longitude = eventController.getLogitude(index);
+
 
 
 
         locationNameList = new ArrayList<String>(); //empty in start
-        //
         adapter = new ArrayAdapter<String>(this, R.layout.list_location, locationNameList);
         locationOuput.setAdapter(adapter);
 
@@ -135,8 +153,8 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
-        /*
-          select location from search result
+        /* select location from search result
+
          */
         locationOuput.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -172,9 +190,8 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
-        /*
-           response to gps button clicked
-           call getGPSlocation() to get gps service
+        /* response to gps button clicked
+          call getGPSlocation() to get gps service
          */
         gpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -194,8 +211,8 @@ public class AddEvent extends AppCompatActivity {
             }
         });
 
-        /*
-          set up the habit event object and save
+        /* create a habit event object and save
+
          */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -204,7 +221,7 @@ public class AddEvent extends AppCompatActivity {
                 if (theComment.length() > 0) {
                     if (theComment.length() < 20) {
                         eventController.setComment(theComment);
-                        eventController.saveAddEvent();
+                        eventController.saveEditEvent();
                         // save in file function here or habit event will gone
 
                     } else {
@@ -213,7 +230,7 @@ public class AddEvent extends AppCompatActivity {
                     }
                 }
                 else{
-                    eventController.saveAddEvent();
+                    eventController.saveEditEvent();
                     // save in file function here or habit event will gone
                 }
 
@@ -223,13 +240,13 @@ public class AddEvent extends AppCompatActivity {
 
 
     /**
-     * call this to open photo gallery outside the app
+     * call this function to open photo gallery outside the app
      * then once the user select the image, get the path of the image
      * to use the path, call permission to access external storage
      *
-     * @param requestCode The indicator for select image operation
+     * @param requestCode the indicator for select image operation
      * @param resultCode
-     * @param data the context of AddEvent activity
+     * @param data the context of EditEventActivity activity
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -257,7 +274,6 @@ public class AddEvent extends AppCompatActivity {
     }
 
 
-
     /**
      * Ask user for permission at runtime
      * one is when user need to get the image then
@@ -265,7 +281,7 @@ public class AddEvent extends AppCompatActivity {
      * one is when user need to get the current location using gps
      * check for access location permission
      *
-     * @param requestType the indicator for gps or image permission
+     * @param requestType the indicator for GPS and image permission
      */
     private void checkPermission(int requestType) {
 
@@ -276,15 +292,15 @@ public class AddEvent extends AppCompatActivity {
                 // if no permission, ask for permission
                 if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-                        ActivityCompat.requestPermissions(AddEvent.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
+                        ActivityCompat.requestPermissions(EditEventActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
 
                     } else {
-                        ActivityCompat.requestPermissions(AddEvent.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
+                        ActivityCompat.requestPermissions(EditEventActivity.this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, GPS_REQUEST_CODE);
 
                     }
                 } else {
                     // has permission, get gps
-                    locationController.getGpsCoordinate(AddEvent.this);
+                    locationController.getGpsCoordinate(EditEventActivity.this);
 
                 }
                 return;
@@ -296,10 +312,10 @@ public class AddEvent extends AppCompatActivity {
                 // no permission, ask permission
                 if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
                     if (ActivityCompat.shouldShowRequestPermissionRationale(this, permission)) {
-                        ActivityCompat.requestPermissions(AddEvent.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IMAGE_REQUEST_CODE);
+                        ActivityCompat.requestPermissions(EditEventActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IMAGE_REQUEST_CODE);
 
                     } else {
-                        ActivityCompat.requestPermissions(AddEvent.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IMAGE_REQUEST_CODE);
+                        ActivityCompat.requestPermissions(EditEventActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, IMAGE_REQUEST_CODE);
 
                     }
                 } else {
@@ -318,9 +334,9 @@ public class AddEvent extends AppCompatActivity {
 
     /**
      * call from checkPermission if no permission is granted
-     * then ask the user to give permissions
+     * then ask the user to get permissions
      *
-     * @param requestCode the indicator for gps or image permission
+     * @param requestCode the indicator for select GPS and image operation
      * @param permissions the sentence of permission request
      * @param grantResults the result of permission request
      */
@@ -341,7 +357,7 @@ public class AddEvent extends AppCompatActivity {
 
                 } else {
                     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                    Toast.makeText(AddEvent.this, "Permission needed to access photo gallery.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditEventActivity.this, "Permission needed to access photo gallery.", Toast.LENGTH_SHORT).show();
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
@@ -357,7 +373,7 @@ public class AddEvent extends AppCompatActivity {
 
                 } else {
                     super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                    Toast.makeText(AddEvent.this, "Permission needed to access GPS services.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditEventActivity.this, "Permission needed to access GPS services.", Toast.LENGTH_SHORT).show();
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                 }
@@ -370,7 +386,7 @@ public class AddEvent extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        eventController.addEvent(habit);
+        eventController.editEvent(index);
     }
 
 }

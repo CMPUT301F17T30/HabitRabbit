@@ -80,7 +80,7 @@ public class ViewEventDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                /*intent = new Intent(ViewEventDetail.this, EditEvent.class);
+                /*intent = new Intent(ViewEventDetail.this, EditEventActivity.class);
                 startActivity(intent);*/
             }
         });

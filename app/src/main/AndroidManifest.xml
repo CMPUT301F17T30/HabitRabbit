@@ -42,10 +42,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".HabitHistoryActivity" />
-        <activity android:name=".AddEvent" />
+        <activity android:name=".AddEventActivity" />
         <activity android:name=".AddHabitActivity" />
         <activity android:name=".EditHabitActivity"/>
-        <activity android:name=".EditEvent"/>
+        <activity android:name=".EditEventActivity"/>
     </application>
 
 </manifest>
