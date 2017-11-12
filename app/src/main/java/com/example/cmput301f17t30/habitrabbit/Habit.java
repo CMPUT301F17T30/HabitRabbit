@@ -135,17 +135,26 @@ public class Habit {
     }
 
     /**
-     *
-     * @return whether not not the habit is due to be completed today
+     * @param date the date to use for 'today', default is today's actual date
+     * @return whether not not the habit is due to be completed at the supplied date
      */
-    public Boolean isDueToday(){
+    public Boolean isDueToday(Date date){
 
         Calendar todayCal = Calendar.getInstance();
-        todayCal.setTime(new Date());
+        todayCal.setTime(date);
 
         Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
 
         return (daylistWrapper(day));
+    }
+
+    /**
+     * default behavior is to run thsi methods suing current date
+     * @return whether not not the habit is due to be completed today
+     */
+    public Boolean isDueToday(){
+
+        return isDueToday(new Date());
     }
 
     public Boolean daylistWrapper(Integer i){

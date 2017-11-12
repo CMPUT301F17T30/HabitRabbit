@@ -196,7 +196,9 @@ public class TestHabit {
         GregorianCalendar myCalendar = new GregorianCalendar(2017, 10, 12);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
@@ -224,7 +226,7 @@ public class TestHabit {
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
         Boolean bool = habit.isDueToday();
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
@@ -244,7 +246,7 @@ public class TestHabit {
         Calendar myCalendar = new GregorianCalendar(2017, 10, 10);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1", "test", daylist, testDate);
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
@@ -264,7 +266,7 @@ public class TestHabit {
         Calendar myCalendar = new GregorianCalendar(2017, 10, 9);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
@@ -284,7 +286,7 @@ public class TestHabit {
         Calendar myCalendar = new GregorianCalendar(2017, 10, 8);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
 
@@ -305,7 +307,7 @@ public class TestHabit {
         Calendar myCalendar = new GregorianCalendar(2017, 10, 13);
         Date testDate = myCalendar.getTime();
         Habit habit = new Habit("title 1","test",daylist,testDate);
-        assertTrue(habit.isDueToday());
+        assertTrue(habit.isDueToday(testDate));
     }
 
     @Test
