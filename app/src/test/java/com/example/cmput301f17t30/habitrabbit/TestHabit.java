@@ -21,7 +21,9 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.test.ActivityInstrumentationTestCase2;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Created by arankin on 18/10/17.
@@ -164,6 +166,38 @@ public class TestHabit extends ActivityInstrumentationTestCase2{
         Habit habit = new Habit("title 1","test",daylist,new Date());
         assertFalse(habit.isDueToday());
 
+    }
+
+    public void testIsDueTodaySunday(){
+        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        daylist.set(0,Boolean.FALSE);
+        daylist.set(1,Boolean.FALSE);
+        daylist.set(2,Boolean.FALSE);
+        daylist.set(3,Boolean.FALSE);
+        daylist.set(4,Boolean.FALSE);
+        daylist.set(5,Boolean.FALSE);
+        daylist.set(6,Boolean.TRUE);
+
+        Calendar myCalendar = new GregorianCalendar(2017, 10, 12);
+        Date testDate = myCalendar.getTime();
+        Habit habit = new Habit("title 1","test",daylist,testDate);
+        assertTrue(habit.isDueToday());
+    }
+
+    public void testIsDueTodayMonday(){
+        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        daylist.set(0,Boolean.TRUE);
+        daylist.set(1,Boolean.FALSE);
+        daylist.set(2,Boolean.FALSE);
+        daylist.set(3,Boolean.FALSE);
+        daylist.set(4,Boolean.FALSE);
+        daylist.set(5,Boolean.FALSE);
+        daylist.set(6,Boolean.FALSE);
+
+        Calendar myCalendar = new GregorianCalendar(2017, 10, 13);
+        Date testDate = myCalendar.getTime();
+        Habit habit = new Habit("title 1","test",daylist,testDate);
+        assertTrue(habit.isDueToday());
     }
 
 }

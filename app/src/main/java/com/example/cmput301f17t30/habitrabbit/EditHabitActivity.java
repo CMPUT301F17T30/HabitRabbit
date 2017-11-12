@@ -162,7 +162,7 @@ public class EditHabitActivity extends AppCompatActivity {
 
                 try {
                     Date startDate = format.parse(date.getText().toString());
-                    if (startDate.after(new Date())) {
+                    if (startDate.after(new Date(System.currentTimeMillis()-24*60*60*1000))) {
                         dateFormat = TRUE;
                     }
                     else {
