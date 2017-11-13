@@ -44,6 +44,8 @@ import java.util.Date;
 
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static java.lang.Boolean.FALSE;
 
 
@@ -59,8 +61,7 @@ public class AddEventActivity extends AppCompatActivity {
 
     // mockup habit event here
     // use intent to pass habit for actual code
-    ArrayList<Boolean> daylist = new ArrayList<>();
-    private Habit habit = new Habit("title 1", "test", daylist, new Date());
+    private Habit habit;
 
     //indicator
     private static int IMG_RESULT = 1;
@@ -390,6 +391,8 @@ public class AddEventActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        int position = getIntent().getIntExtra("pos",0);
+        habit = habitList.getHabit(position);
         eventController.addEvent(habit);
     }
 
