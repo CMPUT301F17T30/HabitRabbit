@@ -95,15 +95,15 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         final HabitEvent habitEvent = eventList.getEvent(position);
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-        format.setLenient(FALSE);
-        String dateText = habitEvent.getDate().toString();
+        String formatDate = format.format(habitEvent.getDate());
+
 
         String comment = habitEvent.getComment();
         //String location = habitEvent.getLocation();
         String type = habitEvent.getHabitType().getTitle();
 
         //holder.eventLocation.setText(location);
-        holder.dateText.setText(dateText);
+        holder.dateText.setText(formatDate);
         holder.eventComment.setText(comment);
         holder.eventType.setText(type);
 
