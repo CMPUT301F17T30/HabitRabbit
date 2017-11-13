@@ -23,6 +23,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Test class for friend model class
  * Created by arankin on 10/18/17.
  */
 
