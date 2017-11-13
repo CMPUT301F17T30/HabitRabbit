@@ -54,11 +54,11 @@
             tools:layout_editor_absoluteY="482dp" />
 
         <Button
-            android:id="@+id/button8"
+            android:id="@+id/habitHistoryFinish"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button2"
+            android:text="@string/main"
             tools:layout_editor_absoluteX="173dp"
             tools:layout_editor_absoluteY="482dp" />
 
