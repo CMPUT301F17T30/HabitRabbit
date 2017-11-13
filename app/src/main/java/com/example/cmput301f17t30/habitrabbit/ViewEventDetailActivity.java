@@ -88,7 +88,7 @@ public class ViewEventDetailActivity extends AppCompatActivity {
 
         //display event info
         commentText.setText(eventController.getComment(index));
-        date.setText(new SimpleDateFormat("dd-MM-yyyy").format(eventController.getDate(index)));
+        //date.setText(new SimpleDateFormat("dd-MM-yyyy").format(eventController.getDate(index)));
         locatoinText.setText(eventController.getLocation(index));
         TypeText.setText(eventController.getType(index).getTitle());
         eventImage.setImageBitmap(eventController.getImage(index));

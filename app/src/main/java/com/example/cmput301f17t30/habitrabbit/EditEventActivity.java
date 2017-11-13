@@ -42,6 +42,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 
 /**
  * Activity for editing a habit event.
@@ -111,6 +112,12 @@ public class EditEventActivity extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.ivImage);
         comment = (EditText) findViewById(R.id.comment);
         address = (EditText) findViewById(R.id.enter_location);
+
+        comment.setText(eventController.getComment(index));
+        address.setText(eventController.getLocation(index));
+        image.setImageBitmap(eventController.getImage(index));
+
+
         // set the information
         selectImage = eventController.getImage(index);
         if (selectImage != null ){
