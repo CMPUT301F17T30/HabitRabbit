@@ -37,4 +37,5 @@
     <string name="timesCompleted">Times completed:</string>
     <string name="edit">EDIT</string>
     <string name="main">MAIN</string>
+    <string name="delete">DELETE</string>
 </resources>

@@ -96,5 +96,9 @@ public class HabitController {
         this.position = position;
     }
 
+    public void deleteHabit(){
+        habitList.deleteHabit(position);
+    }
+
 
 }

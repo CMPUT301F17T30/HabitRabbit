@@ -32,6 +32,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.util.Date;
+
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Math.floor;
 
@@ -39,6 +41,7 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
 
     TextView title;
     TextView reason;
+    TextView date;
 
     TextView percent;
     TextView failed;
@@ -57,6 +60,7 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
 
         title = (TextView) findViewById(R.id.viewHabitTitle);
         reason = (TextView) findViewById(R.id.viewHabitReason);
+        date = (TextView) findViewById(R.id.viewHabitStartDate);
         percent = (TextView) findViewById(R.id.viewHabitPercent);
         failed = (TextView) findViewById(R.id.viewHabitFailed);
         completed = (TextView) findViewById(R.id.viewHabitCompleted);
@@ -65,6 +69,8 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
 
         String habitTitle = habitController.getTitle();
         String habitReason = habitController.getReason();
+        Date startDate = habitController.getStartDate();
+        String dateText = startDate.toString();
         double habitPercent = habitController.getPercentageCompletion();
         String percentText = Double.toString(floor(habitPercent*100)) + "%";
         int complete = habitController.getCompleted();
@@ -98,6 +104,7 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
 
         title.setText(habitTitle);
         reason.setText(habitReason);
+        date.setText(dateText);
         percent.setText(percentText);
         failed.setText(failText);
         completed.setText(completeText);
@@ -109,6 +116,15 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent editHabit = new Intent(ViewHabitDetailActivity.this, EditHabitActivity.class);
                 startActivityForResult(editHabit, 0);
+            }
+        });
+
+        Button deleteHabit = (Button) findViewById(R.id.viewHabitDeleteButton);
+        deleteHabit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                habitController.deleteHabit();
+                finish();
             }
         });
 
