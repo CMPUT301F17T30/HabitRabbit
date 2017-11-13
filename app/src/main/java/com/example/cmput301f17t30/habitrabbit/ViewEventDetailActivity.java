@@ -32,7 +32,7 @@ import android.widget.TextView;
  * This class is used to display event detail.
  */
 
-public class ViewEventDetail extends AppCompatActivity {
+public class ViewEventDetailActivity extends AppCompatActivity {
 
     //build fake info
     //ArrayList<Boolean> daylist = new ArrayList<Boolean>();
@@ -87,7 +87,7 @@ public class ViewEventDetail extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                intent = new Intent(ViewEventDetail.this, EditEventActivity.class);
+                intent = new Intent(ViewEventDetailActivity.this, EditEventActivity.class);
                 intent.putExtra("pos",index);
                 startActivityForResult(intent, EDIT_HABIT_EVENT_REQUEST);
 
