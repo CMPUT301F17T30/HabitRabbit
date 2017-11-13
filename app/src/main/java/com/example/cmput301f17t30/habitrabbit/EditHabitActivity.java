@@ -198,9 +198,7 @@ public class EditHabitActivity extends AppCompatActivity {
 
             Intent returnToMain = new Intent();
             setResult(RESULT_OK, returnToMain);
-
             finish();
-
         }
         catch (Exception e){
             e.printStackTrace();

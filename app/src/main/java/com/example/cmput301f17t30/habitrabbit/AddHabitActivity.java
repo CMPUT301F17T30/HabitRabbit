@@ -178,6 +178,7 @@ public class AddHabitActivity extends AppCompatActivity {
                 habitController.setReason(habitReason);
             }
 
+
             Intent returnToMain = new Intent();
             setResult(RESULT_OK, returnToMain);
 

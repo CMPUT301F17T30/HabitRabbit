@@ -44,6 +44,7 @@ public class Habit {
     private Integer timesCompleted;
     private Date startDate;
     private Date lastCompleted;
+    private Date lastCalculated;
 
     /**
      *
@@ -60,6 +61,7 @@ public class Habit {
         timesFailed =0;
         startDate = date;
         lastCompleted = null;
+        lastCalculated = null;
     }
 
     /**
@@ -75,6 +77,7 @@ public class Habit {
         timesFailed = 0;
         startDate = date;
         lastCompleted = null;
+        lastCalculated = null;
 
     }
 
@@ -298,12 +301,18 @@ public class Habit {
     public void updateFailed() {
         Calendar lastCal = Calendar.getInstance();
 
-        if (lastCompleted!= null)
-            lastCal.setTime(lastCompleted);
-        else
+        if (lastCompleted == null)
             lastCompleted = new Date();
+        if (lastCalculated == null) {
+            lastCalculated = new Date();
+            lastCal.setTime(lastCompleted);
+        }
+        else if (lastCompleted.after(lastCalculated))
+            lastCal.setTime(lastCompleted);
+        else if (lastCalculated.after(lastCompleted))
+            lastCal.setTime(lastCalculated);
 
-        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
 
         Calendar newCal = Calendar.getInstance();
@@ -313,7 +322,7 @@ public class Habit {
 
         }
         else {
-            while (lastCal.getTimeInMillis() < newCal.getTimeInMillis()) {
+            while (!format.format(lastCal.getTime()).matches(format.format(newCal.getTime()))) {
                 lastCal.add(Calendar.DAY_OF_MONTH, 1);
 
                 switch (lastCal.get(Calendar.DAY_OF_WEEK)){
@@ -348,9 +357,9 @@ public class Habit {
 
             }
 
-            lastCompleted = newCal.getTime();
-
         }
+
+        lastCalculated = new Date();
     }
 
 

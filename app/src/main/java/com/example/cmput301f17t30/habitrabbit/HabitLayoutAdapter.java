@@ -68,9 +68,9 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
         @Override
         public void onClick(View view) {
-            Intent editHabit = new Intent(mainContext, EditHabitActivity.class);
-            habitController.editHabit(getPosition());
-            ((Activity)mainContext).startActivityForResult(editHabit, 2);
+            Intent viewHabit = new Intent(mainContext, ViewHabitDetailActivity.class);
+            habitController.viewHabit(getAdapterPosition());
+            ((Activity)mainContext).startActivityForResult(viewHabit, MainActivity.VIEW_HABIT_REQUEST);
         }
     }
 
