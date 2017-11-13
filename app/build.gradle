@@ -53,10 +53,8 @@ dependencies {
     compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
     testCompile 'junit:junit:4.12'
     implementation files('src/include/jest-droid-2.0.1-SNAPSHOT.jar')
-    HEAD
     implementation 'com.jayway.android.robotium:robotium-solo:5.3.1'
     implementation files('src/include/robotium-solo-5.5.4.jar')
-    7b0a6fe8cede80207512591fe6af06568ddb5a49
 }
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
