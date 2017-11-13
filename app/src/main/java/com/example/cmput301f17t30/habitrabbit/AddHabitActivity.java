@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static java.lang.Boolean.FALSE;
 
 /**
@@ -156,12 +157,27 @@ public class AddHabitActivity extends AppCompatActivity {
                     date.setError("Valid date required");
                 }
 
+                Boolean duplicateFlag = Boolean.FALSE;
+                for(int i = 0; i < habitList.getSize();i++){
+                    String valueID = habitList.getHabit(i).getTitle();
+                    if(valueID.equals(name.getText().toString())){
+                        duplicateFlag = Boolean.TRUE;
+                    }
+                    else {
+                        duplicateFlag = Boolean.FALSE;
+                    }
+                }
                 if (name.getText().toString().trim().isEmpty()){
                     name.setError("Habit name required");
+                }
+                else if (duplicateFlag){
+                    name.setError("Duplicate Habit name");
                 }
                 else if (name.getText().toString().length() > 20){
                     name.setError("Habit name too long");
                 }
+
+
                 else if (reason.getText().toString().length() > 30){
                     reason.setError("Reason text too long");
                 }

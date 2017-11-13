@@ -30,6 +30,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
@@ -71,7 +72,13 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
         String habitTitle = habitController.getTitle();
         String habitReason = habitController.getReason();
         Date startDate = habitController.getStartDate();
-        String dateText = startDate.toString();
+
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String dateText = format.format(habitController.getStartDate());
+        //String dateText = startDate.toString();
+
+
         double habitPercent = habitController.getPercentageCompletion();
         String percentText = Double.toString(floor(habitPercent*100)) + "%";
         int complete = habitController.getCompleted();

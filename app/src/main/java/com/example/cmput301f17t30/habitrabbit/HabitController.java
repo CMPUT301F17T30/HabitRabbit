@@ -20,6 +20,8 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import java.util.ArrayList;
 import java.util.Date;
+
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
 /**
@@ -97,7 +99,9 @@ public class HabitController {
     }
 
     public void deleteHabit(){
+        eventController.deleteAllHabitEvents(habitList.getHabit(position));
         habitList.deleteHabit(position);
+
     }
 
 
