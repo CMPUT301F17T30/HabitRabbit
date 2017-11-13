@@ -18,10 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * a recyclerview adapter that works with HabitHistory to dispaly the list of habit events.
- * @see com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity
- */
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,8 +34,10 @@ import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.habitE
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
 /**
- * Created by arankin on 11/2/17.
+ * a recyclerview adapter that works with HabitHistory to dispaly the list of habit events.
+ * @see com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity
  */
+
 
 public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistoryLayoutAdapter.ViewHolder>{
 

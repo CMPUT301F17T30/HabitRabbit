@@ -49,7 +49,6 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
  * The activity for adding a new habit event.
  *
  */
-
 public class AddEventActivity extends AppCompatActivity {
     private EditText comment, locationInput;
     private Intent intent;

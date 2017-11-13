@@ -18,14 +18,14 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * A class representing a list of habit objects.
- */
+
 
 import java.util.ArrayList;
 
 
-
+/**
+ * A class representing a list of habit objects.
+ */
 public class HabitList {
     private ArrayList<Habit> habitList;
 

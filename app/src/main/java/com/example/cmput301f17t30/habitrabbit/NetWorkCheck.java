@@ -18,18 +18,15 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * Simple class that checks for internet access
- */
+
 
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
 /**
- * Created by Irissama on 2017-11-04.
+ * Simple class that checks for internet access
  */
-
 public class NetWorkCheck {
     public boolean isNetWorkAvaliable(Context context){
         ConnectivityManager connectivityManager

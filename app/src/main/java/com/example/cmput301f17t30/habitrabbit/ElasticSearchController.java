@@ -34,7 +34,6 @@ import io.searchbox.core.Update;
  * Controller to deal with elastic search online behavior.
  */
 
-
 public class ElasticSearchController {
     private static JestDroidClient client;
 
