@@ -18,6 +18,8 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.util.Log;
+
 import java.util.ArrayList;
 
 /**
@@ -75,6 +77,10 @@ public class HabitEventList {
      */
     public ArrayList<HabitEvent> getList(){
         return eventList;
+    }
+
+    public int getSize(){
+        return eventList.size();
     }
 
     /**
