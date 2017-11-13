@@ -22,7 +22,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
     tools:context="com.example.cmput301f17t30.habitrabbit.AddHabitActivity">
+
 
     <CheckBox
         android:id="@+id/addHabitSundayCheck"
@@ -80,6 +82,11 @@
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         android:singleLine="true"
+        android:nextFocusUp="@+id/addHabitDone"
+        android:nextFocusDown="@+id/addHabitDone"
+        android:nextFocusLeft="@+id/addHabitDone"
+        android:nextFocusRight="@+id/addHabitDone"
+        android:imeOptions="actionDone"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -95,6 +102,11 @@
         android:inputType="textPersonName"
         android:selectAllOnFocus="true"
         android:singleLine="true"
+        android:nextFocusUp="@+id/addHabitDone"
+        android:nextFocusDown="@+id/addHabitDone"
+        android:nextFocusLeft="@+id/addHabitDone"
+        android:nextFocusRight="@+id/addHabitDone"
+        android:imeOptions="actionDone"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

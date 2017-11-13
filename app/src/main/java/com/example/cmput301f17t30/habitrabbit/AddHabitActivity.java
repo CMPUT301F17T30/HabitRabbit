@@ -132,6 +132,13 @@ public class AddHabitActivity extends AppCompatActivity {
         saturdayButton.setOnCheckedChangeListener(dayCheckListener);
         sundayButton.setOnCheckedChangeListener(dayCheckListener);
 
+        date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                date.setText("");
+            }
+        });
+
 
         Button doneButton = (Button) findViewById(R.id.addHabitDone);
         doneButton.setOnClickListener(new View.OnClickListener() {
