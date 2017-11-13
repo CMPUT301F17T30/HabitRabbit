@@ -28,6 +28,8 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.lang.reflect.Type;
+
 /**
  * This class is used to display event detail.
  */
@@ -44,9 +46,11 @@ public class ViewEventDetailActivity extends AppCompatActivity {
     private ImageView eventImage;
     private TextView commentText;
     private TextView locatoinText;
+    private TextView TypeText;
     private int index;
     private Intent intent;
     private HabitEventController eventController = new HabitEventController();
+
     private int EDIT_HABIT_EVENT_REQUEST = 1;
 
     private Context viewContext;
@@ -71,15 +75,18 @@ public class ViewEventDetailActivity extends AppCompatActivity {
 
 
 
+        TypeText = (TextView) findViewById(R.id.type_text);
         commentText = (TextView) findViewById(R.id.command_text);
         locatoinText = (TextView) findViewById(R.id.locatoin_text);
         eventImage = (ImageView) findViewById(R.id.ivImage);
-        final Button editButton = (Button) findViewById(R.id.editEventButton);
+        final Button editButton = (Button) findViewById(R.id.edit);
 
         //display event info
         commentText.setText(eventController.getComment(index));
         locatoinText.setText(eventController.getLocation(index));
+        TypeText.setText(eventController.getType(index).getTitle());
         eventImage.setImageBitmap(eventController.getImage(index));
+
 
 
 
