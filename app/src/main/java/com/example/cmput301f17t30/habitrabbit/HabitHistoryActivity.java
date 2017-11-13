@@ -61,9 +61,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newEvent = new Intent(HabitHistoryActivity.this, AddEventActivity.class);
-                startActivityForResult(newEvent, ADD_HABIT_EVENT_REQUEST);
-
+                //shouldnt add event from here
 
             }
         });
