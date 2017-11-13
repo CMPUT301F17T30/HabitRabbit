@@ -66,7 +66,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
         @Override
         public void onClick(View view) {
-            Intent detailEventIntent = new Intent(historyContext, ViewEventDetail.class);
+            Intent detailEventIntent = new Intent(historyContext, ViewEventDetailActivity.class);
             habitEventController.editEvent(getPosition());
             detailEventIntent.putExtra("pos",getLayoutPosition());
             ((Activity)historyContext).startActivityForResult(detailEventIntent, 7);
