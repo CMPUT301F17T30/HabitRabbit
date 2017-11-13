@@ -1,5 +1,3 @@
-
-
 /*
  *     <HabitRabbit- A habit tracking app.>
  *     Copyright (C) <2017>
@@ -20,39 +18,70 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+/**
+ * A class representing a list of habit objects.
+ */
+
 import java.util.ArrayList;
 
-/**
- * Created by Jacqueline on 2017-11-11.
- */
+
 
 public class HabitList {
     private ArrayList<Habit> habitList;
 
+    /**
+     * Constructor for habitList
+     */
     public HabitList(){
         habitList = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param habit the habit that we wish to add
+     */
     public void addHabit(Habit habit){
         habitList.add(habit);
     }
 
+    /**
+     *
+     * @param position the index of the habit that we wish to edit
+     * @param habit the habit that we wish to edit
+     */
     public void editEvent(int position, Habit habit){
         habitList.set(position, habit);
     }
 
+    /**
+     *
+     * @param position the index of the habit that we wish to delete
+     */
     public void deleteHabit(int position){
         habitList.remove(position);
     }
 
+    /**
+     *
+     * @param position the index of the habit what we wish to get
+     * @return the habit at the specified position
+     */
     public Habit getHabit(int position){
         return habitList.get(position);
     }
 
+    /**
+     *
+     * @return the number of hbaits in the list
+     */
     public int getSize(){
         return habitList.size();
     }
 
+    /**
+     *
+     * @return the list of habits
+     */
     public ArrayList<Habit> getList(){
         return habitList;
     }

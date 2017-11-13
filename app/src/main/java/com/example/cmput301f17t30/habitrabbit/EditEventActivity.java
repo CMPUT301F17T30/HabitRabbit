@@ -44,9 +44,10 @@ import java.util.List;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 
 /**
- * the activity for edit the habit event object and save
+ * Activity for editing a habit event.
  *
- * @version 1
+ * @see AddEventActivity
+ *
  *
  */
 

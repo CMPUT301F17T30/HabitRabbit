@@ -46,11 +46,10 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
 
 /**
- *  the activity to create new habit event object and save
- *
- *  @version : 1
+ * The activity for adding a new habit event.
  *
  */
+
 public class AddEventActivity extends AppCompatActivity {
     private EditText comment, locationInput;
     private Intent intent;
@@ -209,6 +208,7 @@ public class AddEventActivity extends AppCompatActivity {
             else
                 eventController.setComment(theComment);
                 eventController.setLocationName(addressName);
+                eventController.setImage(selectImage);
                 eventController.saveAddEvent();
                 //addEventDone();
 

@@ -23,6 +23,7 @@ import java.util.Date;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
 /**
+ * Controller to deal with adding, editing and deleting habits.
  * Created by Jacqueline on 2017-11-11.
  */
 

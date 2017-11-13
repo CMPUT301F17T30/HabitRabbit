@@ -21,7 +21,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import java.util.ArrayList;
 
 /**
- * Created by arankin on 10/18/17.
+ * A class to keep track of habit events for a users's added friend
  */
 
 public class Friend {

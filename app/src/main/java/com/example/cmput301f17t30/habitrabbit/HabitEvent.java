@@ -25,6 +25,7 @@ import java.util.Date;
 import io.searchbox.annotations.JestId;
 
 /**
+ * A class representing a habit event, with related details.
  * Created by arankin on 10/18/17.
  */
 
