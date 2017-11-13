@@ -73,6 +73,12 @@ public class AddHabitActivity extends AppCompatActivity {
         reason = (EditText) findViewById(R.id.addHabitReason);
         date = (EditText) findViewById(R.id.addHabitStartDate);
 
+        String pattern = "dd-MM-yyyy";
+        String stringDate = new SimpleDateFormat(pattern).format(new Date());
+        date.setText(stringDate);
+
+
+
 
         CheckBox mondayButton = (CheckBox) findViewById(R.id.addHabitMondayCheck);
         CheckBox tuesdayButton = (CheckBox) findViewById(R.id.addHabitTuesdayCheck);
