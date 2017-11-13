@@ -92,21 +92,24 @@ public class EditHabitActivity extends AppCompatActivity {
         date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                date.setText("");
+                if (hasFocus)
+                    date.setText("");
             }
         });
 
         name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                name.setText("");
+                if (hasFocus)
+                    name.setText("");
             }
         });
 
         reason.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                reason.setText("");
+                if (hasFocus)
+                    reason.setText("");
             }
         });
 
@@ -180,16 +183,9 @@ public class EditHabitActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
-                Boolean dateFormat = FALSE;
 
                 try {
                     Date startDate = format.parse(date.getText().toString());
-                    if (startDate.after(new Date(System.currentTimeMillis()-24*60*60*1000))) {
-                        dateFormat = TRUE;
-                    }
-                    else {
-                        date.setError("Date must be after current date");
-                    }
                 }
 
                 catch (Exception e){
@@ -209,7 +205,7 @@ public class EditHabitActivity extends AppCompatActivity {
                     date.setError("Valid date required");
                 }
 
-                else if (dateFormat == TRUE){
+                else {
                     editHabitDone();
                 }
             }
