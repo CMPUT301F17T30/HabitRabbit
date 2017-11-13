@@ -20,15 +20,11 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.graphics.Bitmap;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
 /**
- * Controller to deal with adding, editing and deleting habit events.
  * Created by Irissama on 2017-11-08.
  */
 
@@ -100,6 +96,10 @@ public class HabitEventController {
         return habitEvent.getLatitude();
     }
 
+    public void setDate(){
+        habitEvent.setDate(new Date());
+    }
+
     public void saveAddEvent(){
         eventList.addEvent(habitEvent);
         habitEvent.getHabitType().incrementTimesCompleted();
@@ -114,21 +114,6 @@ public class HabitEventController {
     public void saveEditEvent(){
         eventList.editEvent(position, habitEvent);
 
-    }
-
-    public void sortByDate(){
-
-
-        ArrayList<HabitEvent> list = eventList.getList();
-
-        Collections.sort(list, new Comparator<HabitEvent>() {
-            @Override
-            public int compare(HabitEvent lhs, HabitEvent rhs) {
-                return lhs.getDate().compareTo(rhs.getDate());
-            }
-        });
-
-        eventList.setEventList(list);
     }
 
 }
