@@ -38,15 +38,11 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
-import static java.lang.Boolean.FALSE;
 
 
 /**
@@ -119,9 +115,9 @@ public class AddEventActivity extends AppCompatActivity {
 
 
 
-        locationNameList = new ArrayList<String>(); //empty in start
+        locationNameList = new ArrayList<>(); //empty in start
         //
-        adapter = new ArrayAdapter<String>(this, R.layout.list_location, locationNameList);
+        adapter = new ArrayAdapter<>(this, R.layout.list_location, locationNameList);
         locationOuput.setAdapter(adapter);
 
 

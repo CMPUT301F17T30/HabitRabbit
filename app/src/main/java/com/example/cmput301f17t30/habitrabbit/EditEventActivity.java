@@ -51,7 +51,10 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventControlle
  */
 
 public class EditEventActivity extends AppCompatActivity {
-    private EditText comment, locationInput;
+    private EditText comment;
+    private EditText locationInput;
+    private EditText address;
+
     private Intent intent;
     private int index;
 
@@ -73,6 +76,7 @@ public class EditEventActivity extends AppCompatActivity {
     //location
     private Button searchButton;
     private ListView locationOuput;
+
 
     private ArrayAdapter<String> adapter;
 
@@ -96,12 +100,16 @@ public class EditEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_event);
 
+        Intent intentIndex = getIntent();
+        index = intentIndex.getIntExtra("pos",1);
+
 
         final Button addImage = (Button) findViewById(R.id.add_image);
         final Button saveButton = (Button) findViewById(R.id.save_event);
         final Button gpsButton = (Button) findViewById(R.id.gps);
         image = (ImageView) findViewById(R.id.ivImage);
         comment = (EditText) findViewById(R.id.comment);
+        address = (EditText) findViewById(R.id.enter_location);
         // set the information
         selectImage = eventController.getImage(index);
         if (selectImage != null ){
@@ -135,8 +143,8 @@ public class EditEventActivity extends AppCompatActivity {
 
 
 
-        locationNameList = new ArrayList<String>(); //empty in start
-        adapter = new ArrayAdapter<String>(this, R.layout.list_location, locationNameList);
+        locationNameList = new ArrayList<>(); //empty in start
+        adapter = new ArrayAdapter<>(this, R.layout.list_location, locationNameList);
         locationOuput.setAdapter(adapter);
 
 
@@ -218,6 +226,7 @@ public class EditEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String theComment = comment.getText().toString();
+                String theAddress = address.getText().toString();
 
                 if (theComment.length() > 20) {
                     Toast.makeText(getApplicationContext(), "Please keep comment under 20 characters.",
@@ -225,11 +234,10 @@ public class EditEventActivity extends AppCompatActivity {
                 }
 
                 else {
-
                     int position = getIntent().getIntExtra("pos",0);
                     eventController.editEvent(position);
                     eventController.setComment(theComment);
-                    eventController.setLocationName(addressName);
+                    eventController.setLocationName(theAddress);
                     eventController.saveEditEvent();
                     //addEventDone();
 

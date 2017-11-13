@@ -28,7 +28,7 @@ public class HabitEventList {
     private ArrayList<HabitEvent> eventList;
 
     public HabitEventList(){
-        eventList = new ArrayList<HabitEvent>();
+        eventList = new ArrayList<>();
     }
 
     public void addEvent(HabitEvent event){

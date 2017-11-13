@@ -28,7 +28,6 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 

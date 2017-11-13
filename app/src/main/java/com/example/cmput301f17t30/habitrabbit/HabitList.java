@@ -30,7 +30,7 @@ public class HabitList {
     private ArrayList<Habit> habitList;
 
     public HabitList(){
-        habitList = new ArrayList<Habit>();
+        habitList = new ArrayList<>();
     }
 
     public void addHabit(Habit habit){

@@ -41,11 +41,13 @@
             app:layout_constraintEnd_toStartOf="@+id/habitEventCommentTextView"
             app:layout_constraintStart_toEndOf="@+id/trafficLightImage"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="name" />
+            tools:text="name"
+            android:layout_marginRight="52dp"
+            android:layout_marginLeft="8dp" />
 
         <Button
             android:id="@+id/buttonAddHabitEvent"
-            android:layout_width="wrap_content"
+            android:layout_width="99dp"
             android:layout_height="49dp"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
@@ -55,7 +57,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/habitEventCommentTextView"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="43dp" />
 
         <TextView
             android:id="@+id/habitEventCommentTextView"
