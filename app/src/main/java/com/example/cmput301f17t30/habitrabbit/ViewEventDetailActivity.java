@@ -79,7 +79,7 @@ public class ViewEventDetailActivity extends AppCompatActivity {
 
 
         TypeText = (TextView) findViewById(R.id.type_text);
-        date = (TextView)findViewById(R.id.date_text);
+        //date = (TextView)findViewById(R.id.date_text);
         commentText = (TextView) findViewById(R.id.command_text);
         locatoinText = (TextView) findViewById(R.id.locatoin_text);
         eventImage = (ImageView) findViewById(R.id.ivImage);

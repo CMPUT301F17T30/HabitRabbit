@@ -77,6 +77,10 @@ public class HabitEventList {
         return eventList;
     }
 
+    public int getSize(){
+        return eventList.size();
+    }
+
     /**
      *
      * @param eventList the list of events
