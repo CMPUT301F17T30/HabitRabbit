@@ -42,6 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".HabitHistoryActivity" />
+        <activity android:name=".ViewEventDetail" />
         <activity android:name=".AddEventActivity" />
         <activity android:name=".AddHabitActivity" />
         <activity android:name=".EditHabitActivity"/>
