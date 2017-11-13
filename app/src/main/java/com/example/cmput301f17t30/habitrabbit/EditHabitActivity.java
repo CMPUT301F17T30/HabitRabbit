@@ -89,6 +89,27 @@ public class EditHabitActivity extends AppCompatActivity {
         reason.setText(oldReason);
         date.setText(startDate);
 
+        date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                date.setText("");
+            }
+        });
+
+        name.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                name.setText("");
+            }
+        });
+
+        reason.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                reason.setText("");
+            }
+        });
+
 
 
 
