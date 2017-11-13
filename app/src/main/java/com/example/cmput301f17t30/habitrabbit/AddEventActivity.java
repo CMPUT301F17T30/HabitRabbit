@@ -215,7 +215,7 @@ public class AddEventActivity extends AppCompatActivity {
                 eventController.setLocationName(addressName);
                 eventController.saveAddEvent();
                 //addEventDone();
-
+                
                 Intent returnToMain = new Intent();
                 setResult(RESULT_OK, returnToMain);
 

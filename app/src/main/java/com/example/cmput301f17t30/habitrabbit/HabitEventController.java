@@ -99,6 +99,7 @@ public class HabitEventController {
     public void saveAddEvent(){
         eventList.addEvent(habitEvent);
         habitEvent.getHabitType().incrementTimesCompleted();
+        habitEvent.getHabitType().setLastCompleted(new Date());
     }
 
     public void deleteEvent(int index){
