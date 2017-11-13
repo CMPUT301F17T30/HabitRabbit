@@ -18,6 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.content.Context;
 import android.media.Image;
 
 import java.util.ArrayList;
@@ -38,11 +39,6 @@ public class HabitController {
 
     public void addHabit(String title, ArrayList<Boolean> days, Date startDate){
         habit = new Habit(title, days, startDate);
-    }
-
-    public void editHabit(int position){
-        habit = habitList.getHabit(position);
-        this.position = position;
     }
 
     public void setTitle(String title){
@@ -69,6 +65,13 @@ public class HabitController {
         return habit.getReason();
     }
 
+    public int getCompleted(){
+        return habit.getTimesCompleted();
+    }
+    public int getFailed(){
+        return habit.getTimesFailed();
+    }
+
     public ArrayList<Boolean> getDays(){
         return habit.getDays();
     }
@@ -90,12 +93,10 @@ public class HabitController {
         habitList.editEvent(position, habit);
     }
 
-    /*
-      @// TODO: 2017-11-11 make grade images
-     * @param position
-     * @return
-     */
-   // public Image getGrade(int position){
-   // }
+    public void viewHabit(int position){
+        habit = habitList.getHabit(position);
+        this.position = position;
+    }
+
 
 }

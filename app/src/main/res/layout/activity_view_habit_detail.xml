@@ -25,9 +25,9 @@
     tools:context="com.example.cmput301f17t30.habitrabbit.ViewHabitDetailActivity">
 
     <TextView
-        android:id="@+id/viewHabitDetailTitle"
-        android:layout_width="154dp"
-        android:layout_height="24dp"
+        android:id="@+id/viewHabitTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:textSize="20sp"
         app:layout_constraintHorizontal_bias="0.052"
@@ -36,14 +36,100 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/viewHabitDetailReason"
-        android:layout_width="348dp"
-        android:layout_height="23dp"
-        android:layout_marginLeft="16dp"
+        android:id="@+id/viewHabitReason"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
         android:layout_marginTop="16dp"
         android:textSize="20sp"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/viewHabitDetailTitle"
-        android:layout_marginStart="8dp" />
+        app:layout_constraintTop_toBottomOf="@+id/viewHabitTitle" />
+
+    <ImageView
+        android:id="@+id/viewHabitGrade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="56dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHabitReason"
+        app:srcCompat="@drawable/gradeaplus" />
+
+    <TextView
+        android:id="@+id/viewHabitPercentText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="32dp"
+        android:text="@string/percentComplete"
+        android:textSize="20sp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHabitGrade" />
+
+    <TextView
+        android:id="@+id/viewHabitPercent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="36dp"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/viewHabitPercentText"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/viewHabitCompleteText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/timesCompleted"
+        android:textSize="20sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHabitPercentText" />
+
+    <TextView
+        android:id="@+id/viewHabitCompleted"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:layout_marginRight="16dp"
+        android:textColor="@color/successGreen"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/viewHabitCompleteText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <TextView
+        android:id="@+id/viewHabitFailText"
+        android:layout_width="228dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/timesFailed"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewHabitCompleteText"
+        app:layout_constraintVertical_bias="0.007" />
+
+    <TextView
+        android:id="@+id/viewHabitFailed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="36dp"
+        android:textColor="@color/failureRed"
+        android:textSize="20sp"
+        app:layout_constraintBaseline_toBaselineOf="@+id/viewHabitFailText"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/viewHabitEditButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginRight="16dp"
+        android:text="@string/edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

@@ -28,6 +28,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Date;
+
+import static java.lang.Boolean.FALSE;
 
 public class MainActivity extends AppCompatActivity {
     
@@ -40,16 +43,15 @@ public class MainActivity extends AppCompatActivity {
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
-    private int EDIT_HABIT_REQUEST = 2;
+    public static int VIEW_HABIT_REQUEST = 3;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
     ArrayList daylist = new ArrayList<Boolean>();
 
-    private ArrayList<Habit> habitList2 = new ArrayList<>();
-
-
+    Habit habit1;
+    Habit habit2;
 
 
     @Override
@@ -57,15 +59,18 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       //habitList.addHabit("one", daylist, new Date());
-       //habitList.add(habit2);
-
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new HabitLayoutAdapter(habitList.getList(), this);
         recyclerView.setAdapter(adapter);
+
+        int i = 0;
+        while (i <= 6){
+            daylist.add(FALSE);
+            i++;
+        }
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
@@ -103,9 +108,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
-     //   habitList.add(habit);
-     //   habitList.add(habit2);
-
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -128,14 +130,13 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
-
-        if (requestCode == EDIT_HABIT_REQUEST){
+        if (requestCode == VIEW_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
                 habitController.saveEditHabit();
                 adapter.notifyDataSetChanged();
-
             }
         }
+
 
     }
 }

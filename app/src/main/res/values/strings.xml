@@ -32,4 +32,8 @@
     <string name="startDate">Start Date (DD-MM-YYYY)</string>
     <string name="addHabit">Add</string>
     <string name="goToHistory">History</string>
+    <string name="percentComplete">Your percentage completion:</string>
+    <string name="timesFailed">Times failed to complete:</string>
+    <string name="timesCompleted">Times completed:</string>
+    <string name="edit">EDIT</string>
 </resources>
