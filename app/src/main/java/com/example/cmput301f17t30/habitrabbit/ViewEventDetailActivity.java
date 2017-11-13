@@ -29,9 +29,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.lang.reflect.Type;
-import java.text.SimpleDateFormat;
-
 /**
  *  This activity is used to display a single habit event object in detail
  */

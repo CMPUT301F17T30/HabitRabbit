@@ -25,6 +25,7 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 /**
+ * Test class for HabitEvent model class
  * Created by arankin on 10/18/17.
  */
 

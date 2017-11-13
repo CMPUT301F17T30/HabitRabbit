@@ -23,6 +23,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Test class for HabitEventList model class
  * Created by Adam on 12-Nov-17.
  */
 

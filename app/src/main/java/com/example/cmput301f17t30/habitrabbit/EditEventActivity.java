@@ -42,7 +42,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 
 /**
  * Activity for editing a habit event.
@@ -268,7 +267,7 @@ public class EditEventActivity extends AppCompatActivity {
      * to use the path, call permission to access external storage
      *
      * @param requestCode the indicator for select image operation
-     * @param resultCode
+     * @param resultCode Whether the activity returned properly
      * @param data the context of EditEventActivity activity
      */
     @Override
