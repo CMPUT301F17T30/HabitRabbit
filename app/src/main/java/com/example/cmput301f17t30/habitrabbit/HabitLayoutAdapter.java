@@ -69,7 +69,6 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
             itemView.setOnClickListener(this);
             habitName = itemView.findViewById(R.id.habitNameTextView);
-            habitReason = itemView.findViewById(R.id.habitEventCommentTextView);
             lightImage = itemView.findViewById(R.id.trafficLightImage);
         }
 
@@ -92,7 +91,6 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
     public void onBindViewHolder(HabitLayoutAdapter.ViewHolder holder, final int position) {
         final Habit habit = habitList.get(position);
         String title = habit.getTitle();
-        String reason = habit.getReason();
         Bitmap light;
         Date todayDate = new Date();
         Date lastCompleteDate = habit.getLastCompleted();
@@ -119,7 +117,6 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
 
 
         holder.habitName.setText(title);
-        holder.habitReason.setText(reason);
         holder.lightImage.setImageBitmap(light);
 
 

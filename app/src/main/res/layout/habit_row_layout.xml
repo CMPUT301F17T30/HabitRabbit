@@ -31,61 +31,38 @@
         <TextView
             android:id="@+id/habitNameTextView"
             android:layout_width="wrap_content"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="52dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/habitEventCommentTextView"
+            app:layout_constraintEnd_toStartOf="@+id/buttonAddHabitEvent"
             app:layout_constraintStart_toEndOf="@+id/trafficLightImage"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="name"
-            android:layout_marginRight="52dp"
-            android:layout_marginLeft="8dp" />
+            tools:text="name" />
 
         <Button
             android:id="@+id/buttonAddHabitEvent"
-            android:layout_width="99dp"
-            android:layout_height="49dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginStart="43dp"
             android:layout_marginTop="8dp"
             android:text="ADD EVENT"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/habitEventCommentTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginRight="8dp"
-            android:layout_marginLeft="43dp" />
-
-        <TextView
-            android:id="@+id/habitEventCommentTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/buttonAddHabitEvent"
-            app:layout_constraintStart_toEndOf="@+id/habitNameTextView"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="reason" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/trafficLightImage"
-            android:layout_width="35dp"
-            android:layout_height="51dp"
+            android:layout_width="49dp"
+            android:layout_height="45dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/habitNameTextView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/greenlight" />
