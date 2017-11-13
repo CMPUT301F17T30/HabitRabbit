@@ -235,6 +235,7 @@ public class EditEventActivity extends AppCompatActivity {
 
                     Intent returnToHistory = new Intent();
                     setResult(RESULT_OK, returnToHistory);
+                    adapter.notifyDataSetChanged();
 
                     finish();
                 }
