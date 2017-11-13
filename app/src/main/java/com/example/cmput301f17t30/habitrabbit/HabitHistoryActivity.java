@@ -72,12 +72,11 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         });
 
-        Button button2 = (Button) findViewById(R.id.button8);
-        button2.setOnClickListener(new View.OnClickListener() {
+        Button returnToMain = (Button) findViewById(R.id.habitHistoryFinish);
+        returnToMain.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 2",
-                        Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

@@ -36,4 +36,5 @@
     <string name="timesFailed">Times failed to complete:</string>
     <string name="timesCompleted">Times completed:</string>
     <string name="edit">EDIT</string>
+    <string name="main">MAIN</string>
 </resources>
