@@ -76,4 +76,14 @@ public class HabitEventList {
     public ArrayList<HabitEvent> getList(){
         return eventList;
     }
+
+    /**
+     *
+     * @param eventList the list of events
+     */
+    public void setEventList(ArrayList<HabitEvent> eventList) {
+        this.eventList = eventList;
+    }
 }
+
+
