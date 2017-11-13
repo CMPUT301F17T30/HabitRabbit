@@ -24,10 +24,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
 /**
+ * Controller for Haddingm, editing, and deleting habit events
  * Created by Irissama on 2017-11-08.
  */
 
@@ -130,6 +133,17 @@ public class HabitEventController {
                 return lhs.getDate().compareTo(rhs.getDate());
             }
         });
+
+        eventList.setEventList(list);
+    }
+
+    public void deleteAllHabitEvents(Habit type) {
+        ArrayList<HabitEvent> list = eventList.getList();
+
+        for(Iterator<HabitEvent> iterator = list.iterator(); iterator.hasNext(); ) {
+            if(iterator.next().getHabitType() == type)
+                iterator.remove();
+        }
 
         eventList.setEventList(list);
     }

@@ -23,12 +23,63 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Test class for HabitEventList model class
  * Created by Adam on 12-Nov-17.
  */
 
 public class TestHabitEventList {
 
-    TestHabitEventList() {
+    public TestHabitEventList() {
         super();
+    }
+
+    @Test
+    public void testAddEvent(){
+        Habit type = new MockHabit();
+        HabitEvent event = new HabitEvent(type);
+        HabitEventList list = new HabitEventList();
+        list.addEvent(event);
+
+        assertEquals(event,list.getEvent(0));
+    }
+
+    @Test
+    public void testEditEvent(){
+        Habit type = new MockHabit();
+        Habit typeTwo = new MockHabit();
+        HabitEvent event = new HabitEvent(type);
+        HabitEvent eventTwo = new HabitEvent(typeTwo);
+        HabitEventList list = new HabitEventList();
+        list.addEvent(event);
+        list.editEvent(0,eventTwo);
+
+        assertEquals(eventTwo,list.getEvent(0));
+    }
+
+    @Test
+    public void testGetSize(){
+        Habit type = new MockHabit();
+        HabitEvent event = new HabitEvent(type);
+        HabitEvent eventTwo = new HabitEvent(type);
+        HabitEventList list = new HabitEventList();
+        list.addEvent(event);
+        list.addEvent(eventTwo);
+
+        assertEquals(2, list.getSize());
+
+
+    }
+
+    @Test
+    public void testDeleteEvent(){
+        Habit type = new MockHabit();
+        HabitEvent event = new HabitEvent(type);
+        HabitEventList list = new HabitEventList();
+        list.addEvent(event);
+        list.deleteEvent(0);
+
+        assertEquals(0, list.getSize());
+
+
     }
 }

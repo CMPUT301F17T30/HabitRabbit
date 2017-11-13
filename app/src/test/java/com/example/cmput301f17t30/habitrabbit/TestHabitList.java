@@ -26,6 +26,7 @@ import java.util.Date;
 import static org.junit.Assert.*;
 
 /**
+ * Test class for Habitlist model class
  * Created by Adam on 12-Nov-17.
  */
 

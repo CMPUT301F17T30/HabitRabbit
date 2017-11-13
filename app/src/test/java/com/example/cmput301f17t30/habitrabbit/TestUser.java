@@ -24,6 +24,7 @@ import org.junit.Test;
 import static org.junit.Assert.*;
 
 /**
+ * Test class for User model class
  * Created by arankin on 20/10/17.
  */
 

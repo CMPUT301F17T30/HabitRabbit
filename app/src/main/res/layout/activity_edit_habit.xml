@@ -22,7 +22,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cmput301f17t30.habitrabbit.editHabitActivity">
+    android:focusableInTouchMode="true"
+    tools:context="com.example.cmput301f17t30.habitrabbit.EditHabitActivity">
 
     <CheckBox
         android:id="@+id/editHabitSundayCheck"
@@ -78,6 +79,9 @@
         android:ems="10"
         android:hint="@string/nameHint"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -91,6 +95,9 @@
         android:ems="10"
         android:hint="@string/reasonHint"
         android:inputType="textPersonName"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
         app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -159,6 +166,9 @@
         android:ems="10"
         android:hint="@string/startDate"
         android:inputType="date"
+        android:selectAllOnFocus="true"
+        android:singleLine="true"
+        android:imeOptions="actionDone"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editHabitReason" />

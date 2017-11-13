@@ -245,7 +245,7 @@ public class AddEventActivity extends AppCompatActivity {
      * to use the path, call permission to access external storage
      *
      * @param requestCode The indicator for select image operation
-     * @param resultCode
+     * @param resultCode Whether the activity returned properly
      * @param data the context of AddEventActivity activity
      */
     @Override

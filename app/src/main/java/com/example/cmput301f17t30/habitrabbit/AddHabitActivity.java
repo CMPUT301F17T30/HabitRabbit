@@ -33,8 +33,8 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
 
 /**
  *  Activity for adding a new habit.
@@ -72,6 +72,12 @@ public class AddHabitActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.addHabitName);
         reason = (EditText) findViewById(R.id.addHabitReason);
         date = (EditText) findViewById(R.id.addHabitStartDate);
+
+        String pattern = "dd-MM-yyyy";
+        String stringDate = new SimpleDateFormat(pattern).format(new Date());
+        date.setText(stringDate);
+
+
 
 
         CheckBox mondayButton = (CheckBox) findViewById(R.id.addHabitMondayCheck);
@@ -127,6 +133,13 @@ public class AddHabitActivity extends AppCompatActivity {
         saturdayButton.setOnCheckedChangeListener(dayCheckListener);
         sundayButton.setOnCheckedChangeListener(dayCheckListener);
 
+        date.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                date.setText("");
+            }
+        });
+
 
         Button doneButton = (Button) findViewById(R.id.addHabitDone);
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -144,12 +157,27 @@ public class AddHabitActivity extends AppCompatActivity {
                     date.setError("Valid date required");
                 }
 
+                Boolean duplicateFlag = Boolean.FALSE;
+                for(int i = 0; i < habitList.getSize();i++){
+                    String valueID = habitList.getHabit(i).getTitle();
+                    if(valueID.equals(name.getText().toString())){
+                        duplicateFlag = Boolean.TRUE;
+                    }
+                    else {
+                        duplicateFlag = Boolean.FALSE;
+                    }
+                }
                 if (name.getText().toString().trim().isEmpty()){
                     name.setError("Habit name required");
+                }
+                else if (duplicateFlag){
+                    name.setError("Duplicate Habit name");
                 }
                 else if (name.getText().toString().length() > 20){
                     name.setError("Habit name too long");
                 }
+
+
                 else if (reason.getText().toString().length() > 30){
                     reason.setError("Reason text too long");
                 }

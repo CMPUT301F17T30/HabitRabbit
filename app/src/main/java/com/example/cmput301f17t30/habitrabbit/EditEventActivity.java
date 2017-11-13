@@ -111,6 +111,12 @@ public class EditEventActivity extends AppCompatActivity {
         image = (ImageView) findViewById(R.id.ivImage);
         comment = (EditText) findViewById(R.id.comment);
         address = (EditText) findViewById(R.id.enter_location);
+
+        comment.setText(eventController.getComment(index));
+        address.setText(eventController.getLocation(index));
+        image.setImageBitmap(eventController.getImage(index));
+
+
         // set the information
         selectImage = eventController.getImage(index);
         if (selectImage != null ){
@@ -261,7 +267,7 @@ public class EditEventActivity extends AppCompatActivity {
      * to use the path, call permission to access external storage
      *
      * @param requestCode the indicator for select image operation
-     * @param resultCode
+     * @param resultCode Whether the activity returned properly
      * @param data the context of EditEventActivity activity
      */
     @Override

@@ -28,10 +28,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.habitEventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
+import static java.lang.Boolean.FALSE;
 
 /**
  * a recyclerview adapter that works with HabitHistory to dispaly the list of habit events.
@@ -54,14 +57,16 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         private TextView eventLocation;
         private TextView eventComment;
         private TextView eventType;
+        private TextView dateText;
 
 
         public ViewHolder(View itemView) {
             super(itemView);
 
-            eventLocation = itemView.findViewById(R.id.habitEventLocationTextView);
+            //eventLocation = itemView.findViewById(R.id.habitEventLocationTextView);
             eventComment = itemView.findViewById(R.id.habitEventCommentTextView);
             eventType = itemView.findViewById(R.id.eventTypeTextView);
+            dateText = itemView.findViewById(R.id.dateTextView);
 
             itemView.setOnClickListener(this);
 
@@ -89,11 +94,16 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
     public void onBindViewHolder(HabitHistoryLayoutAdapter.ViewHolder holder, final int position) {
         final HabitEvent habitEvent = eventList.getEvent(position);
 
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String formatDate = format.format(habitEvent.getDate());
+
+
         String comment = habitEvent.getComment();
-        String location = habitEvent.getLocation();
+        //String location = habitEvent.getLocation();
         String type = habitEvent.getHabitType().getTitle();
 
-        holder.eventLocation.setText(location);
+        //holder.eventLocation.setText(location);
+        holder.dateText.setText(formatDate);
         holder.eventComment.setText(comment);
         holder.eventType.setText(type);
 
