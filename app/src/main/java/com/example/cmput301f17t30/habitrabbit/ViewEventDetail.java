@@ -52,6 +52,7 @@ public class ViewEventDetail extends AppCompatActivity {
     private int index;
     private Intent intent;
     private HabitEventController eventController = new HabitEventController();
+    private int EDIT_HABIT_EVENT_REQUEST = 1;
 
     private Context viewContext;
 
@@ -93,7 +94,7 @@ public class ViewEventDetail extends AppCompatActivity {
 
                 intent = new Intent(ViewEventDetail.this, EditEventActivity.class);
                 intent.putExtra("pos",index);
-                startActivityForResult(intent, 1);
+                startActivityForResult(intent, EDIT_HABIT_EVENT_REQUEST);
 
                 //startActivity(intent);
             }
@@ -102,9 +103,18 @@ public class ViewEventDetail extends AppCompatActivity {
     }
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-        commentText.setText(eventController.getComment(index));
-        locatoinText.setText(eventController.getLocation(index));
-        eventImage.setImageBitmap(eventController.getImage(index));
+
+        if (requestCode == EDIT_HABIT_EVENT_REQUEST){
+            if (resultCode == RESULT_OK){
+                super.onActivityResult(requestCode, resultCode, intent);
+                commentText.setText(eventController.getComment(index));
+                locatoinText.setText(eventController.getLocation(index));
+                eventImage.setImageBitmap(eventController.getImage(index));
+                Intent returnToMain = new Intent();
+                setResult(RESULT_OK, returnToMain);
+                finish();
+
+            }
+        }
     }
 }
