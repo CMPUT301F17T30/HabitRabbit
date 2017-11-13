@@ -59,8 +59,8 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
         solo.clickInList(0);
         solo.clickOnView(solo.getView(R.id.save_event));
 
-        assertTrue(habitController.getTitle() == "test title");
-        assertTrue(eventController.getComment(0) == "testcommand 2");
+        assertTrue(habitController.getTitle().equals("test title") );
+        assertTrue(eventController.getComment(0).equals("testcommand 2") );
     }
 
     public void tearDown() throws Exception{
