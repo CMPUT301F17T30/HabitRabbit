@@ -108,11 +108,11 @@ public class ViewEventDetailActivity extends AppCompatActivity {
         deleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                intent = new Intent(ViewEventDetailActivity.this, HabitHistoryActivity.class);
+                //intent = new Intent(ViewEventDetailActivity.this, HabitHistoryActivity.class);
                 eventController.deleteEvent(index);
                 Toast.makeText(getApplicationContext(), "delete habit event",
                         Toast.LENGTH_LONG).show();
-                startActivity(intent);
+                finish();
             }
         });
     }
