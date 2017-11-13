@@ -75,7 +75,30 @@ public class TestHabit {
     @Test
     public void testGetDays(){
         ArrayList<Boolean> daylist = new ArrayList<>();
+        daylist.add(0,Boolean.TRUE);
+        daylist.add(1,Boolean.TRUE);
+        daylist.add(2,Boolean.TRUE);
+        daylist.add(3,Boolean.FALSE);
+        daylist.add(4,Boolean.TRUE);
+        daylist.add(5,Boolean.TRUE);
+        daylist.add(6,Boolean.FALSE);
         Habit habit = new Habit("title 1","test",daylist,new Date());
+        assertEquals(daylist,habit.getDays());
+    }
+
+    @Test
+    public void testSetDays(){
+        ArrayList<Boolean> prevlist = new ArrayList<>();
+        Habit habit = new Habit("title 1","test",prevlist,new Date());
+        ArrayList<Boolean> daylist = new ArrayList<>();
+        daylist.add(0,Boolean.TRUE);
+        daylist.add(1,Boolean.TRUE);
+        daylist.add(2,Boolean.TRUE);
+        daylist.add(3,Boolean.TRUE);
+        daylist.add(4,Boolean.TRUE);
+        daylist.add(5,Boolean.TRUE);
+        daylist.add(6,Boolean.TRUE);
+        habit.setDays(daylist);
         assertEquals(daylist,habit.getDays());
     }
 
@@ -168,7 +191,7 @@ public class TestHabit {
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesCompleted(5);
         habit.setTimesFailed(5);
-        assertEquals(0.5,habit.getPercentCompletion(),0.02);
+        assertEquals(0.5,habit.getPercentCompletion(),0.0001);
     }
 
     @Test
@@ -177,7 +200,16 @@ public class TestHabit {
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesCompleted(0);
         habit.setTimesFailed(5);
-        assertEquals(0,habit.getPercentCompletion(),0.02);
+        assertEquals(0,habit.getPercentCompletion(),0.0001);
+    }
+
+    @Test
+    public void testGetPercentCompletionZeroDivisionCheck(){
+        ArrayList<Boolean> daylist = new ArrayList<>();
+        Habit habit = new Habit("title 1","test",daylist,new Date());
+        habit.setTimesCompleted(0);
+        habit.setTimesFailed(0);
+        assertEquals(0,habit.getPercentCompletion(),0);
     }
 
     @Test
@@ -543,8 +575,29 @@ public class TestHabit {
     }
 
     @Test
-    public void testThisShouldFail() throws Exception{
+    public void testUpdateFailedThreeDays(){
+        ArrayList<Boolean> daylist = new ArrayList<>();
+        for (int i = 0; i < 7; i++) {
+            daylist.add(Boolean.FALSE);
+        }
+        daylist.set(0,Boolean.TRUE);
+        daylist.set(1,Boolean.TRUE);
+        daylist.set(2,Boolean.TRUE);
+        daylist.set(3,Boolean.TRUE);
+        daylist.set(4,Boolean.TRUE);
+        daylist.set(5,Boolean.TRUE);
+        daylist.set(6,Boolean.TRUE);
 
-        assertEquals ("should fail",-5,"string");
+        Habit habit = new Habit("title 1","test",daylist,new Date());
+
+        long DAY_IN_MS = 1000 * 60 * 60 * 24;
+
+        habit.setLastCompleted(new Date(System.currentTimeMillis()- 3 * DAY_IN_MS));
+        habit.setTimesFailed(0);
+        habit.updateFailed();
+
+        assertEquals((Integer)(3),habit.getTimesFailed());
+
     }
+
 }

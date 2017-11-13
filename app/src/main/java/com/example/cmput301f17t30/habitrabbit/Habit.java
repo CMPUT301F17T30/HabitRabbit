@@ -136,6 +136,7 @@ public class Habit {
     }
 
     /**
+     * This method is used for testing purposes.
      * @param date the date to use for 'today', default is today's actual date
      * @return whether not not the habit is due to be completed at the supplied date
      */
@@ -150,8 +151,8 @@ public class Habit {
     }
 
     /**
-     * default behavior is to run thsi methods suing current date
-     * @return whether not not the habit is due to be completed today
+     * default behavior is to run this method using current date
+     * @return whether or not the habit is due to be completed today
      */
     public Boolean isDueToday(){
 
