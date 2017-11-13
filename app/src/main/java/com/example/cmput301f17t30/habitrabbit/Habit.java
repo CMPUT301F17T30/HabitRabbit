@@ -163,7 +163,7 @@ public class Habit {
     }
 
     /**
-     *  a wrapper function to covnert from the Calendar format to our days list
+     *  a wrapper function to convert from the Calendar format to our days list
      * @param i the day of the week from the Calendar
      * @return  whether or not the day has an event due
      */
