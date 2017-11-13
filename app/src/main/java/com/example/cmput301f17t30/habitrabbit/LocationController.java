@@ -25,7 +25,6 @@ import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -42,8 +41,8 @@ import static android.content.Context.LOCATION_SERVICE;
 public class LocationController {
     private Geocoder geocoder;
     private int maxResults = 2;
-    private List<Address> locationList = new ArrayList<Address>();
-    private ArrayList<String> locationNameList = new ArrayList<String>();
+    private List<Address> locationList = new ArrayList<>();
+    private ArrayList<String> locationNameList = new ArrayList<>();
 
 
     //location

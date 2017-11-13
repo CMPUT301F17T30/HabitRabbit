@@ -18,7 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -28,7 +27,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Math.floor;

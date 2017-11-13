@@ -18,9 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.content.Context;
-import android.media.Image;
-
 import java.util.ArrayList;
 import java.util.Date;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
