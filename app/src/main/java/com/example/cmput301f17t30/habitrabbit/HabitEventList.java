@@ -28,26 +28,51 @@ import java.util.ArrayList;
 public class HabitEventList {
     private ArrayList<HabitEvent> eventList;
 
+    /**
+     * Constructor for habitEventList
+     */
     public HabitEventList(){
         eventList = new ArrayList<>();
     }
 
+    /**
+     *
+     * @param event a habit event that is to be added
+     */
     public void addEvent(HabitEvent event){
         eventList.add(event);
     }
 
+    /**
+     *
+     * @param index the index of the event that is to be edited
+     * @param event the event that is to be edited
+     */
     public void editEvent(int index, HabitEvent event){
         eventList.set(index, event);
     }
 
+    /**
+     *
+     * @param index the index of the event that is to be deleted
+     */
     public void deleteEvent(int index){
         eventList.remove(index);
     }
 
+    /**
+     *
+     * @param index the index of the event
+     *
+     */
     public HabitEvent getEvent(int index){
         return eventList.get(index);
     }
 
+    /**
+     *
+     * @return the list of events
+     */
     public ArrayList<HabitEvent> getList(){
         return eventList;
     }
