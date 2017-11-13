@@ -20,6 +20,9 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.graphics.Bitmap;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
@@ -115,5 +118,21 @@ public class HabitEventController {
         eventList.editEvent(position, habitEvent);
 
     }
+
+    public void sortByDate(){
+
+
+        ArrayList<HabitEvent> list = eventList.getList();
+
+        Collections.sort(list, new Comparator<HabitEvent>() {
+            @Override
+            public int compare(HabitEvent lhs, HabitEvent rhs) {
+                return lhs.getDate().compareTo(rhs.getDate());
+            }
+        });
+
+        eventList.setEventList(list);
+    }
+
 
 }
