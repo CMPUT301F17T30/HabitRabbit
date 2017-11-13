@@ -96,6 +96,9 @@ public class EditEventActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_event);
 
+        Intent intentIndex = getIntent();
+        index = intentIndex.getIntExtra("pos",1);
+
 
         final Button addImage = (Button) findViewById(R.id.add_image);
         final Button saveButton = (Button) findViewById(R.id.save_event);
