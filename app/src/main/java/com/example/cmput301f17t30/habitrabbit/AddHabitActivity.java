@@ -18,6 +18,11 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+/**
+ *  Activity for adding a new habit.
+ *
+ */
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

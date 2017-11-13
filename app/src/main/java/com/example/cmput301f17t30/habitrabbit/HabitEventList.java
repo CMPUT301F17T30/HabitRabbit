@@ -21,6 +21,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import java.util.ArrayList;
 
 /**
+ * A class used for a single instance of a list of habit events.
  * Created by Irissama on 2017-11-08.
  */
 

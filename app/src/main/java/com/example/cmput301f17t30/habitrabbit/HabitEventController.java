@@ -25,6 +25,7 @@ import java.util.Date;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
 /**
+ * Controller to deal with adding, editing and deleting habit events.
  * Created by Irissama on 2017-11-08.
  */
 

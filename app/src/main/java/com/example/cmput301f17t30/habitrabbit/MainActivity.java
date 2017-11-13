@@ -18,6 +18,12 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+/**
+ * The main activity of the app. Displays a list of habits.
+ *
+ * @see com.example.cmput301f17t30.habitrabbit.HabitLayoutAdapter
+ */
+
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;

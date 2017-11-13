@@ -19,6 +19,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 /**
+ * command design pattern. this inherits from command.
  * Created by WilliamWong on 2017-11-08.
  */
 

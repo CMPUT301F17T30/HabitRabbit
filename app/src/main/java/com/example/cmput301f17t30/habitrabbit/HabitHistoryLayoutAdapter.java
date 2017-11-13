@@ -18,6 +18,11 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+/**
+ * a recyclerview adapter that works with HabitHistory to dispaly the list of habit events.
+ * @see com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity
+ */
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;

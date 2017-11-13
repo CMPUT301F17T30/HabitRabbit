@@ -31,7 +31,7 @@ import io.searchbox.core.Index;
 import io.searchbox.core.Update;
 
 /**
- * Created by huiye on 09/11/17.
+ * Controller to deal with elastic search online behavior.
  */
 
 

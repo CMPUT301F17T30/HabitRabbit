@@ -35,6 +35,7 @@ import java.util.Locale;
 import static android.content.Context.LOCATION_SERVICE;
 
 /**
+ * A conttroller dealing with setting, editing and getting the location
  * Created by Irissama on 2017-11-08.
  */
 

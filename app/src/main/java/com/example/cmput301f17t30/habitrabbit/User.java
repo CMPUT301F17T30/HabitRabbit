@@ -19,7 +19,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 /**
- * Created by arankin on 20/10/17.
+ * Class representing a user of the app.
  */
 
 public class User {

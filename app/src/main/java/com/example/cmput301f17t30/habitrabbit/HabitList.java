@@ -1,5 +1,3 @@
-
-
 /*
  *     <HabitRabbit- A habit tracking app.>
  *     Copyright (C) <2017>
@@ -20,11 +18,13 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+/**
+ * A class representing a list of habit objects.
+ */
+
 import java.util.ArrayList;
 
-/**
- * Created by Jacqueline on 2017-11-11.
- */
+
 
 public class HabitList {
     private ArrayList<Habit> habitList;

@@ -32,7 +32,7 @@ import android.widget.Toast;
 import java.lang.reflect.Type;
 
 /**
- * This class is used to display event detail.
+ * This activity is used to display a single habit event object in detail
  */
 
 public class ViewEventDetailActivity extends AppCompatActivity {
