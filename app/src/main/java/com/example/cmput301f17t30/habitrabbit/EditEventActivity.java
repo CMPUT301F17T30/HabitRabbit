@@ -218,21 +218,24 @@ public class EditEventActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String theComment = comment.getText().toString();
-                if (theComment.length() > 0) {
-                    if (theComment.length() < 20) {
-                        eventController.setComment(theComment);
-                        eventController.saveEditEvent();
-                        // save in file function here or habit event will gone
 
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Please keep comment under 20 characters.",
-                                Toast.LENGTH_LONG).show();
-                    }
+                if (theComment.length() > 20) {
+                    Toast.makeText(getApplicationContext(), "Please keep comment under 20 characters.",
+                            Toast.LENGTH_LONG).show();
                 }
-                else{
-                    eventController.saveEditEvent();
-                    // save in file function here or habit event will gone
+
+                else {
+                    eventController.setComment(theComment);
+                    eventController.setLocationName(addressName);
+                    eventController.saveAddEvent();
+                    //addEventDone();
+
+                    Intent returnToMain = new Intent();
+                    setResult(RESULT_OK, returnToMain);
+
+                    finish();
                 }
+
 
             }
         });

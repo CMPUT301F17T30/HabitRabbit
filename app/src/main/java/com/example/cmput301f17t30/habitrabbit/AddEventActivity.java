@@ -220,7 +220,6 @@ public class AddEventActivity extends AppCompatActivity {
                 setResult(RESULT_OK, returnToMain);
 
                 finish();
-                // save in file function here or habit event will gone
 
 
             }
