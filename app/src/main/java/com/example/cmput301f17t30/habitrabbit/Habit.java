@@ -302,8 +302,8 @@ public class Habit {
         Calendar lastCal = Calendar.getInstance();
 
         if (lastCompleted == null)
-            lastCal.setTime(startDate);
-        else if (lastCalculated == null) {
+            lastCompleted = new Date();
+        if (lastCalculated == null) {
             lastCalculated = new Date();
             lastCal.setTime(lastCompleted);
         }

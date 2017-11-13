@@ -209,10 +209,9 @@ public class AddEventActivity extends AppCompatActivity {
             else
                 eventController.setComment(theComment);
                 eventController.setLocationName(addressName);
-                eventController.setImage(selectImage);
                 eventController.saveAddEvent();
                 //addEventDone();
-                
+
                 Intent returnToMain = new Intent();
                 setResult(RESULT_OK, returnToMain);
 
