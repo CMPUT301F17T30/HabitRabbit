@@ -127,18 +127,11 @@ public class AddHabitActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
-                Boolean dateFormat = FALSE;
 
                 try {
                     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                     format.setLenient(FALSE);
                     Date startDate = format.parse(date.getText().toString());
-                    if (startDate.after(new Date(System.currentTimeMillis()-24*60*60*1000))) {
-                        dateFormat = TRUE;
-                    }
-                    else {
-                        date.setError("Date must be after current date");
-                    }
                 }
 
                 catch (Exception e){
@@ -158,7 +151,7 @@ public class AddHabitActivity extends AppCompatActivity {
                     date.setError("Valid date required");
                 }
 
-                else if (dateFormat == TRUE){
+                else {
                     addHabitDone();
                 }
             }

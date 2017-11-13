@@ -155,8 +155,10 @@ public class Habit {
      * @return whether or not the habit is due to be completed today
      */
     public Boolean isDueToday(){
-
-        return isDueToday(new Date());
+        if (startDate.after(new Date()))
+            return Boolean.FALSE;
+        else
+            return isDueToday(new Date());
     }
 
     /**
@@ -306,9 +308,16 @@ public class Habit {
     public void updateFailed() {
         Calendar lastCal = Calendar.getInstance();
 
-        if (lastCompleted == null)
-            lastCompleted = new Date();
-        if (lastCalculated == null) {
+        if (lastCompleted == null && lastCalculated == null && startDate.before(new Date())){
+            lastCal.setTime(startDate);
+        }
+        else if (lastCompleted == null && lastCalculated == null && startDate.after(new Date())){
+            lastCalculated = new Date();
+            lastCal.setTime(lastCalculated);
+        }
+        else if (lastCompleted == null)
+            lastCal.setTime(lastCalculated);
+        else if (lastCalculated == null) {
             lastCalculated = new Date();
             lastCal.setTime(lastCompleted);
         }
@@ -318,7 +327,6 @@ public class Habit {
             lastCal.setTime(lastCalculated);
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
-
 
         Calendar newCal = Calendar.getInstance();
         newCal.setTime(new Date());
@@ -364,7 +372,6 @@ public class Habit {
 
         }
 
-        lastCalculated = new Date();
     }
 
 
