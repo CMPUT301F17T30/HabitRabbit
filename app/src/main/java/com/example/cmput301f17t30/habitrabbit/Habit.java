@@ -18,10 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * This is a class representing a habit.
- */
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

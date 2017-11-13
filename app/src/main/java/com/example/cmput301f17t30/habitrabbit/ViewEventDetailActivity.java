@@ -30,9 +30,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.lang.reflect.Type;
+import java.text.SimpleDateFormat;
 
 /**
- * This activity is used to display a single habit event object in detail
+ * This class is used to display event detail.
  */
 
 public class ViewEventDetailActivity extends AppCompatActivity {
@@ -48,6 +49,7 @@ public class ViewEventDetailActivity extends AppCompatActivity {
     private TextView commentText;
     private TextView locatoinText;
     private TextView TypeText;
+    private TextView date;
     private int index;
     private Intent intent;
     private HabitEventController eventController = new HabitEventController();
@@ -77,6 +79,7 @@ public class ViewEventDetailActivity extends AppCompatActivity {
 
 
         TypeText = (TextView) findViewById(R.id.type_text);
+        date = (TextView)findViewById(R.id.date_text);
         commentText = (TextView) findViewById(R.id.command_text);
         locatoinText = (TextView) findViewById(R.id.locatoin_text);
         eventImage = (ImageView) findViewById(R.id.ivImage);
@@ -85,6 +88,7 @@ public class ViewEventDetailActivity extends AppCompatActivity {
 
         //display event info
         commentText.setText(eventController.getComment(index));
+        date.setText(new SimpleDateFormat("dd-MM-yyyy").format(eventController.getDate(index)));
         locatoinText.setText(eventController.getLocation(index));
         TypeText.setText(eventController.getType(index).getTitle());
         eventImage.setImageBitmap(eventController.getImage(index));

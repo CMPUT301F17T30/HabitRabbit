@@ -18,14 +18,14 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * A class representing a list of habit objects.
- */
+
 
 import java.util.ArrayList;
 
 
-
+/**
+ * A class representing a list of habit objects.
+ */
 public class HabitList {
     private ArrayList<Habit> habitList;
 
@@ -49,7 +49,7 @@ public class HabitList {
      * @param position the index of the habit that we wish to edit
      * @param habit the habit that we wish to edit
      */
-    public void editEvent(int position, Habit habit){
+    public void editHabit(int position, Habit habit){
         habitList.set(position, habit);
     }
 

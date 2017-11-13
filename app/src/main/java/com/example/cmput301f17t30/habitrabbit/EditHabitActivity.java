@@ -18,10 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * Activity for editing a habit object.
- *
- */
+
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -40,6 +37,11 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitControlle
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
+
+/**
+ * Activity for editing a habit object.
+ *
+ */
 public class EditHabitActivity extends AppCompatActivity {
 
     ArrayList<Boolean> days = new ArrayList<>();

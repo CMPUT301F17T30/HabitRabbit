@@ -18,12 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * An activity that displays all previously completed habit events.
- *
- * does not yet sort by date.
- * sort and filter functionality to be added.
- */
+
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -38,6 +33,12 @@ import java.util.ArrayList;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
+/**
+ * An activity that displays all previously completed habit events.
+ *
+ * does not yet sort by date.
+ * sort and filter functionality to be added.
+ */
 public class HabitHistoryActivity extends AppCompatActivity {
 
     private RecyclerView habitEventrecyclerView;

@@ -18,11 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * The main activity of the app. Displays a list of habits.
- *
- * @see com.example.cmput301f17t30.habitrabbit.HabitLayoutAdapter
- */
+
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -37,6 +33,11 @@ import java.util.ArrayList;
 
 import static java.lang.Boolean.FALSE;
 
+/**
+ * The main activity of the app. Displays a list of habits.
+ *
+ * @see com.example.cmput301f17t30.habitrabbit.HabitLayoutAdapter
+ */
 public class MainActivity extends AppCompatActivity {
     
     // create a global eventlist and eventcontroller

@@ -18,15 +18,15 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * This is a mock habit object used for testing.
- */
+
 
 import java.util.ArrayList;
 import java.util.Date;
 
 
-
+/**
+ * This is a mock habit object used for testing.
+ */
 public class MockHabit extends Habit {
     public String Title;
     public String Reason;

@@ -18,11 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * The recyclerview adapter that works with mainactivity to display the list of habits.
- *
- * @see com.example.cmput301f17t30.habitrabbit.MainActivity
- */
+
 
 import android.app.Activity;
 import android.content.Context;
@@ -44,7 +40,9 @@ import java.util.Date;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 
 /**
- * arankin on 26/10/17.
+ * The recyclerview adapter that works with mainactivity to display the list of habits.
+ *
+ * @see com.example.cmput301f17t30.habitrabbit.MainActivity
  */
 
 public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.ViewHolder>  {

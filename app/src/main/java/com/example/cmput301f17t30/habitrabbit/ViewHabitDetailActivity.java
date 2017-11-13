@@ -18,9 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * This activity is used to display a single habit object in detail.
- */
+
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,6 +35,9 @@ import java.util.Date;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Math.floor;
 
+/**
+ * This activity is used to display a single habit object in detail.
+ */
 public class ViewHabitDetailActivity extends AppCompatActivity {
 
     TextView title;

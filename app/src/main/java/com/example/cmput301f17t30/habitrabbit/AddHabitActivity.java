@@ -18,10 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- *  Activity for adding a new habit.
- *
- */
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -39,6 +35,11 @@ import java.util.Date;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
+
+/**
+ *  Activity for adding a new habit.
+ *
+ */
 
 public class AddHabitActivity extends AppCompatActivity {
 

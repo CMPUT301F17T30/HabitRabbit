@@ -18,16 +18,16 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-/**
- * A controller dealing with adding and editing images
- * Created by Irissama on 2017-11-08.
- */
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
 import java.io.ByteArrayOutputStream;
 
+/**
+ * A controller dealing with adding and editing images
+ * Created by Irissama on 2017-11-08.
+ */
 
 public class ImageController {
     //image
