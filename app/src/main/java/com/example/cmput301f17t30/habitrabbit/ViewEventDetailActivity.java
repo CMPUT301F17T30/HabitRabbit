@@ -75,11 +75,11 @@ public class ViewEventDetailActivity extends AppCompatActivity {
 
 
 
-        TypeText = (TextView) findViewById(R.id.type_text);
+        TypeText = (TextView) findViewById(R.id.typeText);
         commentText = (TextView) findViewById(R.id.command_text);
         locatoinText = (TextView) findViewById(R.id.locatoin_text);
         eventImage = (ImageView) findViewById(R.id.ivImage);
-        final Button editButton = (Button) findViewById(R.id.edit);
+        final Button editButton = (Button) findViewById(R.id.editEventButton);
 
         //display event info
         commentText.setText(eventController.getComment(index));
