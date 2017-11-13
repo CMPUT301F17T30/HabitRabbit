@@ -44,13 +44,13 @@ public class TestHabit {
 
     @Test
     public void testGetTitle(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         assertEquals(habit.getTitle(), "title 1");
     }
     @Test
     public void testSetTitle(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTitle("new title");
         assertEquals(habit.getTitle(), "new title");
@@ -58,14 +58,14 @@ public class TestHabit {
 
     @Test
     public void testGetReason(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         assertEquals(habit.getReason(),"test");
     }
 
     @Test
     public void testSetReason(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setReason("new reason");
         assertEquals(habit.getReason(),"new reason");
@@ -74,21 +74,21 @@ public class TestHabit {
 
     @Test
     public void testGetDays(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         assertEquals(daylist,habit.getDays());
     }
 
     @Test
     public void testGetTimesFailed(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         assertEquals((Integer) 0,habit.getTimesFailed());
     }
 
     @Test
     public void testSetTimesFailed(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesFailed(5);
         assertEquals((Integer) 5,habit.getTimesFailed());
@@ -96,14 +96,14 @@ public class TestHabit {
 
     @Test
     public void testGetTimesCompleted(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         assertEquals((Integer) 0,habit.getTimesCompleted());
     }
 
     @Test
     public void testSetTimesCompleted(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesCompleted(5);
         assertEquals((Integer) 5,habit.getTimesCompleted());
@@ -111,7 +111,7 @@ public class TestHabit {
 
     @Test
     public void testIncrementTimesFailed(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.incrementTimesFailed();
         assertEquals((Integer) 1,habit.getTimesFailed());
@@ -119,7 +119,7 @@ public class TestHabit {
 
     @Test
     public void testDecrementTimesFailed(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesFailed(5);
         habit.decrementTimesFailed();
@@ -128,7 +128,7 @@ public class TestHabit {
 
     @Test
     public void testDecrementTimesFailedZeroBehavior(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesFailed(0);
         habit.decrementTimesFailed();
@@ -138,7 +138,7 @@ public class TestHabit {
 
     @Test
     public void testIncrementTimesCompleted(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.incrementTimesCompleted();
         assertEquals((Integer) 1,habit.getTimesCompleted());
@@ -146,7 +146,7 @@ public class TestHabit {
     }
     @Test
     public void testDecrementTimesCompleted(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesCompleted(5);
         habit.decrementTimesCompleted();
@@ -155,7 +155,7 @@ public class TestHabit {
 
     @Test
     public void testDecrementTimesCompletedZeroBehavior() {
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1", "test", daylist, new Date());
         habit.setTimesCompleted(0);
         habit.decrementTimesCompleted();
@@ -164,7 +164,7 @@ public class TestHabit {
 
     @Test
     public void testGetPercentCompletion(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesCompleted(5);
         habit.setTimesFailed(5);
@@ -173,7 +173,7 @@ public class TestHabit {
 
     @Test
     public void testGetPercentCompletionZeroPercent(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesCompleted(0);
         habit.setTimesFailed(5);
@@ -182,7 +182,7 @@ public class TestHabit {
 
     @Test
     public void testGetStartDate(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Date testDate = new Date();
         Habit habit = new Habit("title 1","test",daylist,testDate);
         assertEquals(testDate,habit.getStartDate());
@@ -190,7 +190,7 @@ public class TestHabit {
 
     @Test
     public void testSetStartDate(){
-        ArrayList<Boolean> daylist = new ArrayList<Boolean>();
+        ArrayList<Boolean> daylist = new ArrayList<>();
         Date testDate = new Date();
         Habit habit = new Habit("title 1","test",daylist,testDate);
         Date newDate = new Date();

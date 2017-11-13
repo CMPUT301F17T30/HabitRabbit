@@ -138,8 +138,8 @@ public class EditEventActivity extends AppCompatActivity {
 
 
 
-        locationNameList = new ArrayList<String>(); //empty in start
-        adapter = new ArrayAdapter<String>(this, R.layout.list_location, locationNameList);
+        locationNameList = new ArrayList<>(); //empty in start
+        adapter = new ArrayAdapter<>(this, R.layout.list_location, locationNameList);
         locationOuput.setAdapter(adapter);
 
 
