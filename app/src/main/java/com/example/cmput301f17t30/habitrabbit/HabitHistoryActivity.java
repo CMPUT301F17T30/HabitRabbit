@@ -23,12 +23,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
@@ -66,14 +71,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         });
 
-        Button button2 = (Button) findViewById(R.id.button8);
-        button2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 2",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
 
         Button button3 = (Button) findViewById(R.id.button9);
         button3.setOnClickListener(new View.OnClickListener() {
@@ -83,9 +80,46 @@ public class HabitHistoryActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+/*
+        EditText eventSearchField = (EditText) findViewById(R.id.eventSearchField);
+        eventSearchField.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
+                // TODO Auto-generated method stub
+            }
 
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+                // TODO Auto-generated method stub
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                // filter your list from your input
+                filter(s.toString());
+                //you can use runnable postDelayed like 500 ms to delay search text
+            }
+
+        }); */
     }
+
+    /*
+    void filter(String text){
+        ArrayList<HabitEvent> temp = new ArrayList();
+        for(HabitEvent event: habitHistoryList){
+            //or use .equal(text) with you want equal match
+            //use .toLowerCase() for better matches
+            if(event.getComment().contains(text)){
+                temp.add(event);
+            }
+        }
+        //update recyclerview
+        habitEventadapter.updateList(temp);
+    }
+    */
 
     protected void onStart(){
         super.onStart();

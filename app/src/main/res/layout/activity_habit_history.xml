@@ -49,25 +49,29 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button1"
+            android:text="comment"
+            android:textSize="10sp"
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="482dp" />
 
-        <Button
-            android:id="@+id/button8"
-            style="?android:attr/buttonBarButtonStyle"
+        <EditText
+            android:id="@+id/eventSearchField"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Button2"
-            tools:layout_editor_absoluteX="173dp"
-            tools:layout_editor_absoluteY="482dp" />
+            android:layout_height="47dp"
+            android:layout_weight="1"
+            android:lineSpacingExtra="8sp"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Filter/search" />
 
         <Button
             android:id="@+id/button9"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button3"
+            android:text="Habit tYpe"
+            android:textSize="10sp"
             tools:layout_editor_absoluteX="241dp"
             tools:layout_editor_absoluteY="482dp" />
 

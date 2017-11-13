@@ -116,4 +116,9 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
         return habitHistoryList.size();
     }
+
+    public void updateList(ArrayList<HabitEvent> list){
+        this.habitHistoryList = list;
+        notifyDataSetChanged();
+    }
 }
