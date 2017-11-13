@@ -225,13 +225,16 @@ public class EditEventActivity extends AppCompatActivity {
                 }
 
                 else {
+
+                    int position = getIntent().getIntExtra("pos",0);
+                    eventController.editEvent(position);
                     eventController.setComment(theComment);
                     eventController.setLocationName(addressName);
-                    eventController.saveAddEvent();
+                    eventController.saveEditEvent();
                     //addEventDone();
 
-                    Intent returnToMain = new Intent();
-                    setResult(RESULT_OK, returnToMain);
+                    Intent returnToHistory = new Intent();
+                    setResult(RESULT_OK, returnToHistory);
 
                     finish();
                 }
@@ -389,7 +392,7 @@ public class EditEventActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        eventController.editEvent(index);
+        //eventController.editEvent(index);
     }
 
 }
