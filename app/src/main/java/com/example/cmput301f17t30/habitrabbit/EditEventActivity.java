@@ -402,7 +402,7 @@ public class EditEventActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        //eventController.editEvent(index);
+        //eventController.editHabit(index);
     }
 
 }

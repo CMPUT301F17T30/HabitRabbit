@@ -88,7 +88,7 @@ public class HabitController {
     }
 
     public void saveEditHabit(){
-        habitList.editEvent(position, habit);
+        habitList.editHabit(position, habit);
     }
 
     public void viewHabit(int position){

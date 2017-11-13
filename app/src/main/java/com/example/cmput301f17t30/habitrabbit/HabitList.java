@@ -49,7 +49,7 @@ public class HabitList {
      * @param position the index of the habit that we wish to edit
      * @param habit the habit that we wish to edit
      */
-    public void editEvent(int position, Habit habit){
+    public void editHabit(int position, Habit habit){
         habitList.set(position, habit);
     }
 

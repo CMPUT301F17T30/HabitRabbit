@@ -20,6 +20,9 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -28,7 +31,62 @@ import static org.junit.Assert.*;
 
 public class TestHabitList {
 
-    TestHabitList() {
+    public TestHabitList() {
         super();
     }
+
+    @Test
+    public void testAddHabit(){
+        HabitList list = new HabitList();
+        Habit habit = new MockHabit();
+        list.addHabit(habit);
+        assertEquals(habit,list.getHabit(0));
+
+    }
+
+    @Test
+    public void testEditHabit(){
+        HabitList list = new HabitList();
+        Habit habit = new MockHabit();
+        Habit newHabit = new Habit("tester",new ArrayList<Boolean>(),new Date());
+        list.addHabit(habit);
+        list.editHabit(0,newHabit);
+        assertEquals(newHabit,list.getHabit(0));
+
+    }
+
+    @Test
+    public void testGetSize(){
+        HabitList list = new HabitList();
+        Habit habit = new MockHabit();
+        Habit habitTwo = new MockHabit();
+        list.addHabit(habit);
+        list.addHabit(habitTwo);
+        assertEquals(2, list.getSize());
+
+    }
+
+    @Test
+    public void testDeleteHabit(){
+        HabitList list = new HabitList();
+        Habit habit = new MockHabit();
+        list.addHabit(habit);
+        list.deleteHabit(0);
+        assertEquals(0, list.getSize());
+
+    }
+
+    @Test
+    public void testDeleteHabitOutOfBounds(){
+        HabitList list = new HabitList();
+        Habit habit = new MockHabit();
+        list.addHabit(habit);
+        list.deleteHabit(7);
+        assertEquals(0, list.getSize());
+
+    }
+
+
+
+
 }
