@@ -38,9 +38,6 @@
     <string name="edit">EDIT</string>
     <string name="main">MAIN</string>
     <string name="delete">DELETE</string>
-<<<<<<< HEAD
     <string name="title_activity_event_maps">Map</string>
-=======
     <string name="title_activity_login">LoginActivity</string>
->>>>>>> 63977f96e37fbbb38216bcc9e14e9107fe79b548
 </resources>

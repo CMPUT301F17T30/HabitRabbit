@@ -46,7 +46,6 @@
         <activity android:name=".EditHabitActivity" />
         <activity android:name=".EditEventActivity" />
         <activity android:name=".ViewHabitDetailActivity" />
-<<<<<<< HEAD
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -63,9 +62,8 @@
             android:name=".EventMapsActivity"
             android:label="@string/title_activity_event_maps">
         </activity>
-=======
+
         <activity android:name=".LoginActivity"></activity>
->>>>>>> 63977f96e37fbbb38216bcc9e14e9107fe79b548
     </application>
 
 </manifest>
