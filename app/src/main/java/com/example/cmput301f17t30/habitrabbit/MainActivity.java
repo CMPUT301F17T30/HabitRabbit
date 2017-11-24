@@ -25,6 +25,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -50,11 +52,12 @@ public class MainActivity extends AppCompatActivity {
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
     public static int VIEW_HABIT_REQUEST = 3;
+    private static int LOGOUT_REQUEST = 4;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
-    ArrayList daylist = new ArrayList<Boolean>();
+    public User user;
 
     Habit habit1;
     Habit habit2;
@@ -65,6 +68,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (this.user == null){
+            Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+            startActivityForResult(logout, LOGOUT_REQUEST);
+        }
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -72,11 +79,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HabitLayoutAdapter(habitList.getList(), this);
         recyclerView.setAdapter(adapter);
 
-        int i = 0;
-        while (i <= 6){
-            daylist.add(FALSE);
-            i++;
-        }
+
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
@@ -84,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent newHabit = new Intent(MainActivity.this, AddHabitActivity.class);
                 startActivityForResult(newHabit, ADD_HABIT_REQUEST);
-
-
             }
         });
 
@@ -106,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
-
 
     }
 
@@ -143,6 +143,34 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
+        if (requestCode == LOGOUT_REQUEST){
+            if (resultCode == RESULT_OK){
+                String username = data.getStringExtra("name");
+                this.user = new User(username);
+            }
+        }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle menu button stuff
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.logout_button) {
+            logoutCurrentUser();
+            Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+            startActivityForResult(logout, LOGOUT_REQUEST);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    public void logoutCurrentUser(){
+        this.user = null;
     }
 }
