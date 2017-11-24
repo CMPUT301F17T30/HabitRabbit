@@ -53,7 +53,6 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText comment, locationInput;
     private Intent intent;
 
-    // mockup habit event here
     // use intent to pass habit for actual code
     private Habit habit;
 
@@ -163,6 +162,7 @@ public class AddEventActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                locationNameList.clear();
                 String locationName = locationInput.getText().toString();
                 locationNameList.addAll(locationController.getLocationList(v.getContext(), locationName));
                 adapter.notifyDataSetChanged();

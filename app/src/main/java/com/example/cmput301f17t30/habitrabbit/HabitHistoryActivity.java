@@ -64,15 +64,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventrecyclerView.setAdapter(habitEventadapter);
 
 
-        Button addEventButton = (Button) findViewById(R.id.addEventButton);
-        addEventButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //shouldnt add event from here
-
-            }
-        });
-
         Button returnToMain = (Button) findViewById(R.id.habitHistoryFinish);
         returnToMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -87,6 +78,15 @@ public class HabitHistoryActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 3",
                         Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        Button button1 = (Button) findViewById(R.id.map);
+        button1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent map = new Intent(HabitHistoryActivity.this, EventMapsActivity.class);
+                startActivity(map);
             }
         });
 

@@ -49,12 +49,12 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.1.0'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:recyclerview-v7:26.1.0'
-    compile 'com.jayway.android.robotium:robotium-solo:5.6.3'
+    implementation 'com.android.support:recyclerview-v7:26.1.0'
+    implementation 'com.jayway.android.robotium:robotium-solo:5.6.3'
     testCompile 'junit:junit:4.12'
     implementation files('src/include/jest-droid-2.0.1-SNAPSHOT.jar')
     implementation 'com.jayway.android.robotium:robotium-solo:5.3.1'
-
+    implementation 'com.google.android.gms:play-services-maps:9.8.0'
 }
 configurations.all {
     resolutionStrategy.eachDependency { DependencyResolveDetails details ->
