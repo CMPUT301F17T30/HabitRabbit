@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -42,10 +43,20 @@ public class LoginActivity extends AppCompatActivity {
             EditText usernameText = (EditText)findViewById(R.id.userName);
             String name = usernameText.getText().toString();
 
-            Intent returnIntent = getIntent();
-            returnIntent.putExtra("name", name);
-            setResult(RESULT_OK, returnIntent);
-            finish();
+             if (name.trim().length() == 0) {
+                Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
+            }
+
+            else if (name.trim().length() > 20) {
+                Toast.makeText(LoginActivity.this, "Please enter a name of 20 characters or less", Toast.LENGTH_SHORT).show();
+            }
+
+            else {
+                 Intent returnIntent = getIntent();
+                 returnIntent.putExtra("name", name);
+                 setResult(RESULT_OK, returnIntent);
+                 finish();
+             }
 
 
         }
