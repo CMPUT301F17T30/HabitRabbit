@@ -25,6 +25,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -32,6 +34,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
+//import com.example.cmput301f17t30.habitrabbit.MainActivity.user;
 
 /**
  * An activity that displays all previously completed habit events.
@@ -50,6 +53,8 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
+    private int LOGOUT_REQUEST = 2;
+
 
 
     @Override
@@ -114,5 +119,23 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         }
 
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    // handle menu button stuff
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+
+        if (id == R.id.logout_button) {
+            Intent logout = new Intent(HabitHistoryActivity.this, LoginActivity.class);
+            startActivityForResult(logout, LOGOUT_REQUEST);
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

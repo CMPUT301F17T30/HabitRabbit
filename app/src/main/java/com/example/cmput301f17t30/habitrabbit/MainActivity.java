@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
-    private User user;
+    public User user;
 
     Habit habit1;
     Habit habit2;
@@ -163,10 +163,14 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.logout_button) {
-            this.user = null;
+            logoutCurrentUser();
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(logout, LOGOUT_REQUEST);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void logoutCurrentUser(){
+        this.user = null;
     }
 }

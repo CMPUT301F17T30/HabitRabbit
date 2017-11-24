@@ -43,7 +43,7 @@ public class LoginActivity extends AppCompatActivity {
             EditText usernameText = (EditText)findViewById(R.id.userName);
             String name = usernameText.getText().toString();
 
-             if (name.trim().length() == 0) {
+            if (name.trim().length() == 0) {
                 Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
             }
 
