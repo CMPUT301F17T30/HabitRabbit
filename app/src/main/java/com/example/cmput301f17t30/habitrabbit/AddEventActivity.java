@@ -206,10 +206,6 @@ public class AddEventActivity extends AppCompatActivity {
 
             else
                 eventController.setComment(theComment);
-                eventController.setLocationName(addressName);
-                eventController.setImage(selectImage);
-                eventController.setDate();
-                eventController.sortByDate();
                 eventController.saveAddEvent();
                 //addEventDone();
 
@@ -387,8 +383,6 @@ public class AddEventActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
-        int position = getIntent().getIntExtra("pos",0);
-        habit = habitList.getHabit(position);
         eventController.addEvent(habit);
     }
 

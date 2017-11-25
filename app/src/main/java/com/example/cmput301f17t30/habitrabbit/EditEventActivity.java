@@ -103,6 +103,7 @@ public class EditEventActivity extends AppCompatActivity {
 
         Intent intentIndex = getIntent();
         index = intentIndex.getIntExtra("pos",1);
+        eventController.editEvent(index);
 
 
         final Button addImage = (Button) findViewById(R.id.add_image);
@@ -242,13 +243,8 @@ public class EditEventActivity extends AppCompatActivity {
                 }
 
                 else {
-                    int position = getIntent().getIntExtra("pos",0);
-                    eventController.editEvent(position);
                     eventController.setComment(theComment);
-                    eventController.setLocationName(theAddress);
-                    eventController.saveEditEvent();
-                    //addEventDone();
-
+                    eventController.saveEditEvent(index);
                     Intent returnToHistory = new Intent();
                     setResult(RESULT_OK, returnToHistory);
                     adapter.notifyDataSetChanged();
