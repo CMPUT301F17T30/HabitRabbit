@@ -112,7 +112,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         holder.dateText.setText(formatDate);
         holder.eventComment.setText(comment);
         holder.eventType.setText(type);
-        
+
         holder.eventImage.setImageBitmap(image);
 
 

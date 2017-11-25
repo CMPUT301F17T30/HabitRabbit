@@ -29,6 +29,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
+
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+
 /**
  *  This activity is used to display a single habit event object in detail
  */
@@ -80,6 +84,7 @@ public class ViewEventDetailActivity extends AppCompatActivity {
         commentText = (TextView) findViewById(R.id.command_text);
         locatoinText = (TextView) findViewById(R.id.locatoin_text);
         eventImage = (ImageView) findViewById(R.id.ivImage);
+        date = (TextView) findViewById(R.id.dateText);
         final Button editButton = (Button) findViewById(R.id.editEventButton);
         final Button deleteButton = (Button) findViewById(R.id.deleteEventButton);
 
@@ -89,6 +94,10 @@ public class ViewEventDetailActivity extends AppCompatActivity {
         locatoinText.setText(eventController.getLocation(index));
         TypeText.setText(eventController.getType(index).getTitle());
         eventImage.setImageBitmap(eventController.getImage(index));
+
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String dateText = format.format(eventController.getDate(index));
+        date.setText(dateText);
 
 
 
