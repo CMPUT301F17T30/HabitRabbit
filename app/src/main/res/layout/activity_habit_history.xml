@@ -45,11 +45,11 @@
 
 
         <Button
-            android:id="@+id/addEventButton"
+            android:id="@+id/map"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button1"
+            android:text="Map"
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="482dp" />
 

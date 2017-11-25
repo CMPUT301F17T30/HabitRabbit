@@ -60,7 +60,7 @@ public class AddEventActivityTest extends ActivityInstrumentationTestCase2<MainA
         solo.clickOnView(solo.getView(R.id.save_event));
 
         solo.sleep(2000);
-        assertTrue(habitController.getTitle() == "test title");
+        assertTrue(habitController.getTitle().equals("test title"));
 
         assertTrue(eventController.getComment(0).equals("testcommand"));
 

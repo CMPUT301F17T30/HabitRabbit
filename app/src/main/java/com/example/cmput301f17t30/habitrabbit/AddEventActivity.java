@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -53,7 +54,6 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText comment, locationInput;
     private Intent intent;
 
-    // mockup habit event here
     // use intent to pass habit for actual code
     private Habit habit;
 
@@ -79,13 +79,11 @@ public class AddEventActivity extends AppCompatActivity {
 
     private ArrayList<String> locationNameList;
 
-
-
-
     //location
     private double latitude;
     private double longitude;
     private String addressName;
+    private Bitmap defaultImage;
 
 
     private LocationController locationController;
@@ -110,7 +108,6 @@ public class AddEventActivity extends AppCompatActivity {
         locationInput = (EditText) findViewById(R.id.enter_location);
         searchButton = (Button) findViewById(R.id.search_location);
         locationOuput = (ListView) findViewById(R.id.serchout);
-
 
 
         locationNameList = new ArrayList<>(); //empty in start
@@ -163,6 +160,7 @@ public class AddEventActivity extends AppCompatActivity {
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                locationNameList.clear();
                 String locationName = locationInput.getText().toString();
                 locationNameList.addAll(locationController.getLocationList(v.getContext(), locationName));
                 adapter.notifyDataSetChanged();
@@ -207,6 +205,8 @@ public class AddEventActivity extends AppCompatActivity {
             else
                 eventController.setComment(theComment);
                 eventController.setLocationName(addressName);
+
+
                 eventController.setImage(selectImage);
                 eventController.setDate();
                 eventController.sortByDate();

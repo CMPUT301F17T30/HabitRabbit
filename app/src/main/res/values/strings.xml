@@ -38,4 +38,6 @@
     <string name="edit">EDIT</string>
     <string name="main">MAIN</string>
     <string name="delete">DELETE</string>
+    <string name="title_activity_event_maps">Map</string>
+    <string name="title_activity_login">LoginActivity</string>
 </resources>
