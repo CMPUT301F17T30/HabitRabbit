@@ -112,8 +112,14 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         holder.dateText.setText(formatDate);
         holder.eventComment.setText(comment);
         holder.eventType.setText(type);
-
-        holder.eventImage.setImageBitmap(image);
+        if (image == null) {
+            Bitmap defaultImage = BitmapFactory.decodeResource(historyContext.getResources(),
+                    R.drawable.greyrabbit);
+            holder.eventImage.setImageBitmap(defaultImage);
+        }
+        else {
+            holder.eventImage.setImageBitmap(image);
+        }
 
 
         /*

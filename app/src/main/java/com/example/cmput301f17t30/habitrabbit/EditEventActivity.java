@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -114,6 +115,10 @@ public class EditEventActivity extends AppCompatActivity {
 
         comment.setText(eventController.getComment(index));
         address.setText(eventController.getLocation(index));
+
+        Bitmap defaultImage = BitmapFactory.decodeResource(this.getResources(),
+                R.drawable.greyrabbit);
+        image.setImageBitmap(defaultImage);
         image.setImageBitmap(eventController.getImage(index));
 
 
