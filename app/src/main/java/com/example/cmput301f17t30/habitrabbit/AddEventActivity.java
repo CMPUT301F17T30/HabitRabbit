@@ -109,9 +109,6 @@ public class AddEventActivity extends AppCompatActivity {
         searchButton = (Button) findViewById(R.id.search_location);
         locationOuput = (ListView) findViewById(R.id.serchout);
 
-        defaultImage = BitmapFactory.decodeResource(this.getResources(),
-                R.drawable.greyrabbit);
-        image.setImageBitmap(defaultImage);
 
         locationNameList = new ArrayList<>(); //empty in start
         //

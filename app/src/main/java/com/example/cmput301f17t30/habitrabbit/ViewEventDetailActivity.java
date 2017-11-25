@@ -21,6 +21,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -87,6 +88,7 @@ public class ViewEventDetailActivity extends AppCompatActivity {
         date = (TextView) findViewById(R.id.dateText);
         final Button editButton = (Button) findViewById(R.id.editEventButton);
         final Button deleteButton = (Button) findViewById(R.id.deleteEventButton);
+        
 
         //display event info
         commentText.setText(eventController.getComment(index));
