@@ -22,10 +22,12 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
@@ -58,6 +60,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         private TextView eventComment;
         private TextView eventType;
         private TextView dateText;
+        private ImageView eventImage;
 
 
         public ViewHolder(View itemView) {
@@ -67,6 +70,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
             eventComment = itemView.findViewById(R.id.habitEventCommentTextView);
             eventType = itemView.findViewById(R.id.eventTypeTextView);
             dateText = itemView.findViewById(R.id.dateTextView);
+            eventImage = itemView.findViewById(R.id.habitEventThumbnail);
 
             itemView.setOnClickListener(this);
 
@@ -101,11 +105,13 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         String comment = habitEvent.getComment();
         //String location = habitEvent.getLocation();
         String type = habitEvent.getHabitType().getTitle();
+        Bitmap image = habitEvent.getImage();
 
         //holder.eventLocation.setText(location);
         holder.dateText.setText(formatDate);
         holder.eventComment.setText(comment);
         holder.eventType.setText(type);
+        holder.eventImage.setImageBitmap(image);
 
 
         /*
