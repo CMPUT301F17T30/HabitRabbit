@@ -23,6 +23,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -111,6 +112,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         holder.dateText.setText(formatDate);
         holder.eventComment.setText(comment);
         holder.eventType.setText(type);
+        
         holder.eventImage.setImageBitmap(image);
 
 
