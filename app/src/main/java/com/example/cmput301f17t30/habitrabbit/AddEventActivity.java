@@ -381,6 +381,8 @@ public class AddEventActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+        int position = getIntent().getIntExtra("pos",0);
+        habit = habitList.getHabit(position);
         eventController.addEvent(habit);
     }
 
