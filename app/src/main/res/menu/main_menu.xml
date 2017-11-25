@@ -27,6 +27,6 @@
         android:id="@+id/logout_button"
         android:icon="@drawable/ic_launcher_background"
         android:orderInCategory="100"
-        com.example.cmput301f17t30.habitrabbit:showAsAction="ifRoom"
+        com.example.cmput301f17t30.habitrabbit:showAsAction="ifRoom|withText"
         android:title="logout" />
 </menu>

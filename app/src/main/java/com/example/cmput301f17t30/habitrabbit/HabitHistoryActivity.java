@@ -21,6 +21,8 @@ package com.example.cmput301f17t30.habitrabbit;
 
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -67,6 +69,9 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
         habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
+
+        Bitmap defaultImage = BitmapFactory.decodeResource(this.getResources(),
+                R.drawable.greyrabbit);
 
 
         Button returnToMain = (Button) findViewById(R.id.habitHistoryFinish);

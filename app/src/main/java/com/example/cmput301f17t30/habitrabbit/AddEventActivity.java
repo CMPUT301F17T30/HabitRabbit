@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -78,13 +79,11 @@ public class AddEventActivity extends AppCompatActivity {
 
     private ArrayList<String> locationNameList;
 
-
-
-
     //location
     private double latitude;
     private double longitude;
     private String addressName;
+    private Bitmap defaultImage;
 
 
     private LocationController locationController;
@@ -109,7 +108,6 @@ public class AddEventActivity extends AppCompatActivity {
         locationInput = (EditText) findViewById(R.id.enter_location);
         searchButton = (Button) findViewById(R.id.search_location);
         locationOuput = (ListView) findViewById(R.id.serchout);
-
 
 
         locationNameList = new ArrayList<>(); //empty in start
