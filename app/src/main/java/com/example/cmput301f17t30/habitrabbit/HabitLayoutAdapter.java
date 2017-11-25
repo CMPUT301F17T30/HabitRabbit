@@ -131,9 +131,6 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
                 if (habit.isDueToday() && isSameDay(habit)) {
                     Toast.makeText(mainContext, "That habit has already been completed today", Toast.LENGTH_SHORT).show();
                 }
-                else if (habit.isDueToday() == Boolean.FALSE) {
-                    Toast.makeText(mainContext, "That habit is not due today", Toast.LENGTH_SHORT).show();
-                }
                 else {
                     Intent newEvent = new Intent(mainContext, AddEventActivity.class);
                     newEvent.putExtra("pos", position);
