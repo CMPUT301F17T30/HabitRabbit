@@ -85,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
         habitHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent counterPage = new Intent(MainActivity.this, HabitHistoryActivity.class);
-                startActivityForResult(counterPage, HABIT_HISTORY_REQUEST);
+                Intent habitHistoryIntent = new Intent(MainActivity.this, HabitHistoryActivity.class);
+                startActivityForResult(habitHistoryIntent, HABIT_HISTORY_REQUEST);
             }
         });
 

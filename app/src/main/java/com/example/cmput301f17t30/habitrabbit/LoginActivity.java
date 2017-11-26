@@ -55,10 +55,13 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             else {
-                 Intent returnIntent = getIntent();
+                 //Intent returnIntent = getIntent();
                  userController.setUser(name);
-                 setResult(RESULT_OK, returnIntent);
-                 finish();
+                 //setResult(RESULT_OK, returnIntent);
+
+                Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(mainActivityIntent);
+                 //finish();
              }
 
 
