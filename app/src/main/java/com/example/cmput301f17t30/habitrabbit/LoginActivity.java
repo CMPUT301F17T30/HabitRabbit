@@ -26,6 +26,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
+
 public class LoginActivity extends AppCompatActivity {
 
     @Override
@@ -54,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             else {
                  Intent returnIntent = getIntent();
                  returnIntent.putExtra("name", name);
+                 userController.setUser(name);
                  setResult(RESULT_OK, returnIntent);
                  finish();
              }

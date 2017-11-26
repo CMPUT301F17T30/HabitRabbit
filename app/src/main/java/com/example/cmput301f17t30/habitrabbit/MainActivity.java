@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static final HabitList habitList = new HabitList();
     public static final HabitController habitController = new HabitController();
+    public static final UserController userController = new UserController();
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
@@ -57,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
-    public User user;
+    public User user = null;
 
     Habit habit1;
     Habit habit2;
@@ -68,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        if (this.user == null){
+        if (userController.getUsername() == null){
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(logout, LOGOUT_REQUEST);
         }
@@ -154,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        String username = user.getUserId();
+        String username = userController.getUsername();
 
         menu.findItem(R.id.logged_in_user).setTitle(username);
         return super.onPrepareOptionsMenu(menu);
@@ -172,14 +173,11 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.logout_button) {
-            logoutCurrentUser();
+            userController.clearUser();
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
             startActivityForResult(logout, LOGOUT_REQUEST);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void logoutCurrentUser(){
-        this.user = null;
-    }
 }

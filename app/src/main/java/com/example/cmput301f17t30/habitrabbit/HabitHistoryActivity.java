@@ -50,8 +50,8 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private LinearLayoutManager habitEventlinearLayoutManager;
     private HabitHistoryLayoutAdapter habitEventadapter;
 
-    private ArrayList<HabitEvent> habitHistoryList = new ArrayList<>();
     public static final HabitEventController habitEventController = new HabitEventController();
+    public static final UserController userController = new UserController();
 
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
@@ -127,6 +127,15 @@ public class HabitHistoryActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        String username = userController.getUsername();
+
+        menu.findItem(R.id.logged_in_user).setTitle(username);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
@@ -138,6 +147,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.logout_button) {
+            userController.clearUser();
             Intent logout = new Intent(HabitHistoryActivity.this, LoginActivity.class);
             startActivityForResult(logout, LOGOUT_REQUEST);
         }
