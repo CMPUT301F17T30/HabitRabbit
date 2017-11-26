@@ -117,8 +117,8 @@ public class HabitEventController {
         habitEvent.getHabitType().decrementTimesCompleted();
     }
 
-    public void saveEditEvent(){
-        eventList.editEvent(position, habitEvent);
+    public void saveEditEvent(int index){
+        eventList.editEvent(index, habitEvent);
 
     }
 
@@ -147,6 +147,7 @@ public class HabitEventController {
 
         eventList.setEventList(list);
     }
+
 
 
 }

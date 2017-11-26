@@ -204,12 +204,6 @@ public class AddEventActivity extends AppCompatActivity {
 
             else
                 eventController.setComment(theComment);
-                eventController.setLocationName(addressName);
-
-
-                eventController.setImage(selectImage);
-                eventController.setDate();
-                eventController.sortByDate();
                 eventController.saveAddEvent();
                 //addEventDone();
 
