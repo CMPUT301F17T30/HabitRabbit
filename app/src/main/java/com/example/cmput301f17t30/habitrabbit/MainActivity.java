@@ -31,10 +31,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
-import static java.lang.Boolean.FALSE;
-
 /**
  * The main activity of the app. Displays a list of habits.
  *
@@ -53,15 +49,10 @@ public class MainActivity extends AppCompatActivity {
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
     public static int VIEW_HABIT_REQUEST = 3;
-    private static int LOGOUT_REQUEST = 4;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
-
-    Habit habit1;
-    Habit habit2;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,7 +139,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        String username = userController.getUsername();
+        String username;
+
+        username = userController.getUsername();
 
         menu.findItem(R.id.logged_in_user).setTitle(username);
         return super.onPrepareOptionsMenu(menu);
@@ -166,9 +159,8 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.logout_button) {
-            userController.clearUser();
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
-            startActivityForResult(logout, LOGOUT_REQUEST);
+            startActivity(logout);
         }
         return super.onOptionsItemSelected(item);
     }

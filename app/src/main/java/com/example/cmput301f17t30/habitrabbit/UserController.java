@@ -48,9 +48,5 @@ public class UserController {
         }
     }
 
-    public void setUsername(String username){
-        user.setUserId(username);
-    }
-
 
 }
