@@ -17,16 +17,21 @@
   ~     along with this program.  If not, see <https://www.gnu.org/licenses/>.
   -->
 
-<menu xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:com.example.cmput301f17t30.habitrabbit="http://schemas.android.com/tools">
+<menu  xmlns:app="http://schemas.android.com/apk/res-auto"
+       xmlns:android="http://schemas.android.com/apk/res/android">
+       <!-- xmlns:com.example.cmput301f17t30.habitrabbit="http://schemas.android.com/tools"> -->
 
 
     <!-- logout -->
     <item
         android:id="@+id/logout_button"
-        android:icon="@drawable/ic_launcher_background"
+        android:icon="@drawable/logut"
         android:orderInCategory="100"
-        com.example.cmput301f17t30.habitrabbit:showAsAction="ifRoom|withText"
+        app:showAsAction="ifRoom|withText"
         android:title="logout" />
+
+    <item
+        android:id="@+id/userLogged"
+        app:showAsAction="always"
+        android:title="current user"/>
 </menu>
