@@ -105,6 +105,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
 
+        invalidateOptionsMenu();
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -139,9 +141,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        String username;
-
-        username = userController.getUsername();
+        String username = userController.getUsername();
 
         menu.findItem(R.id.logged_in_user).setTitle(username);
         return super.onPrepareOptionsMenu(menu);

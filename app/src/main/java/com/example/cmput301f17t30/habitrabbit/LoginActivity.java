@@ -33,11 +33,11 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        userController.clearUser();
         setContentView(R.layout.activity_login);
-
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginListener);
-        userController.clearUser();
+
     }
 
     private View.OnClickListener loginListener = new View.OnClickListener() {

@@ -70,9 +70,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
 
-        Bitmap defaultImage = BitmapFactory.decodeResource(this.getResources(),
-                R.drawable.greyrabbit);
-
 
         Button returnToMain = (Button) findViewById(R.id.habitHistoryFinish);
         returnToMain.setOnClickListener(new View.OnClickListener() {
@@ -100,7 +97,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     protected void onStart(){
@@ -123,7 +119,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
             }
         }
-
     }
 
     @Override
@@ -147,9 +142,8 @@ public class HabitHistoryActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.logout_button) {
-            userController.clearUser();
             Intent logout = new Intent(HabitHistoryActivity.this, LoginActivity.class);
-            startActivityForResult(logout, LOGOUT_REQUEST);
+            startActivity(logout);
         }
         return super.onOptionsItemSelected(item);
     }
