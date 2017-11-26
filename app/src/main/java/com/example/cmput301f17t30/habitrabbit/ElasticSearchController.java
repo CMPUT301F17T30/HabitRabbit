@@ -26,10 +26,18 @@ import android.util.Log;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
+
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
 /**
  * Controller to deal with elastic search online behavior.
@@ -173,6 +181,48 @@ public class ElasticSearchController {
 
         }
     }
+
+    public static class GetHabitsTask extends AsyncTask<String, Void, Void>{
+        @Override
+        protected Void doInBackground(String...user_id){
+            verifySettings();
+
+            ArrayList<Habit> habits = new ArrayList<Habit>();
+
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"user_id\" : \""+user_id[0]+"\" }\n" +
+                    "    }\n" +
+                    "}";
+
+
+            Search search = new Search.Builder(query)
+                    .addIndex("team30_habitrabbit")
+                    .addType("Habit")
+                    .build();
+            try {
+                // TODO get the results of the query
+                SearchResult result = client.execute(search);
+                if(result.isSucceeded()){
+                    List<Habit> foundHabits = result.getSourceAsObjectList(Habit.class);
+                    habits.addAll(foundHabits);
+                    habitController.addAllHabits(habits);
+                }
+                else{
+                    Log.e("Error", "The seach query failed");
+                }
+
+            }
+            catch (Exception e) {
+                Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return null;
+        }
+
+    }
+
+
 
 
     public static void verifySettings() {

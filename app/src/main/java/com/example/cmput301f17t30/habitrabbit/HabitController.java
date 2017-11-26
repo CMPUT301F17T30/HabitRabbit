@@ -109,5 +109,9 @@ public class HabitController {
         habitList.deleteHabit(position);
     }
 
+    public void addAllHabits(ArrayList<Habit> habits){
+        habitList.addAll(habits);
+    }
+
 
 }

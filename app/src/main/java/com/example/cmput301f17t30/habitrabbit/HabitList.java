@@ -86,4 +86,12 @@ public class HabitList {
         return habitList;
     }
 
+    /**
+     *
+     * @param habits the habits to add to habitlist
+     */
+    public void addAll(ArrayList<Habit> habits){
+        habitList.addAll(habits);
+    }
+
 }
