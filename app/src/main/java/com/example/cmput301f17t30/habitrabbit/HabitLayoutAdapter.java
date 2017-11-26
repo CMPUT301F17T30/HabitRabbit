@@ -32,6 +32,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -125,9 +126,16 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent newEvent = new Intent(mainContext, AddEventActivity.class);
-                newEvent.putExtra("pos",position);
-                mainContext.startActivity(newEvent);
+                Habit habit = habitList.get(position);
+
+                if (habit.isDueToday() && isSameDay(habit)) {
+                    Toast.makeText(mainContext, "That habit has already been completed today", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Intent newEvent = new Intent(mainContext, AddEventActivity.class);
+                    newEvent.putExtra("pos", position);
+                    mainContext.startActivity(newEvent);
+                }
             }
         });
 
@@ -139,5 +147,23 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
     public int getItemCount() {
 
         return habitList.size();
+    }
+
+    public Boolean isSameDay(Habit habit) {
+        Date todayDate = new Date();
+        Date lastCompleteDate = habit.getLastCompleted();
+
+        Calendar calToday = Calendar.getInstance();
+        Calendar calLast = Calendar.getInstance();
+        calToday.setTime(todayDate);
+        if (lastCompleteDate != null)
+            calLast.setTime(lastCompleteDate);
+        Boolean sameDay = calToday.get(Calendar.YEAR) == calLast.get(Calendar.YEAR) &&
+                calToday.get(Calendar.DAY_OF_YEAR) == calLast.get(Calendar.DAY_OF_YEAR);
+
+        if (lastCompleteDate == null)
+            sameDay = Boolean.FALSE;
+
+        return sameDay;
     }
 }

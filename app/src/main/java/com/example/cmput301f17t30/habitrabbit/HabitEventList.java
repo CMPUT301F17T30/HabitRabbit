@@ -42,13 +42,12 @@ public class HabitEventList {
      * @param event a habit event that is to be added
      */
     public void addEvent(HabitEvent event){
-        eventList.add(event);
+        eventList.add(0, event);
     }
 
     /**
      *
      * @param index the index of the event that is to be edited
-     * @param event the event that is to be edited
      */
     public void editEvent(int index, HabitEvent event){
         eventList.set(index, event);

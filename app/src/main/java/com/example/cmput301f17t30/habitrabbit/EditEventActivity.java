@@ -23,6 +23,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -103,6 +104,7 @@ public class EditEventActivity extends AppCompatActivity {
 
         Intent intentIndex = getIntent();
         index = intentIndex.getIntExtra("pos",1);
+        eventController.editEvent(index);
 
 
         final Button addImage = (Button) findViewById(R.id.add_image);
@@ -114,7 +116,11 @@ public class EditEventActivity extends AppCompatActivity {
 
         comment.setText(eventController.getComment(index));
         address.setText(eventController.getLocation(index));
+
+
+
         image.setImageBitmap(eventController.getImage(index));
+
 
 
         // set the information
@@ -242,13 +248,8 @@ public class EditEventActivity extends AppCompatActivity {
                 }
 
                 else {
-                    int position = getIntent().getIntExtra("pos",0);
-                    eventController.editEvent(position);
                     eventController.setComment(theComment);
-                    eventController.setLocationName(theAddress);
-                    eventController.saveEditEvent();
-                    //addEventDone();
-
+                    eventController.saveEditEvent(index);
                     Intent returnToHistory = new Intent();
                     setResult(RESULT_OK, returnToHistory);
                     adapter.notifyDataSetChanged();
