@@ -25,7 +25,7 @@
     <!-- logout -->
     <item
         android:id="@+id/logout_button"
-        android:icon="@drawable/logut"
+        android:icon="@drawable/logout"
         android:orderInCategory="100"
         app:showAsAction="ifRoom|withText"
         android:title="logout" />
