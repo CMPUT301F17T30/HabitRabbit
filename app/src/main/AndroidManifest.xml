@@ -60,10 +60,9 @@
 
         <activity
             android:name=".EventMapsActivity"
-            android:label="@string/title_activity_event_maps">
-        </activity>
-
-        <activity android:name=".LoginActivity"></activity>
+            android:label="@string/title_activity_event_maps"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".UserProfileActivity"></activity>
     </application>
 
 </manifest>
