@@ -23,6 +23,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * A class representing a habit object, with related details.
  * Created by arankin on 18/10/17.
@@ -46,6 +48,10 @@ public class Habit {
     private Date startDate;
     private Date lastCompleted;
     private Date lastCalculated;
+
+
+    @JestId
+    private String id;
 
     /**
      *
@@ -374,6 +380,15 @@ public class Habit {
         }
 
     }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
 
 
 

@@ -87,10 +87,14 @@ public class HabitController {
 
     public void saveAddHabit(){
         habitList.addHabit(habit);
+        ElasticSearchController.AddHabitTask addHabitTask = new ElasticSearchController.AddHabitTask();
+        addHabitTask.execute(habit);
     }
 
     public void saveEditHabit(){
         habitList.editHabit(position, habit);
+        ElasticSearchController.EditHabitTask editHabitTask = new ElasticSearchController.EditHabitTask();
+        editHabitTask.execute(habit);
     }
 
     public void viewHabit(int position){
@@ -100,8 +104,9 @@ public class HabitController {
 
     public void deleteHabit(){
         eventController.deleteAllHabitEvents(habitList.getHabit(position));
+        ElasticSearchController.DeleteHabitTask deleteHabitTask = new ElasticSearchController.DeleteHabitTask();
+        deleteHabitTask.execute(habit);
         habitList.deleteHabit(position);
-
     }
 
 

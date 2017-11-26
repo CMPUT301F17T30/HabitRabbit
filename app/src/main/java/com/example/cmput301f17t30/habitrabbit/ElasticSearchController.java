@@ -26,6 +26,7 @@ import android.util.Log;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
+import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Update;
@@ -45,7 +46,7 @@ public class ElasticSearchController {
             verifySettings();
 
             for (HabitEvent habitEvent : habitEvents) {
-                Index index = new Index.Builder(habitEvent).index("Team30_HabitRabbit").type("HabitEvent").build();
+                Index index = new Index.Builder(habitEvent).index("team30_habitrabbit").type("HabitEvent").build();
 
                 try {
                     // where is the client?
@@ -76,7 +77,7 @@ public class ElasticSearchController {
             // TODO Build the query
 
             for (HabitEvent habitEvent : habitEvents) {
-                Update update = new Update.Builder(habitEvent).index("Team30_HabitRabbit").type("HabitEvent").id(habitEvent.getId()).build();
+                Update update = new Update.Builder(habitEvent).index("team30_habitrabbit").type("HabitEvent").id(habitEvent.getId()).build();
 
                 try {
                     DocumentResult result = client.execute(update);
@@ -95,6 +96,84 @@ public class ElasticSearchController {
         }
 
     }
+
+    public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
+        @Override
+        protected Void doInBackground(Habit...habits){
+            verifySettings();
+            for (Habit habit : habits) {
+                Index index = new Index.Builder(habit).index("team30_habitrabbit").type("Habit").build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                    if(result.isSucceeded()){
+                        habit.setId(result.getId());
+                        Log.i("Sucess","Sucessfully added Habit");
+                    }
+                    else{
+                        Log.i("Error","Elasticsearch was unable to add Habit");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "Failed to build and send new Habit");
+                }
+
+            }
+            return null;
+
+        }
+    }
+
+    public static class EditHabitTask extends AsyncTask<Habit, Void, Void> {
+        @Override
+        protected Void doInBackground(Habit...habits){
+            verifySettings();
+
+            for (Habit habit : habits) {
+                Index index = new Index.Builder(habit).index("team30_habitrabbit").type("Habit").id(habit.getId()).build();
+
+                try {
+                    DocumentResult result = client.execute(index);
+                    if (result.isSucceeded()) {
+                        Log.i("Sucess", "Sucessfully updated Habit");
+                    } else {
+                        Log.i("Error", "Elasticsearch was unable to update Habit");
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "Failed to build and send updated Habit");
+                }
+            }
+
+            return null;
+
+        }
+    }
+
+    public static class DeleteHabitTask extends AsyncTask<Habit, Void, Void> {
+        @Override
+        protected Void doInBackground(Habit...habits){
+            verifySettings();
+
+            for (Habit habit : habits) {
+                Delete delete = new Delete.Builder(habit.getId()).index("team30_habitrabbit").type("Habit").build();
+
+                try {
+                    DocumentResult result = client.execute(delete);
+                    if (result.isSucceeded()) {
+                        Log.i("Sucess", "Sucessfully deleted Habit");
+                    } else {
+                        Log.i("Error", "Elasticsearch was unable to delete Habit");
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "Failed to communicate with server");
+                }
+            }
+
+            return null;
+
+        }
+    }
+
 
     public static void verifySettings() {
         if (client == null) {
