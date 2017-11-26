@@ -58,7 +58,6 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
-    public User user = null;
 
     Habit habit1;
     Habit habit2;
@@ -71,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (userController.getUsername() == null){
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
-            startActivityForResult(logout, LOGOUT_REQUEST);
+            startActivity(logout);
         }
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
@@ -144,12 +143,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (requestCode == LOGOUT_REQUEST){
-            if (resultCode == RESULT_OK){
-                String username = data.getStringExtra("name");
-                this.user = new User(username);
-            }
-        }
     }
 
     @Override

@@ -37,6 +37,7 @@ public class LoginActivity extends AppCompatActivity {
 
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginListener);
+        userController.clearUser();
     }
 
     private View.OnClickListener loginListener = new View.OnClickListener() {
@@ -55,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
 
             else {
                  Intent returnIntent = getIntent();
-                 returnIntent.putExtra("name", name);
                  userController.setUser(name);
                  setResult(RESULT_OK, returnIntent);
                  finish();

@@ -36,6 +36,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 //import com.example.cmput301f17t30.habitrabbit.MainActivity.user;
 
 /**
@@ -51,7 +52,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private HabitHistoryLayoutAdapter habitEventadapter;
 
     public static final HabitEventController habitEventController = new HabitEventController();
-    public static final UserController userController = new UserController();
 
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
