@@ -18,6 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -61,6 +62,7 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
 
             achievementName = itemView.findViewById(R.id.achievement_name);
             achievementDescription = itemView.findViewById(R.id.achievement_description);
+            achievementImage = itemView.findViewById(R.id.achievement_image);
         }
 
         @Override
@@ -75,7 +77,7 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
                 .achievement_row_layout, parent, false);
         return new ViewHolder(inflatedView);
     }
-
+    @TargetApi(16)
     @Override
     public void onBindViewHolder(AchievementLayoutAdapter.ViewHolder holder, final int position) {
         final Achievement achievement = achievements.get(position);
@@ -84,10 +86,11 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
 
         holder.achievementName.setText(name);
         holder.achievementDescription.setText(description);
-
         if (achievement.getCompleted() == Boolean.TRUE){
-            //Bitmap successImage = BitmapFactory.decodeResource(profileContext.getResources(), R.drawable.ic_launcher_background);
-            //holder.achievementImage.setImageBitmap(successImage);
+            Bitmap successImage = BitmapFactory.decodeResource(profileContext.getResources(), R.drawable.unlocked);
+
+            holder.achievementImage.setBackground(null);
+            holder.achievementImage.setImageBitmap(successImage);
         }
 
 

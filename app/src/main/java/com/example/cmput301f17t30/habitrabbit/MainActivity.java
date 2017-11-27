@@ -23,6 +23,8 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -187,6 +189,17 @@ public class MainActivity extends AppCompatActivity {
             startActivity(profile);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void initializeAchievements(){
+        Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
+        Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","Busy Beaver");
+        Achievement firstEventAchievement = new Achievement(1,"complete your first habit","Good Start");
+        Achievement openAppAchievement = new Achievement(1,"you opened the app","Too Easy");
+        Bitmap openAppImage;
+        openAppImage = BitmapFactory.decodeResource(getResources(), R.drawable.gradea);
+        openAppAchievement.setBitmap(openAppImage);
+        Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
     }
 
 

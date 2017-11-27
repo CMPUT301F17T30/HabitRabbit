@@ -36,13 +36,14 @@ public class AchievementController {
     private Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","Busy Beaver");
     private Achievement firstEventAchievement = new Achievement(1,"complete your first habit","Good Start");
     private Achievement openAppAchievement = new Achievement(1,"you opened the app","Too Easy");
-    private Bitmap openAppImage;
+    //private Bitmap openAppImage;
     private Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
 
     public AchievementController(){
         //set to True or False
         //openAppImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.gradea);
         //openAppAchievement.setBitmap(openAppImage);
+        openAppAchievement.setCompleted();
         achievementList.add(openAppAchievement);
         achievementList.add(weekendWarriorAchievement);
         achievementList.add(busyAchievement);
@@ -50,6 +51,10 @@ public class AchievementController {
 
     public ArrayList<Achievement> getAchievements() {
         return this.achievementList;
+    }
+
+    public void AddAchievement(Achievement achievement){
+        this.achievementList.add(achievement);
     }
 
     public void loadAchievementsStatus(){
