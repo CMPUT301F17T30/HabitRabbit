@@ -31,7 +31,7 @@
         android:title="logout" />
 
     <item
-        android:id="@+id/logged_in_user"
+        android:id="@+id/user_profile_button"
         app:showAsAction="always"
         android:title="current user"/>
 </menu>

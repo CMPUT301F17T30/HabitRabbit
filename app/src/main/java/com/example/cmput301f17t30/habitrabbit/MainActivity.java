@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
 
         String username = userController.getUsername();
 
-        menu.findItem(R.id.logged_in_user).setTitle(username);
+        menu.findItem(R.id.user_profile_button).setTitle(username);
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -161,6 +161,11 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.logout_button) {
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(logout);
+        }
+
+        if (id == R.id.user_profile_button) {
+            Intent profile = new Intent(MainActivity.this, UserProfileActivity.class);
+            startActivity(profile);
         }
         return super.onOptionsItemSelected(item);
     }

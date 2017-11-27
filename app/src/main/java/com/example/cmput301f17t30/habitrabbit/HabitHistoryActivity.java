@@ -126,7 +126,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
         String username = userController.getUsername();
 
-        menu.findItem(R.id.logged_in_user).setTitle(username);
+        menu.findItem(R.id.user_profile_button).setTitle(username);
         return super.onPrepareOptionsMenu(menu);
     }
 
