@@ -246,7 +246,7 @@ public class EditHabitActivity extends AppCompatActivity {
 
         },
                 newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-        date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
+        //date.setText(date.getText());
         datePickerDialog.show();
     }
 
