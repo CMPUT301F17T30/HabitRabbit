@@ -18,6 +18,10 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
 import java.util.ArrayList;
 
 /**
@@ -27,11 +31,19 @@ import java.util.ArrayList;
 public class AchievementController {
     private ArrayList<Achievement> achievementList = new ArrayList<>();
     private ArrayList<Boolean> isCompletedList;
+    private Context context;
     private Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
-    private Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","busy beaver");
+    private Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","Busy Beaver");
+    private Achievement firstEventAchievement = new Achievement(1,"complete your first habit","Good Start");
+    private Achievement openAppAchievement = new Achievement(1,"you opened the app","Too Easy");
+    private Bitmap openAppImage;
+    private Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
 
     public AchievementController(){
         //set to True or False
+        //openAppImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.gradea);
+        //openAppAchievement.setBitmap(openAppImage);
+        achievementList.add(openAppAchievement);
         achievementList.add(weekendWarriorAchievement);
         achievementList.add(busyAchievement);
     }
@@ -57,6 +69,14 @@ public class AchievementController {
             weekendWarriorAchievement.setCompleted();
         }
 
+    }
+
+    public void updateFirstEvent(){
+        firstEventAchievement.setCompleted();
+    }
+
+    public void setOpenAppAchievement(){
+        openAppAchievement.setCompleted();
     }
 
 

@@ -19,6 +19,8 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -82,6 +84,11 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
 
         holder.achievementName.setText(name);
         holder.achievementDescription.setText(description);
+
+        if (achievement.getCompleted() == Boolean.TRUE){
+            //Bitmap successImage = BitmapFactory.decodeResource(profileContext.getResources(), R.drawable.ic_launcher_background);
+            //holder.achievementImage.setImageBitmap(successImage);
+        }
 
 
     }
