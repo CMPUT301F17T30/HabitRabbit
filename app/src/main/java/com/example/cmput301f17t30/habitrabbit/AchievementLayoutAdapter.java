@@ -55,6 +55,7 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
         private TextView achievementName;
         private TextView achievementDescription;
         private ImageView achievementImage;
+        private TextView achievementProgress;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -63,6 +64,7 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
             achievementName = itemView.findViewById(R.id.achievement_name);
             achievementDescription = itemView.findViewById(R.id.achievement_description);
             achievementImage = itemView.findViewById(R.id.achievement_image);
+            achievementProgress = itemView.findViewById(R.id.achievement_progess);
         }
 
         @Override
@@ -83,9 +85,33 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
         final Achievement achievement = achievements.get(position);
         String name = achievement.getName();
         String description = achievement.getDescription();
+        String progressDisplay;
+
+
+        if (achievement.getCompleted()){
+            progressDisplay = "";
+        }
+        else {
+            String total = achievement.getProgressRequired().toString();
+            String done = achievement.getProgress().toString();
+            progressDisplay = ("(" + done + "/" + total + ")");
+            /*
+            if (achievement.getProgressRequired() == 1){
+                progressDisplay = "Not completed";
+            }
+            else {
+                String total = achievement.getProgressRequired().toString();
+                String done = achievement.getProgress().toString();
+                progressDisplay = ("(" + done + "/" + total + ")");
+            }
+            */
+        }
+
+
 
         holder.achievementName.setText(name);
         holder.achievementDescription.setText(description);
+        holder.achievementProgress.setText(progressDisplay);
         if (achievement.getCompleted() == Boolean.TRUE){
             Bitmap successImage = BitmapFactory.decodeResource(profileContext.getResources(), R.drawable.unlocked);
 
