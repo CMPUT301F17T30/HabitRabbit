@@ -27,11 +27,13 @@ import java.util.ArrayList;
 public class AchievementController {
     private ArrayList<Achievement> achievementList = new ArrayList<>();
     private ArrayList<Boolean> isCompletedList;
-    private Achievement weekendWarrior = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
+    private Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
+    private Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","busy beaver");
 
     public AchievementController(){
         //set to True or False
-        achievementList.add(weekendWarrior);
+        achievementList.add(weekendWarriorAchievement);
+        achievementList.add(busyAchievement);
     }
 
     public ArrayList<Achievement> getAchievements() {
@@ -49,10 +51,10 @@ public class AchievementController {
     }
 
     public void updateWeekendWarrior(){
-        weekendWarrior.incrementProgress();
-        if ((weekendWarrior.getCompleted() == Boolean.FALSE) &&
-                (weekendWarrior.getProgress() >= weekendWarrior.getProgressRequired())) {
-            weekendWarrior.setCompleted();
+        weekendWarriorAchievement.incrementProgress();
+        if ((weekendWarriorAchievement.getCompleted() == Boolean.FALSE) &&
+                (weekendWarriorAchievement.getProgress() >= weekendWarriorAchievement.getProgressRequired())) {
+            weekendWarriorAchievement.setCompleted();
         }
 
     }
