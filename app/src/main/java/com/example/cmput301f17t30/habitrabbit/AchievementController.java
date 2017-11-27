@@ -18,51 +18,43 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import java.util.ArrayList;
+
 /**
  * Sets achivements as complete, and loads achievment status
  */
 
 public class AchievementController {
+    private ArrayList<Achievement> achievementList = new ArrayList<>();
+    private ArrayList<Boolean> isCompletedList;
+    private Achievement weekendWarrior = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
 
-    private Boolean achievementa;
-
-    //complete a habit on a Saturday or Sunday 10 times
-    private Boolean weekendWarrior;
-    private Integer weekendWarriorProgress;
-
-    private AchievementController(){
+    public AchievementController(){
+        //set to True or False
+        achievementList.add(weekendWarrior);
     }
 
-    private void loadAchievementsStatus(){
+    public ArrayList<Achievement> getAchievements() {
+        return this.achievementList;
+    }
+
+    public void loadAchievementsStatus(){
         //get achivement status for each achievement here
         //call this on user login
     }
 
-    private void saveAchievementsStatus(){
+    public void saveAchievementsStatus(){
         //call this after any achievement is completed
         //upload status of elasticsearch
     }
 
-    private Boolean isAchievementaComplete(){
-        return this.achievementa;
-    }
-
-    private void setAchievementaComplete(){
-        this.achievementa = Boolean.TRUE;
-    }
-
-    private void updateWeekendWarrior(){
-        this.weekendWarriorProgress +=1;
-    }
-
-    private void checkWeekendWarriorComplete(){
-        if (this.weekendWarriorProgress == 10){
-            this.weekendWarrior = Boolean.TRUE;
+    public void updateWeekendWarrior(){
+        weekendWarrior.incrementProgress();
+        if ((weekendWarrior.getCompleted() == Boolean.FALSE) &&
+                (weekendWarrior.getProgress() >= weekendWarrior.getProgressRequired())) {
+            weekendWarrior.setCompleted();
         }
-    }
 
-    private Boolean isWeekendWarriorComplete(){
-        return this.weekendWarrior;
     }
 
 

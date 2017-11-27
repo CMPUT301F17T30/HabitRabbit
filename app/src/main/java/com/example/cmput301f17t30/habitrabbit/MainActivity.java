@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
     public static final HabitList habitList = new HabitList();
     public static final HabitController habitController = new HabitController();
     public static final UserController userController = new UserController();
+    public static final AchievementController achievementController = new AchievementController();
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;

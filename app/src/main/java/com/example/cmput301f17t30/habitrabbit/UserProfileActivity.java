@@ -21,16 +21,22 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 public class UserProfileActivity extends AppCompatActivity {
+
+    private RecyclerView recyclerView;
+    private LinearLayoutManager linearLayoutManager;
+    private AchievementLayoutAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,12 @@ public class UserProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_profile);
 
         final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.profile_viewflipper);
+
+        recyclerView = (RecyclerView) findViewById(R.id.achievementsLayout);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapter = new AchievementLayoutAdapter(achievementController.getAchievements(), this);
+        recyclerView.setAdapter(adapter);
 
         Button achievementsButton = (Button) findViewById(R.id.achievements_button);
         achievementsButton.setOnClickListener(new View.OnClickListener() {
