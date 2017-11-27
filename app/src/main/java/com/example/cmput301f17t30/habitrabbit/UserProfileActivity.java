@@ -27,6 +27,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
@@ -50,6 +51,9 @@ public class UserProfileActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new AchievementLayoutAdapter(achievementController.getAchievements(), this);
         recyclerView.setAdapter(adapter);
+
+        TextView usernameText = (TextView) findViewById(R.id.username_text);
+        usernameText.setText(userController.getUsername());
 
         Button achievementsButton = (Button) findViewById(R.id.achievements_button);
         achievementsButton.setOnClickListener(new View.OnClickListener() {
