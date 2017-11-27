@@ -143,6 +143,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
         if (id == R.id.logout_button) {
             Intent logout = new Intent(HabitHistoryActivity.this, LoginActivity.class);
+            getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
             startActivity(logout);
         }
         return super.onOptionsItemSelected(item);

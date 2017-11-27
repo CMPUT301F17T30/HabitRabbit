@@ -20,7 +20,10 @@ package com.example.cmput301f17t30.habitrabbit;
 
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -53,16 +56,27 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        if (sharedPreferences.getString("username",null) == null){
+            Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(logout);
+        }
+        else{
+            userController.setUser(sharedPreferences.getString("username",null));
+        }
+        /*
         if (userController.getUsername() == null){
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(logout);
         }
+        */
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -141,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
 
-        String username = userController.getUsername();
+        String username = sharedPreferences.getString("username",null);
 
         menu.findItem(R.id.user_profile_button).setTitle(username);
         return super.onPrepareOptionsMenu(menu);
@@ -160,6 +174,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.logout_button) {
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+            getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
             startActivity(logout);
         }
 

@@ -19,6 +19,8 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -30,8 +32,11 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController
 
 public class LoginActivity extends AppCompatActivity {
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         super.onCreate(savedInstanceState);
         userController.clearUser();
         setContentView(R.layout.activity_login);
@@ -58,6 +63,10 @@ public class LoginActivity extends AppCompatActivity {
                  //Intent returnIntent = getIntent();
                  userController.setUser(name);
                  //setResult(RESULT_OK, returnIntent);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("logged in", Boolean.TRUE);
+                editor.putString("username", name);
+                editor.apply();
 
                 Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(mainActivityIntent);
