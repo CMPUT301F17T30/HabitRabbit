@@ -20,17 +20,22 @@ package com.example.cmput301f17t30.habitrabbit;
 
 
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
@@ -57,6 +62,10 @@ public class EditHabitActivity extends AppCompatActivity {
     EditText name;
     EditText reason;
     EditText date;
+    ImageButton datePickerButton;
+
+    Calendar dateSelected;
+    DatePickerDialog datePickerDialog;
 
     SimpleDateFormat format;
 
@@ -79,6 +88,9 @@ public class EditHabitActivity extends AppCompatActivity {
         name = (EditText) findViewById(R.id.editHabitName);
         reason = (EditText) findViewById(R.id.editHabitReason);
         date = (EditText) findViewById(R.id.editHabitStartDate);
+        datePickerButton = (ImageButton)findViewById(R.id.datePickerButton);
+
+        dateSelected = Calendar.getInstance();
 
         format = new SimpleDateFormat("dd-MM-yyyy");
         format.setLenient(FALSE);
@@ -177,6 +189,13 @@ public class EditHabitActivity extends AppCompatActivity {
         saturdayButton.setOnCheckedChangeListener(dayCheckListener);
         sundayButton.setOnCheckedChangeListener(dayCheckListener);
 
+        datePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setDateTimeField();
+            }
+        });
+
 
         Button doneButton = (Button) findViewById(R.id.editHabitDone);
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -212,6 +231,23 @@ public class EditHabitActivity extends AppCompatActivity {
 
         });
 
+    }
+
+    private void setDateTimeField() {
+        Calendar newCalendar = dateSelected;
+        final String pattern1 = "dd-MM-yyyy";
+        final DateFormat formatter = new SimpleDateFormat(pattern1);
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                dateSelected.set(year, monthOfYear, dayOfMonth, 0, 0);
+                date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
+            }
+
+        },
+                newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+        date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
+        datePickerDialog.show();
     }
 
     public void editHabitDone(){
