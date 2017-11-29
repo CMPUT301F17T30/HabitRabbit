@@ -191,7 +191,7 @@ public class ElasticSearchController {
 
             String query = "{\n" +
                     "    \"query\" : {\n" +
-                    "        \"term\" : { \"user_id\" : \""+user_id[0]+"\" }\n" +
+                    "        \"term\" : { \"userID\" : \""+user_id[0]+"\" }\n" +
                     "    }\n" +
                     "}";
 
@@ -201,12 +201,11 @@ public class ElasticSearchController {
                     .addType("Habit")
                     .build();
             try {
-                // TODO get the results of the query
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     List<Habit> foundHabits = result.getSourceAsObjectList(Habit.class);
                     habits.addAll(foundHabits);
-                    habitController.addAllHabits(habits);
+                    habitList.addAll(habits);
                 }
                 else{
                     Log.e("Error", "The seach query failed");
@@ -220,6 +219,15 @@ public class ElasticSearchController {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            isDone();
+        }
+
+        protected boolean isDone(){
+            return true;
+        }
     }
 
 

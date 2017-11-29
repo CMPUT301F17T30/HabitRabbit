@@ -36,6 +36,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 /**
  * The main activity of the app. Displays a list of habits.
  *
@@ -60,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
+    private ArrayList<Habit> adapterList;
     SharedPreferences sharedPreferences;
 
     @Override
@@ -76,6 +79,8 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             userController.setUser(sharedPreferences.getString("username",null));
+            habitController.clearHabits();
+            habitController.getHabits();
         }
         /*
         if (userController.getUsername() == null){
@@ -84,11 +89,17 @@ public class MainActivity extends AppCompatActivity {
         }
         */
 
+        adapterList = new ArrayList<Habit>();
+
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new HabitLayoutAdapter(habitList.getList(), this);
+        adapterList.clear();
+        adapterList.addAll(habitList.getList());
+        adapter = new HabitLayoutAdapter(adapterList, this);
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
+
 
 
 
@@ -119,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+
     }
 
     @Override
@@ -130,7 +142,9 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new HabitLayoutAdapter(habitList.getList(), this);
+        adapterList.clear();
+        adapterList.addAll(habitList.getList());
+        adapter = new HabitLayoutAdapter(adapterList, this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
@@ -142,21 +156,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume()
+    {
+        super.onResume();
+        adapterList.clear();
+        adapterList.addAll(habitList.getList());
+        adapter.notifyDataSetChanged();
+    }
+
+  /*  @Override
+      protected void onDestroy(){
+        super.onDestroy();
+        habitController.saveAllHabits();
+    }
+*/
+    @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
                 habitController.saveAddHabit();
+                adapterList.clear();
+                adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
             }
         }
         if (requestCode == VIEW_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
                 habitController.saveEditHabit();
+                adapterList.clear();
+                adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
             }
         }
 
     }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {

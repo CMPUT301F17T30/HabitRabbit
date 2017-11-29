@@ -28,6 +28,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 public class LoginActivity extends AppCompatActivity {
@@ -61,8 +62,10 @@ public class LoginActivity extends AppCompatActivity {
 
             else {
                  //Intent returnIntent = getIntent();
-                 userController.setUser(name);
-                 //setResult(RESULT_OK, returnIntent);
+                userController.setUser(name);
+                habitController.clearHabits();
+                habitController.getHabits();
+                //setResult(RESULT_OK, returnIntent);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("logged in", Boolean.TRUE);
                 editor.putString("username", name);

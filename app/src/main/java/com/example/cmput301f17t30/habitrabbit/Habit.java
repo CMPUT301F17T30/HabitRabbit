@@ -49,6 +49,8 @@ public class Habit {
     private Date lastCompleted;
     private Date lastCalculated;
 
+    private String userID;
+
 
     @JestId
     private String id;
@@ -335,6 +337,8 @@ public class Habit {
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 
+        lastCalculated = new Date();
+
         Calendar newCal = Calendar.getInstance();
         newCal.setTime(new Date());
 
@@ -389,8 +393,13 @@ public class Habit {
         this.id = id;
     }
 
+    public String getUserID() {
+        return userID;
+    }
 
-
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
 
 }
