@@ -24,6 +24,8 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
 
     private GoogleMap mMap;
     private Map<Marker, Integer> importmap = new HashMap<Marker, Integer>();
+    private Marker select;
+    private Integer index;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +40,13 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
     }
 
     @Override
-    protected void onResume(){
-        super.onResume();
-        drawMarker(mMap);
+    protected void onRestart(){
+        super.onRestart();
+        Double Lat = eventController.getLatitude(index);
+        Double Long = eventController.getLogitude(index);
+        LatLng pos = new LatLng(Lat, Long);
+        select.setPosition(pos);
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
 
     }
 
@@ -60,11 +66,11 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                select = marker;
                 Intent view = new Intent(EventMapsActivity.this, ViewEventDetailActivity.class);
-                Integer index = importmap.get(marker);
+                index = importmap.get(marker);
                 view.putExtra("pos", index);
                 startActivity(view);
-
                 return false;
             }
         });
