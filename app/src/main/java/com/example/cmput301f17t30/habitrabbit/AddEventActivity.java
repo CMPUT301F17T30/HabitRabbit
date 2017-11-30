@@ -259,20 +259,6 @@ public class AddEventActivity extends AppCompatActivity {
         });
     }
 
-    public void addEventDone(){
-        try{
-
-
-            Intent returnToMain = new Intent();
-            setResult(RESULT_OK, returnToMain);
-
-            finish();
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 
     /**
