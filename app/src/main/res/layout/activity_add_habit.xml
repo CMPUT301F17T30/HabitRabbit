@@ -189,6 +189,6 @@
         android:layout_marginTop="8dp"
         app:layout_constraintStart_toEndOf="@+id/addHabitStartDate"
         app:layout_constraintTop_toBottomOf="@+id/addHabitReason"
-        app:srcCompat="@drawable/calendar" />
+        app:srcCompat="@drawable/calendar" android:contentDescription="@string/calnedar_button_descript" />
 
 </android.support.constraint.ConstraintLayout>
