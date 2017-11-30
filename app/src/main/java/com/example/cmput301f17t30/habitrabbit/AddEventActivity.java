@@ -322,6 +322,13 @@ public class AddEventActivity extends AppCompatActivity {
 
         },
                 newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        //add restriction for date
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -7);
+        Date result = cal.getTime();
+        datePickerDialog.getDatePicker().setMinDate(result.getTime());
+
         date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
         datePickerDialog.show();
     }
