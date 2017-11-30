@@ -180,7 +180,10 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.logout_button) {
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
-            getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
+            SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = mySPrefs.edit();
+            editor.remove("username").apply();
+            //getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
             startActivity(logout);
         }
 

@@ -21,8 +21,10 @@ package com.example.cmput301f17t30.habitrabbit;
 
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -143,7 +145,9 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
         if (id == R.id.logout_button) {
             Intent logout = new Intent(HabitHistoryActivity.this, LoginActivity.class);
-            getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
+            SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = mySPrefs.edit();
+            editor.remove("username").apply();
             startActivity(logout);
         }
         return super.onOptionsItemSelected(item);
