@@ -18,7 +18,9 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.content.Context;
 import android.graphics.Bitmap;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -38,8 +40,10 @@ public class HabitEventController {
 
     private HabitEvent habitEvent;
     private int position;
+    private static int flag;
 
     public HabitEventController(){
+        flag = 0;
     }
 
     public void addEvent(Habit habit){
@@ -102,8 +106,8 @@ public class HabitEventController {
         return habitEvent.getLatitude();
     }
 
-    public void setDate(){
-        habitEvent.setDate(new Date());
+    public void setDate(Date date){
+        habitEvent.setDate(date);
     }
 
     public void saveAddEvent(){
@@ -115,6 +119,16 @@ public class HabitEventController {
     public void deleteEvent(int index){
         eventList.deleteEvent(index);
         habitEvent.getHabitType().decrementTimesCompleted();
+        flag = 1;
+    }
+
+    public void resetDelete(){
+        flag = 0;
+    }
+
+    public int isDelete(){
+
+        return flag;
     }
 
     public void saveEditEvent(int index){

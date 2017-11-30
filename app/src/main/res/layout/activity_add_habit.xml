@@ -181,4 +181,14 @@
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addHabitReason" />
 
+    <ImageButton
+        android:id="@+id/datePickerButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toEndOf="@+id/addHabitStartDate"
+        app:layout_constraintTop_toBottomOf="@+id/addHabitReason"
+        app:srcCompat="@drawable/calendar" />
+
 </android.support.constraint.ConstraintLayout>

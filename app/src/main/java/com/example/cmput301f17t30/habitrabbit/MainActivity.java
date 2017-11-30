@@ -20,7 +20,12 @@ package com.example.cmput301f17t30.habitrabbit;
 
 
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -30,10 +35,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-
-import static java.lang.Boolean.FALSE;
 
 /**
  * The main activity of the app. Displays a list of habits.
@@ -48,30 +49,40 @@ public class MainActivity extends AppCompatActivity {
 
     public static final HabitList habitList = new HabitList();
     public static final HabitController habitController = new HabitController();
+    public static final UserController userController = new UserController();
+    public static final AchievementController achievementController = new AchievementController();
+
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
     public static int VIEW_HABIT_REQUEST = 3;
-    private static int LOGOUT_REQUEST = 4;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
-    public User user;
-
-    Habit habit1;
-    Habit habit2;
-
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        if (this.user == null){
+        achievementController.setOpenAppAchievement();
+
+        if (sharedPreferences.getString("username",null) == null){
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
-            startActivityForResult(logout, LOGOUT_REQUEST);
+            startActivity(logout);
         }
+        else{
+            userController.setUser(sharedPreferences.getString("username",null));
+        }
+        /*
+        if (userController.getUsername() == null){
+            Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(logout);
+        }
+        */
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -94,8 +105,8 @@ public class MainActivity extends AppCompatActivity {
         habitHistoryButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent counterPage = new Intent(MainActivity.this, HabitHistoryActivity.class);
-                startActivityForResult(counterPage, HABIT_HISTORY_REQUEST);
+                Intent habitHistoryIntent = new Intent(MainActivity.this, HabitHistoryActivity.class);
+                startActivityForResult(habitHistoryIntent, HABIT_HISTORY_REQUEST);
             }
         });
 
@@ -113,6 +124,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
+
+        invalidateOptionsMenu();
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
@@ -143,12 +156,15 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (requestCode == LOGOUT_REQUEST){
-            if (resultCode == RESULT_OK){
-                String username = data.getStringExtra("name");
-                this.user = new User(username);
-            }
-        }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        String username = sharedPreferences.getString("username",null);
+
+        menu.findItem(R.id.user_profile_button).setTitle(username);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -163,14 +179,28 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.logout_button) {
-            logoutCurrentUser();
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
-            startActivityForResult(logout, LOGOUT_REQUEST);
+            getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
+            startActivity(logout);
+        }
+
+        if (id == R.id.user_profile_button) {
+            Intent profile = new Intent(MainActivity.this, UserProfileActivity.class);
+            startActivity(profile);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void logoutCurrentUser(){
-        this.user = null;
+    public void initializeAchievements(){
+        Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
+        Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","Busy Beaver");
+        Achievement firstEventAchievement = new Achievement(1,"complete your first habit","Good Start");
+        Achievement openAppAchievement = new Achievement(1,"you opened the app","Too Easy");
+        Bitmap openAppImage;
+        openAppImage = BitmapFactory.decodeResource(getResources(), R.drawable.gradea);
+        openAppAchievement.setBitmap(openAppImage);
+        Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
     }
+
+
 }

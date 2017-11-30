@@ -36,6 +36,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 //import com.example.cmput301f17t30.habitrabbit.MainActivity.user;
 
 /**
@@ -50,7 +51,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private LinearLayoutManager habitEventlinearLayoutManager;
     private HabitHistoryLayoutAdapter habitEventadapter;
 
-    private ArrayList<HabitEvent> habitHistoryList = new ArrayList<>();
     public static final HabitEventController habitEventController = new HabitEventController();
 
     private int ADD_HABIT_EVENT_REQUEST = 0;
@@ -69,9 +69,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
         habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
-
-        Bitmap defaultImage = BitmapFactory.decodeResource(this.getResources(),
-                R.drawable.greyrabbit);
 
 
         Button returnToMain = (Button) findViewById(R.id.habitHistoryFinish);
@@ -100,7 +97,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         });
 
-
     }
 
     protected void onStart(){
@@ -123,7 +119,15 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
             }
         }
+    }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        String username = userController.getUsername();
+
+        menu.findItem(R.id.user_profile_button).setTitle(username);
+        return super.onPrepareOptionsMenu(menu);
     }
 
     @Override
@@ -139,7 +143,8 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
         if (id == R.id.logout_button) {
             Intent logout = new Intent(HabitHistoryActivity.this, LoginActivity.class);
-            startActivityForResult(logout, LOGOUT_REQUEST);
+            getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
+            startActivity(logout);
         }
         return super.onOptionsItemSelected(item);
     }

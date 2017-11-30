@@ -127,15 +127,10 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
             @Override
             public void onClick(View view) {
                 Habit habit = habitList.get(position);
+                Intent newEvent = new Intent(mainContext, AddEventActivity.class);
+                newEvent.putExtra("pos", position);
+                mainContext.startActivity(newEvent);
 
-                if (habit.isDueToday() && isSameDay(habit)) {
-                    Toast.makeText(mainContext, "That habit has already been completed today", Toast.LENGTH_SHORT).show();
-                }
-                else {
-                    Intent newEvent = new Intent(mainContext, AddEventActivity.class);
-                    newEvent.putExtra("pos", position);
-                    mainContext.startActivity(newEvent);
-                }
             }
         });
 

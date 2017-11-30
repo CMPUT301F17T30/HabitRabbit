@@ -33,6 +33,8 @@ import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.habitEventController;
@@ -52,9 +54,17 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
     public HabitHistoryLayoutAdapter(ArrayList<HabitEvent> habitHistoryList, Context context) {
         this.habitHistoryList = habitHistoryList;
+        Collections.sort(habitHistoryList,new HabitHistorySorter());
         this.historyContext = context;
 
     }
+
+    public class HabitHistorySorter implements Comparator<HabitEvent>{
+        public int compare(HabitEvent a, HabitEvent b){
+            return b.getDate().compareTo(a.getDate());
+        }
+    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView eventLocation;

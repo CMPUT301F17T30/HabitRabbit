@@ -19,6 +19,8 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -26,15 +28,21 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
+
 public class LoginActivity extends AppCompatActivity {
+
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         super.onCreate(savedInstanceState);
+        userController.clearUser();
         setContentView(R.layout.activity_login);
-
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginListener);
+
     }
 
     private View.OnClickListener loginListener = new View.OnClickListener() {
@@ -52,10 +60,17 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             else {
-                 Intent returnIntent = getIntent();
-                 returnIntent.putExtra("name", name);
-                 setResult(RESULT_OK, returnIntent);
-                 finish();
+                 //Intent returnIntent = getIntent();
+                 userController.setUser(name);
+                 //setResult(RESULT_OK, returnIntent);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putBoolean("logged in", Boolean.TRUE);
+                editor.putString("username", name);
+                editor.apply();
+
+                Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
+                startActivity(mainActivityIntent);
+                 //finish();
              }
 
 

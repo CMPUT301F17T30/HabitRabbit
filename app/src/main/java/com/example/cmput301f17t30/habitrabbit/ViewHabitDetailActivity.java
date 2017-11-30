@@ -20,9 +20,11 @@ package com.example.cmput301f17t30.habitrabbit;
 
 
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -131,13 +133,34 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
         deleteHabit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                habitController.deleteHabit();
-                finish();
+                AlertDialog.Builder alert = new AlertDialog.Builder(ViewHabitDetailActivity.this);
+                alert.setTitle("Delete");
+                alert.setMessage("Deleting this habit will delete all associated events. Do you wish to delete?");
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        //delete habit here
+                        habitController.deleteHabit();
+
+                        dialog.dismiss();
+                        finish();
+                    }
+                });
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                alert.show();
             }
         });
 
-
     }
+
+
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){

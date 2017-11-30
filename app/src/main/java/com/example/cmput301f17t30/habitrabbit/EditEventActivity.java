@@ -248,6 +248,10 @@ public class EditEventActivity extends AppCompatActivity {
                 }
 
                 else {
+                    if (locationInput.getText().toString().length() == 0){
+                        eventController.setLocationName("");
+                        eventController.setCoordinate(0, 0);
+                    }
                     eventController.setComment(theComment);
                     eventController.saveEditEvent(index);
                     Intent returnToHistory = new Intent();
