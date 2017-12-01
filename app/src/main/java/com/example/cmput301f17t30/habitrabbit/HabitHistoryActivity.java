@@ -53,8 +53,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private LinearLayoutManager habitEventlinearLayoutManager;
     private HabitHistoryLayoutAdapter habitEventadapter;
 
-    public static final HabitEventController habitEventController = new HabitEventController();
-
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
     private int LOGOUT_REQUEST = 2;
