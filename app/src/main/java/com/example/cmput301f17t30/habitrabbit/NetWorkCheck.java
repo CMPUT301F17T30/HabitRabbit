@@ -45,7 +45,7 @@ public class NetWorkCheck {
      * Checks if internet access is available. Do not call from main thread.
      * @return whether internet access is available
      */
-        public boolean isOnline() {
+        public static boolean isOnline() {
             try {
                 int timeoutMs = 1500;
                 Socket sock = new Socket();
