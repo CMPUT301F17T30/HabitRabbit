@@ -177,9 +177,10 @@
         android:id="@+id/datePickerButton"
         android:layout_width="30dp"
         android:layout_height="30dp"
-        android:layout_marginBottom="28dp"
-        app:layout_constraintBottom_toTopOf="@+id/search_location"
-        app:layout_constraintStart_toEndOf="@+id/setEventDate"
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/editHabitDaySelectTextView"
+        app:layout_constraintStart_toEndOf="@+id/editHabitStartDate"
         app:srcCompat="@drawable/calendar" />
 
 

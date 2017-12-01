@@ -259,6 +259,9 @@ public class AddEventActivity extends AppCompatActivity {
                     setResult(RESULT_OK, returnToMain);
                     finish();
                 }
+                else{
+                    date.setError("Cannot add more than one event in one day");
+                }
 
             }
 
@@ -319,9 +322,11 @@ public class AddEventActivity extends AppCompatActivity {
 
         //add restriction for date
         Calendar cal = Calendar.getInstance();
+        Date today = cal.getTime();
         cal.add(Calendar.DAY_OF_MONTH, -7);
         Date result = cal.getTime();
         datePickerDialog.getDatePicker().setMinDate(result.getTime());
+        datePickerDialog.getDatePicker().setMaxDate(today.getTime());
 
         date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
         datePickerDialog.show();
@@ -340,7 +345,6 @@ public class AddEventActivity extends AppCompatActivity {
             Date getDate = eventController.getDate(i);
             String title = eventController.getType(i).getTitle();
             if (title == habit.getTitle() && getDate.equals(edate)){
-                date.setError("Cannot add more than one event in one day");
                 eventController.setEvent(event);
                 return FALSE;
             }

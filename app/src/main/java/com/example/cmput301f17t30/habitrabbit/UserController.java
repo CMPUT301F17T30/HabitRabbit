@@ -18,6 +18,8 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import java.util.ArrayList;
+
 /**
  * Controller to deal with adding new users,
  * and logging out and in
@@ -47,6 +49,17 @@ public class UserController {
             return null;
         }
     }
+
+    public void addFriend(String friend){
+        ArrayList<String> friends = user.getFriends();
+        friends.add(friend);
+        user.setFriends(friends);
+    }
+
+    public ArrayList<String> getFriends(){
+        return user.getFriends();
+    }
+
 
 
 
