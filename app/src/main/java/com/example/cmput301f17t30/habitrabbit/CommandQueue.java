@@ -57,7 +57,7 @@ public class CommandQueue {
     }
 
     public void executeHead(){
-        if (NetWorkCheck.isOnline()) {
+        if (NetWorkCheck.isOnline() && (commandQueue.peek() != null)){
             commandQueue.poll().execute();
         }
     }

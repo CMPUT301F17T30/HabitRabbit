@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         commandQueue.runCommands();
         achievementController.setOpenAppAchievement();
+        achievementController.loadAchievementsStatus();
 
         if (sharedPreferences.getString("username",null) == null){
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
@@ -197,14 +198,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void initializeAchievements(){
+        /*
         Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
         Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","Busy Beaver");
         Achievement firstEventAchievement = new Achievement(1,"complete your first habit","Good Start");
         Achievement openAppAchievement = new Achievement(1,"you opened the app","Too Easy");
-        Bitmap openAppImage;
-        openAppImage = BitmapFactory.decodeResource(getResources(), R.drawable.gradea);
-        openAppAchievement.setBitmap(openAppImage);
         Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
+        achievementController.addAchievement(weekendWarriorAchievement);
+        achievementController.addAchievement(busyAchievement);
+        achievementController.addAchievement(firstEventAchievement);
+        achievementController.addAchievement(openAppAchievement);
+        achievementController.addAchievement(newYearsAchievement);
+         */
+
+
     }
 
 
