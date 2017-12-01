@@ -198,7 +198,7 @@ public class Habit {
     public double getPercentCompletion(){
 
         if ((timesCompleted+timesFailed) == 0)
-            return 0;
+            return -1;
         
         else
             return ((double)timesCompleted/(timesFailed+timesCompleted));
