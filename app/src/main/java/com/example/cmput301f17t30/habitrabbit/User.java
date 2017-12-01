@@ -18,12 +18,21 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.graphics.Bitmap;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Class representing a user of the app.
  */
 
 public class User {
     private  String userId;
+    private ArrayList<User> friendsList;
+    private Date joinDate;
+    private Bitmap profilePic;
+    private ArrayList<Integer> achievementProgress;
 
     /**
      * @param userId A unique identifier for the user
@@ -44,5 +53,41 @@ public class User {
      */
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public ArrayList<User> getFriendsList() {
+        return friendsList;
+    }
+
+    public void setFriendsList(ArrayList<User> friendsList) {
+        this.friendsList = friendsList;
+    }
+
+    public void addFriend(User friend){
+        this.friendsList.add(friend);
+    }
+
+    public Date getJoinDate() {
+        return joinDate;
+    }
+
+    public void setJoinDate(Date joinDate) {
+        this.joinDate = joinDate;
+    }
+
+    public Bitmap getProfilePic() {
+        return profilePic;
+    }
+
+    public void setProfilePic(Bitmap profilePic) {
+        this.profilePic = profilePic;
+    }
+
+    public ArrayList<Integer> getAchievementProgress() {
+        return achievementProgress;
+    }
+
+    public void setAchievementProgress(ArrayList<Integer> achievementProgress) {
+        this.achievementProgress = achievementProgress;
     }
 }
