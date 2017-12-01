@@ -205,7 +205,7 @@ public class EditHabitActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //minimum date
-                Date earliestEventDate = new Date(0L);
+                Date earliestEventDate = eventList.getEvent(0).getDate();
                 Date newDate = new Date();
                 try {
                     newDate = format.parse(date.getText().toString());
