@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public static final HabitController habitController = new HabitController();
     public static final UserController userController = new UserController();
     public static final AchievementController achievementController = new AchievementController();
+    public static final CommandQueue commandQueue = new CommandQueue();
 
 
     private int ADD_HABIT_REQUEST = 0;
@@ -68,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        commandQueue.runCommands();
         achievementController.setOpenAppAchievement();
 
         if (sharedPreferences.getString("username",null) == null){
