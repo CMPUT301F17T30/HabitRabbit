@@ -58,13 +58,13 @@ public class LoginActivity extends AppCompatActivity {
 
             if (name.trim().length() == 0) {
                 //Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
-                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.enter_valid_username, 15);
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.enter_valid_username, Snackbar.LENGTH_LONG);
                 mySnackbar.show();
             }
 
             else if (name.trim().length() > 20) {
                 //Toast.makeText(LoginActivity.this, "Please enter a name of 20 characters or less", Toast.LENGTH_SHORT).show();
-                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.too_long_username, 15);
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.too_long_username, Snackbar.LENGTH_LONG);
                 mySnackbar.show();
             }
 
