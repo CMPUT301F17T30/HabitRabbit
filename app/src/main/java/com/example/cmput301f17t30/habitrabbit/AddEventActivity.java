@@ -65,7 +65,7 @@ public class AddEventActivity extends AppCompatActivity {
     private Intent intent;
     private EditText date;
     private DatePickerDialog datePickerDialog;
-    priavte Date eventDate;
+    private Date eventDate;
 
     // use intent to pass habit for actual code
     private Habit habit;
