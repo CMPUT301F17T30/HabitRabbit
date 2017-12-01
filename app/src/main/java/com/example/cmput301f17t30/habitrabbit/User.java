@@ -55,42 +55,73 @@ public class User {
         this.userId = userId;
     }
 
+    /**
+     * @return the list of friends that the user is following
+     */
     public ArrayList<User> getFriendsList() {
         return friendsList;
     }
 
+    /**
+     * @param friendsList the list of friends that the user is following
+     */
     public void setFriendsList(ArrayList<User> friendsList) {
         this.friendsList = friendsList;
     }
 
+    /**
+     * @param friend a new friend that the user is adding to his follow list
+     */
     public void addFriend(User friend){
         this.friendsList.add(friend);
     }
 
+    /**
+     * @return the date that the user first used the app
+     */
     public Date getJoinDate() {
         return joinDate;
     }
 
+    /**
+     * @param joinDate the date that the user first used the app
+     */
     public void setJoinDate(Date joinDate) {
         this.joinDate = joinDate;
     }
 
+    /**
+     * @return the profile picture added by the the user
+     */
     public Bitmap getProfilePic() {
         return profilePic;
     }
 
+    /**
+     * @param profilePic a profile pic added by the user
+     */
     public void setProfilePic(Bitmap profilePic) {
         this.profilePic = profilePic;
     }
 
+    /**
+     * @return the numerical progress for each achievement
+     */
     public ArrayList<Integer> getAchievementProgress() {
         return achievementProgress;
     }
 
+    /**
+     * @param achievementProgress the numerical progress for each achievement
+     */
     public void setAchievementProgress(ArrayList<Integer> achievementProgress) {
         this.achievementProgress = achievementProgress;
     }
 
+    /**
+     * @param index the index of the achievement to update
+     * @param newProgress the new progress for the specified achievment
+     */
     public void updateAchievementProgress(Integer index, Integer newProgress){
         this.achievementProgress.set(index,newProgress);
     }
