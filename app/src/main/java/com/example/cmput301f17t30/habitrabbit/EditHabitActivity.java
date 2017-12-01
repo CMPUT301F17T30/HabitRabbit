@@ -33,11 +33,13 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
@@ -202,6 +204,20 @@ public class EditHabitActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View view){
+                Date earliestEventDate = new Date();
+                Date newDate = new Date();
+                try {
+                    newDate = format.parse(date.getText().toString());
+                }
+                catch (ParseException e){
+                    e.printStackTrace();
+                }
+
+                for (HabitEvent event :eventList.getList()){
+                    if (event.getDate().before(earliestEventDate)){
+                        earliestEventDate = event.getDate();
+                    }
+                }
 
                 try {
                     Date startDate = format.parse(date.getText().toString());
@@ -222,6 +238,10 @@ public class EditHabitActivity extends AppCompatActivity {
                 }
                 else if (date.getText().toString().isEmpty()){
                     date.setError("Valid date required");
+                }
+
+                else if (newDate.before(earliestEventDate)){
+                    date.setError("Date cannot be before completion date of any event");
                 }
 
                 else {
