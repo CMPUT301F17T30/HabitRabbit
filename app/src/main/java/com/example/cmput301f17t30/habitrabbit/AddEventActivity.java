@@ -63,6 +63,7 @@ public class AddEventActivity extends AppCompatActivity {
     private Intent intent;
     private EditText date;
     private DatePickerDialog datePickerDialog;
+    priavte Date eventDate;
 
     // use intent to pass habit for actual code
     private Habit habit;
@@ -217,7 +218,7 @@ public class AddEventActivity extends AppCompatActivity {
         /*
           set up the habit event object and save
          */
-        saveButton.setOnClickListener(new View.OnClickListener() {
+       saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             String theComment = comment.getText().toString();
@@ -232,25 +233,25 @@ public class AddEventActivity extends AppCompatActivity {
                     eventController.setComment(theComment);
                     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                     format.setLenient(FALSE);
-                    Date eventdate = format.parse(date.getText().toString());
-                    eventController.setDate(eventdate);
+                    eventDate = format.parse(date.getText().toString());
                     if (locationInput.getText().toString().length() == 0){
                         eventController.setLocationName("");
                         eventController.setCoordinate(0, 0);
                     }
-                    eventController.saveAddEvent();
                     //addEventDone();
-
-                    Intent returnToMain = new Intent();
-                    setResult(RESULT_OK, returnToMain);
-
-                    finish();
 
                 } catch (Exception e) {
                     Toast.makeText(getApplicationContext(), "Date cannot be set.",
                             Toast.LENGTH_LONG).show();
                 }
 
+                if (checkDuplicate(eventDate)) {
+                    eventController.setDate(eventDate);
+                    eventController.saveAddEvent();
+                    Intent returnToMain = new Intent();
+                    setResult(RESULT_OK, returnToMain);
+                    finish();
+                }
 
             }
 
@@ -317,6 +318,34 @@ public class AddEventActivity extends AppCompatActivity {
 
         date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
         datePickerDialog.show();
+    }
+    
+     private boolean checkDuplicate(Date edate) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -7);
+        Date result = cal.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        df.format(result);
+        HabitEvent event  = eventController.returnEvent();
+
+        for (int i = 0; i < eventList.getSize(); i++){
+            Date getDate = eventController.getDate(i);
+            String title = eventController.getType(i).getTitle();
+            if (title == habit.getTitle() && getDate.equals(edate)){
+                date.setError("Cannot add more than one event in one day");
+                eventController.setEvent(event);
+                return FALSE;
+            }
+            else if (getDate.before(result)){
+                eventController.setEvent(event);
+                return TRUE;
+            }
+
+
+        }
+        eventController.setEvent(event);
+        return TRUE;
     }
 
 
