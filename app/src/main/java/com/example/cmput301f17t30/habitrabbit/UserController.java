@@ -18,6 +18,11 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.graphics.Bitmap;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 /**
  * Controller to deal with adding new users,
  * and logging out and in
@@ -46,6 +51,30 @@ public class UserController {
         catch (NullPointerException exception) {
             return null;
         }
+    }
+
+    public void setFriends(ArrayList<User> friends){
+        user.setFriendsList(friends);
+    }
+
+    public void addFriend(User friend){
+        user.addFriend(friend);
+    }
+
+    public Date getJoinDate(){
+        return user.getJoinDate();
+    }
+
+    public void setJoinDate(Date date){
+        user.setJoinDate(date);
+    }
+
+    public void setProfilePicture(Bitmap newPic){
+        user.setProfilePic(newPic);
+    }
+
+    public Bitmap getProfilePic(){
+        return user.getProfilePic();
     }
 
 
