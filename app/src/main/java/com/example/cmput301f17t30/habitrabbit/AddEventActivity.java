@@ -43,12 +43,14 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static java.lang.Boolean.FALSE;
@@ -238,9 +240,13 @@ public class AddEventActivity extends AppCompatActivity {
                         eventController.setLocationName("");
                         eventController.setCoordinate(0, 0);
                     }
+                    achievementController.updateNewYearsResolution();
+                    achievementController.updateBusyBeaver();
+                    achievementController.updateWeekendWarrior();
+                    achievementController.updateFirstEvent();
                     //addEventDone();
 
-                } catch (Exception e) {
+                } catch (ParseException exception) {
                     Toast.makeText(getApplicationContext(), "Date cannot be set.",
                             Toast.LENGTH_LONG).show();
                 }
