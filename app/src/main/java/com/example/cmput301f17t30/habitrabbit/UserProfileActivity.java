@@ -126,6 +126,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
+        /*
         Spinner languageSpinner = (Spinner) findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.languages_array, android.R.layout.simple_spinner_item);
@@ -167,6 +168,7 @@ public class UserProfileActivity extends AppCompatActivity {
             }
 
         });
+        */
     }
 
     @Override
