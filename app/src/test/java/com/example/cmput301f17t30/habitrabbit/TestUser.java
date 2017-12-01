@@ -21,6 +21,9 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Date;
+
 import static org.junit.Assert.*;
 
 /**
@@ -44,4 +47,71 @@ public class TestUser  {
         user.setUserId("timmy");
         assertEquals("timmy",user.getUserId());
     }
+    @Test
+    public void testGetJoinDate(){
+        User user = new User("bob");
+        Date today = new Date();
+        user.setJoinDate(today);
+        assertEquals(today,user.getJoinDate());
+    }
+    @Test
+    public void testSetJoinDate(){
+        User user = new User("bob");
+        Date today = new Date();
+        user.setJoinDate(today);
+        assertEquals(today,user.getJoinDate());
+    }
+    @Test
+    public void testGetFriendsList(){
+        User user = new User("bob");
+        ArrayList<User> friends = new ArrayList<>();
+        User user1 = new User("Timmy");
+        User user2 = new User("Biff");
+        User user3 = new User("ZugZug");
+        friends.add(user1);
+        friends.add(user2);
+        friends.add(user3);
+        user.setFriendsList(friends);
+        assertEquals(friends,user.getFriendsList());
+    }
+    @Test
+    public void testAddFriend(){
+        User user = new User("bob");
+        ArrayList<User> friends = new ArrayList<>();
+        User user1 = new User("Timmy");
+        User user2 = new User("Biff");
+        User user3 = new User("ZugZug");
+        friends.add(user1);
+        friends.add(user2);
+        friends.add(user3);
+        user.setFriendsList(friends);
+        User newFriend = new User("Nebuchadnezzar");
+        user.addFriend(newFriend);
+        assertEquals(newFriend,user.getFriendsList().get(3));
+
+    }
+    @Test
+    public void testGetAchievementProgress(){
+        User user = new User("Nabonidus");
+        ArrayList<Integer> progress = new ArrayList<>();
+        progress.add(1);
+        progress.add(3);
+        user.setAchievementProgress(progress);
+        assertEquals(progress,user.getAchievementProgress());
+
+    }
+    @Test
+    public void testUpdateAchievementProgress(){
+        User user = new User("Hammurabi");
+        ArrayList<Integer> progress = new ArrayList<>();
+        progress.add(1);
+        progress.add(3);
+        progress.add(7);
+        user.setAchievementProgress(progress);
+        user.updateAchievementProgress(1,5);
+        assertEquals((Integer)5,user.getAchievementProgress().get(1));
+
+    }
+
+
 }

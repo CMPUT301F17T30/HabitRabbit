@@ -90,4 +90,8 @@ public class User {
     public void setAchievementProgress(ArrayList<Integer> achievementProgress) {
         this.achievementProgress = achievementProgress;
     }
+
+    public void updateAchievementProgress(Integer index, Integer newProgress){
+        this.achievementProgress.set(index,newProgress);
+    }
 }
