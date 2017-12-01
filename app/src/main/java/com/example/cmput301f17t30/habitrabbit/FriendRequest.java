@@ -25,29 +25,29 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController
  */
 
 public class FriendRequest {
-    private String sender;
-    private String reciever;
+    private User sender;
+    private User reciever;
     private Boolean accepted;
 
-    public FriendRequest(String sender, String reciever){
+    public FriendRequest(User sender, User reciever){
         this.sender = sender;
         this.reciever = reciever;
         this.accepted = null;
     }
 
-    public String getSender() {
+    public User getSender() {
         return sender;
     }
 
-    public void setSender(String sender) {
+    public void setSender(User sender) {
         this.sender = sender;
     }
 
-    public String getReciever() {
+    public User getReciever() {
         return reciever;
     }
 
-    public void setReciever(String reciever) {
+    public void setReciever(User reciever) {
         this.reciever = reciever;
     }
 
@@ -67,7 +67,7 @@ public class FriendRequest {
     public void checkRequestStatus(){
         if (getAccepted() == Boolean.TRUE){
             //reciever has accepted, add the reciever to friends list
-            userController.addFriend(new User(reciever));
+            userController.addFriend(reciever);
         }
         else if (getAccepted() == Boolean.FALSE){
             // user got rejected
