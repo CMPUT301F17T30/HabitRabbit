@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     public static final HabitController habitController = new HabitController();
     public static final UserController userController = new UserController();
     public static final AchievementController achievementController = new AchievementController();
+    public static final FriendController friendController = new FriendController();
     public static final CommandQueue commandQueue = new CommandQueue();
 
 
