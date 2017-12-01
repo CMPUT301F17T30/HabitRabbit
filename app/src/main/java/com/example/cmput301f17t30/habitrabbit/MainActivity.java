@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity {
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
-    public static int VIEW_HABIT_REQUEST = 3;
+    public static int VIEW_HABIT_REQUEST = 2;
+    private int FRIENDS_REQUEST = 3;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -81,20 +82,12 @@ public class MainActivity extends AppCompatActivity {
         else{
             userController.setUser(sharedPreferences.getString("username",null));
         }
-        /*
-        if (userController.getUsername() == null){
-            Intent logout = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(logout);
-        }
-        */
 
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new HabitLayoutAdapter(habitList.getList(), this);
         recyclerView.setAdapter(adapter);
-
-
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
@@ -118,8 +111,9 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 3",
-                        Toast.LENGTH_SHORT).show();
+                Intent friendsIntent = new Intent(MainActivity.this, FriendActivity.class);
+                startActivityForResult(friendsIntent, FRIENDS_REQUEST);
+
             }
         });
 
