@@ -37,7 +37,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 
-import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.habitEventController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static java.lang.Boolean.FALSE;
 
@@ -90,7 +90,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         @Override
         public void onClick(View view) {
             Intent detailEventIntent = new Intent(historyContext, ViewEventDetailActivity.class);
-            habitEventController.editEvent(getPosition());
+            eventController.editEvent(getPosition());
             detailEventIntent.putExtra("pos",getLayoutPosition());
             ((Activity)historyContext).startActivityForResult(detailEventIntent, 7);
         }

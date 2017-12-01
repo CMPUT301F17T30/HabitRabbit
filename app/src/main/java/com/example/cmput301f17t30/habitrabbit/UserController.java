@@ -18,7 +18,13 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+
 import java.util.ArrayList;
+
+import android.graphics.Bitmap;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Controller to deal with adding new users,
@@ -29,18 +35,28 @@ public class UserController {
 
     private User user;
 
-
     public UserController(){
     }
 
+    //TODO fix this method
+    /**
+     *
+     * @param username
+     */
     public void setUser(String username){
         this.user = new User(username);
     }
 
+    /**
+     * removes the current user, used when user logs out
+     */
     public void clearUser(){
         this.user = null;
     }
 
+    /**
+     * @return the user's username if some user is logged in, otherwise null
+     */
     public String getUsername(){
         try {
             return user.getUserId();
@@ -50,16 +66,54 @@ public class UserController {
         }
     }
 
-    public void addFriend(String friend){
-        ArrayList<String> friends = user.getFriends();
-        friends.add(friend);
-        user.setFriends(friends);
-    }
 
     public ArrayList<String> getFriends(){
-        return user.getFriends();
+        return user.getFriendsList();
     }
 
+    /**
+     *
+     * @param friends list of friends that the user is following
+     */
+    public void setFriends(ArrayList<String> friends){
+        user.setFriendsList(friends);
+    }
+
+    /**
+     * @param friend a user that current user wishes to follow
+     */
+    public void addFriend(String friend){
+        user.addFriend(friend);
+    }
+
+    /**
+     * @return the date when this user first opened app
+     */
+    public Date getJoinDate(){
+        return user.getJoinDate();
+    }
+
+    /**
+     *
+     * @param date the date when this user first opened app
+     */
+    public void setJoinDate(Date date){
+        user.setJoinDate(date);
+    }
+
+    /**
+     * @param newPic current user's profile picture
+     */
+    public void setProfilePicture(Bitmap newPic){
+        user.setProfilePic(newPic);
+    }
+
+    /**
+     * @return current user's profile picture
+     */
+    public Bitmap getProfilePic(){
+        return user.getProfilePic();
+    }
 
 
 

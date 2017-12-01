@@ -58,16 +58,30 @@ public class AchievementController {
         this.achievementList.add(achievement);
     }
 
+    /**
+     * get the progress for each achievement
+     */
     public void loadAchievementsStatus(){
-        //get achivement status for each achievement here
-        //call this on user login
+        ArrayList<Achievement> list = this.achievementList;
+        for (Achievement a : list){
+            if (a.getProgress() >= a.getProgressRequired()){
+                a.setCompleted();
+            }
+
+        }
     }
 
+    /**
+     * save the progress for each achievement
+     */
     public void saveAchievementsStatus(){
-        //call this after any achievement is completed
-        //upload status of elasticsearch
+
     }
 
+    /**
+     * updates the progress for the achievement weekendwarrior
+     * and sets completion if needed
+     */
     public void updateWeekendWarrior(){
         Calendar calendar = new GregorianCalendar();
         // if it is a weekend, update the achievement
@@ -81,6 +95,10 @@ public class AchievementController {
 
     }
 
+    /**
+     * updates the progress for the achievement busy beaver and sets
+     * completion if needed
+     */
     public void updateBusyBeaver(){
         Date currentDate = new Date();
         SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
@@ -98,15 +116,26 @@ public class AchievementController {
 
     }
 
+    /**
+     * updates the progress for the achievement good start and sets
+     * completion if needed
+     */
     public void updateFirstEvent()
     {
         firstEventAchievement.setCompleted();
     }
 
+    /**
+     * sets completion of the achievement too easy
+     */
     public void setOpenAppAchievement(){
         openAppAchievement.setCompleted();
     }
 
+    /**
+     *  sets completion for the achievement new years resolution if the condition
+     *  is met
+     */
     public void updateNewYearsResolution(){
         Date date1 = new Date(2011, Calendar.DECEMBER, 31);
         SimpleDateFormat fmt = new SimpleDateFormat("MMdd");

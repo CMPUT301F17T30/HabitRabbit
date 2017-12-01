@@ -79,7 +79,6 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
                 .achievement_row_layout, parent, false);
         return new ViewHolder(inflatedView);
     }
-    @TargetApi(16)
     @Override
     public void onBindViewHolder(AchievementLayoutAdapter.ViewHolder holder, final int position) {
         final Achievement achievement = achievements.get(position);
