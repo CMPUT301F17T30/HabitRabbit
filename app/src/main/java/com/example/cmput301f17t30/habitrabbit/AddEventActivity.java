@@ -318,6 +318,7 @@ public class AddEventActivity extends AppCompatActivity {
                 newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
 
         //add restriction for date
+        Calendar cal = Calendar.getInstance();
         Date today = cal.getTime();
         cal.add(Calendar.DAY_OF_MONTH, -7);
         Date result = cal.getTime();
