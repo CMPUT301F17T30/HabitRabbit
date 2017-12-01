@@ -52,6 +52,7 @@ import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static java.lang.Boolean.FALSE;
 
@@ -345,13 +346,13 @@ public class AddEventActivity extends AppCompatActivity {
             }
             else if (getDate.before(result)){
                 eventController.setEvent(event);
-                return TRUE;
+                return Boolean.TRUE;
             }
 
 
         }
         eventController.setEvent(event);
-        return TRUE;
+        return Boolean.TRUE;
     }
 
 
