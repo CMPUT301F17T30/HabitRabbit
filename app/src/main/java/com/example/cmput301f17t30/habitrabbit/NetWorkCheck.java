@@ -24,8 +24,14 @@ import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
+import java.net.Socket;
+import java.net.SocketAddress;
+
 /**
- * Simple class that checks for internet access
+ * Simple class that can check for netowrk or internet access
  */
 public class NetWorkCheck {
     public boolean isNetWorkAvaliable(Context context){
@@ -34,4 +40,21 @@ public class NetWorkCheck {
         NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
         return activeNetworkInfo != null && activeNetworkInfo.isConnected();
     }
+
+    /**
+     * Checks if internet access is available. Do not call from main thread.
+     * @return whether internet access is available
+     */
+        public boolean isOnline() {
+            try {
+                int timeoutMs = 1500;
+                Socket sock = new Socket();
+                SocketAddress sockaddr = new InetSocketAddress("8.8.8.8", 53);
+
+                sock.connect(sockaddr, timeoutMs);
+                sock.close();
+
+                return true;
+            } catch (IOException e) { return false; }
+        }
 }
