@@ -22,6 +22,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -56,11 +57,15 @@ public class LoginActivity extends AppCompatActivity {
             String name = usernameText.getText().toString();
 
             if (name.trim().length() == 0) {
-                Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.enter_valid_username, 15);
+                mySnackbar.show();
             }
 
             else if (name.trim().length() > 20) {
-                Toast.makeText(LoginActivity.this, "Please enter a name of 20 characters or less", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "Please enter a name of 20 characters or less", Toast.LENGTH_SHORT).show();
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.too_long_username, 15);
+                mySnackbar.show();
             }
 
             else {

@@ -37,6 +37,9 @@
     <string name="nameHint">Name</string>
     <string name="reasonHint">Reason</string>
 
+    <string name="enter_valid_username">Please enter a valid username</string>
+    <string name="too_long_username">Please enter a username of no more than 20 characters</string>
+
     <string name="daySelectPrompt">Please select days this habit is due:</string>
     <string name="startDate">Start Date (DD-MM-YYYY)</string>
     <string name="addHabit">Add</string>
@@ -44,8 +47,8 @@
     <string name="percentComplete">Your percentage completion:</string>
     <string name="timesFailed">Times failed to complete:</string>
     <string name="timesCompleted">Times completed:</string>
-
     <string name="title_activity_event_maps">Map</string>
+
     <string name="title_activity_login">LoginActivity</string>
     <string name="description">description</string>
     <string name="progress">progress</string>
