@@ -162,6 +162,12 @@ public class HabitEventController {
         eventList.setEventList(list);
     }
 
+     public HabitEvent returnEvent(){
+     return habitEvent;
+    }
 
+    public void setEvent(HabitEvent event){
+        this.habitEvent = event;
+    }
 
 }
