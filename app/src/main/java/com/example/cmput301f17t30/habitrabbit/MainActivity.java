@@ -132,7 +132,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HabitLayoutAdapter(habitList.getList(), this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
     }
 
     @Override
@@ -159,9 +158,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-
         String username = sharedPreferences.getString("username",null);
-
         menu.findItem(R.id.user_profile_button).setTitle(username);
         return super.onPrepareOptionsMenu(menu);
     }
@@ -182,7 +179,6 @@ public class MainActivity extends AppCompatActivity {
             SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = mySPrefs.edit();
             editor.remove("username").apply();
-            //getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
             startActivity(logout);
         }
 
@@ -192,23 +188,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void initializeAchievements(){
-        /*
-        Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
-        Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","Busy Beaver");
-        Achievement firstEventAchievement = new Achievement(1,"complete your first habit","Good Start");
-        Achievement openAppAchievement = new Achievement(1,"you opened the app","Too Easy");
-        Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
-        achievementController.addAchievement(weekendWarriorAchievement);
-        achievementController.addAchievement(busyAchievement);
-        achievementController.addAchievement(firstEventAchievement);
-        achievementController.addAchievement(openAppAchievement);
-        achievementController.addAchievement(newYearsAchievement);
-         */
-
-
-    }
-
-
 }
