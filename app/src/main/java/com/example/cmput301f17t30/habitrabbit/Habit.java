@@ -82,6 +82,7 @@ public class Habit {
     public Habit(String title, ArrayList<Boolean> days, Date date) {
         Title = title;
         this.days = days;
+        Reason = "";
         timesCompleted = 0;
         timesFailed = 0;
         startDate = date;

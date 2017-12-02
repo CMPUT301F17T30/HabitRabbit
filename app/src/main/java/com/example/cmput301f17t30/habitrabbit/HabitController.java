@@ -110,21 +110,20 @@ public class HabitController {
         habitList.deleteHabit(position);
     }
 
-    public void getHabits(){
+  /*  public void getHabits(){
         ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
         getHabitsTask.execute(userController.getUsername());
-        getHabitsTask.onPostExecute(null);
     }
-
+*/
     public void clearHabits(){
         habitList.clearAll();
     }
 
     public void saveAllHabits(){
         for (int i = 0; i < habitList.getSize(); i++) {
-            habit = habitList.getHabit(i);
+            Habit newHabit = habitList.getHabit(i);
             ElasticSearchController.EditHabitTask editHabitTask = new ElasticSearchController.EditHabitTask();
-            editHabitTask.execute(habit);
+            editHabitTask.execute(newHabit);
         }
     }
 

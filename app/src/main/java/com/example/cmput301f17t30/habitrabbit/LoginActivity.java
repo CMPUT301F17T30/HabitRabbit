@@ -64,7 +64,6 @@ public class LoginActivity extends AppCompatActivity {
                  //Intent returnIntent = getIntent();
                 userController.setUser(name);
                 habitController.clearHabits();
-                habitController.getHabits();
                 //setResult(RESULT_OK, returnIntent);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putBoolean("logged in", Boolean.TRUE);

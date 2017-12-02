@@ -70,7 +70,8 @@ public class HabitList {
      * @return the habit at the specified position
      */
     public Habit getHabit(int position){
-        return habitList.get(position);
+        Habit habit = habitList.get(position);
+        return habit;
     }
 
     /**

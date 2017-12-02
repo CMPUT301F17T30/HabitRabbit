@@ -20,23 +20,34 @@ package com.example.cmput301f17t30.habitrabbit;
 
 
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import com.searchly.jestdroid.DroidClientConfig;
+import com.searchly.jestdroid.JestClientFactory;
+import com.searchly.jestdroid.JestDroidClient;
+
 import java.util.ArrayList;
+import java.util.List;
+
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
 
 /**
  * The main activity of the app. Displays a list of habits.
@@ -58,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
     public static int VIEW_HABIT_REQUEST = 3;
+    private static JestDroidClient client;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -79,8 +91,6 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             userController.setUser(sharedPreferences.getString("username",null));
-            habitController.clearHabits();
-            habitController.getHabits();
         }
         /*
         if (userController.getUsername() == null){
@@ -89,18 +99,16 @@ public class MainActivity extends AppCompatActivity {
         }
         */
 
-        adapterList = new ArrayList<Habit>();
 
+        adapterList = new ArrayList<Habit>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapterList.clear();
-        adapterList.addAll(habitList.getList());
         adapter = new HabitLayoutAdapter(adapterList, this);
-        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
 
-
+        ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
+        getHabitsTask.execute(userController.getUsername());
 
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
@@ -148,11 +156,29 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
 
+
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        invalidateOptionsMenu();
+
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
+        linearLayoutManager = new LinearLayoutManager(this);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        adapterList.clear();
+        adapterList.addAll(habitList.getList());
+        adapter = new HabitLayoutAdapter(adapterList, this);
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
+        habitController.saveAllHabits();
     }
 
     @Override
@@ -236,5 +262,8 @@ public class MainActivity extends AppCompatActivity {
         Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
     }
 
-
 }
+
+
+
+
