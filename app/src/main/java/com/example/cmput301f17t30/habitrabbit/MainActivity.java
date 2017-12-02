@@ -69,7 +69,8 @@ public class MainActivity extends AppCompatActivity {
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
     public static int VIEW_HABIT_REQUEST = 3;
-    private static JestDroidClient client;
+
+    public static elasticDoneBoolean elasticDone;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -107,6 +108,9 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HabitLayoutAdapter(adapterList, this);
         recyclerView.setAdapter(adapter);
 
+
+
+
         ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
         getHabitsTask.execute(userController.getUsername());
 
@@ -137,6 +141,19 @@ public class MainActivity extends AppCompatActivity {
                         Toast.LENGTH_SHORT).show();
             }
         });
+
+        elasticDone = new elasticDoneBoolean();
+        elasticDone.setListener(new elasticDoneBoolean.ChangeListener() {
+            @Override
+            public void onChange() {
+                adapterList.clear();
+                adapterList.addAll(habitList.getList());
+                adapter.notifyDataSetChanged();
+
+            }
+        });
+
+
 
 
     }
@@ -261,6 +278,7 @@ public class MainActivity extends AppCompatActivity {
         openAppAchievement.setBitmap(openAppImage);
         Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
     }
+
 
 }
 

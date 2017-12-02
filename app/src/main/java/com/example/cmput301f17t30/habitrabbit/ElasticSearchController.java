@@ -37,6 +37,7 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
@@ -229,6 +230,7 @@ public class ElasticSearchController {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            elasticDone.setDone(true);
         }
     }
 
