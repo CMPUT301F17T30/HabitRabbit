@@ -22,8 +22,6 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -35,11 +33,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
-//import com.example.cmput301f17t30.habitrabbit.MainActivity.user;
 
 /**
  * An activity that displays all previously completed habit events.
@@ -55,9 +50,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
-    private int LOGOUT_REQUEST = 2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,7 +61,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
         habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
-
 
         Button returnToMain = (Button) findViewById(R.id.habitHistoryFinish);
         returnToMain.setOnClickListener(new View.OnClickListener() {
@@ -111,7 +102,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
                 habitEventadapter.notifyDataSetChanged();
             }
         }
-
         if (requestCode == EDIT_HABIT_EVENT_REQUEST){
             if (resultCode == RESULT_OK){
                 //habitEventController.saveEditEvent();
