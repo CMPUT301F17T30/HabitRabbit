@@ -42,19 +42,18 @@ import android.widget.Toast;
  * @see com.example.cmput301f17t30.habitrabbit.HabitLayoutAdapter
  */
 public class MainActivity extends AppCompatActivity {
-    
-    // create a global eventlist and eventcontroller
-    public static final HabitEventList eventList = new HabitEventList();
-    public static final HabitEventController eventController = new HabitEventController();
 
     public static final FriendList friendsList = new FriendList();
     public static final HabitList habitList = new HabitList();
+    public static final HabitEventList eventList = new HabitEventList();
+
+    public static final HabitEventController eventController = new HabitEventController();
     public static final HabitController habitController = new HabitController();
     public static final UserController userController = new UserController();
     public static final AchievementController achievementController = new AchievementController();
     public static final FriendController friendController = new FriendController();
-    public static final CommandQueue commandQueue = new CommandQueue();
 
+    public static final CommandQueue commandQueue = new CommandQueue();
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
@@ -64,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private HabitLayoutAdapter adapter;
+
     SharedPreferences sharedPreferences;
 
     @Override
