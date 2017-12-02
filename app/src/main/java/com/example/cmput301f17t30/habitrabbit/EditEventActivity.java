@@ -218,6 +218,7 @@ public class EditEventActivity extends AppCompatActivity {
         gpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                locationNameList.clear();
                 int flag = locationController.getGPS(v.getContext());
                 if (flag == 1) {
                     checkPermission(GPS_REQUEST_CODE);

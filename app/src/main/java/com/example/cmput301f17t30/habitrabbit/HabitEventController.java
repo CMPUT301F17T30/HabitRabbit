@@ -71,6 +71,10 @@ public class HabitEventController {
         habitEvent.setComment(comment);
     }
 
+    public void setUserId(String userId){habitEvent.setUserId(userId);}
+
+    public String getUserId(){return habitEvent.getUserId();}
+
     public Bitmap getImage(int index){
         habitEvent = eventList.getEvent(index);
         return habitEvent.getImage();
