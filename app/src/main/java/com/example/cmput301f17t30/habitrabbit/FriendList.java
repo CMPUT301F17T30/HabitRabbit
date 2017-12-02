@@ -3,7 +3,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import java.util.ArrayList;
 
 /**
- * Created by Irissama on 2017-12-01.
+ * Class used for storing a list of user's friends
  */
 
 public class FriendList {

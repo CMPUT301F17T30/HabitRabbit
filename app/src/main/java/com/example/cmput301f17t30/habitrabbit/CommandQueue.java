@@ -22,7 +22,8 @@ import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
- * Created by Adam on 30-Nov-17.
+ * A first in first out queue that continues trying to push the oldest command to elasticsearch
+ * will check for internet access, and push when it has access
  */
 
 public class CommandQueue {

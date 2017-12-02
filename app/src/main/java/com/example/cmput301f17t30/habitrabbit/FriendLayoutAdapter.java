@@ -32,7 +32,8 @@ import java.util.ArrayList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 
 /**
- * Created by Adam on 01-Dec-17.
+ * Adapter for displaying the latest events complete by a users friend
+ * @See FriendActivity
  */
 
 public class FriendLayoutAdapter extends RecyclerView.Adapter<FriendLayoutAdapter.ViewHolder> {

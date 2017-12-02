@@ -22,7 +22,7 @@ import java.util.ArrayList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 
 /**
- * Created by Adam on 01-Dec-17.
+ * Controller for managing friends and latest friend events
  */
 
 public class FriendController {

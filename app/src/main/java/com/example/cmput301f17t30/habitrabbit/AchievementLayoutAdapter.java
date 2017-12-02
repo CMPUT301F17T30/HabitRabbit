@@ -34,7 +34,8 @@ import java.util.ArrayList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
 
 /**
- * Created by Adam on 26-Nov-17.
+ * Adapter for displaying achievements in user profile
+ * @See UserProfileActivity
  */
 
 public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLayoutAdapter.ViewHolder> {
