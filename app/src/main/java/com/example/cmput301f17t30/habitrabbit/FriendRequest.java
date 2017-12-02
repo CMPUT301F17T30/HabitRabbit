@@ -1,5 +1,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
+import io.searchbox.annotations.JestId;
+
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**
@@ -10,6 +12,9 @@ public class FriendRequest {
     private User sender;
     private User reciever;
     private Boolean accepted;
+
+    @JestId
+    private String id;
 
     public FriendRequest(User sender, User reciever){
         this.sender = sender;

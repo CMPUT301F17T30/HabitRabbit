@@ -24,6 +24,8 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.Date;
 
+import io.searchbox.annotations.JestId;
+
 /**
  * Class representing a user of the app.
  */
@@ -34,6 +36,9 @@ public class User {
     private Date joinDate;
     private Bitmap profilePic;
     private ArrayList<Integer> achievementProgress;
+
+    @JestId
+    private String id;
 
     /**
      * @param userId A unique identifier for the user
@@ -127,4 +132,6 @@ public class User {
     public void updateAchievementProgress(Integer index, Integer newProgress){
         this.achievementProgress.set(index,newProgress);
     }
+
+    public String getId(){return id;}
 }
