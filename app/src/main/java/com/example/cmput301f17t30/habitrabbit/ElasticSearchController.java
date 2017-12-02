@@ -20,6 +20,7 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import com.searchly.jestdroid.JestDroidClient;
 
+import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -132,7 +133,7 @@ public class ElasticSearchController {
     }
 
     public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
-        @Override
+
         protected Void doInBackground(Habit...habits){
             verifySettings();
             for (Habit habit : habits) {
@@ -209,6 +210,12 @@ public class ElasticSearchController {
     }
 
     public static class GetHabitsTask extends AsyncTask<String, Void, Void>{
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
         @Override
         protected Void doInBackground(String...user_id){
             verifySettings();
@@ -217,7 +224,7 @@ public class ElasticSearchController {
 
             String query = "{\n" +
                     "    \"query\" : {\n" +
-                    "        \"term\" : { \"user_id\" : \""+user_id[0]+"\" }\n" +
+                    "        \"term\" : { \"userId\" : \""+user_id[0]+"\" }\n" +
                     "    }\n" +
                     "}";
 
@@ -246,6 +253,9 @@ public class ElasticSearchController {
             return null;
         }
 
+        @Override
+        protected void onPostExecute(Void aVoid) {
+        }
     }
 
     public static class GetFriendList extends AsyncTask<User, Void, Void>{

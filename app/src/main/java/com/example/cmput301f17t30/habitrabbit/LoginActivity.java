@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 public class LoginActivity extends AppCompatActivity {
@@ -69,7 +70,8 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             else {
-                 userController.setUser(name);
+                userController.setUser(name);
+                habitController.clearHabits();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("username", name);
                 editor.apply();

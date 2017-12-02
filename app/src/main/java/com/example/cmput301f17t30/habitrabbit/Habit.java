@@ -49,6 +49,8 @@ public class Habit {
     private Date lastCompleted;
     private Date lastCalculated;
 
+    private String userID;
+
 
 
     @JestId
@@ -81,6 +83,7 @@ public class Habit {
     public Habit(String title, ArrayList<Boolean> days, Date date) {
         Title = title;
         this.days = days;
+        Reason = "";
         timesCompleted = 0;
         timesFailed = 0;
         startDate = date;
@@ -390,6 +393,14 @@ public class Habit {
         this.id = id;
     }
 
+
+    public String getUserID() {
+        return userID;
+    }
+
+    public void setUserID(String userID) {
+        this.userID = userID;
+    }
 
 
 

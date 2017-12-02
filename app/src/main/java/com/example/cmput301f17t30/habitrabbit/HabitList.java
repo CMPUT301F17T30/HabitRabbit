@@ -22,6 +22,8 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import java.util.ArrayList;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
+
 
 /**
  * A class representing a list of habit objects.
@@ -41,6 +43,7 @@ public class HabitList {
      * @param habit the habit that we wish to add
      */
     public void addHabit(Habit habit){
+        habit.setUserID(userController.getUsername());
         habitList.add(habit);
     }
 
@@ -67,6 +70,7 @@ public class HabitList {
      * @return the habit at the specified position
      */
     public Habit getHabit(int position){
+        Habit habit = habitList.get(position);
         return habitList.get(position);
     }
 
@@ -93,5 +97,10 @@ public class HabitList {
     public void addAll(ArrayList<Habit> habits){
         habitList.addAll(habits);
     }
+
+    public void clearAll(){
+        habitList.clear();
+    }
+
 
 }
