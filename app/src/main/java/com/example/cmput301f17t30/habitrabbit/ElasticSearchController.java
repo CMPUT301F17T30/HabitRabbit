@@ -265,7 +265,7 @@ public class ElasticSearchController {
 
             User user1 = user[0];
             ArrayList<String> friends = user1.getFriendsList();
-            ArrayList<User> users = new ArrayList<>();
+            ArrayList<Friend> users = new ArrayList<>();
 
             for (int i = 0; i < friends.size() ; i++) {
                 String query = "{\n" +
@@ -283,8 +283,10 @@ public class ElasticSearchController {
                     // TODO get the results of the query
                     SearchResult result = client.execute(search);
                     if (result.isSucceeded()) {
-                        User foundFriend = result.getSourceAsObject(User.class);
-                        users.add(0, foundFriend);
+                        User foundFriend = new Friend();
+                        foundFriend = result.getSourceAsObject(User.class);
+                        Friend friend = (Friend) foundFriend;
+                        users.add(0, friend);
                     } else {
                         Log.e("Error", "The seach query failed");
                     }

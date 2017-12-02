@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 
 public class FriendList {
-    private ArrayList<User> friends;
+    private ArrayList<Friend> friends;
     private ArrayList<HabitEvent> latestEvents;
 
     public FriendList(){
@@ -15,12 +15,12 @@ public class FriendList {
         this.latestEvents = new ArrayList<>();
     }
 
-    public void setList(ArrayList<User> friends){
+    public void setList(ArrayList<Friend> friends){
         this.friends = friends;
     }
 
     public void getLatestEvents(){
-        for (User f : friends){
+        for (Friend f : friends){
             //ElasticSearchController.GetHabitsTask
             //ElasticSearchController.AddEventTask AddLatestEvent = new ElasticSearchController.AddEventTask();
 
