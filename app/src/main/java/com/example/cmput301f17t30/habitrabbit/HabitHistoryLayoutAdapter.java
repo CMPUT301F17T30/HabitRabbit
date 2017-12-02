@@ -23,7 +23,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -35,28 +34,27 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
-import static java.lang.Boolean.FALSE;
+
 
 /**
  * a recyclerview adapter that works with HabitHistory to dispaly the list of habit events.
  * @see com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity
  */
 
-
 public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistoryLayoutAdapter.ViewHolder>{
 
     private ArrayList<HabitEvent> habitHistoryList;
     private Context historyContext;
 
+    private int EVENT_DETAIL_REQUEST = 7;
+
     public HabitHistoryLayoutAdapter(ArrayList<HabitEvent> habitHistoryList, Context context) {
         this.habitHistoryList = habitHistoryList;
         Collections.sort(habitHistoryList,new HabitHistorySorter());
         this.historyContext = context;
-
     }
 
     public class HabitHistorySorter implements Comparator<HabitEvent>{
@@ -65,37 +63,29 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         }
     }
 
-
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView eventLocation;
         private TextView eventComment;
         private TextView eventType;
         private TextView dateText;
         private ImageView eventImage;
 
-
         public ViewHolder(View itemView) {
             super(itemView);
 
-            //eventLocation = itemView.findViewById(R.id.habitEventLocationTextView);
             eventComment = itemView.findViewById(R.id.habitEventCommentTextView);
             eventType = itemView.findViewById(R.id.eventTypeTextView);
             dateText = itemView.findViewById(R.id.dateTextView);
             eventImage = itemView.findViewById(R.id.habitEventThumbnail);
-
             itemView.setOnClickListener(this);
-
         }
 
         @Override
         public void onClick(View view) {
             Intent detailEventIntent = new Intent(historyContext, ViewEventDetailActivity.class);
-            eventController.editEvent(getPosition());
+            eventController.editEvent(getLayoutPosition());
             detailEventIntent.putExtra("pos",getLayoutPosition());
-            ((Activity)historyContext).startActivityForResult(detailEventIntent, 7);
+            ((Activity)historyContext).startActivityForResult(detailEventIntent, EVENT_DETAIL_REQUEST);
         }
-
-
     }
 
     @Override
@@ -112,40 +102,19 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String formatDate = format.format(habitEvent.getDate());
 
-
         String comment = habitEvent.getComment();
-        //String location = habitEvent.getLocation();
         String type = habitEvent.getHabitType().getTitle();
         Bitmap image = habitEvent.getImage();
 
-        //holder.eventLocation.setText(location);
         holder.dateText.setText(formatDate);
         holder.eventComment.setText(comment);
         holder.eventType.setText(type);
-
         holder.eventImage.setImageBitmap(image);
-
-
-
-        /*
-         Button delete = holder.itemView.findViewById(R.id.deleteHabitEventButton);
-
-         button1.setOnClickListener(new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-        //do stuff
-        notifyItemChanged(position);
-
-        }
-        });
-         */
-
     }
 
 
     @Override
     public int getItemCount() {
-
         return habitHistoryList.size();
     }
 }
