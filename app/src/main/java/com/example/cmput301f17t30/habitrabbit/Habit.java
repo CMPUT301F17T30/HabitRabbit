@@ -50,6 +50,7 @@ public class Habit {
     private Date lastCalculated;
 
 
+
     @JestId
     private String id;
 

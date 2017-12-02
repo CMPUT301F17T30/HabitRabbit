@@ -48,7 +48,7 @@ public class ElasticSearchController {
     private static JestDroidClient client;
 
 
-    public class AddEventTask extends AsyncTask<HabitEvent, Void, Void> {
+    public static class AddEventTask extends AsyncTask<HabitEvent, Void, Void> {
 
         @Override
         protected Void doInBackground(HabitEvent...habitEvents) {
@@ -264,6 +264,64 @@ public class ElasticSearchController {
 
 
     }
+
+    public static class AddUserTask extends AsyncTask<User, Void, Void> {
+
+        @Override
+        protected Void doInBackground(User...users) {
+            verifySettings();
+
+            for (User user : users) {
+                Index index = new Index.Builder(user).index("team30_habitrabbit").type("User").build();
+
+                try {
+                    // where is the client?
+                    DocumentResult result = client.execute(index);
+                    if(result.isSucceeded()){
+                        user.setJestId(result.getId());
+                        Log.i("Success","Adding User success");
+                    }
+                    else{
+                        Log.i("Error","Elasticsearch was not able to add the User");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the User");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class UpdateUser extends AsyncTask<User, Void, Void> {
+        @Override
+        protected Void doInBackground(User...users) {
+            verifySettings();
+
+            // TODO Build the query
+
+            for (User user : users) {
+                Update update = new Update.Builder(user).index("team30_habitrabbit").type("User").id(user.getJestId()).build();
+
+                try {
+                    DocumentResult result = client.execute(update);
+                    if (result.isSucceeded()) {
+
+                    } else {
+                        Log.d("Error", "The search query failed");
+                    }
+                    // TODO get the results of the query
+                } catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+            }
+
+            return null;
+        }
+
+    }
+
 
 
 

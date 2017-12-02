@@ -133,5 +133,7 @@ public class User {
         this.achievementProgress.set(index,newProgress);
     }
 
-    public String getId(){return id;}
+    public String getJestId(){return id;}
+
+    public void setJestId(String id){this.id = id;}
 }
