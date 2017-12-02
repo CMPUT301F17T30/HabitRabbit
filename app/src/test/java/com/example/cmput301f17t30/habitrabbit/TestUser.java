@@ -64,30 +64,23 @@ public class TestUser  {
     @Test
     public void testGetFriendsList(){
         User user = new User("bob");
-        ArrayList<User> friends = new ArrayList<>();
-        User user1 = new User("Timmy");
-        User user2 = new User("Biff");
-        User user3 = new User("ZugZug");
-        friends.add(user1);
-        friends.add(user2);
-        friends.add(user3);
+        ArrayList<String> friends = new ArrayList<>();
+        friends.add("timmy");
+        friends.add("Biff");
+        friends.add("ZugZug");
         user.setFriendsList(friends);
         assertEquals(friends,user.getFriendsList());
     }
     @Test
     public void testAddFriend(){
         User user = new User("bob");
-        ArrayList<User> friends = new ArrayList<>();
-        User user1 = new User("Timmy");
-        User user2 = new User("Biff");
-        User user3 = new User("ZugZug");
-        friends.add(user1);
-        friends.add(user2);
-        friends.add(user3);
+        ArrayList<String> friends = new ArrayList<>();
+        friends.add("timmy");
+        friends.add("Biff");
+        friends.add("ZugZug");
         user.setFriendsList(friends);
-        User newFriend = new User("Nebuchadnezzar");
-        user.addFriend(newFriend);
-        assertEquals(newFriend,user.getFriendsList().get(3));
+        user.addFriend("Nebuchadnezzar");
+        assertEquals("Nebuchadnezzar",user.getFriendsList().get(3));
 
     }
     @Test
