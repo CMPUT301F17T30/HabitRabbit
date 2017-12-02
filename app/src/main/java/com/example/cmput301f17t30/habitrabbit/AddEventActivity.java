@@ -348,7 +348,7 @@ public class AddEventActivity extends AppCompatActivity {
         for (int i = 0; i < eventList.getSize(); i++){
             Date getDate = eventController.getDate(i);
             String title = eventController.getType(i).getTitle();
-            if (title == habit.getTitle() && getDate.equals(edate)){
+            if (title.equals(habit.getTitle())  && getDate.equals(edate)){
                 eventController.setEvent(event);
                 return FALSE;
             }
