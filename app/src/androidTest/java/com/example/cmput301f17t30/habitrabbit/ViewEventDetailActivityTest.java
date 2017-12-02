@@ -13,7 +13,6 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.habitEventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 
@@ -34,9 +33,9 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
         habitController.addHabit("test title", days, new Date());
         habitController.saveAddHabit();
 
-        habitEventController.addEvent(testHabit);
-        habitEventController.setComment("test comment");
-        habitEventController.saveAddEvent();
+        eventController.addEvent(testHabit);
+        eventController.setComment("test comment");
+        eventController.saveAddEvent();
         //assertTrue(habitList.getHabit(1) == testHabit);
     }
 
