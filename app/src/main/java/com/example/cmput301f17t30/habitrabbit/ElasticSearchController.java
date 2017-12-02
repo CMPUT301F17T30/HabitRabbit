@@ -36,6 +36,7 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
@@ -219,6 +220,48 @@ public class ElasticSearchController {
 
             return null;
         }
+
+    }
+
+    public static class GetFriendList extends AsyncTask<User, Void, Void>{
+        @Override
+        protected Void doInBackground(User...user) {
+            verifySettings();
+
+            User user1 = user[0];
+            ArrayList<String> friends = user1.getFriendsList();
+            ArrayList<User> users = new ArrayList<>();
+
+            for (int i = 0; i < friends.size() ; i++) {
+                String query = "{\n" +
+                        "    \"query\" : {\n" +
+                        "        \"term\" : { \"user_id\" : \"" + friends.get(i) + "\" }\n" +
+                        "    }\n" +
+                        "}";
+
+
+                Search search = new Search.Builder(query)
+                        .addIndex("team30_habitrabbit")
+                        .addType("User")
+                        .build();
+                try {
+                    // TODO get the results of the query
+                    SearchResult result = client.execute(search);
+                    if (result.isSucceeded()) {
+                        User foundFriend = result.getSourceAsObject(User.class);
+                        users.add(0, foundFriend);
+                    } else {
+                        Log.e("Error", "The seach query failed");
+                    }
+
+                } catch (Exception e) {
+                    Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+            }
+            friendController.setFriendsList(users);
+            return null;
+        }
+
 
     }
 

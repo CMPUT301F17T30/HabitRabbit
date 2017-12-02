@@ -19,6 +19,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import java.util.ArrayList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 
 /**
  * Created by Adam on 01-Dec-17.
@@ -26,12 +27,17 @@ import java.util.ArrayList;
 
 public class FriendController {
 
-    private ArrayList<User> friendsList = new ArrayList<>();
+    private ArrayList<User> friends = new ArrayList<>();
 
     public FriendController(){
     }
 
+
     public ArrayList<User> getFriends(){
-        return this.friendsList;
+        return this.friends;
+    }
+
+    public void setFriendsList(ArrayList<User> friends){
+        friendsList.setList(friends);
     }
 }
