@@ -39,6 +39,8 @@ public class HabitEvent {
     private String Location;
     private double logitude;
     private double latitude;
+
+    private String userId;
     
     // use for elasticsearch later.
     @JestId
