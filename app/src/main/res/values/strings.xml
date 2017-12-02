@@ -75,6 +75,7 @@
     <string name="type_header">TYPE:</string>
     <string name="date">date</string>
     <string name="add_event">ADD EVENT</string>
+    <string name="Date" />
 
 
 </resources>

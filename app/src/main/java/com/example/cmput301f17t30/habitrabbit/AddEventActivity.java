@@ -133,13 +133,13 @@ public class AddEventActivity extends AppCompatActivity {
 
 
         locationNameList = new ArrayList<>(); //empty in start
-        //
         adapter = new ArrayAdapter<>(this, R.layout.list_location, locationNameList);
         locationOuput.setAdapter(adapter);
 
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                date.setError(null);
                 setDateTimeField();
             }
         });
@@ -237,31 +237,35 @@ public class AddEventActivity extends AppCompatActivity {
                     SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
                     format.setLenient(FALSE);
                     eventDate = format.parse(date.getText().toString());
+                    eventController.setDate(eventDate);
                     if (locationInput.getText().toString().length() == 0){
                         eventController.setLocationName("");
                         eventController.setCoordinate(0, 0);
                     }
-                    achievementController.updateNewYearsResolution();
-                    achievementController.updateBusyBeaver();
-                    achievementController.updateWeekendWarrior();
-                    achievementController.updateFirstEvent();
-                    //addEventDone();
+                    if (!checkDuplicate(eventDate)) {
+                        date.setError("Cannot add more than one event in one day");
+                    }
+                    else{
+
+                        //addEventDone();
+                        eventController.saveAddEvent();
+                        achievementController.updateNewYearsResolution();
+                        achievementController.updateBusyBeaver();
+                        achievementController.updateWeekendWarrior();
+                        achievementController.updateFirstEvent();
+                        Intent returnToMain = new Intent();
+                        setResult(RESULT_OK, returnToMain);
+                        finish();
+                    }
+
+
 
                 } catch (ParseException exception) {
                     Toast.makeText(getApplicationContext(), "Date cannot be set.",
                             Toast.LENGTH_LONG).show();
                 }
 
-                if (checkDuplicate(eventDate)) {
-                    eventController.setDate(eventDate);
-                    eventController.saveAddEvent();
-                    Intent returnToMain = new Intent();
-                    setResult(RESULT_OK, returnToMain);
-                    finish();
-                }
-                else{
-                    date.setError("Cannot add more than one event in one day");
-                }
+
 
             }
 
