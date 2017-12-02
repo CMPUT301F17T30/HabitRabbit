@@ -41,6 +41,7 @@ public class DeleteHabitEventTest extends ActivityInstrumentationTestCase2<Habit
     }
 
     public void setUp()throws Exception{
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
     public void testViewEventActivity(){
@@ -54,6 +55,7 @@ public class DeleteHabitEventTest extends ActivityInstrumentationTestCase2<Habit
 
 
     public void tearDown() throws Exception{
+        super.tearDown();
         solo.finishOpenedActivities();
     }
 }

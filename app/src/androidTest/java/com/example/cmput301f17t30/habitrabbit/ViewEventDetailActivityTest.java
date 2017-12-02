@@ -40,6 +40,7 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     }
 
     public void setUp()throws Exception{
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
     public void testViewEventActivity(){
@@ -62,6 +63,7 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     }
 
     public void tearDown() throws Exception{
+        super.tearDown();
         solo.finishOpenedActivities();
     }
 }

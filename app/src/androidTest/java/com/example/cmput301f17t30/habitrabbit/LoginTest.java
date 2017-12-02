@@ -21,6 +21,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     }
 
     public void setUp()throws Exception{
+        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
@@ -34,6 +35,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     }
 
     public void tearDown() throws Exception {
+        super.tearDown();
         solo.finishOpenedActivities();
     }
 
