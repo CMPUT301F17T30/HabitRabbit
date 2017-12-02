@@ -35,21 +35,16 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementCon
 
 /**
  * Adapter for displaying achievements in user profile
- * @See UserProfileActivity
+ * @See com.example.cmput301f17t30.habitrabbit.UserProfileActivity
  */
-
 public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLayoutAdapter.ViewHolder> {
 
     private ArrayList<Achievement>  achievements;
     private Context profileContext;
 
-
-
     public AchievementLayoutAdapter(ArrayList<Achievement> habitList, Context context) {
         this.profileContext = context;
-
         achievements = achievementController.getAchievements();
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -70,7 +65,7 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
 
         @Override
         public void onClick(View view) {
-            //say something maybe
+            //could say the date this was completed
         }
     }
 
@@ -87,7 +82,6 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
         String description = achievement.getDescription();
         String progressDisplay;
 
-
         if (achievement.getCompleted()){
             progressDisplay = "";
         }
@@ -95,37 +89,20 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
             String total = achievement.getProgressRequired().toString();
             String done = achievement.getProgress().toString();
             progressDisplay = ("(" + done + "/" + total + ")");
-            /*
-            if (achievement.getProgressRequired() == 1){
-                progressDisplay = "Not completed";
-            }
-            else {
-                String total = achievement.getProgressRequired().toString();
-                String done = achievement.getProgress().toString();
-                progressDisplay = ("(" + done + "/" + total + ")");
-            }
-            */
         }
-
-
-
         holder.achievementName.setText(name);
         holder.achievementDescription.setText(description);
         holder.achievementProgress.setText(progressDisplay);
         if (achievement.getCompleted() == Boolean.TRUE){
             Bitmap successImage = BitmapFactory.decodeResource(profileContext.getResources(), R.drawable.unlocked);
-
             holder.achievementImage.setBackground(null);
             holder.achievementImage.setImageBitmap(successImage);
         }
-
-
     }
 
 
     @Override
     public int getItemCount() {
-
         return achievements.size();
     }
 }
