@@ -112,12 +112,16 @@ public class HabitEventController {
 
     public void saveAddEvent(){
         eventList.addEvent(habitEvent);
+        ElasticSearchController.AddEventTask addEventTask = new ElasticSearchController.AddEventTask();
+        addEventTask.execute(habitEvent);
         habitEvent.getHabitType().incrementTimesCompleted();
         habitEvent.getHabitType().setLastCompleted(new Date());
     }
 
     public void deleteEvent(int index){
         eventList.deleteEvent(index);
+        ElasticSearchController.DeleteHabitEvent deleteHabitEvent = new ElasticSearchController.DeleteHabitEvent();
+        deleteHabitEvent.execute(habitEvent);
         habitEvent.getHabitType().decrementTimesCompleted();
         flag = 1;
     }
@@ -133,6 +137,8 @@ public class HabitEventController {
 
     public void saveEditEvent(int index){
         eventList.editEvent(index, habitEvent);
+        ElasticSearchController.UpdateHabitEvent updateHabitEvent = new ElasticSearchController.UpdateHabitEvent();
+        updateHabitEvent.execute(habitEvent);
 
     }
 
@@ -153,10 +159,14 @@ public class HabitEventController {
 
     public void deleteAllHabitEvents(Habit type) {
         ArrayList<HabitEvent> list = eventList.getList();
-
+        habitEvent = eventList.getEvent(0);
         for(Iterator<HabitEvent> iterator = list.iterator(); iterator.hasNext(); ) {
             if(iterator.next().getHabitType() == type)
                 iterator.remove();
+                ElasticSearchController.DeleteHabitEvent deleteHabitEvent = new ElasticSearchController.DeleteHabitEvent();
+                deleteHabitEvent.execute(habitEvent);
+            if(iterator.hasNext())
+                habitEvent = iterator.next();
         }
 
         eventList.setEventList(list);

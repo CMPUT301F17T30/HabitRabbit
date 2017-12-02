@@ -48,7 +48,7 @@ public class ElasticSearchController {
     private static JestDroidClient client;
 
 
-    public class AddEventTask extends AsyncTask<HabitEvent, Void, Void> {
+    public static class AddEventTask extends AsyncTask<HabitEvent, Void, Void> {
 
         @Override
         protected Void doInBackground(HabitEvent...habitEvents) {
@@ -86,10 +86,9 @@ public class ElasticSearchController {
             // TODO Build the query
 
             for (HabitEvent habitEvent : habitEvents) {
-                Update update = new Update.Builder(habitEvent).index("team30_habitrabbit").type("HabitEvent").id(habitEvent.getId()).build();
-
+                Index index = new Index.Builder(habitEvent).index("team30_habitrabbit").type("HabitEvent").id(habitEvent.getId()).build();
                 try {
-                    DocumentResult result = client.execute(update);
+                    DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
 
                     } else {
@@ -102,8 +101,34 @@ public class ElasticSearchController {
             }
 
             return null;
+
         }
 
+    }
+
+    public static class DeleteHabitEvent extends AsyncTask<HabitEvent, Void, Void> {
+        @Override
+        protected Void doInBackground(HabitEvent...habitEvents){
+            verifySettings();
+
+            for (HabitEvent habitEvent : habitEvents) {
+                Delete delete = new Delete.Builder(habitEvent.getId()).index("team30_habitrabbit").type("HabitEvent").build();
+
+                try {
+                    DocumentResult result = client.execute(delete);
+                    if (result.isSucceeded()) {
+                        Log.i("Sucess", "Sucessfully deleted Habit Event");
+                    } else {
+                        Log.i("Error", "Elasticsearch was unable to delete Habit Event");
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "Failed to communicate with server");
+                }
+            }
+
+            return null;
+
+        }
     }
 
     public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
