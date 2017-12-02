@@ -27,13 +27,13 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 
 public class FriendController {
 
-    private ArrayList<User> friends = new ArrayList<>();
+    private ArrayList<Friend> friends = new ArrayList<>();
 
     public FriendController(){
     }
 
 
-    public ArrayList<User> getFriends(){
+    public ArrayList<Friend> getFriends(){
         return this.friends;
     }
 

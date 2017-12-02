@@ -48,6 +48,9 @@ public class User {
         friends = new ArrayList<>();
     }
 
+    public User(){
+    }
+
     /**
      * @return The unique identifier for the user
      */

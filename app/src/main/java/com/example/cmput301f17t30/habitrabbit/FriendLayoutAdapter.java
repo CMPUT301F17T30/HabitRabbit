@@ -38,12 +38,12 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendControll
 
 public class FriendLayoutAdapter extends RecyclerView.Adapter<FriendLayoutAdapter.ViewHolder> {
 
-    private ArrayList<User> friends;
+    private ArrayList<Friend> friends;
     private Context friendContext;
 
 
 
-    public FriendLayoutAdapter(ArrayList<User> friendList, Context context) {
+    public FriendLayoutAdapter(ArrayList<Friend> friendList, Context context) {
         this.friendContext = context;
 
         friends = friendController.getFriends();
