@@ -283,9 +283,8 @@ public class ElasticSearchController {
                     // TODO get the results of the query
                     SearchResult result = client.execute(search);
                     if (result.isSucceeded()) {
-                        User foundFriend = new Friend();
-                        foundFriend = result.getSourceAsObject(User.class);
-                        Friend friend = (Friend) foundFriend;
+                        User foundFriend = result.getSourceAsObject(User.class);
+                        Friend friend = new Friend(foundFriend);
                         users.add(0, friend);
                     } else {
                         Log.e("Error", "The seach query failed");
@@ -301,6 +300,8 @@ public class ElasticSearchController {
 
 
     }
+
+
 
     public static class AddUserTask extends AsyncTask<User, Void, Void> {
 

@@ -24,8 +24,13 @@ import java.util.ArrayList;
  * A class to keep track of habit events for a users's added friend
  */
 
-public class Friend extends User{
+public class Friend{
     private ArrayList<HabitEvent> recentEvents = new ArrayList<>();
+    private User user;
+
+    public Friend(User user){
+        this.user = user;
+    }
 
 
     public void setRecentEvents(ArrayList<HabitEvent> events){
