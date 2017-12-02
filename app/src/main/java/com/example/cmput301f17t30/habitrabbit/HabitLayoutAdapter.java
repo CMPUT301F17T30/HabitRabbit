@@ -32,7 +32,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -51,16 +50,13 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
     private ArrayList<Habit> habitList;
     private Context mainContext;
 
-
     public HabitLayoutAdapter(ArrayList<Habit> habitList, Context context) {
         this.habitList = habitList;
         this.mainContext = context;
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView habitName;
-        private TextView habitReason;
         private ImageView lightImage;
 
         public ViewHolder(View itemView) {
@@ -91,20 +87,8 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         final Habit habit = habitList.get(position);
         String title = habit.getTitle();
         Bitmap light;
-        Date todayDate = new Date();
-        Date lastCompleteDate = habit.getLastCompleted();
-
-        Calendar calToday = Calendar.getInstance();
-        Calendar calLast = Calendar.getInstance();
-        calToday.setTime(todayDate);
-        if (lastCompleteDate != null)
-            calLast.setTime(lastCompleteDate);
-            Boolean sameDay = calToday.get(Calendar.YEAR) == calLast.get(Calendar.YEAR) &&
-                              calToday.get(Calendar.DAY_OF_YEAR) == calLast.get(Calendar.DAY_OF_YEAR);
-
-        if (lastCompleteDate == null)
-            sameDay = Boolean.FALSE;
-
+        Boolean sameDay;
+        sameDay = isSameDay(habit);
 
         if (habit.isDueToday() && (sameDay == Boolean.TRUE) )
             light = BitmapFactory.decodeResource(mainContext.getResources(), R.drawable.greenlight);
@@ -113,34 +97,21 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         else
             light = BitmapFactory.decodeResource(mainContext.getResources(),R.drawable.yellowlight);
 
-
-
         holder.habitName.setText(title);
         holder.lightImage.setImageBitmap(light);
-
-
-
-
         Button addEventButton = holder.itemView.findViewById(R.id.buttonAddHabitEvent);
-
         addEventButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Habit habit = habitList.get(position);
                 Intent newEvent = new Intent(mainContext, AddEventActivity.class);
                 newEvent.putExtra("pos", position);
                 mainContext.startActivity(newEvent);
-
             }
         });
-
-
     }
-
 
     @Override
     public int getItemCount() {
-
         return habitList.size();
     }
 
