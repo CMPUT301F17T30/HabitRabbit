@@ -170,8 +170,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
         else if (parameter == 1){
             //run elasticsearch for the matching comment text
         }
-
         //refresh adapter and display new events
-
     }
 }
