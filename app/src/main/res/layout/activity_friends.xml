@@ -22,22 +22,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cmput301f17t30.habitrabbit.MainActivity">
+    tools:context="com.example.cmput301f17t30.habitrabbit.FriendActivity">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerView1"
-        android:layout_width="0dp"
-        android:layout_height="495dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -54,33 +40,45 @@
 
 
         <Button
-            android:id="@+id/addHabitButton"
+            android:id="@+id/friends_map"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/addHabit"
+            android:text="@string/map"
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="482dp" />
 
         <Button
-            android:id="@+id/habitHistoryButton"
+            android:id="@+id/some_button"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/goToHistory"
+            android:text="@string/main"
             tools:layout_editor_absoluteX="173dp"
             tools:layout_editor_absoluteY="482dp" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/add_accept_friend"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/friends"
+            android:text="@string/addHabit"
             tools:layout_editor_absoluteX="241dp"
             tools:layout_editor_absoluteY="482dp" />
 
     </LinearLayout>
 
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/friends_recycler_view"
+        android:layout_width="368dp"
+        android:layout_height="415dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

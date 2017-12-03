@@ -18,7 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -34,21 +33,17 @@ import java.util.ArrayList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
 
 /**
- * Created by Adam on 26-Nov-17.
+ * Adapter for displaying achievements in user profile
+ * @See com.example.cmput301f17t30.habitrabbit.UserProfileActivity
  */
-
 public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLayoutAdapter.ViewHolder> {
 
     private ArrayList<Achievement>  achievements;
     private Context profileContext;
 
-
-
     public AchievementLayoutAdapter(ArrayList<Achievement> habitList, Context context) {
         this.profileContext = context;
-
         achievements = achievementController.getAchievements();
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -69,7 +64,7 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
 
         @Override
         public void onClick(View view) {
-            //say something maybe
+            //could say the date this was completed
         }
     }
 
@@ -79,14 +74,12 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
                 .achievement_row_layout, parent, false);
         return new ViewHolder(inflatedView);
     }
-    @TargetApi(16)
     @Override
     public void onBindViewHolder(AchievementLayoutAdapter.ViewHolder holder, final int position) {
         final Achievement achievement = achievements.get(position);
         String name = achievement.getName();
         String description = achievement.getDescription();
         String progressDisplay;
-
 
         if (achievement.getCompleted()){
             progressDisplay = "";
@@ -95,37 +88,20 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
             String total = achievement.getProgressRequired().toString();
             String done = achievement.getProgress().toString();
             progressDisplay = ("(" + done + "/" + total + ")");
-            /*
-            if (achievement.getProgressRequired() == 1){
-                progressDisplay = "Not completed";
-            }
-            else {
-                String total = achievement.getProgressRequired().toString();
-                String done = achievement.getProgress().toString();
-                progressDisplay = ("(" + done + "/" + total + ")");
-            }
-            */
         }
-
-
-
         holder.achievementName.setText(name);
         holder.achievementDescription.setText(description);
         holder.achievementProgress.setText(progressDisplay);
         if (achievement.getCompleted() == Boolean.TRUE){
             Bitmap successImage = BitmapFactory.decodeResource(profileContext.getResources(), R.drawable.unlocked);
-
             holder.achievementImage.setBackground(null);
             holder.achievementImage.setImageBitmap(successImage);
         }
-
-
     }
 
 
     @Override
     public int getItemCount() {
-
         return achievements.size();
     }
 }

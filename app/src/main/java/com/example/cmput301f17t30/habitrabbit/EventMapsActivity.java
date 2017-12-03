@@ -36,7 +36,7 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
     private Marker select;
     private Integer index;
     private BitmapDescriptor icon;
-
+    private static Integer highlightflag = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +55,18 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
         highlightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //Toast.makeText(EventMapsActivity.this, "CLICKbutton!", Toast.LENGTH_SHORT).show();
-                try{
-                    highLight();
-                }catch (Exception e){
+                if (highlightflag == 1){
+                    mMap.clear();
+                    highlightflag = 0;
+                    drawMarker(mMap);
+                } else if (highlightflag == 0){
+                    //Toast.makeText(EventMapsActivity.this, "CLICKbutton!", Toast.LENGTH_SHORT).show();
+                    try {
+                        highLight();
+                        highlightflag = 1;
+                    } catch (Exception e) {
 
+                    }
                 }
 
             }
@@ -123,7 +130,6 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
                 index = importmap.get(marker);
                 view.putExtra("pos", index);
                 startActivity(view);
-
                 return false;
             }
         });
@@ -138,11 +144,14 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
                 try {
                     Double Lat = eventController.getLatitude(ind);
                     Double Long = eventController.getLogitude(ind);
-                    LatLng pos = new LatLng(Lat, Long);
-                    Marker marker = googleMap.addMarker(new MarkerOptions().position(pos)
-                            .title(eventController.getType(ind).getTitle()));
-                    importmap.put(marker, ind);
-                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                    if (Lat != 0 && Long != 0){
+                        LatLng pos = new LatLng(Lat, Long);
+                        Marker marker = googleMap.addMarker(new MarkerOptions().position(pos)
+                                .title(eventController.getType(ind).getTitle()));
+                        importmap.put(marker, ind);
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                    }
+
                 } catch (Exception e){
 
                 }

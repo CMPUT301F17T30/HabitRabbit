@@ -18,6 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.os.AsyncTask;
 
 
 import android.app.ProgressDialog;
@@ -38,6 +39,18 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
+import android.util.Log;
+
+import com.searchly.jestdroid.DroidClientConfig;
+import com.searchly.jestdroid.JestClientFactory;
+import com.searchly.jestdroid.JestDroidClient;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import io.searchbox.core.Search;
+import io.searchbox.core.SearchResult;
+
 
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
@@ -55,20 +68,24 @@ import io.searchbox.core.SearchResult;
  * @see com.example.cmput301f17t30.habitrabbit.HabitLayoutAdapter
  */
 public class MainActivity extends AppCompatActivity {
-    
-    // create a global eventlist and eventcontroller
-    public static final HabitEventList eventList = new HabitEventList();
-    public static final HabitEventController eventController = new HabitEventController();
 
+    public static final FriendList friendsList = new FriendList();
     public static final HabitList habitList = new HabitList();
+    public static final HabitEventList eventList = new HabitEventList();
+
+    public static final HabitEventController eventController = new HabitEventController();
     public static final HabitController habitController = new HabitController();
     public static final UserController userController = new UserController();
     public static final AchievementController achievementController = new AchievementController();
+    public static final FriendController friendController = new FriendController();
 
+    public static final CommandQueue commandQueue = new CommandQueue();
 
     private int ADD_HABIT_REQUEST = 0;
     private int HABIT_HISTORY_REQUEST = 1;
-    public static int VIEW_HABIT_REQUEST = 3;
+    public static int VIEW_HABIT_REQUEST = 2;
+    private int FRIENDS_REQUEST = 3;
+
 
     public static elasticDoneBoolean elasticDone;
 
@@ -84,7 +101,9 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
+        commandQueue.runCommands();
         achievementController.setOpenAppAchievement();
+        achievementController.loadAchievementsStatus();
 
         if (sharedPreferences.getString("username",null) == null){
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
@@ -93,13 +112,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             userController.setUser(sharedPreferences.getString("username",null));
         }
-        /*
-        if (userController.getUsername() == null){
-            Intent logout = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(logout);
-        }
-        */
-
 
         adapterList = new ArrayList<Habit>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
@@ -108,11 +120,9 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HabitLayoutAdapter(adapterList, this);
         recyclerView.setAdapter(adapter);
 
-
-
-
         ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
         getHabitsTask.execute(userController.getUsername());
+
 
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
@@ -137,8 +147,9 @@ public class MainActivity extends AppCompatActivity {
         button3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 3",
-                        Toast.LENGTH_SHORT).show();
+                Intent friendsIntent = new Intent(MainActivity.this, FriendActivity.class);
+                startActivityForResult(friendsIntent, FRIENDS_REQUEST);
+
             }
         });
 
@@ -146,6 +157,7 @@ public class MainActivity extends AppCompatActivity {
         elasticDone.setListener(new elasticDoneBoolean.ChangeListener() {
             @Override
             public void onChange() {
+                habitList.sort();
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
@@ -172,9 +184,6 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HabitLayoutAdapter(adapterList, this);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
-
-
-
     }
 
     @Override
@@ -207,17 +216,12 @@ public class MainActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
     }
 
-  /*  @Override
-      protected void onDestroy(){
-        super.onDestroy();
-        habitController.saveAllHabits();
-    }
-*/
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
                 habitController.saveAddHabit();
+                habitList.sort();
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
@@ -226,6 +230,7 @@ public class MainActivity extends AppCompatActivity {
         if (requestCode == VIEW_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
                 habitController.saveEditHabit();
+                habitList.sort();
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
@@ -237,9 +242,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-
         String username = sharedPreferences.getString("username",null);
-
         menu.findItem(R.id.user_profile_button).setTitle(username);
         return super.onPrepareOptionsMenu(menu);
     }
@@ -257,7 +260,9 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.logout_button) {
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
-            getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
+            SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = mySPrefs.edit();
+            editor.remove("username").apply();
             startActivity(logout);
         }
 
@@ -267,19 +272,6 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    public void initializeAchievements(){
-        Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
-        Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","Busy Beaver");
-        Achievement firstEventAchievement = new Achievement(1,"complete your first habit","Good Start");
-        Achievement openAppAchievement = new Achievement(1,"you opened the app","Too Easy");
-        Bitmap openAppImage;
-        openAppImage = BitmapFactory.decodeResource(getResources(), R.drawable.gradea);
-        openAppAchievement.setBitmap(openAppImage);
-        Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
-    }
-
-
 }
 
 

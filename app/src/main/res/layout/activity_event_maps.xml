@@ -6,17 +6,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="highlight"
-    tools:context="com.example.cmput301f17t30.habitrabbit.EventMapsActivity">
+    tools:context="com.example.cmput301f17t30.habitrabbit.EventMapsActivity"
+    tools:ignore="OnClick">
 
 
     <Button
-    android:id="@+id/highlight"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_alignParentBottom="true"
-    android:layout_centerHorizontal="true"
-    android:text="Highlight" />
+        android:id="@+id/highlight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Highlight" />
+
 
 </fragment>
-
 

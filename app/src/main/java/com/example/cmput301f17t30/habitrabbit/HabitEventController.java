@@ -20,6 +20,7 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.commandQueue;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
 /**
@@ -71,6 +73,10 @@ public class HabitEventController {
         habitEvent.setComment(comment);
     }
 
+    public void setUserId(String userId){habitEvent.setUserId(userId);}
+
+    public String getUserId(){return habitEvent.getUserId();}
+
     public Bitmap getImage(int index){
         habitEvent = eventList.getEvent(index);
         return habitEvent.getImage();
@@ -106,18 +112,22 @@ public class HabitEventController {
         return habitEvent.getLatitude();
     }
 
-    public void setDate(){
-        habitEvent.setDate(new Date());
+    public void setDate(Date date){
+        habitEvent.setDate(date);
     }
 
     public void saveAddEvent(){
         eventList.addEvent(habitEvent);
+        AddEventCommand addEventCommand = new AddEventCommand(habitEvent);
+        commandQueue.addTail(addEventCommand);
         habitEvent.getHabitType().incrementTimesCompleted();
         habitEvent.getHabitType().setLastCompleted(new Date());
     }
 
     public void deleteEvent(int index){
         eventList.deleteEvent(index);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(habitEvent);
+        commandQueue.addTail(deleteEventCommand);
         habitEvent.getHabitType().decrementTimesCompleted();
         flag = 1;
     }
@@ -133,6 +143,8 @@ public class HabitEventController {
 
     public void saveEditEvent(int index){
         eventList.editEvent(index, habitEvent);
+        EditEventCommand editEventCommand = new EditEventCommand(habitEvent);
+        commandQueue.addTail(editEventCommand);
 
     }
 
@@ -153,15 +165,29 @@ public class HabitEventController {
 
     public void deleteAllHabitEvents(Habit type) {
         ArrayList<HabitEvent> list = eventList.getList();
-
-        for(Iterator<HabitEvent> iterator = list.iterator(); iterator.hasNext(); ) {
-            if(iterator.next().getHabitType() == type)
-                iterator.remove();
+        try {
+            habitEvent = eventList.getEvent(0);
+            for (Iterator<HabitEvent> iterator = list.iterator(); iterator.hasNext(); ) {
+                if (iterator.next().getHabitType() == type)
+                    iterator.remove();
+                DeleteEventCommand deleteEventCommand = new DeleteEventCommand(habitEvent);
+                commandQueue.addTail(deleteEventCommand);
+                if (iterator.hasNext())
+                    habitEvent = iterator.next();
+            }
+        } catch(IndexOutOfBoundsException e) {
+            Log.i("Delete Habit", "No HabitEvents in Habit");
         }
-
         eventList.setEventList(list);
     }
 
 
+     public HabitEvent returnEvent(){
+     return habitEvent;
+    }
+
+    public void setEvent(HabitEvent event){
+        this.habitEvent = event;
+    }
 
 }

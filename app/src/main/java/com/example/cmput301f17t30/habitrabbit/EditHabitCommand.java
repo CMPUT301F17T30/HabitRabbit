@@ -27,22 +27,15 @@ public class EditHabitCommand extends Command {
     private Habit oldHabit;
     private Habit editedHabit;
     private User user;
+
+    public EditHabitCommand(Habit habit) {
+        this.editedHabit = habit;
+    }
+
     @Override
     public void execute() {
-        //POST Method
-        //Index: Our Index
-        //Type: Habit
-        //ID: ID of Habit in elasticsearch
-        /*
-        * {
-        *   "user-id" : "This is the user id"
-        *   "title" : "This is a Title"
-        *   "reason" : "This is a reason"
-        *   "days" : "These are the days"
-        *   "failed" : "This is how many times I failed" -- Do we add this?
-        *   "completed" : "This is how many times I completed" -- Do we add this?
-        * }
-        * */
+        ElasticSearchController.EditHabitTask editHabitTask = new ElasticSearchController.EditHabitTask();
+        editHabitTask.execute(editedHabit);
     }
 
     @Override

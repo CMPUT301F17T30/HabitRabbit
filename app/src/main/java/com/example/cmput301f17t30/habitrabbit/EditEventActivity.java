@@ -218,6 +218,7 @@ public class EditEventActivity extends AppCompatActivity {
         gpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                locationNameList.clear();
                 int flag = locationController.getGPS(v.getContext());
                 if (flag == 1) {
                     checkPermission(GPS_REQUEST_CODE);
@@ -248,6 +249,10 @@ public class EditEventActivity extends AppCompatActivity {
                 }
 
                 else {
+                    if (locationInput.getText().toString().length() == 0){
+                        eventController.setLocationName("");
+                        eventController.setCoordinate(0, 0);
+                    }
                     eventController.setComment(theComment);
                     eventController.saveEditEvent(index);
                     Intent returnToHistory = new Intent();

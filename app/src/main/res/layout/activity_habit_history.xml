@@ -49,7 +49,7 @@
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Map"
+            android:text="@string/map"
             tools:layout_editor_absoluteX="93dp"
             tools:layout_editor_absoluteY="482dp" />
 
@@ -63,11 +63,11 @@
             tools:layout_editor_absoluteY="482dp" />
 
         <Button
-            android:id="@+id/button9"
+            android:id="@+id/button_filter_history"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Button3"
+            android:text="@string/filter"
             tools:layout_editor_absoluteX="241dp"
             tools:layout_editor_absoluteY="482dp" />
 

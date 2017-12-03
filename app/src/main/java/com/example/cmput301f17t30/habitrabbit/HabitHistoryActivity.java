@@ -21,8 +21,8 @@ package com.example.cmput301f17t30.habitrabbit;
 
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -33,11 +33,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
-//import com.example.cmput301f17t30.habitrabbit.MainActivity.user;
 
 /**
  * An activity that displays all previously completed habit events.
@@ -51,13 +48,8 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private LinearLayoutManager habitEventlinearLayoutManager;
     private HabitHistoryLayoutAdapter habitEventadapter;
 
-    public static final HabitEventController habitEventController = new HabitEventController();
-
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
-    private int LOGOUT_REQUEST = 2;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +62,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
 
-
         Button returnToMain = (Button) findViewById(R.id.habitHistoryFinish);
         returnToMain.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,17 +70,20 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         });
 
-        Button button3 = (Button) findViewById(R.id.button9);
-        button3.setOnClickListener(new View.OnClickListener() {
+
+        Button filterButton = (Button) findViewById(R.id.button_filter_history);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 3",
-                        Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                HistoryFilterDialogue yourDialog = new HistoryFilterDialogue(HabitHistoryActivity.this);
+                yourDialog.show();
             }
         });
 
-        Button button1 = (Button) findViewById(R.id.map);
-        button1.setOnClickListener(new View.OnClickListener() {
+        Button mapButton = (Button) findViewById(R.id.map);
+        mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent map = new Intent(HabitHistoryActivity.this, EventMapsActivity.class);
@@ -111,7 +105,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
                 habitEventadapter.notifyDataSetChanged();
             }
         }
-
         if (requestCode == EDIT_HABIT_EVENT_REQUEST){
             if (resultCode == RESULT_OK){
                 //habitEventController.saveEditEvent();
@@ -143,9 +136,40 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
         if (id == R.id.logout_button) {
             Intent logout = new Intent(HabitHistoryActivity.this, LoginActivity.class);
-            getApplicationContext().getSharedPreferences("YOUR_PREFS", 0).edit().clear().apply();
+            SharedPreferences mySPrefs = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = mySPrefs.edit();
+            editor.remove("username").apply();
             startActivity(logout);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void searchWord(String textString) {
+        //run the elastic stuff here
+
+    }
+
+    /**
+     * @param searchText the text that the user wishes to search by
+     * @param parameter 0 for filter by habit type, 1 for filter by comment text
+     */
+    public void filterHistoryList(String searchText, Integer parameter){
+        String searchType;
+        if (parameter == 0){
+            searchType = "type ";
+        }
+        else{
+            searchType = "comment ";
+        }
+        Toast.makeText(getApplicationContext(), "you searched for the " + searchType + searchText, Toast.LENGTH_LONG).show();
+
+
+        if (parameter ==0){
+            //run elasticsearch for habit type
+        }
+        else if (parameter == 1){
+            //run elasticsearch for the matching comment text
+        }
+        //refresh adapter and display new events
     }
 }

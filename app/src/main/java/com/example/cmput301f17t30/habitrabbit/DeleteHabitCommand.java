@@ -24,15 +24,16 @@ package com.example.cmput301f17t30.habitrabbit;
  */
 
 public class DeleteHabitCommand extends Command {
+    private Habit habit;
+
+    public DeleteHabitCommand(Habit habit) {
+        this.habit = habit;
+    }
+
     @Override
     public void execute() {
-        //Using the Jest library
-        /*
-        client.execute(new Delete.Builder("ID from Habit in elasticsearch")
-                        .index("Our Index")
-                        .type("Habit")
-                        .build())
-         */
+        ElasticSearchController.DeleteHabitTask deleteHabitTask = new ElasticSearchController.DeleteHabitTask();
+        deleteHabitTask.execute(habit);
     }
 
     @Override

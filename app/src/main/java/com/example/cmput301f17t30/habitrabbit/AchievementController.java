@@ -22,7 +22,11 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
 /**
  * Sets achivements as complete, and loads achievment status
@@ -30,59 +34,113 @@ import java.util.ArrayList;
 
 public class AchievementController {
     private ArrayList<Achievement> achievementList = new ArrayList<>();
-    private ArrayList<Boolean> isCompletedList;
-    private Context context;
+    private ArrayList<Integer> isCompletedList;
     private Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
-    private Achievement busyAchievement = new Achievement(1,"complete 3 habits in one day","Busy Beaver");
+    private Achievement busyAchievement = new Achievement(3,"complete 3 habits in one day","Busy Beaver");
+    private Date busyDate = new Date();
     private Achievement firstEventAchievement = new Achievement(1,"complete your first habit","Good Start");
     private Achievement openAppAchievement = new Achievement(1,"you opened the app","Too Easy");
-    //private Bitmap openAppImage;
     private Achievement newYearsAchievement = new Achievement(1,"Start a habit on New Years Eve","New Years Resolution");
 
     public AchievementController(){
-        //set to True or False
-        //openAppImage = BitmapFactory.decodeResource(context.getResources(), R.drawable.gradea);
-        //openAppAchievement.setBitmap(openAppImage);
-        openAppAchievement.setCompleted();
         achievementList.add(openAppAchievement);
         achievementList.add(weekendWarriorAchievement);
         achievementList.add(busyAchievement);
+        achievementList.add(newYearsAchievement);
+        achievementList.add(firstEventAchievement);
     }
 
     public ArrayList<Achievement> getAchievements() {
         return this.achievementList;
     }
 
-    public void AddAchievement(Achievement achievement){
+    public void addAchievement(Achievement achievement){
         this.achievementList.add(achievement);
     }
 
+    /**
+     * get the progress for each achievement
+     */
     public void loadAchievementsStatus(){
-        //get achivement status for each achievement here
-        //call this on user login
+        ArrayList<Achievement> list = this.achievementList;
+        for (Achievement a : list){
+            if (a.getProgress() >= a.getProgressRequired()){
+                a.setCompleted();
+            }
+
+        }
     }
 
+    /**
+     * save the progress for each achievement
+     */
     public void saveAchievementsStatus(){
-        //call this after any achievement is completed
-        //upload status of elasticsearch
+
     }
 
+    /**
+     * updates the progress for the achievement weekendwarrior
+     * and sets completion if needed
+     */
     public void updateWeekendWarrior(){
-        weekendWarriorAchievement.incrementProgress();
-        if ((weekendWarriorAchievement.getCompleted() == Boolean.FALSE) &&
-                (weekendWarriorAchievement.getProgress() >= weekendWarriorAchievement.getProgressRequired())) {
+        Calendar calendar = new GregorianCalendar();
+        // if it is a weekend, update the achievement
+        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY ||
+                calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+            weekendWarriorAchievement.incrementProgress();
+        }
+        if ((weekendWarriorAchievement.getProgress() >= weekendWarriorAchievement.getProgressRequired())) {
             weekendWarriorAchievement.setCompleted();
         }
 
     }
 
-    public void updateFirstEvent(){
+    /**
+     * updates the progress for the achievement busy beaver and sets
+     * completion if needed
+     */
+    public void updateBusyBeaver(){
+        Date currentDate = new Date();
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyyMMdd");
+        if (fmt.format(this.busyDate).equals(fmt.format(currentDate))){
+            busyAchievement.incrementProgress();
+        }
+        else {
+            busyAchievement.setProgress(1);
+            this.busyDate = new Date();
+        }
+
+        if (busyAchievement.getProgress().equals(busyAchievement.getProgressRequired())){
+            busyAchievement.setCompleted();
+        }
+
+    }
+
+    /**
+     * updates the progress for the achievement good start and sets
+     * completion if needed
+     */
+    public void updateFirstEvent()
+    {
         firstEventAchievement.setCompleted();
     }
 
+    /**
+     * sets completion of the achievement too easy
+     */
     public void setOpenAppAchievement(){
         openAppAchievement.setCompleted();
     }
 
-
+    /**
+     *  sets completion for the achievement new years resolution if the condition
+     *  is met
+     */
+    public void updateNewYearsResolution(){
+        Date date1 = new Date(2011, Calendar.DECEMBER, 31);
+        SimpleDateFormat fmt = new SimpleDateFormat("MMdd");
+        if (fmt.format(new Date()).equals(fmt.format(date1))){
+           newYearsAchievement.setCompleted();
+        }
+    }
 }

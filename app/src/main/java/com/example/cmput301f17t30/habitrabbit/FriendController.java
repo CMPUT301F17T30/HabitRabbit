@@ -18,30 +18,26 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import java.util.ArrayList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
+
 /**
- * command design pattern. this inherits from command.
- * Created by WilliamWong on 2017-11-08.
+ * Controller for managing friends and latest friend events
  */
 
-public class DeleteEventCommand extends Command {
-    private HabitEvent habitEvent;
+public class FriendController {
 
-    public DeleteEventCommand(HabitEvent habitEvent) {
-        this.habitEvent = habitEvent;
-    }
-    @Override
-    public void execute() {
-        ElasticSearchController.DeleteHabitEvent deleteHabitEvent = new ElasticSearchController.DeleteHabitEvent();
-        deleteHabitEvent.execute(habitEvent);
+    private ArrayList<Friend> friends = new ArrayList<>();
+
+    public FriendController(){
     }
 
-    @Override
-    public void unexecute() {
 
+    public ArrayList<Friend> getFriends(){
+        return this.friends;
     }
 
-    @Override
-    public boolean isReversible() {
-        return false;
+    public void setFriendsList(ArrayList<Friend> friends){
+        friendsList.setList(friends);
     }
 }

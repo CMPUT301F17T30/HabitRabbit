@@ -20,13 +20,18 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
@@ -53,11 +58,15 @@ public class LoginActivity extends AppCompatActivity {
             String name = usernameText.getText().toString();
 
             if (name.trim().length() == 0) {
-                Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.enter_valid_username, Snackbar.LENGTH_LONG);
+                mySnackbar.show();
             }
 
             else if (name.trim().length() > 20) {
-                Toast.makeText(LoginActivity.this, "Please enter a name of 20 characters or less", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(LoginActivity.this, "Please enter a name of 20 characters or less", Toast.LENGTH_SHORT).show();
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.too_long_username, Snackbar.LENGTH_LONG);
+                mySnackbar.show();
             }
 
             else {
@@ -66,16 +75,20 @@ public class LoginActivity extends AppCompatActivity {
                 habitController.clearHabits();
                 //setResult(RESULT_OK, returnIntent);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("logged in", Boolean.TRUE);
                 editor.putString("username", name);
                 editor.apply();
-
+                //String language = getApplicationContext().getSharedPreferences("language", 0).toString();
                 Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(mainActivityIntent);
-                 //finish();
+                finish();
              }
 
 
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        
+    }
 }

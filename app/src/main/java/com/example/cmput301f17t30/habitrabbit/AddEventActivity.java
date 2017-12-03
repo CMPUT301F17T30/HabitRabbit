@@ -19,6 +19,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -34,16 +35,26 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
+import static java.lang.Boolean.FALSE;
 
 
 /**
@@ -53,6 +64,9 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 public class AddEventActivity extends AppCompatActivity {
     private EditText comment, locationInput;
     private Intent intent;
+    private EditText date;
+    private DatePickerDialog datePickerDialog;
+    private Date eventDate;
 
     // use intent to pass habit for actual code
     private Habit habit;
@@ -85,6 +99,8 @@ public class AddEventActivity extends AppCompatActivity {
     private String addressName;
     private Bitmap defaultImage;
 
+    private Calendar dateSelected;
+
 
     private LocationController locationController;
 
@@ -102,7 +118,13 @@ public class AddEventActivity extends AppCompatActivity {
         final Button gpsButton = (Button) findViewById(R.id.gps);
         image = (ImageView) findViewById(R.id.ivImage);
         comment = (EditText) findViewById(R.id.comment);
+        ImageButton datePickerButton = (ImageButton)findViewById(R.id.datePickerButton);
+        date = (EditText) findViewById(R.id.setEventDate);
 
+        dateSelected = Calendar.getInstance();
+        String pattern = "dd-MM-yyyy";
+        String stringDate = new SimpleDateFormat(pattern).format(new Date());
+        date.setText(stringDate);
 
 
         locationInput = (EditText) findViewById(R.id.enter_location);
@@ -111,9 +133,16 @@ public class AddEventActivity extends AppCompatActivity {
 
 
         locationNameList = new ArrayList<>(); //empty in start
-        //
         adapter = new ArrayAdapter<>(this, R.layout.list_location, locationNameList);
         locationOuput.setAdapter(adapter);
+
+        datePickerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                date.setError(null);
+                setDateTimeField();
+            }
+        });
 
 
         // add image
@@ -174,6 +203,7 @@ public class AddEventActivity extends AppCompatActivity {
         gpsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                locationNameList.clear();
                 int flag = locationController.getGPS(v.getContext());
                 if (flag == 1) {
                     checkPermission(GPS_REQUEST_CODE);
@@ -192,7 +222,7 @@ public class AddEventActivity extends AppCompatActivity {
         /*
           set up the habit event object and save
          */
-        saveButton.setOnClickListener(new View.OnClickListener() {
+       saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
             String theComment = comment.getText().toString();
@@ -202,35 +232,49 @@ public class AddEventActivity extends AppCompatActivity {
                         Toast.LENGTH_LONG).show();
             }
 
-            else
-                eventController.setComment(theComment);
-                eventController.saveAddEvent();
-                //addEventDone();
+            else {
+                try {
+                    eventController.setComment(theComment);
+                    SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+                    format.setLenient(FALSE);
+                    eventDate = format.parse(date.getText().toString());
+                    eventController.setDate(eventDate);
+                    if (locationInput.getText().toString().length() == 0){
+                        eventController.setLocationName("");
+                        eventController.setCoordinate(0, 0);
+                    }
+                    if (!checkDuplicate(eventDate)) {
+                        date.setError("Cannot add more than one event in one day");
+                    }
+                    else{
 
-                Intent returnToMain = new Intent();
-                setResult(RESULT_OK, returnToMain);
+                        //addEventDone();
+                        eventController.saveAddEvent();
+                        achievementController.updateNewYearsResolution();
+                        achievementController.updateBusyBeaver();
+                        achievementController.updateWeekendWarrior();
+                        achievementController.updateFirstEvent();
+                        Intent returnToMain = new Intent();
+                        setResult(RESULT_OK, returnToMain);
+                        finish();
+                    }
 
-                finish();
+
+
+                } catch (ParseException exception) {
+                    Toast.makeText(getApplicationContext(), "Date cannot be set.",
+                            Toast.LENGTH_LONG).show();
+                }
+
+
+
+            }
 
 
             }
         });
     }
 
-    public void addEventDone(){
-        try{
-
-
-            Intent returnToMain = new Intent();
-            setResult(RESULT_OK, returnToMain);
-
-            finish();
-
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-    }
 
 
     /**
@@ -267,6 +311,58 @@ public class AddEventActivity extends AppCompatActivity {
 
     }
 
+    private void setDateTimeField() {
+        Calendar newCalendar = dateSelected;
+        final String pattern1 = "dd-MM-yyyy";
+        final DateFormat formatter = new SimpleDateFormat(pattern1);
+        datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
+
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                dateSelected.set(year, monthOfYear, dayOfMonth, 0, 0);
+                date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
+            }
+
+        },
+                newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
+
+        //add restriction for date
+        Calendar cal = Calendar.getInstance();
+        Date today = cal.getTime();
+        cal.add(Calendar.DAY_OF_MONTH, -7);
+        Date result = cal.getTime();
+        datePickerDialog.getDatePicker().setMinDate(result.getTime());
+        datePickerDialog.getDatePicker().setMaxDate(today.getTime());
+
+        date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
+        datePickerDialog.show();
+    }
+    
+     private boolean checkDuplicate(Date edate) {
+
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -7);
+        Date result = cal.getTime();
+        SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy");
+        df.format(result);
+        HabitEvent event  = eventController.returnEvent();
+
+        for (int i = 0; i < eventList.getSize(); i++){
+            Date getDate = eventController.getDate(i);
+            String title = eventController.getType(i).getTitle();
+            if (title.equals(habit.getTitle())  && getDate.equals(edate)){
+                eventController.setEvent(event);
+                return FALSE;
+            }
+            else if (getDate.before(result)){
+                eventController.setEvent(event);
+                return Boolean.TRUE;
+            }
+
+
+        }
+        eventController.setEvent(event);
+        return Boolean.TRUE;
+    }
 
 
     /**
@@ -384,6 +480,7 @@ public class AddEventActivity extends AppCompatActivity {
         int position = getIntent().getIntExtra("pos",0);
         habit = habitList.getHabit(position);
         eventController.addEvent(habit);
+        eventController.setUserId(habit.getUserID());
     }
 
 }

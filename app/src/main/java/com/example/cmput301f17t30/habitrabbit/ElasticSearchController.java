@@ -37,6 +37,7 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
@@ -49,7 +50,7 @@ public class ElasticSearchController {
     private static JestDroidClient client;
 
 
-    public class AddEventTask extends AsyncTask<HabitEvent, Void, Void> {
+    public static class AddEventTask extends AsyncTask<HabitEvent, Void, Void> {
 
         @Override
         protected Void doInBackground(HabitEvent...habitEvents) {
@@ -87,10 +88,9 @@ public class ElasticSearchController {
             // TODO Build the query
 
             for (HabitEvent habitEvent : habitEvents) {
-                Update update = new Update.Builder(habitEvent).index("team30_habitrabbit").type("HabitEvent").id(habitEvent.getId()).build();
-
+                Index index = new Index.Builder(habitEvent).index("team30_habitrabbit").type("HabitEvent").id(habitEvent.getId()).build();
                 try {
-                    DocumentResult result = client.execute(update);
+                    DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
 
                     } else {
@@ -103,8 +103,34 @@ public class ElasticSearchController {
             }
 
             return null;
+
         }
 
+    }
+
+    public static class DeleteHabitEvent extends AsyncTask<HabitEvent, Void, Void> {
+        @Override
+        protected Void doInBackground(HabitEvent...habitEvents){
+            verifySettings();
+
+            for (HabitEvent habitEvent : habitEvents) {
+                Delete delete = new Delete.Builder(habitEvent.getId()).index("team30_habitrabbit").type("HabitEvent").build();
+
+                try {
+                    DocumentResult result = client.execute(delete);
+                    if (result.isSucceeded()) {
+                        Log.i("Sucess", "Sucessfully deleted Habit Event");
+                    } else {
+                        Log.i("Error", "Elasticsearch was unable to delete Habit Event");
+                    }
+                } catch (Exception e) {
+                    Log.i("Error", "Failed to communicate with server");
+                }
+            }
+
+            return null;
+
+        }
     }
 
     public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
@@ -186,7 +212,6 @@ public class ElasticSearchController {
 
     public static class GetHabitsTask extends AsyncTask<String, Void, Void>{
 
-
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -233,6 +258,115 @@ public class ElasticSearchController {
             elasticDone.setDone(true);
         }
     }
+
+   public static class GetFriendEventsTask extends AsyncTask<Friend, Void, Void>{
+        @Override
+        protected Void doInBackground(Friend...friends) {
+            verifySettings();
+
+            for (Friend friend: friends) {
+                ArrayList<Habit> friendHabits = new ArrayList<>();
+                String friendId = friend.getUser().getUserId();
+                String query = "{\n" +
+                        "    \"query\" : {\n" +
+                        "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
+                        "    }\n" +
+                        "}";
+
+
+                Search search = new Search.Builder(query)
+                        .addIndex("team30_habitrabbit")
+                        .addType("Habit")
+                        .build();
+                try {
+                    // TODO get the results of the query
+                    SearchResult result = client.execute(search);
+                    if (result.isSucceeded()) {
+                        List<Habit> habits = result.getSourceAsObjectList(Habit.class);
+                        friendHabits.addAll(habits);
+                        for (Habit friendHabit : friendHabits) {
+                            friendHabit.getTitle();
+                            String queryEvent = "{\n" +
+                                    "    \"query\" : {\n" +
+                                    "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
+                                    "    }\n" +
+                                    "}";
+                        }
+                    } else {
+                        Log.e("Error", "The seach query failed");
+                    }
+
+                } catch (Exception e) {
+                    Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+            }
+            return null;
+        }
+
+
+    }
+
+
+
+
+
+    public static class AddUserTask extends AsyncTask<User, Void, Void> {
+
+        @Override
+        protected Void doInBackground(User...users) {
+            verifySettings();
+
+            for (User user : users) {
+                Index index = new Index.Builder(user).index("team30_habitrabbit").type("User").build();
+
+                try {
+                    // where is the client?
+                    DocumentResult result = client.execute(index);
+                    if(result.isSucceeded()){
+                        user.setJestId(result.getId());
+                        Log.i("Success","Adding User success");
+                    }
+                    else{
+                        Log.i("Error","Elasticsearch was not able to add the User");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the User");
+                }
+
+            }
+            return null;
+        }
+    }
+
+    public static class UpdateUser extends AsyncTask<User, Void, Void> {
+        @Override
+        protected Void doInBackground(User...users) {
+            verifySettings();
+
+            // TODO Build the query
+
+            for (User user : users) {
+                Update update = new Update.Builder(user).index("team30_habitrabbit").type("User").id(user.getJestId()).build();
+
+                try {
+                    DocumentResult result = client.execute(update);
+                    if (result.isSucceeded()) {
+
+                    } else {
+                        Log.d("Error", "The search query failed");
+                    }
+                    // TODO get the results of the query
+                } catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+            }
+
+            return null;
+        }
+
+    }
+
 
 
 

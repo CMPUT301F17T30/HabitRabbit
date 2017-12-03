@@ -39,6 +39,8 @@ public class HabitEvent {
     private String Location;
     private double logitude;
     private double latitude;
+
+    private String userId;
     
     // use for elasticsearch later.
     @JestId
@@ -88,6 +90,13 @@ public class HabitEvent {
         return id;
     }
 
+    public void setUserId(String userId){
+        this.userId = userId;
+    }
+
+    public String getUserId(){
+        return userId;
+    }
 
     /**
      * @return the date that this habitevent was completed

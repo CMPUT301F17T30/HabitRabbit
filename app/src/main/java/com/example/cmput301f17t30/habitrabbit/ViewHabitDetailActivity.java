@@ -83,12 +83,18 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
 
         double habitPercent = habitController.getPercentageCompletion();
         String percentText = Double.toString(floor(habitPercent*100)) + "%";
+        if (percentText.equals("-100.0%")){
+            percentText = "N/A";
+        }
         int complete = habitController.getCompleted();
         int fail = habitController.getFailed();
         String completeText = Integer.toString(complete);
         String failText = Integer.toString(fail);
 
-        if (habitPercent <= 0.15){
+        if (habitPercent < 0){
+            picture_id = R.drawable.gradenone;
+        }
+        else if (habitPercent <= 0.15){
             picture_id = R.drawable.gradefminus;
         }
         else if (habitPercent <= 0.30){

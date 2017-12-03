@@ -2,30 +2,26 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
 /**
- * Created by gaoxin on 2017/11/13.
+ * Created by gaoxin on 2017/11/29.
  */
 
-public class AddEventActivityTest extends ActivityInstrumentationTestCase2<MainActivity>{
+public class EventMapTest  extends ActivityInstrumentationTestCase2<MainActivity> {
     private Solo solo;
 
-    public AddEventActivityTest(){
+    public EventMapTest() {
         super(com.example.cmput301f17t30.habitrabbit.MainActivity.class);
         ArrayList<Boolean> days = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
         Collections.fill(days, Boolean.TRUE);
@@ -36,13 +32,12 @@ public class AddEventActivityTest extends ActivityInstrumentationTestCase2<MainA
     }
 
 
-    public void setUp()throws Exception{
+    public void setUp() throws Exception {
         super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
-
-    public void testAddEventActivity(){
+    public void testEventMap(){
         Activity activity = getActivity();
         //solo.clickOnView(solo.getView(R.id.buttonAddHabitEvent));
         //solo.clickOnButton(R.id.addHabitButton);
@@ -54,38 +49,23 @@ public class AddEventActivityTest extends ActivityInstrumentationTestCase2<MainA
         solo.enterText((EditText) solo.getView(R.id.comment), "testcommand");
         assertTrue(solo.waitForText("testcommand"));
 
-        solo.enterText((EditText)solo.getView(R.id.enter_location), "university of alberta");
-        solo.clickOnView(solo.getView(R.id.search_location));
+        solo.clickOnView(solo.getView(R.id.gps));
 
-        solo.clickInList(0);
         solo.clickOnView(solo.getView(R.id.save_event));
 
+        solo.clickOnView(solo.getView(R.id.habitHistoryButton));
         solo.sleep(2000);
-        assertTrue(habitController.getTitle().equals("test title"));
-
-        assertTrue(eventController.getComment(0).equals("testcommand"));
+        solo.clickOnView(solo.getView(R.id.map));
+        solo.sleep(2000);
+        solo.clickOnView(solo.getView(R.id.highlight));
+        solo.sleep(2000);
+        solo.clickOnView(solo.getView(R.id.highlight));
+        solo.sleep(2000);
 
     }
-
-
-    /*public void testAddEventActivity(){
-        solo.assertCurrentActivity("Wrong activity", AddEventActivity.class);
-        solo.enterText((EditText)solo.getView(R.id.comment), "testcommand");
-
-        solo.enterText((EditText)solo.getView(R.id.enter_location), "university of alberta");
-        solo.clickOnButton(R.id.enter_location);
-
-        solo.clickInList(0);
-
-        solo.clickOnButton(R.id.save_event);
-        //assertTrue();
-    }*/
-
     public void tearDown() throws Exception{
         super.tearDown();
         solo.finishOpenedActivities();
     }
-
-
 
 }

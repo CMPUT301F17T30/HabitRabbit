@@ -21,7 +21,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.graphics.Bitmap;
 
 /**
- * Created by Adam on 26-Nov-17.
+ * Class to model an achievement and its details
  */
 
 public class Achievement {
@@ -33,6 +33,13 @@ public class Achievement {
     private Bitmap bitmap;
     private String name;
 
+    /**
+     * The achievement constructor
+     *
+     * @param required the number of times a task must bo completed to unlock the achievement
+     * @param description a short description of how to unlock the achievement
+     * @param name the title of the achievement
+     */
     public Achievement(Integer required, String description, String name){
         this.completed = Boolean.FALSE;
         this.progress = 0;
@@ -41,54 +48,80 @@ public class Achievement {
         this.name = name;
     }
 
+    /**
+     * marks the achievement as unlocked
+     */
     public void setCompleted(){
         this.completed = Boolean.TRUE;
     }
 
+    /**
+     * @return whether or not the user has unlocked this achievement
+     */
     public Boolean getCompleted() {
         return completed;
     }
 
+    /**
+     * @return the progress towards unlocking the achievement
+     */
     public Integer getProgress() {
         return progress;
     }
 
+    /**
+     * @param progress the progress towards unlocking this achievement
+     */
     public void setProgress(Integer progress) {
         this.progress = progress;
     }
 
+    /**
+     * @return the number of times a task must be completed to unlock this achievement
+     */
     public Integer getProgressRequired() {
         return progressRequired;
     }
 
+    /**\
+     *
+     * @param progressRequired the number of times a task must be completed to unlock this achievement
+     */
     public void setProgressRequired(Integer progressRequired) {
         this.progressRequired = progressRequired;
     }
 
+    /**
+     *  increases the achievement progress by 1
+     */
     public void incrementProgress(){
         this.progress += 1;
     }
 
+    /**
+     * @return a short description of how to unlock the achievement
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * @param description a short description of how to unlock the achievement
+     */
     public void setDescription(String description) {
         this.description = description;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
-    }
-
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
-    }
-
+    /**
+     * @return the title of this achievement
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * @param name the title of this achievement
+     */
     public void setName(String name) {
         this.name = name;
     }
