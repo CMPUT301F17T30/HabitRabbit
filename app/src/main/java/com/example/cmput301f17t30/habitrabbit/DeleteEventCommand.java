@@ -24,15 +24,15 @@ package com.example.cmput301f17t30.habitrabbit;
  */
 
 public class DeleteEventCommand extends Command {
+    private HabitEvent habitEvent;
+
+    public DeleteEventCommand(HabitEvent habitEvent) {
+        this.habitEvent = habitEvent;
+    }
     @Override
     public void execute() {
-        //Using the Jest library
-        /*
-        client.execute(new Delete.Builder("ID of Event from elasticsearch")
-                        .index("Our Index")
-                        .type("Event")
-                        .build())
-         */
+        ElasticSearchController.DeleteHabitEvent deleteHabitEvent = new ElasticSearchController.DeleteHabitEvent();
+        deleteHabitEvent.execute(habitEvent);
     }
 
     @Override

@@ -282,6 +282,7 @@ public class EditHabitActivity extends AppCompatActivity {
             habitController.setReason(habitReason);
             habitController.setDays(days);
             habitController.setDate(startDate);
+            habitController.saveEditHabit();
 
             Intent returnToMain = new Intent();
             setResult(RESULT_OK, returnToMain);

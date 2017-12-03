@@ -21,6 +21,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import java.util.ArrayList;
 import java.util.Date;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.commandQueue;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
@@ -88,14 +89,16 @@ public class HabitController {
 
     public void saveAddHabit(){
         habitList.addHabit(habit);
-        ElasticSearchController.AddHabitTask addHabitTask = new ElasticSearchController.AddHabitTask();
-        addHabitTask.execute(habit);
+        AddHabitCommand addHabitCommand = new AddHabitCommand(habit);
+        commandQueue.addTail(addHabitCommand);
+        commandQueue.runCommands();
     }
 
     public void saveEditHabit(){
         habitList.editHabit(position, habit);
-        ElasticSearchController.EditHabitTask editHabitTask = new ElasticSearchController.EditHabitTask();
-        editHabitTask.execute(habit);
+        EditHabitCommand editHabitCommand = new EditHabitCommand(habit);
+        commandQueue.addTail(editHabitCommand);
+        commandQueue.runCommands();
     }
 
     public void viewHabit(int position){
@@ -105,8 +108,9 @@ public class HabitController {
 
     public void deleteHabit(){
         eventController.deleteAllHabitEvents(habitList.getHabit(position));
-        ElasticSearchController.DeleteHabitTask deleteHabitTask = new ElasticSearchController.DeleteHabitTask();
-        deleteHabitTask.execute(habit);
+        DeleteHabitCommand deleteHabitCommand = new DeleteHabitCommand(habit);
+        commandQueue.addTail(deleteHabitCommand);
+        commandQueue.runCommands();
         habitList.deleteHabit(position);
     }
 
