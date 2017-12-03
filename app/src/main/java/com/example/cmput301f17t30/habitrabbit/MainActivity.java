@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private static JestDroidClient client;
 
     public static elasticDoneBoolean elasticDone;
-    public static elasticDoneBoolean userDone;
+    public static UserDoneBoolean userDone;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;

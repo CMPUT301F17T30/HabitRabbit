@@ -5,8 +5,9 @@ package com.example.cmput301f17t30.habitrabbit;
  */
 
 public class elasticDoneBoolean {
-    private boolean elasticDone = false;
+    private boolean elasticDone;
     private ChangeListener listener;
+
 
     public boolean isDone() {
         return elasticDone;
@@ -28,4 +29,5 @@ public class elasticDoneBoolean {
     public interface ChangeListener {
         void onChange();
     }
+
 }

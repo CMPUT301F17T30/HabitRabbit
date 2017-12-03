@@ -33,6 +33,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.Date;
 import java.util.Locale;
 
@@ -44,7 +46,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.userDone;
 public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
-    ElasticSearchController elasticSearchController = new ElasticSearchController();
+    ElasticSearchController elasticSearchController;
 
 
     @Override
@@ -55,6 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginListener);
+        elasticSearchController = new ElasticSearchController();
     }
 
     private View.OnClickListener loginListener = new View.OnClickListener() {
@@ -82,17 +85,25 @@ public class LoginActivity extends AppCompatActivity {
                 ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
                 getUserTask.execute(name);
 
-                userDone = new elasticDoneBoolean();
-                userDone.setListener(new elasticDoneBoolean.ChangeListener() {
+                try{
+                    Log.d("Login test","successfully got user" + userController.getUsername());
+                }
+                catch (NullPointerException exception){
+                    Log.d("Login test","user not set yet before listener");
+                }
+
+
+                userDone = new UserDoneBoolean();
+                userDone.setUserListener(new UserDoneBoolean.ChangeUserListener() {
                     @Override
                     public void onChange() {
                         if (userController.checkUserExist() == Boolean.FALSE){
-                            Log.d("error","user does not exist");
+                            Log.d("Login  error","user does not exist");
 
                         }
 
                         if (userController.getUser() == null){
-                            Log.d("error","user was a null object");
+                            Log.d("Login  error","user was a null object");
                             Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.login_failed, Snackbar.LENGTH_LONG);
                             mySnackbar.show();
                             ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
@@ -104,6 +115,7 @@ public class LoginActivity extends AppCompatActivity {
                             userController.saveUser();
                         }
                         else{
+                            Log.d("Login  test","successfully got user " + userController.getUsername());
                             habitController.clearHabits();
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putString("username", name);

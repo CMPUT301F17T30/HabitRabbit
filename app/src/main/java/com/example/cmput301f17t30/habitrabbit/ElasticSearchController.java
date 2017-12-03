@@ -617,15 +617,15 @@ public class ElasticSearchController {
                     User user = result.getSourceAsObject(User.class);
                     userController.setUser(user);
                     userController.setUserExist(Boolean.TRUE);
-                    Log.d("success","get user succeeded");
+                    Log.d("ElasticSearch success","get user succeeded");
                     try {
-                        Log.d("username", userController.getUsername());
+                        Log.d("ElasticSearch username", userController.getUsername());
                     }
                     catch (NullPointerException exception){
-                        Log.d("error","could not get username");
+                        Log.d("ElasticSearch error","could not get username");
                     }
                 } else {
-                    Log.d("Error", "The search query failed");
+                    Log.d("ElasticSearch Error", "The search query failed");
                     userController.setUserExist(Boolean.FALSE);
                 }
                 // TODO get the results of the query
@@ -636,7 +636,8 @@ public class ElasticSearchController {
         }
 
         protected void onPostExecute(Void aVoid) {
-            userDone.setDone(true);
+            Log.d("ElasticSearch", "onPostExecute executed");
+            userDone.setUserDone(Boolean.TRUE);
         }
 
 
