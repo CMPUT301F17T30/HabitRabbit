@@ -88,7 +88,7 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         String title = habit.getTitle();
         Bitmap light;
         Boolean sameDay;
-        sameDay = isSameDay(habit);
+        sameDay = habit.isSameDay();
 
         if (habit.isDueToday() && (sameDay == Boolean.TRUE) )
             light = BitmapFactory.decodeResource(mainContext.getResources(), R.drawable.greenlight);
@@ -115,21 +115,4 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         return habitList.size();
     }
 
-    public Boolean isSameDay(Habit habit) {
-        Date todayDate = new Date();
-        Date lastCompleteDate = habit.getLastCompleted();
-
-        Calendar calToday = Calendar.getInstance();
-        Calendar calLast = Calendar.getInstance();
-        calToday.setTime(todayDate);
-        if (lastCompleteDate != null)
-            calLast.setTime(lastCompleteDate);
-        Boolean sameDay = calToday.get(Calendar.YEAR) == calLast.get(Calendar.YEAR) &&
-                calToday.get(Calendar.DAY_OF_YEAR) == calLast.get(Calendar.DAY_OF_YEAR);
-
-        if (lastCompleteDate == null)
-            sameDay = Boolean.FALSE;
-
-        return sameDay;
-    }
 }

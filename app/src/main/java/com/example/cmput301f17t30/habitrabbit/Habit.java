@@ -401,5 +401,24 @@ public class Habit {
         this.userID = userID;
     }
 
+    public Boolean isSameDay() {
+        Date todayDate = new Date();
+        Date lastCompleteDate = lastCompleted;
+
+        Calendar calToday = Calendar.getInstance();
+        Calendar calLast = Calendar.getInstance();
+        calToday.setTime(todayDate);
+        if (lastCompleteDate != null)
+            calLast.setTime(lastCompleteDate);
+        Boolean sameDay = calToday.get(Calendar.YEAR) == calLast.get(Calendar.YEAR) &&
+                calToday.get(Calendar.DAY_OF_YEAR) == calLast.get(Calendar.DAY_OF_YEAR);
+
+        if (lastCompleteDate == null)
+            sameDay = Boolean.FALSE;
+
+        return sameDay;
+    }
+
+
 
 }
