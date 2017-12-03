@@ -83,7 +83,7 @@ public class TestHabitList {
         Habit habit = new MockHabit();
         list.addHabit(habit);
         list.deleteHabit(7);
-        assertEquals(0, list.getSize());
+        assertEquals(1, list.getSize());
 
     }
 
