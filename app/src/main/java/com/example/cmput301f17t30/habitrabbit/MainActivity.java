@@ -160,13 +160,8 @@ public class MainActivity extends AppCompatActivity {
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
-
             }
         });
-
-
-
-
     }
 
     @Override
@@ -207,8 +202,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onResume()
-    {
+    protected void onResume() {
         super.onResume();
         adapterList.clear();
         adapterList.addAll(habitList.getList());
@@ -233,9 +227,7 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         }
-
     }
-
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -256,13 +248,13 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.logout_button) {
+            habitController.saveAllHabits();
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
             SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = mySPrefs.edit();
             editor.remove("username").apply();
             startActivity(logout);
         }
-
         if (id == R.id.user_profile_button) {
             Intent profile = new Intent(MainActivity.this, UserProfileActivity.class);
             startActivity(profile);

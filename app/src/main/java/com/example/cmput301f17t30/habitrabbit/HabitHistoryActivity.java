@@ -76,7 +76,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-                // TODO Auto-generated method stub
                 HistoryFilterDialogue yourDialog = new HistoryFilterDialogue(HabitHistoryActivity.this);
                 yourDialog.show();
             }
