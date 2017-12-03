@@ -33,12 +33,14 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
+    ElasticSearchController elasticSearchController = new ElasticSearchController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginListener);
-
     }
 
     private View.OnClickListener loginListener = new View.OnClickListener() {
@@ -71,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
 
             else {
                  //Intent returnIntent = getIntent();
-                User user = new User(name);
-                userController.setUser(user);
+                ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+                getUserTask.execute(name);
                 habitController.clearHabits();
                 //setResult(RESULT_OK, returnIntent);
                 SharedPreferences.Editor editor = sharedPreferences.edit();

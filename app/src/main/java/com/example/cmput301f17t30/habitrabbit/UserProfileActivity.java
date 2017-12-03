@@ -48,6 +48,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
+import java.text.ParseException;
+import java.util.EmptyStackException;
 import java.util.Locale;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
@@ -89,9 +91,14 @@ public class UserProfileActivity extends AppCompatActivity {
         usernameText.setText(userController.getUsername());
 
         profilePic = (ImageView) findViewById(R.id.profile_picture);
-        if (userController.getProfilePic() != null){
+
+        try {
             profilePic.setImageBitmap(userController.getProfilePic());
         }
+        catch (NullPointerException exception){
+            //do not set picture if it doesnt exist
+        }
+
 
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -233,6 +240,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             Bitmap newProfilePic = imageController.decodeFile(imageDecode);
             profilePic.setImageBitmap(newProfilePic);
+            userController.setProfilePicture(profileImage);
             // permission was granted
 
         } else {
@@ -250,7 +258,6 @@ public class UserProfileActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         try {
-
             if (requestCode == IMAGE_RESULT && resultCode == RESULT_OK && null != data) {
                 Uri URI = data.getData();
                 String[] FILE = { MediaStore.Images.Media.DATA };
@@ -263,7 +270,7 @@ public class UserProfileActivity extends AppCompatActivity {
                 checkPermission(IMAGE_REQUEST_CODE);
 
             }
-        } catch (Exception e) {
+        } catch (NullPointerException e) {
             // unable to get the path
             Toast.makeText(this, "Please try again", Toast.LENGTH_LONG)
                     .show();
