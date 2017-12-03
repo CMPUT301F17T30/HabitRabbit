@@ -20,11 +20,13 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.app.Dialog;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 /**
  * Created by Adam on 02-Dec-17.
@@ -73,11 +75,18 @@ public class HistoryFilterDialogue extends Dialog {
             @Override
             public void onClick(View v) {
                 String textString = searchText.getText().toString();
-                int radioButtonID = filterGroup.getCheckedRadioButtonId();
-                View radioButton = filterGroup.findViewById(radioButtonID);
-                searchBy = filterGroup.indexOfChild(radioButton);
-                activity.filterHistoryList(textString,searchBy);
-                thisDialog.cancel();
+
+                if (textString.trim().length() == 0){
+                    Toast.makeText(activity, "Search field cannot be blank", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    int radioButtonID = filterGroup.getCheckedRadioButtonId();
+                    View radioButton = filterGroup.findViewById(radioButtonID);
+                    searchBy = filterGroup.indexOfChild(radioButton);
+                    activity.filterHistoryList(textString,searchBy);
+                    thisDialog.cancel();
+                }
+
             }
         });
     }
