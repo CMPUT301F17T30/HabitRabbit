@@ -507,7 +507,7 @@ public class ElasticSearchController {
                     if (addresult.isSucceeded()) {
                         sender = addresult.getSourceAsObject(User.class);
                         sender.addFriend(request.getReciever().getUserId());
-                        Index index = new Index.Builder(sender).index("team30_habitrabbit").type("FriendRequest").id(user.getJestId()).build();
+                        Index index = new Index.Builder(sender).index("team30_habitrabbit").type("User").id(user.getJestId()).build();
 
                         try {
                             DocumentResult result = client.execute(index);
@@ -571,7 +571,7 @@ public class ElasticSearchController {
             // TODO Build the query
 
             for (User user : users) {
-                Update update = new Update.Builder(user).index("team30_habitrabbit").type("User").id(user.getJestId()).build();
+                Index index = new Index.Builder(user).index("team30_habitrabbit").type("User").id(user.getJestId()).build();
 
                 try {
                     DocumentResult result = client.execute(update);
