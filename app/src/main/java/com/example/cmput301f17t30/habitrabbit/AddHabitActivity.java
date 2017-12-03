@@ -249,6 +249,7 @@ public class AddHabitActivity extends AppCompatActivity {
             Date startDate = format.parse(date.getText().toString());
 
             habitController.addHabit(habitName, days, startDate);
+            habitController.saveAddHabit();
 
             if (!habitReason.trim().isEmpty()){
                 habitController.setReason(habitReason);

@@ -220,7 +220,6 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
-                habitController.saveAddHabit();
                 habitList.sort();
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
@@ -229,7 +228,6 @@ public class MainActivity extends AppCompatActivity {
         }
         if (requestCode == VIEW_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
-                habitController.saveEditHabit();
                 habitList.sort();
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
