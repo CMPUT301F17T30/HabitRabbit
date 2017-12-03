@@ -54,10 +54,6 @@ public class AchievementController {
         return this.achievementList;
     }
 
-    public void addAchievement(Achievement achievement){
-        this.achievementList.add(achievement);
-    }
-
     /**
      * get the progress for each achievement
      */
@@ -143,4 +139,5 @@ public class AchievementController {
            newYearsAchievement.setCompleted();
         }
     }
+
 }

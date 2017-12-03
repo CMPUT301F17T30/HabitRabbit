@@ -39,6 +39,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController
 public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
+    ElasticSearchController elasticSearchController = new ElasticSearchController();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,8 +72,8 @@ public class LoginActivity extends AppCompatActivity {
 
             else {
                  //Intent returnIntent = getIntent();
-                User user = new User(name);
-                userController.setUser(user);
+                ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+                getUserTask.execute(name);
                 habitController.clearHabits();
                 //setResult(RESULT_OK, returnIntent);
                 SharedPreferences.Editor editor = sharedPreferences.edit();

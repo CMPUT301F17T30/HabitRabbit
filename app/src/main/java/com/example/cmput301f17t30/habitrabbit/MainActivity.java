@@ -111,7 +111,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(logout);
         }
         else{
-            userController.setUser(sharedPreferences.getString("username",null));
+            //TODO make this work offline
+            String username = sharedPreferences.getString("username",null);
+            ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+            getUserTask.execute(username);
         }
 
         adapterList = new ArrayList<Habit>();
