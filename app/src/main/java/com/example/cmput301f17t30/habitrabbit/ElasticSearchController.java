@@ -31,11 +31,6 @@ import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 8292e582eedd9891514380501770bebd9b90a8b5
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
