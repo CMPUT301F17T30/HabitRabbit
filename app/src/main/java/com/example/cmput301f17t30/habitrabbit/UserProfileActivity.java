@@ -240,7 +240,6 @@ public class UserProfileActivity extends AppCompatActivity {
             Toast.makeText(UserProfileActivity.this, "Permission needed to access photo gallery.", Toast.LENGTH_SHORT).show();
             // permission denied
         }
-        return;
     }
 
 
