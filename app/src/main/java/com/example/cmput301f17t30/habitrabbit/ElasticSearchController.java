@@ -31,7 +31,7 @@ import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.plaf.BorderUIResource;
+
 
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;

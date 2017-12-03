@@ -89,9 +89,14 @@ public class UserProfileActivity extends AppCompatActivity {
         usernameText.setText(userController.getUsername());
 
         profilePic = (ImageView) findViewById(R.id.profile_picture);
-        if (userController.getProfilePic() != null){
+
+        try {
             profilePic.setImageBitmap(userController.getProfilePic());
         }
+        catch (NullPointerException exception){
+            //do not set picture if it doesnt exist
+        }
+
 
         profilePic.setOnClickListener(new View.OnClickListener() {
             @Override
