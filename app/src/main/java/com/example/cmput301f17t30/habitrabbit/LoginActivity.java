@@ -80,10 +80,15 @@ public class LoginActivity extends AppCompatActivity {
                 //String language = getApplicationContext().getSharedPreferences("language", 0).toString();
                 Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
                 startActivity(mainActivityIntent);
-                 //finish();
+                finish();
              }
 
 
         }
     };
+
+    @Override
+    public void onBackPressed() {
+        
+    }
 }
