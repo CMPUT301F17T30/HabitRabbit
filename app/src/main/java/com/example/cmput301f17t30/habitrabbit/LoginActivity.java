@@ -48,7 +48,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         super.onCreate(savedInstanceState);
-        userController.clearUser();
         setContentView(R.layout.activity_login);
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginListener);
