@@ -126,9 +126,10 @@ public class HabitController {
     public void saveAllHabits(){
         for (int i = 0; i < habitList.getSize(); i++) {
             Habit newHabit = habitList.getHabit(i);
-            ElasticSearchController.EditHabitTask editHabitTask = new ElasticSearchController.EditHabitTask();
-            editHabitTask.execute(newHabit);
+            AddHabitCommand addHabitCommand = new AddHabitCommand(newHabit);
+            commandQueue.addTail(addHabitCommand);
         }
+        commandQueue.runCommands();
     }
 
 }
