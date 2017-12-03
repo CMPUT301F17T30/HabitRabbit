@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     private int FRIENDS_REQUEST = 3;
 
 
-    public static ElasticDoneBoolean elasticDone;
+    public static elasticDoneBoolean elasticDone;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        elasticDone = new ElasticDoneBoolean();
-        elasticDone.setListener(new ElasticDoneBoolean.ChangeListener() {
+        elasticDone = new elasticDoneBoolean();
+        elasticDone.setListener(new elasticDoneBoolean.ChangeListener() {
             @Override
             public void onChange() {
                 habitList.sort();

@@ -4,7 +4,7 @@ package com.example.cmput301f17t30.habitrabbit;
  * Created by Jacqueline on 2017-12-02.
  */
 
-public class ElasticDoneBoolean {
+public class elasticDoneBoolean {
     private boolean elasticDone = false;
     private ChangeListener listener;
 
