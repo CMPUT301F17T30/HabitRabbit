@@ -117,8 +117,6 @@ public class MainActivity extends AppCompatActivity {
             String username = sharedPreferences.getString("username",null);
             ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
             getUserTask.execute(username);
-            ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
-            getHabitsTask.execute(sharedPreferences.getString("username",null));
         }
 
 
@@ -172,7 +170,8 @@ public class MainActivity extends AppCompatActivity {
         userDone.setListener(new elasticDoneBoolean.ChangeListener() {
             @Override
             public void onChange() {
-
+                ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
+                getHabitsTask.execute(userController.getUsername());
             }
         });
 
