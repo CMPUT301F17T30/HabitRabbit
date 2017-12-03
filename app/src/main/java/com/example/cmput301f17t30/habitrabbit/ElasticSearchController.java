@@ -258,34 +258,39 @@ public class ElasticSearchController {
         }
     }
 
-    public static class GetFriendList extends AsyncTask<User, Void, Void>{
+   public static class GetFriendEventsTask extends AsyncTask<Friend, Void, Void>{
         @Override
-        protected Void doInBackground(User...user) {
+        protected Void doInBackground(Friend...friends) {
             verifySettings();
 
-            User user1 = user[0];
-            ArrayList<String> friends = user1.getFriendsList();
-            ArrayList<Friend> users = new ArrayList<>();
-
-            for (int i = 0; i < friends.size() ; i++) {
+            for (Friend friend: friends) {
+                ArrayList<Habit> friendHabits = new ArrayList<>();
+                String friendId = friend.getUser().getUserId();
                 String query = "{\n" +
                         "    \"query\" : {\n" +
-                        "        \"term\" : { \"user_id\" : \"" + friends.get(i) + "\" }\n" +
+                        "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
                         "    }\n" +
                         "}";
 
 
                 Search search = new Search.Builder(query)
                         .addIndex("team30_habitrabbit")
-                        .addType("User")
+                        .addType("Habit")
                         .build();
                 try {
                     // TODO get the results of the query
                     SearchResult result = client.execute(search);
                     if (result.isSucceeded()) {
-                        User foundFriend = result.getSourceAsObject(User.class);
-                        Friend friend = new Friend(foundFriend);
-                        users.add(0, friend);
+                        List<Habit> habits = result.getSourceAsObjectList(Habit.class);
+                        friendHabits.addAll(habits);
+                        for (Habit friendHabit : friendHabits) {
+                            friendHabit.getTitle();
+                            String queryEvent = "{\n" +
+                                    "    \"query\" : {\n" +
+                                    "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
+                                    "    }\n" +
+                                    "}";
+                        }
                     } else {
                         Log.e("Error", "The seach query failed");
                     }
@@ -294,11 +299,43 @@ public class ElasticSearchController {
                     Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
             }
-            friendController.setFriendsList(users);
             return null;
         }
 
 
+    }
+
+
+
+
+
+    public static class AddUserTask extends AsyncTask<User, Void, Void> {
+
+        @Override
+        protected Void doInBackground(User...users) {
+            verifySettings();
+
+            for (User user : users) {
+                Index index = new Index.Builder(user).index("team30_habitrabbit").type("User").build();
+
+                try {
+                    // where is the client?
+                    DocumentResult result = client.execute(index);
+                    if(result.isSucceeded()){
+                        user.setJestId(result.getId());
+                        Log.i("Success","Adding User success");
+                    }
+                    else{
+                        Log.i("Error","Elasticsearch was not able to add the User");
+                    }
+                }
+                catch (Exception e) {
+                    Log.i("Error", "The application failed to build and send the User");
+                }
+
+            }
+            return null;
+        }
     }
 
 
