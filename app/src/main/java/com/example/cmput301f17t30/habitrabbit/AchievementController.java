@@ -110,7 +110,7 @@ public class AchievementController {
             this.busyDate = new Date();
         }
 
-        if (busyAchievement.getProgress() == busyAchievement.getProgressRequired()){
+        if (busyAchievement.getProgress().equals(busyAchievement.getProgressRequired())){
             busyAchievement.setCompleted();
         }
 

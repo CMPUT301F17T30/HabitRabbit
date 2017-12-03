@@ -20,6 +20,7 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -29,6 +30,7 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.commandQueue;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
 /**
@@ -116,16 +118,16 @@ public class HabitEventController {
 
     public void saveAddEvent(){
         eventList.addEvent(habitEvent);
-        ElasticSearchController.AddEventTask addEventTask = new ElasticSearchController.AddEventTask();
-        addEventTask.execute(habitEvent);
+        AddEventCommand addEventCommand = new AddEventCommand(habitEvent);
+        commandQueue.addTail(addEventCommand);
         habitEvent.getHabitType().incrementTimesCompleted();
         habitEvent.getHabitType().setLastCompleted(new Date());
     }
 
     public void deleteEvent(int index){
         eventList.deleteEvent(index);
-        ElasticSearchController.DeleteHabitEvent deleteHabitEvent = new ElasticSearchController.DeleteHabitEvent();
-        deleteHabitEvent.execute(habitEvent);
+        DeleteEventCommand deleteEventCommand = new DeleteEventCommand(habitEvent);
+        commandQueue.addTail(deleteEventCommand);
         habitEvent.getHabitType().decrementTimesCompleted();
         flag = 1;
     }
@@ -141,8 +143,8 @@ public class HabitEventController {
 
     public void saveEditEvent(int index){
         eventList.editEvent(index, habitEvent);
-        ElasticSearchController.UpdateHabitEvent updateHabitEvent = new ElasticSearchController.UpdateHabitEvent();
-        updateHabitEvent.execute(habitEvent);
+        EditEventCommand editEventCommand = new EditEventCommand(habitEvent);
+        commandQueue.addTail(editEventCommand);
 
     }
 
@@ -163,20 +165,22 @@ public class HabitEventController {
 
     public void deleteAllHabitEvents(Habit type) {
         ArrayList<HabitEvent> list = eventList.getList();
-        if (eventList.getSize() > 0) {
+        try {
             habitEvent = eventList.getEvent(0);
             for (Iterator<HabitEvent> iterator = list.iterator(); iterator.hasNext(); ) {
                 if (iterator.next().getHabitType() == type)
                     iterator.remove();
-                ElasticSearchController.DeleteHabitEvent deleteHabitEvent = new ElasticSearchController.DeleteHabitEvent();
-                deleteHabitEvent.execute(habitEvent);
+                DeleteEventCommand deleteEventCommand = new DeleteEventCommand(habitEvent);
+                commandQueue.addTail(deleteEventCommand);
                 if (iterator.hasNext())
                     habitEvent = iterator.next();
             }
-
-            eventList.setEventList(list);
+        } catch(IndexOutOfBoundsException e) {
+            Log.i("Delete Habit", "No HabitEvents in Habit");
         }
+        eventList.setEventList(list);
     }
+
 
      public HabitEvent returnEvent(){
      return habitEvent;
