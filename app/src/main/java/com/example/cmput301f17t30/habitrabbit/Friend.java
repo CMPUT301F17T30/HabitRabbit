@@ -32,12 +32,14 @@ public class Friend{
         this.user = user;
     }
 
-
     public User getUser(){return user;}
+
     public void setUser(User user){this.user = user;}
+
     public void setRecentEvents(ArrayList<HabitEvent> events){
         recentEvents = events;
     }
+
     /**
      *
      * @return The list of events that this friend has recently completed

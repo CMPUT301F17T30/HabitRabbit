@@ -20,6 +20,8 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 /**
@@ -32,20 +34,39 @@ public class TestFriend  {
     public TestFriend() {
         super();
     }
+
     @Test
-    public void testSetId(){
-        //String ID = "bob";
-        //Friend friend = new Friend(ID);
-        //assertEquals(ID, friend.getId());
+    public void testGetUser(){
+        User user = new User("Bartholemew");
+        Friend friend = new Friend(user);
+        assertEquals(user,friend.getUser());
     }
 
     @Test
-    public void testGetId(){
-        String ID = "bob";
-        //Friend friend = new Friend(ID);
-        String newID = "tim";
-        //friend.setId(newID);
-        //assertEquals(newID, friend.getId());
-
+    public void testSetUser(){
+        User user = new User("Bartholemew");
+        Friend friend = new Friend(user);
+        User newUser = new User("Hubert");
+        friend.setUser(newUser);
+        assertEquals(newUser,friend.getUser());
     }
+
+    @Test
+    public void testGetRecentEvents(){
+        ArrayList<HabitEvent> events = new ArrayList<>();
+        User user = new User("Bartholemew");
+        Friend friend = new Friend(user);
+        friend.setRecentEvents(events);
+        assertEquals(events,friend.getRecentEvents());
+    }
+
+    @Test
+    public void testSetRecentEvents(){
+        ArrayList<HabitEvent> events = new ArrayList<>();
+        User user = new User("Bartholemew");
+        Friend friend = new Friend(user);
+        friend.setRecentEvents(events);
+        assertEquals(events,friend.getRecentEvents());
+    }
+
 }
