@@ -55,7 +55,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             EditText usernameText = (EditText)findViewById(R.id.userName);
-            String name = usernameText.getText().toString();
+            String name = usernameText.getText().toString().toLowerCase();
 
             if (name.trim().length() == 0) {
                 //Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
