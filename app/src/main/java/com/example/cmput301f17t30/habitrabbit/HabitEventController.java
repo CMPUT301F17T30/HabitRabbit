@@ -120,7 +120,6 @@ public class HabitEventController {
         eventList.addEvent(habitEvent);
         AddEventCommand addEventCommand = new AddEventCommand(habitEvent);
         commandQueue.addTail(addEventCommand);
-        commandQueue.runCommands();
         habitEvent.getHabitType().incrementTimesCompleted();
         habitEvent.getHabitType().setLastCompleted(new Date());
     }
@@ -129,7 +128,6 @@ public class HabitEventController {
         eventList.deleteEvent(index);
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(habitEvent);
         commandQueue.addTail(deleteEventCommand);
-        commandQueue.runCommands();
         habitEvent.getHabitType().decrementTimesCompleted();
         flag = 1;
     }
@@ -147,7 +145,6 @@ public class HabitEventController {
         eventList.editEvent(index, habitEvent);
         EditEventCommand editEventCommand = new EditEventCommand(habitEvent);
         commandQueue.addTail(editEventCommand);
-        commandQueue.runCommands();
 
     }
 
@@ -175,7 +172,6 @@ public class HabitEventController {
                     iterator.remove();
                 DeleteEventCommand deleteEventCommand = new DeleteEventCommand(habitEvent);
                 commandQueue.addTail(deleteEventCommand);
-                commandQueue.runCommands();
                 if (iterator.hasNext())
                     habitEvent = iterator.next();
             }

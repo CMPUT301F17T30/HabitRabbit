@@ -91,14 +91,12 @@ public class HabitController {
         habitList.addHabit(habit);
         AddHabitCommand addHabitCommand = new AddHabitCommand(habit);
         commandQueue.addTail(addHabitCommand);
-        commandQueue.runCommands();
     }
 
     public void saveEditHabit(){
         habitList.editHabit(position, habit);
         EditHabitCommand editHabitCommand = new EditHabitCommand(habit);
         commandQueue.addTail(editHabitCommand);
-        commandQueue.runCommands();
     }
 
     public void viewHabit(int position){
@@ -110,7 +108,6 @@ public class HabitController {
         eventController.deleteAllHabitEvents(habitList.getHabit(position));
         DeleteHabitCommand deleteHabitCommand = new DeleteHabitCommand(habit);
         commandQueue.addTail(deleteHabitCommand);
-        commandQueue.runCommands();
         habitList.deleteHabit(position);
     }
 
@@ -129,7 +126,6 @@ public class HabitController {
             AddHabitCommand addHabitCommand = new AddHabitCommand(newHabit);
             commandQueue.addTail(addHabitCommand);
         }
-        commandQueue.runCommands();
     }
 
 }
