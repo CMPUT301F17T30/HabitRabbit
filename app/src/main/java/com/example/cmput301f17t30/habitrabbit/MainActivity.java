@@ -112,10 +112,13 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             //TODO make this work offline
-            String username = sharedPreferences.getString("username",null);
-            ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
-            getUserTask.execute(username);
+            //String username = sharedPreferences.getString("username",null);
+            //.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+            //getUserTask.execute(username);
         }
+
+        ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
+        getHabitsTask.execute(userController.getUsername());
 
         adapterList = new ArrayList<Habit>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
@@ -123,11 +126,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new HabitLayoutAdapter(adapterList, this);
         recyclerView.setAdapter(adapter);
-
-        ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
-        getHabitsTask.execute(userController.getUsername());
-
-
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
@@ -235,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        String username = sharedPreferences.getString("username",null);
+        String username = userController.getUsername();
         menu.findItem(R.id.user_profile_button).setTitle(username);
         return super.onPrepareOptionsMenu(menu);
     }

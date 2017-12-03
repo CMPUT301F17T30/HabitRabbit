@@ -62,6 +62,7 @@ public class UserController {
      */
     public void clearUser(){
         this.user = null;
+        setUserExist(Boolean.FALSE);
     }
 
     /**
