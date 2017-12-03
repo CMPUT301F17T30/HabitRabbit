@@ -338,37 +338,6 @@ public class ElasticSearchController {
         }
     }
 
-
-
-    public static class AddUserTask extends AsyncTask<User, Void, Void> {
-
-        @Override
-        protected Void doInBackground(User...users) {
-            verifySettings();
-
-            for (User user : users) {
-                Index index = new Index.Builder(user).index("team30_habitrabbit").type("User").build();
-
-                try {
-                    // where is the client?
-                    DocumentResult result = client.execute(index);
-                    if(result.isSucceeded()){
-                        user.setJestId(result.getId());
-                        Log.i("Success","Adding User success");
-                    }
-                    else{
-                        Log.i("Error","Elasticsearch was not able to add the User");
-                    }
-                }
-                catch (Exception e) {
-                    Log.i("Error", "The application failed to build and send the User");
-                }
-
-            }
-            return null;
-        }
-    }
-
     public static class UpdateUser extends AsyncTask<User, Void, Void> {
         @Override
         protected Void doInBackground(User...users) {

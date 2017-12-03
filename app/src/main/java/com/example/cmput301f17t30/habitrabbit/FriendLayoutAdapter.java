@@ -77,7 +77,7 @@ public class FriendLayoutAdapter extends RecyclerView.Adapter<FriendLayoutAdapte
 
     @Override
     public void onBindViewHolder(FriendLayoutAdapter.ViewHolder holder, final int position) {
-        final User friend = friends.get(position);
+        final Friend friend = friends.get(position);
 
         //holder.friendName.setText(name);
         //holder.friendImage.setImageBitmap(friendProfilePic);
