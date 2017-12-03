@@ -70,17 +70,20 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         });
 
-        Button button3 = (Button) findViewById(R.id.button9);
-        button3.setOnClickListener(new View.OnClickListener() {
+
+        Button filterButton = (Button) findViewById(R.id.button_filter_history);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+
             @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "congratulations, you clicked on button 3",
-                        Toast.LENGTH_SHORT).show();
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                HistoryFilterDialogue yourDialog = new HistoryFilterDialogue(HabitHistoryActivity.this);
+                yourDialog.show();
             }
         });
 
-        Button button1 = (Button) findViewById(R.id.map);
-        button1.setOnClickListener(new View.OnClickListener() {
+        Button mapButton = (Button) findViewById(R.id.map);
+        mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent map = new Intent(HabitHistoryActivity.this, EventMapsActivity.class);
@@ -139,5 +142,10 @@ public class HabitHistoryActivity extends AppCompatActivity {
             startActivity(logout);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void searchWord(String textString) {
+        //run the elastic stuff here
+
     }
 }
