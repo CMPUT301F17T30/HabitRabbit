@@ -87,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
     private int HABIT_HISTORY_REQUEST = 1;
     public static int VIEW_HABIT_REQUEST = 2;
     private int FRIENDS_REQUEST = 3;
-    private static JestDroidClient client;
+
 
     public static ElasticDoneBoolean elasticDone;
 
@@ -160,6 +160,7 @@ public class MainActivity extends AppCompatActivity {
         elasticDone.setListener(new ElasticDoneBoolean.ChangeListener() {
             @Override
             public void onChange() {
+                habitList.sort();
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
@@ -216,7 +217,7 @@ public class MainActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
-                habitController.saveAddHabit();
+                habitList.sort();
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
@@ -224,7 +225,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (requestCode == VIEW_HABIT_REQUEST){
             if (resultCode == RESULT_OK){
-                habitController.saveEditHabit();
+                habitList.sort();
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();

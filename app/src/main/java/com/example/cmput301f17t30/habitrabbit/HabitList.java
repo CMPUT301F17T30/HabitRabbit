@@ -102,4 +102,22 @@ public class HabitList {
         habitList.clear();
     }
 
+    public void sort(){
+        ArrayList<Habit> sortedList = new ArrayList<Habit>();
+        for (int i = 0; i < habitList.size(); i++){
+            Habit habit = habitList.get(i);
+
+            if (habit.isDueToday() && !habit.isSameDay()){
+                sortedList.add(0, habit);
+            }
+            else {
+                sortedList.add(habit);
+            }
+
+        }
+
+        habitList = sortedList;
+
+    }
+
 }

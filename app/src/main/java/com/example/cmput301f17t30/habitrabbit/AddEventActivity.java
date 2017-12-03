@@ -254,6 +254,8 @@ public class AddEventActivity extends AppCompatActivity {
                         achievementController.updateBusyBeaver();
                         achievementController.updateWeekendWarrior();
                         achievementController.updateFirstEvent();
+                        habitList.sort();
+
                         Intent returnToMain = new Intent();
                         setResult(RESULT_OK, returnToMain);
                         finish();
