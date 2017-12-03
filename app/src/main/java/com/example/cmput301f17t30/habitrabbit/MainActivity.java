@@ -69,6 +69,7 @@ import io.searchbox.core.SearchResult;
  */
 public class MainActivity extends AppCompatActivity {
 
+    public static final User currentUser = new User();
     public static final FriendList friendsList = new FriendList();
     public static final HabitList habitList = new HabitList();
     public static final HabitEventList eventList = new HabitEventList();

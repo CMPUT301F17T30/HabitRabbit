@@ -37,10 +37,13 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.currentUser;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**
  * Controller to deal with elastic search online behavior.
@@ -133,7 +136,52 @@ public class ElasticSearchController {
         }
     }
 
-    public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
+
+    public static class GetEventTask extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String... user_id) {
+            verifySettings();
+
+            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"userId\" : \"" + user_id[0] + "\" }\n" +
+                    " \"range\" : {\n" +
+                    "            \"date\" : {\n" +
+                    "                \"gte\" : \"now-4w\",\n" +
+                    "                \"lte\" :  \"now\"\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "    }\n" +
+                    "}";
+
+
+            Search search = new Search.Builder(query)
+                    .addIndex("team30_habitrabbit")
+                    .addType("HabitEvent")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<HabitEvent> foundEvents = result.getSourceAsObjectList(HabitEvent.class);
+                    events.addAll(foundEvents);
+                    eventList.setEventList(events);
+                } else {
+                    Log.e("Error", "The seach query failed");
+                }
+
+            } catch (Exception e) {
+                Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return null;
+        }
+    }
+
+
+        public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
 
         protected Void doInBackground(Habit...habits){
             verifySettings();
@@ -265,6 +313,7 @@ public class ElasticSearchController {
             verifySettings();
 
             for (Friend friend: friends) {
+                ArrayList<HabitEvent> friendEvents = new ArrayList<>();
                 ArrayList<Habit> friendHabits = new ArrayList<>();
                 String friendId = friend.getUser().getUserId();
                 String query = "{\n" +
@@ -288,10 +337,37 @@ public class ElasticSearchController {
                             friendHabit.getTitle();
                             String queryEvent = "{\n" +
                                     "    \"query\" : {\n" +
-                                    "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
-                                    "    }\n" +
+                                    "       \"nested\" : {\n" +
+                                    "           \"path\" : \"habitType\",\n" +
+                                    "               \"query\" : {\n" +
+                                    "                   \"term\" : { \"id\" : \"" + friendHabit.getId() +"\" }\n" +
+                                    "                   }\n" +
+                                    "               }\n" +
+                                    "    },\n" +
+                                    "    \"sort\": { \"date\" : \"desc\" },\n" +
+                                    "    \"size\": 1\n" +
                                     "}";
+                            Search searchEvent = new Search.Builder(query)
+                                    .addIndex("team30_habitrabbit")
+                                    .addType("HabitEvent")
+                                    .build();
+                            try {
+                                SearchResult resultEvent = client.execute(search);
+                                if(result.isSucceeded()){
+                                    HabitEvent friendEvent = result.getSourceAsObject(HabitEvent.class);
+                                    friendEvents.add(friendEvent);
+                                }
+                                else{
+                                    Log.e("Error", "The seach query failed");
+                                }
+
+                            }
+                            catch (Exception e) {
+                                Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                            }
+
                         }
+                        friend.setRecentEvents(friendEvents);
                     } else {
                         Log.e("Error", "The seach query failed");
                     }
@@ -339,7 +415,7 @@ public class ElasticSearchController {
         }
     }
 
-    public static class UpdateUser extends AsyncTask<User, Void, Void> {
+    public static class UpdateUserTask extends AsyncTask<User, Void, Void> {
         @Override
         protected Void doInBackground(User...users) {
             verifySettings();
@@ -366,6 +442,43 @@ public class ElasticSearchController {
         }
 
     }
+
+    public static class GetUserTask extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String...user_id) {
+            verifySettings();
+
+            // TODO Build the query
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"userId\" : \""+user_id[0]+"\" }\n" +
+                    "    }\n" +
+                    "}";
+
+
+            Search search = new Search.Builder(query)
+                    .addIndex("team30_habitrabbit")
+                    .addType("User")
+                    .build();
+
+                try {
+                    SearchResult result = client.execute(search);
+                    if (result.isSucceeded()) {
+                        User user = result.getSourceAsObject(User.class);
+                        userController.setUserObject(user);
+                    } else {
+                        Log.d("Error", "The search query failed");
+                    }
+                    // TODO get the results of the query
+                } catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+            return null;
+        }
+
+
+    }
+
 
 
 

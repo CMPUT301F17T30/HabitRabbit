@@ -47,6 +47,8 @@ public class UserController {
         this.user = new User(username);
     }
 
+    public void setUserObject(User user) {this.user = user;}
+
     /**
      * removes the current user, used when user logs out
      */
