@@ -148,4 +148,19 @@ public class HabitHistoryActivity extends AppCompatActivity {
         //run the elastic stuff here
 
     }
+
+    /**
+     * @param searchText the text that the user wishes to search by
+     * @param paramter 0 for filter by habit type, 1 for filter by comment text
+     */
+    public void filterHistoryList(String searchText, Integer paramter){
+        String searchType;
+        if (paramter == 0){
+            searchType = "type";
+        }
+        else{
+            searchType = "comment";
+        }
+        Toast.makeText(getApplicationContext(), "you searched for the" + searchType + searchText, Toast.LENGTH_LONG).show();
+    }
 }

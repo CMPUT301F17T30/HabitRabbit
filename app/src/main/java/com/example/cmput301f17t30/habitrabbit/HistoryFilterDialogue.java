@@ -61,9 +61,7 @@ public class HistoryFilterDialogue extends Dialog {
         searchText = findViewById(R.id.search_text);
 
         final RadioGroup filterGroup = findViewById(R.id.radio_filter_group);
-        int radioButtonID = filterGroup.getCheckedRadioButtonId();
-        View radioButton = filterGroup.findViewById(radioButtonID);
-        searchBy = filterGroup.indexOfChild(radioButton);
+
 
         Button cancel = findViewById(R.id.search_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -79,6 +77,11 @@ public class HistoryFilterDialogue extends Dialog {
             @Override
             public void onClick(View v) {
                 String textString = searchText.getText().toString();
+                int radioButtonID = filterGroup.getCheckedRadioButtonId();
+                View radioButton = filterGroup.findViewById(radioButtonID);
+                searchBy = filterGroup.indexOfChild(radioButton);
+                activity.filterHistoryList(textString,searchBy);
+                thisDialog.cancel();
             }
         });
     }
