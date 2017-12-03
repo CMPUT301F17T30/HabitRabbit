@@ -113,9 +113,9 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             //TODO make this work offline
-            //String username = sharedPreferences.getString("username",null);
-            //.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
-            //getUserTask.execute(username);
+            String username = sharedPreferences.getString("username",null);
+            ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
+            getUserTask.execute(username);
         }
 
         ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
@@ -253,9 +253,12 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.logout_button) {
             habitController.saveAllHabits();
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+
+            //remove user from preferences
             SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = mySPrefs.edit();
             editor.remove("username").apply();
+
             startActivity(logout);
         }
         if (id == R.id.user_profile_button) {
