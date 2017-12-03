@@ -82,8 +82,13 @@ public class TestHabitList {
         HabitList list = new HabitList();
         Habit habit = new MockHabit();
         list.addHabit(habit);
-        list.deleteHabit(7);
-        assertEquals(0, list.getSize());
+        try {
+            list.deleteHabit(7);
+        }
+        catch(IndexOutOfBoundsException e){
+            
+        }
+        assertEquals(1, list.getSize());
 
     }
 
