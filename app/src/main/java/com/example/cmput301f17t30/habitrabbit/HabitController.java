@@ -23,6 +23,7 @@ import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**
  * Controller to deal with adding, editing and deleting habits.
@@ -109,10 +110,11 @@ public class HabitController {
         habitList.deleteHabit(position);
     }
 
-    public void addAllHabits(ArrayList<Habit> habits){
-        habitList.addAll(habits);
+  /*  public void getHabits(){
+        ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
+        getHabitsTask.execute(userController.getUsername());
     }
-
+*/
     public void clearHabits(){
         habitList.clearAll();
     }
@@ -124,7 +126,5 @@ public class HabitController {
             editHabitTask.execute(newHabit);
         }
     }
-
-
 
 }

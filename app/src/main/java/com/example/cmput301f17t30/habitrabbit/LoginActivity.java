@@ -70,8 +70,10 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             else {
+                 //Intent returnIntent = getIntent();
                 userController.setUser(name);
                 habitController.clearHabits();
+                //setResult(RESULT_OK, returnIntent);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("username", name);
                 editor.apply();
