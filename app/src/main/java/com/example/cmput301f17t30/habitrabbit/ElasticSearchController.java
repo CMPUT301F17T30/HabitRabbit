@@ -489,19 +489,44 @@ public class ElasticSearchController {
 
             for (FriendRequest request : friendRequests) {
                 User user = request.getSender();
-                user.addFriend(request.getReciever().getUserId());
-                Index index = new Index.Builder(user).index("team30_habitrabbit").type("FriendRequest").id(user.getJestId()).build();
+                User sender = new User();
+                String query = "{\n" +
+                        "    \"query\" : {\n" +
+                        "        \"term\" : { \"userId\" : \""+user.getUserId()+"\" }\n" +
+                        "    }\n" +
+                        "}";
+
+
+                Search search = new Search.Builder(query)
+                        .addIndex("team30_habitrabbit")
+                        .addType("User")
+                        .build();
 
                 try {
-                    DocumentResult result = client.execute(index);
-                    if (result.isSucceeded()) {
-                        Log.i("Sucess", "Sucessfully added Friend");
-                    } else {
-                        Log.i("Error", "Elasticsearch was unable to add Friend");
+                    SearchResult addresult = client.execute(search);
+                    if (addresult.isSucceeded()) {
+                        sender = addresult.getSourceAsObject(User.class);
+                        sender.addFriend(request.getReciever().getUserId());
+                        Index index = new Index.Builder(sender).index("team30_habitrabbit").type("FriendRequest").id(user.getJestId()).build();
+
+                        try {
+                            DocumentResult result = client.execute(index);
+                            if (result.isSucceeded()) {
+                                Log.i("Sucess", "Sucessfully added Friend");
+                            } else {
+                                Log.i("Error", "Elasticsearch was unable to add Friend");
+                            }
+                        } catch (Exception e) {
+                            Log.i("Error", "Failed to build and send added Friend");
+                        }
                     }
+                    // TODO get the results of the query
                 } catch (Exception e) {
-                    Log.i("Error", "Failed to build and send added Friend");
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
+
+
+
             }
 
             return null;
