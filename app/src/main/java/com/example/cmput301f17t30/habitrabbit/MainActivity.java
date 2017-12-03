@@ -111,6 +111,7 @@ public class MainActivity extends AppCompatActivity {
         if (sharedPreferences.getString("username",null) == null){
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(logout);
+            finish();
         }
         else{
             //TODO make this work offline
@@ -265,12 +266,18 @@ public class MainActivity extends AppCompatActivity {
             editor.remove("username").apply();
 
             startActivity(logout);
+            finish();
         }
         if (id == R.id.user_profile_button) {
             Intent profile = new Intent(MainActivity.this, UserProfileActivity.class);
             startActivity(profile);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+
     }
 }
 
