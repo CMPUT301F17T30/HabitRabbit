@@ -33,6 +33,8 @@ public class Friend{
     }
 
 
+    public User getUser(){return user;}
+    public void setUser(User user){this.user = user;}
     public void setRecentEvents(ArrayList<HabitEvent> events){
         recentEvents = events;
     }

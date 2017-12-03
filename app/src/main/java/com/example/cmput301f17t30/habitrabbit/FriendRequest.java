@@ -43,12 +43,7 @@ public class FriendRequest {
     }
 
     public void setAccepted(Boolean accepted) {
-        if (accepted == Boolean.TRUE) {
-            this.accepted = Boolean.TRUE;
-        } else if (accepted == Boolean.FALSE) {
-            this.accepted = Boolean.FALSE;
-            //delete request
-        }
+        this.accepted = accepted;
     }
 
     public void checkRequestStatus(){

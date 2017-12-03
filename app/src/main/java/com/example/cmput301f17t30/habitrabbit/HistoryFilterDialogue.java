@@ -36,11 +36,7 @@ public class HistoryFilterDialogue extends Dialog {
     private EditText searchText;
     private HistoryFilterDialogue thisDialog;
 
-    private int SEARCH_BY_TYPE = 0;
-    private int SEARCH_BY_COMMENT = 1;
-
-    private Integer searchBy = SEARCH_BY_TYPE;
-
+    private Integer searchBy = 0;
 
     public HistoryFilterDialogue(HabitHistoryActivity context) {
         super(context);
@@ -61,9 +57,7 @@ public class HistoryFilterDialogue extends Dialog {
         searchText = findViewById(R.id.search_text);
 
         final RadioGroup filterGroup = findViewById(R.id.radio_filter_group);
-        int radioButtonID = filterGroup.getCheckedRadioButtonId();
-        View radioButton = filterGroup.findViewById(radioButtonID);
-        searchBy = filterGroup.indexOfChild(radioButton);
+
 
         Button cancel = findViewById(R.id.search_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {
@@ -79,23 +73,12 @@ public class HistoryFilterDialogue extends Dialog {
             @Override
             public void onClick(View v) {
                 String textString = searchText.getText().toString();
+                int radioButtonID = filterGroup.getCheckedRadioButtonId();
+                View radioButton = filterGroup.findViewById(radioButtonID);
+                searchBy = filterGroup.indexOfChild(radioButton);
+                activity.filterHistoryList(textString,searchBy);
+                thisDialog.cancel();
             }
         });
-    }
-    public void onRadioButtonClicked(View view) {
-        // Is the button now checked?
-        boolean checked = ((RadioButton) view).isChecked();
-
-        // Check which radio button was clicked
-        switch(view.getId()) {
-            case R.id.radio_type:
-                if (checked)
-                    searchBy = SEARCH_BY_TYPE;
-                    break;
-            case R.id.radio_comment:
-                if (checked)
-                    searchBy = SEARCH_BY_COMMENT;
-                    break;
-        }
     }
 }
