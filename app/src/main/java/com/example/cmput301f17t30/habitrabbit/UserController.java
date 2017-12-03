@@ -26,7 +26,6 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.Date;
 
-import javax.swing.event.ChangeListener;
 
 /**
  * Controller to deal with adding new users,
