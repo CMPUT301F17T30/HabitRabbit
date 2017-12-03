@@ -31,6 +31,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import java.util.Date;
 import java.util.Locale;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
@@ -74,6 +75,15 @@ public class LoginActivity extends AppCompatActivity {
                  //Intent returnIntent = getIntent();
                 ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
                 getUserTask.execute(name);
+                if (userController.checkUserExist()== Boolean.FALSE){
+                    ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
+                    User user = new User(name);
+                    user.setJoinDate(new Date());
+                    addUserTask.execute(user);
+                }
+
+
+
                 habitController.clearHabits();
                 //setResult(RESULT_OK, returnIntent);
                 SharedPreferences.Editor editor = sharedPreferences.edit();

@@ -31,7 +31,7 @@ import io.searchbox.annotations.JestId;
  */
 
 public class User {
-    private  String userId;
+    private String userId;
     private ArrayList<String> friends;
     private Date joinDate;
     private Bitmap profilePic;
