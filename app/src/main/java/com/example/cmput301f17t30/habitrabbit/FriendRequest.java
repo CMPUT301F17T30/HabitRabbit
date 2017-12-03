@@ -16,6 +16,7 @@ public class FriendRequest {
     @JestId
     private String id;
 
+
     /**
      *
      * @param sender the user who sent the request
@@ -27,6 +28,14 @@ public class FriendRequest {
         this.accepted = null;
     }
 
+
+    public void setId(String id){
+        this.id = id;
+    }
+
+    public String getId(){
+        return id;
+    }
     /**
      * @return the user who sent the request
      */

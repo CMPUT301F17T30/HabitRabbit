@@ -111,7 +111,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(logout);
         }
         else{
-            userController.setUser(sharedPreferences.getString("username",null));
+            User user = new User(sharedPreferences.getString("username",null));
+            userController.setUser(user);
         }
 
         adapterList = new ArrayList<Habit>();

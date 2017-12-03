@@ -27,8 +27,11 @@ import android.util.Log;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
+import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.plaf.BorderUIResource;
 
 import io.searchbox.core.Delete;
 import io.searchbox.core.DocumentResult;
@@ -384,6 +387,42 @@ public class ElasticSearchController {
 
 
 
+    public static class GetFriendRequestTask extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String...user_id) {
+            verifySettings();
+
+            // TODO Build the query
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"userId\" : \""+user_id[0]+"\" }\n" +
+                    "    }\n" +
+                    "}";
+
+
+            Search search = new Search.Builder(query)
+                    .addIndex("team30_habitrabbit")
+                    .addType("User")
+                    .build();
+
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    User user = result.getSourceAsObject(User.class);
+
+                } else {
+                    Log.d("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return null;
+        }
+
+
+    }
+
 
 
     public static class AddUserTask extends AsyncTask<User, Void, Void> {
@@ -466,8 +505,10 @@ public class ElasticSearchController {
                     if (result.isSucceeded()) {
                         User user = result.getSourceAsObject(User.class);
                         userController.setUser(user);
+                        userController.setUserExist(Boolean.TRUE);
                     } else {
                         Log.d("Error", "The search query failed");
+                        userController.setUserExist(Boolean.FALSE);
                     }
                     // TODO get the results of the query
                 } catch (Exception e) {
