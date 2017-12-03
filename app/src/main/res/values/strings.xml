@@ -77,6 +77,10 @@
     <string name="add_event">ADD EVENT</string>
     <string name="Date" />
     <string name="filter">Filter</string>
+    <string name="filter_by_type">Filter by type</string>
+    <string name="filter_by_comment">Filter by comment</string>
+    <string name="search">search</string>
+    <string name="cancel">Cancel</string>
 
 
 </resources>
