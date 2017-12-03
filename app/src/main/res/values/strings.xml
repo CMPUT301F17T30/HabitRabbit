@@ -76,6 +76,7 @@
     <string name="date">date</string>
     <string name="add_event">ADD EVENT</string>
     <string name="Date" />
+    <string name="filter">Filter</string>
 
 
 </resources>
