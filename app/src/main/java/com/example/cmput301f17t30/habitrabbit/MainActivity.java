@@ -118,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
             ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
             getUserTask.execute(username);
             ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
-            getHabitsTask.execute(userController.getUsername());
+            getHabitsTask.execute(sharedPreferences.getString("username",null));
         }
 
 
@@ -167,6 +167,16 @@ public class MainActivity extends AppCompatActivity {
                 adapter.notifyDataSetChanged();
             }
         });
+
+        userDone = new elasticDoneBoolean();
+        userDone.setListener(new elasticDoneBoolean.ChangeListener() {
+            @Override
+            public void onChange() {
+
+            }
+        });
+
+
     }
 
     @Override
