@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static elasticDoneBoolean elasticDone;
+    public static Boolean fromMain = Boolean.FALSE;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -114,6 +115,7 @@ public class MainActivity extends AppCompatActivity {
         else{
             //TODO make this work offline
             String username = sharedPreferences.getString("username",null);
+            fromMain = Boolean.TRUE;
             ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
             getUserTask.execute(username);
         }
@@ -252,7 +254,9 @@ public class MainActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.logout_button) {
+            fromMain = Boolean.FALSE;
             habitController.saveAllHabits();
+            userController.clearUser();
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
 
             //remove user from preferences

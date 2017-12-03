@@ -38,11 +38,13 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
+import static com.example.cmput301f17t30.habitrabbit.LoginActivity.elasticDoneL;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.currentUser;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendRequests;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.fromMain;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
@@ -634,7 +636,9 @@ public class ElasticSearchController {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            userController.setDone(true);
+            if (fromMain == Boolean.FALSE) {
+                elasticDoneL.setDone(true);
+            }
         }
 
 
