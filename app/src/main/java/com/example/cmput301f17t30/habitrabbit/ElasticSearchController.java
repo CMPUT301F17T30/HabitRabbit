@@ -465,7 +465,7 @@ public class ElasticSearchController {
                     SearchResult result = client.execute(search);
                     if (result.isSucceeded()) {
                         User user = result.getSourceAsObject(User.class);
-                        userController.setUserObject(user);
+                        userController.setUser(user);
                     } else {
                         Log.d("Error", "The search query failed");
                     }

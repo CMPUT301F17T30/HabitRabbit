@@ -41,13 +41,12 @@ public class UserController {
     //TODO fix this method
     /**
      *
-     * @param username
+     * @param user
      */
-    public void setUser(String username){
-        this.user = new User(username);
+    public void setUser(User user){
+        this.user = user;
     }
 
-    public void setUserObject(User user) {this.user = user;}
 
     /**
      * removes the current user, used when user logs out
