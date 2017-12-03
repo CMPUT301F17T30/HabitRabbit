@@ -484,6 +484,7 @@ public class ElasticSearchController {
 
 
 
+
     public static void verifySettings() {
         if (client == null) {
             DroidClientConfig.Builder builder = new DroidClientConfig.Builder("http://cmput301.softwareprocess.es:8080/");
