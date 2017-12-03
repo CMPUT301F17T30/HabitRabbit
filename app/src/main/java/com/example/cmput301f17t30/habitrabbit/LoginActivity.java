@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                     User user = new User(name);
                     user.setJoinDate(new Date());
                     addUserTask.execute(user);
+                    userController.setUser(user);
                 }
 
 
