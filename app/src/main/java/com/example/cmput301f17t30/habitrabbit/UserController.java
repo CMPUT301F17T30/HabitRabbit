@@ -78,6 +78,10 @@ public class UserController {
         }
     }
 
+    public void saveUser(){
+        ElasticSearchController.UpdateUserTask updateUser = new ElasticSearchController.UpdateUserTask();
+        updateUser.execute(user);
+    }
 
     public ArrayList<String> getFriends(){
         return user.getFriendsList();

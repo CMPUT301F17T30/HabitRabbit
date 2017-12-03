@@ -51,6 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button loginButton = (Button) findViewById(R.id.loginButton);
         loginButton.setOnClickListener(loginListener);
+        userController.clearUser();
     }
 
     private View.OnClickListener loginListener = new View.OnClickListener() {
@@ -110,6 +111,6 @@ public class LoginActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
+        
     }
 }

@@ -36,6 +36,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -97,6 +98,7 @@ public class UserProfileActivity extends AppCompatActivity {
         }
         catch (NullPointerException exception){
             //do not set picture if it doesnt exist
+            Log.d("error", "user has no profile pic or user is null" );
         }
 
 
@@ -225,6 +227,7 @@ public class UserProfileActivity extends AppCompatActivity {
             profileImage = imageController.decodeFile(imageDecode);
             profilePic.setImageBitmap(profileImage);
             userController.setProfilePicture(profileImage);
+            userController.saveUser();
         }
 
     }
@@ -238,9 +241,10 @@ public class UserProfileActivity extends AppCompatActivity {
         // If request is cancelled, the result arrays are empty.
         if (grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            Bitmap newProfilePic = imageController.decodeFile(imageDecode);
-            profilePic.setImageBitmap(newProfilePic);
-            userController.setProfilePicture(profileImage);
+            //Bitmap newProfilePic = imageController.decodeFile(imageDecode);
+            //profilePic.setImageBitmap(newProfilePic);
+            //userController.setProfilePicture(profileImage);
+            //userController.saveUser();
             // permission was granted
 
         } else {

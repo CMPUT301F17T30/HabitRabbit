@@ -69,10 +69,7 @@ public class TestFriendRequest {
         User sender = new User();
         User reciever = new User();
         FriendRequest request = new FriendRequest(sender,reciever);
-        request.setAccepted(Boolean.TRUE);
-        assertEquals(Boolean.TRUE,request.getAccepted());
-        request.setAccepted(Boolean.FALSE);
-        assertEquals(Boolean.FALSE,request.getAccepted());
+
 
     }
 }

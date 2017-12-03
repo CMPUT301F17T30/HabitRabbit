@@ -209,7 +209,7 @@ public class TestHabit {
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setTimesCompleted(0);
         habit.setTimesFailed(0);
-        assertEquals(0,habit.getPercentCompletion(),0);
+        assertEquals(-1,habit.getPercentCompletion(),0);
     }
 
     @Test
@@ -306,7 +306,7 @@ public class TestHabit {
 
         Integer day = todayCal.get(Calendar.DAY_OF_WEEK);
 
-        Boolean bol = (daylist.get(day-2));
+        Boolean bol = (daylist.get(day-1));
 
         GregorianCalendar myCalendar = new GregorianCalendar(2017, 10, 11);
         Date testDate = myCalendar.getTime();
