@@ -34,8 +34,17 @@ import java.util.Date;
 public class UserController {
 
     private User user;
+    private static Boolean userExist;
 
     public UserController(){
+    }
+
+    public Boolean checkUserExist(){
+        return userExist;
+    }
+
+    public void setUserExist(Boolean flag){
+        userExist = flag;
     }
 
     //TODO fix this method
