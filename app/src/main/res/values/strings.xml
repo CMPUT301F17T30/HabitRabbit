@@ -39,6 +39,7 @@
 
     <string name="enter_valid_username">Please enter a valid username</string>
     <string name="too_long_username">Please enter a username of no more than 20 characters</string>
+    <string name="login_failed">Could not get user data from Elastic servers</string>
 
     <string name="daySelectPrompt">Please select days this habit is due:</string>
     <string name="startDate">Start Date (DD-MM-YYYY)</string>

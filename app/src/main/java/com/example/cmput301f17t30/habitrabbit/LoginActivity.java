@@ -21,11 +21,13 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -37,11 +39,13 @@ import java.util.Locale;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userDone;
 
 public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     ElasticSearchController elasticSearchController = new ElasticSearchController();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +61,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             EditText usernameText = (EditText)findViewById(R.id.userName);
-            String name = usernameText.getText().toString().toLowerCase();
+            final String name = usernameText.getText().toString().toLowerCase();
 
             if (name.trim().length() == 0) {
                 //Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
@@ -74,33 +78,55 @@ public class LoginActivity extends AppCompatActivity {
             else {
 
                 //TODO fix this
+                userController.clearUser();
                 ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
                 getUserTask.execute(name);
-                if (userController.checkUserExist() == Boolean.FALSE){
-                    ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
-                    User user = new User(name);
-                    user.setJoinDate(new Date());
-                    addUserTask.execute(user);
-                    userController.setUser(user);
-                }
+
+                userDone = new elasticDoneBoolean();
+                userDone.setListener(new elasticDoneBoolean.ChangeListener() {
+                    @Override
+                    public void onChange() {
+                        if (userController.checkUserExist() == Boolean.FALSE){
+                            Log.d("error","user does not exist");
+
+                        }
+
+                        if (userController.getUser() == null){
+                            Log.d("error","user was a null object");
+                            Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.login_failed, Snackbar.LENGTH_LONG);
+                            mySnackbar.show();
+                            ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
+                            User user = new User(name);
+                            user.setJoinDate(new Date());
+                            user.setUserId(name);
+                            addUserTask.execute(user);
+                            userController.setUser(user);
+                            userController.saveUser();
+                        }
+                        else{
+                            habitController.clearHabits();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putString("username", name);
+                            editor.apply();
+                            Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
+                            startActivity(mainActivityIntent);
+                            finish();
+                        }
+
+
+                    }
+                });
 
 
 
-                habitController.clearHabits();
-                //setResult(RESULT_OK, returnIntent);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("username", name);
-                editor.apply();
-                //String language = getApplicationContext().getSharedPreferences("language", 0).toString();
-                Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(mainActivityIntent);
-                finish();
+
              }
 
 
         }
     };
 
+    //override back button functionality so that user cannot go back after logging out
     @Override
     public void onBackPressed() {
 

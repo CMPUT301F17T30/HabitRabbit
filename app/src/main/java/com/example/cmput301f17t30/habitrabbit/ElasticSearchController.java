@@ -27,6 +27,7 @@ import android.util.Log;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
+import java.io.IOException;
 import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +47,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendRequests
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userDone;
 
 /**
  * Controller to deal with elastic search online behavior.
@@ -309,7 +311,7 @@ public class ElasticSearchController {
         }
     }
 
-   public static class GetFriendEventsTask extends AsyncTask<Friend, Void, Void>{
+    public static class GetFriendEventsTask extends AsyncTask<Friend, Void, Void>{
         @Override
         protected Void doInBackground(Friend...friends) {
             verifySettings();
@@ -551,11 +553,11 @@ public class ElasticSearchController {
                         Log.i("Success","Adding User success");
                     }
                     else{
-                        Log.i("Error","Elasticsearch was not able to add the User");
+                        Log.i("Error","Add User Task: Elasticsearch was not able to add the User");
                     }
                 }
-                catch (Exception e) {
-                    Log.i("Error", "The application failed to build and send the User");
+                catch (IOException e) {
+                    Log.i("Error", "Add User Task: The application failed to build and send the User");
                 }
 
             }
@@ -581,8 +583,8 @@ public class ElasticSearchController {
                         Log.d("Error", "The search query failed");
                     }
                     // TODO get the results of the query
-                } catch (Exception e) {
-                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                } catch (IOException e) {
+                    Log.i("Error", "Update User Task: Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
             }
 
@@ -609,21 +611,32 @@ public class ElasticSearchController {
                     .addType("User")
                     .build();
 
-                try {
-                    SearchResult result = client.execute(search);
-                    if (result.isSucceeded()) {
-                        User user = result.getSourceAsObject(User.class);
-                        userController.setUser(user);
-                        userController.setUserExist(Boolean.TRUE);
-                    } else {
-                        Log.d("Error", "The search query failed");
-                        userController.setUserExist(Boolean.FALSE);
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded() && result.getSourceAsObject(User.class)!= null) {
+                    User user = result.getSourceAsObject(User.class);
+                    userController.setUser(user);
+                    userController.setUserExist(Boolean.TRUE);
+                    Log.d("success","get user succeeded");
+                    try {
+                        Log.d("username", userController.getUsername());
                     }
-                    // TODO get the results of the query
-                } catch (Exception e) {
-                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                    catch (NullPointerException exception){
+                        Log.d("error","could not get username");
+                    }
+                } else {
+                    Log.d("Error", "The search query failed");
+                    userController.setUserExist(Boolean.FALSE);
                 }
+                // TODO get the results of the query
+            } catch (IOException e) {
+                Log.i("Error", " Get User Task: Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
             return null;
+        }
+
+        protected void onPostExecute(Void aVoid) {
+            userDone.setDone(true);
         }
 
 

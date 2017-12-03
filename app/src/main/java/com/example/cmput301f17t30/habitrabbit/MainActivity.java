@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
     private static JestDroidClient client;
 
     public static elasticDoneBoolean elasticDone;
+    public static elasticDoneBoolean userDone;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -107,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
         achievementController.setOpenAppAchievement();
         achievementController.loadAchievementsStatus();
 
-        if (sharedPreferences.getString("username",null) == null){
+        if (sharedPreferences.getString("username",null) == null) {
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(logout);
         }
@@ -116,10 +117,11 @@ public class MainActivity extends AppCompatActivity {
             String username = sharedPreferences.getString("username",null);
             ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
             getUserTask.execute(username);
+            ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
+            getHabitsTask.execute(userController.getUsername());
         }
 
-        ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
-        getHabitsTask.execute(userController.getUsername());
+
 
         adapterList = new ArrayList<Habit>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
@@ -234,8 +236,13 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        String username = userController.getUsername();
-        menu.findItem(R.id.user_profile_button).setTitle(username);
+        try {
+            String username = userController.getUsername();
+            menu.findItem(R.id.user_profile_button).setTitle(username);
+        }
+        catch (NullPointerException exception){
+
+        }
         return super.onPrepareOptionsMenu(menu);
     }
 
@@ -252,6 +259,7 @@ public class MainActivity extends AppCompatActivity {
 
         if (id == R.id.logout_button) {
             habitController.saveAllHabits();
+            userController.saveUser();
             Intent logout = new Intent(MainActivity.this, LoginActivity.class);
 
             //remove user from preferences

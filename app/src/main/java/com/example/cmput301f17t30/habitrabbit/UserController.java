@@ -23,6 +23,8 @@ import java.util.ArrayList;
 
 import android.graphics.Bitmap;
 
+import org.apache.commons.lang3.ObjectUtils;
+
 import java.util.ArrayList;
 import java.util.Date;
 
@@ -34,7 +36,7 @@ import java.util.Date;
 public class UserController {
 
     private User user;
-    private static Boolean userExist;
+    private static Boolean userExist = Boolean.FALSE;
 
     public UserController(){
     }
@@ -56,6 +58,15 @@ public class UserController {
         this.user = user;
     }
 
+    public User getUser(){
+        return this.user;
+    }
+
+    public void saveUser(){
+        ElasticSearchController.UpdateUserTask updateUser = new ElasticSearchController.UpdateUserTask();
+        updateUser.execute();
+    }
+
 
     /**
      * removes the current user, used when user logs out
@@ -68,14 +79,8 @@ public class UserController {
      * @return the user's username if some user is logged in, otherwise null
      */
     public String getUsername(){
-        try {
             return user.getUserId();
-        }
-        catch (NullPointerException exception) {
-            return null;
-        }
     }
-
 
     public ArrayList<String> getFriends(){
         return user.getFriendsList();
@@ -122,7 +127,12 @@ public class UserController {
      * @return current user's profile picture
      */
     public Bitmap getProfilePic(){
-        return user.getProfilePic();
+        try {
+            return user.getProfilePic();
+        }
+        catch (NullPointerException e){
+            return null;
+        }
     }
 
 

@@ -225,6 +225,7 @@ public class UserProfileActivity extends AppCompatActivity {
             profileImage = imageController.decodeFile(imageDecode);
             profilePic.setImageBitmap(profileImage);
             userController.setProfilePicture(profileImage);
+            userController.saveUser();
         }
 
     }
@@ -241,6 +242,7 @@ public class UserProfileActivity extends AppCompatActivity {
             Bitmap newProfilePic = imageController.decodeFile(imageDecode);
             profilePic.setImageBitmap(newProfilePic);
             userController.setProfilePicture(profileImage);
+            userController.saveUser();
             // permission was granted
 
         } else {
