@@ -205,7 +205,7 @@ public class EditHabitActivity extends AppCompatActivity {
             @Override
             public void onClick(View view){
                 //minimum date
-                Date earliestEventDate = eventList.getEvent(0).getDate();
+                Date earliestEventDate = null;
                 Date newDate = new Date();
                 try {
                     newDate = format.parse(date.getText().toString());
@@ -213,12 +213,17 @@ public class EditHabitActivity extends AppCompatActivity {
                 catch (ParseException e){
                     e.printStackTrace();
                 }
-
-                for (HabitEvent event :eventList.getList()){
-                    if (event.getDate().before(earliestEventDate)){
-                        earliestEventDate = event.getDate();
+                if(eventList.getSize() > 0) {
+                    earliestEventDate = eventList.getEvent(0).getDate();
+                    for (HabitEvent event :eventList.getList()){
+                        if (event.getDate().before(earliestEventDate)){
+                            earliestEventDate = event.getDate();
+                        }
                     }
+
                 }
+
+
 
                 try {
                     Date startDate = format.parse(date.getText().toString());
@@ -241,7 +246,7 @@ public class EditHabitActivity extends AppCompatActivity {
                     date.setError("Valid date required");
                 }
 
-                else if (newDate.before(earliestEventDate)){
+                else if (earliestEventDate != null && newDate.before(earliestEventDate)){
                     date.setError("Date cannot be before completion date of any event");
                 }
 

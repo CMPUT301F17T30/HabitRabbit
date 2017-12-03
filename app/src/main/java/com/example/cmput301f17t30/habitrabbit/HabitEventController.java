@@ -163,17 +163,19 @@ public class HabitEventController {
 
     public void deleteAllHabitEvents(Habit type) {
         ArrayList<HabitEvent> list = eventList.getList();
-        habitEvent = eventList.getEvent(0);
-        for(Iterator<HabitEvent> iterator = list.iterator(); iterator.hasNext(); ) {
-            if(iterator.next().getHabitType() == type)
-                iterator.remove();
+        if (eventList.getSize() > 0) {
+            habitEvent = eventList.getEvent(0);
+            for (Iterator<HabitEvent> iterator = list.iterator(); iterator.hasNext(); ) {
+                if (iterator.next().getHabitType() == type)
+                    iterator.remove();
                 ElasticSearchController.DeleteHabitEvent deleteHabitEvent = new ElasticSearchController.DeleteHabitEvent();
                 deleteHabitEvent.execute(habitEvent);
-            if(iterator.hasNext())
-                habitEvent = iterator.next();
-        }
+                if (iterator.hasNext())
+                    habitEvent = iterator.next();
+            }
 
-        eventList.setEventList(list);
+            eventList.setEventList(list);
+        }
     }
 
      public HabitEvent returnEvent(){
