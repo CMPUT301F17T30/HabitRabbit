@@ -42,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     ElasticSearchController elasticSearchController = new ElasticSearchController();
+    public static elasticDoneBoolean elasticDoneL;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +77,8 @@ public class LoginActivity extends AppCompatActivity {
                 //TODO fix this
                 ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
                 getUserTask.execute(name);
-                userController.setListener(new UserController.ChangeListener() {
+                elasticDoneL = new elasticDoneBoolean();
+                elasticDoneL.setListener(new elasticDoneBoolean.ChangeListener() {
                     @Override
                     public void onChange() {
                         if (userController.checkUserExist() == Boolean.FALSE){
