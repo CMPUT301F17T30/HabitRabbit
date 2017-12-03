@@ -183,7 +183,7 @@ public class ElasticSearchController {
     }
 
 
-        public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
+    public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
 
         protected Void doInBackground(Habit...habits){
             verifySettings();
