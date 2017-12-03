@@ -548,6 +548,7 @@ public class ElasticSearchController {
                     DocumentResult result = client.execute(index);
                     if(result.isSucceeded()){
                         user.setJestId(result.getId());
+                        userController.setUser(user);
                         Log.i("Success","Adding User success");
                     }
                     else{
@@ -593,6 +594,11 @@ public class ElasticSearchController {
 
     public static class GetUserTask extends AsyncTask<String, Void, Void> {
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
         protected Void doInBackground(String...user_id) {
             verifySettings();
 
@@ -611,8 +617,8 @@ public class ElasticSearchController {
 
                 try {
                     SearchResult result = client.execute(search);
-                    if (result.isSucceeded()) {
-                        User user = result.getSourceAsObject(User.class);
+                    User user = result.getSourceAsObject(User.class);
+                    if (user != null) {
                         userController.setUser(user);
                         userController.setUserExist(Boolean.TRUE);
                     } else {
@@ -624,6 +630,11 @@ public class ElasticSearchController {
                     Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
             return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            userController.setDone(true);
         }
 
 

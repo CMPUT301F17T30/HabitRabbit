@@ -57,7 +57,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onClick(View v) {
 
             EditText usernameText = (EditText)findViewById(R.id.userName);
-            String name = usernameText.getText().toString().toLowerCase();
+            final String name = usernameText.getText().toString().toLowerCase();
 
             if (name.trim().length() == 0) {
                 //Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
@@ -76,26 +76,32 @@ public class LoginActivity extends AppCompatActivity {
                 //TODO fix this
                 ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
                 getUserTask.execute(name);
-                if (userController.checkUserExist() == Boolean.FALSE){
-                    ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
-                    User user = new User(name);
-                    user.setJoinDate(new Date());
-                    addUserTask.execute(user);
-                    userController.setUser(user);
-                }
+                userController.setListener(new UserController.ChangeListener() {
+                    @Override
+                    public void onChange() {
+                        if (userController.checkUserExist() == Boolean.FALSE){
+                            ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
+                            User user = new User(name);
+                            user.setJoinDate(new Date());
+                            addUserTask.execute(user);
+                        }
 
 
 
-                habitController.clearHabits();
-                //setResult(RESULT_OK, returnIntent);
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putString("username", name);
-                editor.apply();
-                //String language = getApplicationContext().getSharedPreferences("language", 0).toString();
-                Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
-                startActivity(mainActivityIntent);
-                finish();
-             }
+                        habitController.clearHabits();
+                        //setResult(RESULT_OK, returnIntent);
+                        SharedPreferences.Editor editor = sharedPreferences.edit();
+                        editor.putString("username", name);
+                        editor.apply();
+                        //String language = getApplicationContext().getSharedPreferences("language", 0).toString();
+                        Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
+                        startActivity(mainActivityIntent);
+                        finish();
+                    }
+
+                });
+        }
+
 
 
         }

@@ -26,6 +26,8 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 import java.util.Date;
 
+import javax.swing.event.ChangeListener;
+
 /**
  * Controller to deal with adding new users,
  * and logging out and in
@@ -35,8 +37,11 @@ public class UserController {
 
     private User user;
     private static Boolean userExist;
+    private ChangeListener listener;
+    private static Boolean elasticDone;
 
     public UserController(){
+        userExist = Boolean.FALSE;
     }
 
     public Boolean checkUserExist(){
@@ -45,6 +50,21 @@ public class UserController {
 
     public void setUserExist(Boolean flag){
         userExist = flag;
+    }
+
+    public void setDone(boolean done) {
+        this.elasticDone = done;
+        if (listener != null) {
+            listener.onChange();
+        }
+    }
+
+    public interface ChangeListener {
+        void onChange();
+    }
+
+    public void setListener(ChangeListener listener) {
+        this.listener = listener;
     }
 
     //TODO fix this method
