@@ -28,7 +28,7 @@
         android:id="@+id/search_text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:hint="search"
+        android:hint="@string/search"
         android:inputType="text" />
 
     <LinearLayout
@@ -38,11 +38,11 @@
         android:weightSum="2">
 
         <Button
-            android:id="@+id/search_confirm"
+            android:id="@+id/search_cancel"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Search" />
+            android:text="@string/cancel" />
 
         <RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/radio_filter_group"
@@ -55,21 +55,22 @@
                 android:id="@+id/radio_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filter by type" />
+                android:text="@string/filter_by_type" />
 
             <RadioButton
                 android:id="@+id/radio_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Filter by comment" />
+                android:text="@string/filter_by_comment" />
         </RadioGroup>
 
         <Button
-            android:id="@+id/search_cancel"
+            android:id="@+id/search_confirm"
             android:layout_width="fill_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="Cancel" />
+            android:text="@string/search" />
+
     </LinearLayout>
 
 </LinearLayout>
