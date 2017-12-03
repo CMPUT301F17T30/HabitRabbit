@@ -11,7 +11,6 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController
 public class FriendRequest {
     private User sender;
     private User reciever;
-    private Boolean accepted;
 
     @JestId
     private String id;
@@ -25,7 +24,6 @@ public class FriendRequest {
     public FriendRequest(User sender, User reciever){
         this.sender = sender;
         this.reciever = reciever;
-        this.accepted = null;
     }
 
 
@@ -65,34 +63,9 @@ public class FriendRequest {
         this.reciever = reciever;
     }
 
-    /**
-     * @return whether or not the request was accepted or rejected
-     */
-    public Boolean getAccepted() {
-        return accepted;
-    }
 
     /**
-     * @param accepted whether or not the request was accepted or rejected
+     *  do accept and decline action in activity, call elastic search
      */
-    public void setAccepted(Boolean accepted) {
-        this.accepted = accepted;
-    }
 
-    /**
-     *  check if the reciever has rejected or accepted the request yet
-     *  if he has accepted, then add the friend to user's friend list
-     */
-    public void checkRequestStatus(){
-        if ((getAccepted() == Boolean.TRUE) && (userController.getUsername().equals(this.reciever.getUserId()))){
-            //reciever has accepted, add the reciever to friends list
-            userController.addFriend(reciever.getUserId());
-        }
-        else if (getAccepted() == Boolean.FALSE){
-            // user got rejected
-        }
-        else {
-            // friend has not responded to request yet
-        }
-    }
 }

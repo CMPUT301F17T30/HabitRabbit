@@ -24,4 +24,8 @@ public class FriendRequestList {
     public ArrayList<FriendRequest> getFriendRequests(){
         return requests;
     }
+
+    public FriendRequest getRequest(int index){
+        return requests.get(index);
+    }
 }
