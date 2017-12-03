@@ -71,7 +71,7 @@ public class HabitList {
      */
     public Habit getHabit(int position){
         Habit habit = habitList.get(position);
-        return habitList.get(position);
+        return habit;
     }
 
     /**
@@ -101,6 +101,5 @@ public class HabitList {
     public void clearAll(){
         habitList.clear();
     }
-
 
 }

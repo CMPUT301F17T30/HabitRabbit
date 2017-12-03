@@ -38,6 +38,7 @@ import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 
@@ -224,7 +225,7 @@ public class ElasticSearchController {
 
             String query = "{\n" +
                     "    \"query\" : {\n" +
-                    "        \"term\" : { \"userId\" : \""+user_id[0]+"\" }\n" +
+                    "        \"term\" : { \"userID\" : \""+user_id[0]+"\" }\n" +
                     "    }\n" +
                     "}";
 
@@ -234,12 +235,11 @@ public class ElasticSearchController {
                     .addType("Habit")
                     .build();
             try {
-                // TODO get the results of the query
                 SearchResult result = client.execute(search);
                 if(result.isSucceeded()){
                     List<Habit> foundHabits = result.getSourceAsObjectList(Habit.class);
                     habits.addAll(foundHabits);
-                    habitController.addAllHabits(habits);
+                    habitList.addAll(habits);
                 }
                 else{
                     Log.e("Error", "The seach query failed");
@@ -255,6 +255,7 @@ public class ElasticSearchController {
 
         @Override
         protected void onPostExecute(Void aVoid) {
+            elasticDone.setDone(true);
         }
     }
 
