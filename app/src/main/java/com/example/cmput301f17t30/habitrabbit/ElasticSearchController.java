@@ -574,7 +574,7 @@ public class ElasticSearchController {
                 Index index = new Index.Builder(user).index("team30_habitrabbit").type("User").id(user.getJestId()).build();
 
                 try {
-                    DocumentResult result = client.execute(update);
+                    DocumentResult result = client.execute(index);
                     if (result.isSucceeded()) {
 
                     } else {

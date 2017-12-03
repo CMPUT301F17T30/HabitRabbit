@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     private int FRIENDS_REQUEST = 3;
     private static JestDroidClient client;
 
-    public static elasticDoneBoolean elasticDone;
+    public static ElasticDoneBoolean elasticDone;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -156,8 +156,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        elasticDone = new elasticDoneBoolean();
-        elasticDone.setListener(new elasticDoneBoolean.ChangeListener() {
+        elasticDone = new ElasticDoneBoolean();
+        elasticDone.setListener(new ElasticDoneBoolean.ChangeListener() {
             @Override
             public void onChange() {
                 adapterList.clear();
