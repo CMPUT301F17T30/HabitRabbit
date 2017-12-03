@@ -72,10 +72,11 @@ public class LoginActivity extends AppCompatActivity {
             }
 
             else {
-                 //Intent returnIntent = getIntent();
+
+                //TODO fix this
                 ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
                 getUserTask.execute(name);
-                if (userController.checkUserExist()== Boolean.FALSE){
+                if (userController.checkUserExist() == Boolean.FALSE){
                     ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
                     User user = new User(name);
                     user.setJoinDate(new Date());
