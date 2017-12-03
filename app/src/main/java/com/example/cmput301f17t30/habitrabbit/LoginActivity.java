@@ -74,6 +74,7 @@ public class LoginActivity extends AppCompatActivity {
                 habitController.clearHabits();
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("username", name);
+                editor.putBoolean("logged in", Boolean.TRUE);
                 editor.apply();
                 //String language = getApplicationContext().getSharedPreferences("language", 0).toString();
                 Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
