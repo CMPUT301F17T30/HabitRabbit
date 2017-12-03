@@ -18,7 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -41,8 +40,6 @@ import android.util.Log;
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 import com.searchly.jestdroid.JestDroidClient;
-
-import java.util.ArrayList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -74,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
     private int HABIT_HISTORY_REQUEST = 1;
     public static int VIEW_HABIT_REQUEST = 2;
     private int FRIENDS_REQUEST = 3;
-    public static elasticDoneBoolean elasticDone;
+    private static JestDroidClient client;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -136,17 +133,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent friendsIntent = new Intent(MainActivity.this, FriendActivity.class);
                 startActivityForResult(friendsIntent, FRIENDS_REQUEST);
-
-            }
-        });
-
-        elasticDone = new elasticDoneBoolean();
-        elasticDone.setListener(new elasticDoneBoolean.ChangeListener() {
-            @Override
-            public void onChange() {
-                adapterList.clear();
-                adapterList.addAll(habitList.getList());
-                adapter.notifyDataSetChanged();
 
             }
         });

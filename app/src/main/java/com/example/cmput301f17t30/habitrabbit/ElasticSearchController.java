@@ -37,7 +37,6 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
@@ -240,7 +239,6 @@ public class ElasticSearchController {
                 if(result.isSucceeded()){
                     List<Habit> foundHabits = result.getSourceAsObjectList(Habit.class);
                     habits.addAll(foundHabits);
-                    Log.d("habit","" + habits);
                     habitController.addAllHabits(habits);
                 }
                 else{
@@ -257,11 +255,10 @@ public class ElasticSearchController {
 
         @Override
         protected void onPostExecute(Void aVoid) {
-            elasticDone.setDone(true);
         }
     }
 
-    public static class GetFriendListTask extends AsyncTask<User, Void, Void>{
+    public static class GetFriendList extends AsyncTask<User, Void, Void>{
         @Override
         protected Void doInBackground(User...user) {
             verifySettings();
@@ -273,7 +270,7 @@ public class ElasticSearchController {
             for (int i = 0; i < friends.size() ; i++) {
                 String query = "{\n" +
                         "    \"query\" : {\n" +
-                        "        \"term\" : { \"useId\" : \"" + friends.get(i) + "\" }\n" +
+                        "        \"term\" : { \"user_id\" : \"" + friends.get(i) + "\" }\n" +
                         "    }\n" +
                         "}";
 
@@ -303,55 +300,6 @@ public class ElasticSearchController {
 
 
     }
-
-    public static class GetFriendEventsTask extends AsyncTask<Friend, Void, Void>{
-        @Override
-        protected Void doInBackground(Friend...friends) {
-            verifySettings();
-
-            for (Friend friend: friends) {
-                ArrayList<Habit> friendHabits = new ArrayList<>();
-                String friendId = friend.getUser().getUserId();
-                String query = "{\n" +
-                        "    \"query\" : {\n" +
-                        "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
-                        "    }\n" +
-                        "}";
-
-
-                Search search = new Search.Builder(query)
-                        .addIndex("team30_habitrabbit")
-                        .addType("Habit")
-                        .build();
-                try {
-                    // TODO get the results of the query
-                    SearchResult result = client.execute(search);
-                    if (result.isSucceeded()) {
-                        List<Habit> habits = result.getSourceAsObjectList(Habit.class);
-                        friendHabits.addAll(habits);
-                        for (Habit friendHabit : friendHabits) {
-                            friendHabit.getTitle();
-                            String queryEvent = "{\n" +
-                                    "    \"query\" : {\n" +
-                                    "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
-                                    "    }\n" +
-                                    "}";
-                        }
-                    } else {
-                        Log.e("Error", "The seach query failed");
-                    }
-
-                } catch (Exception e) {
-                    Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
-                }
-            }
-            return null;
-        }
-
-
-    }
-
-
 
 
 
