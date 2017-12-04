@@ -27,6 +27,4 @@ package com.example.cmput301f17t30.habitrabbit;
 
 public abstract class Command {
     public abstract void execute();
-    public abstract void unexecute();
-    public abstract boolean isReversible();
 }

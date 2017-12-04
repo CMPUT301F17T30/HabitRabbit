@@ -34,14 +34,4 @@ public class EditEventCommand extends Command {
         ElasticSearchController.UpdateHabitEvent updateHabitEvent = new ElasticSearchController.UpdateHabitEvent();
         updateHabitEvent.execute(habitEvent);
     }
-
-    @Override
-    public void unexecute() {
-
-    }
-
-    @Override
-    public boolean isReversible() {
-        return false;
-    }
 }

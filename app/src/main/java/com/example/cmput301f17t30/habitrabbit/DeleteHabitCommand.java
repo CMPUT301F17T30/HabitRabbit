@@ -35,14 +35,4 @@ public class DeleteHabitCommand extends Command {
         ElasticSearchController.DeleteHabitTask deleteHabitTask = new ElasticSearchController.DeleteHabitTask();
         deleteHabitTask.execute(habit);
     }
-
-    @Override
-    public void unexecute() {
-
-    }
-
-    @Override
-    public boolean isReversible() {
-        return false;
-    }
 }
