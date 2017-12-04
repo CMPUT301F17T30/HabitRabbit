@@ -84,6 +84,8 @@
     <string name="add">add</string>
     <string name="friend_username">friend username</string>
     <string name="accept">Accept</string>
+    <string name="incoming_requests">Incoming Requests</string>
+    <string name="add_a_friend">Add a Friend</string>
 
 
 </resources>

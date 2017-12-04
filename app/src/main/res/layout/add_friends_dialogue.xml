@@ -30,7 +30,7 @@
         android:id="@+id/textView6"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add a Friend"
+        android:text="@string/add_a_friend"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -62,9 +62,9 @@
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_weight="1"
-        android:text="Incoming Requests"
+        android:text="@string/incoming_requests"
         android:textAlignment="center"
         android:textColor="@android:color/black"
         android:textSize="18sp" />
@@ -77,4 +77,5 @@
         android:clipToPadding="false" >
 
     </android.support.v7.widget.RecyclerView>
+
 </LinearLayout>
