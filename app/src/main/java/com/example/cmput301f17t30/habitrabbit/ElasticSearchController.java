@@ -44,6 +44,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendRequests;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.fromMain;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
@@ -313,6 +314,48 @@ public class ElasticSearchController {
         }
     }
 
+    public static class GetFriendTask extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String...friends) {
+            verifySettings();
+            ArrayList<Friend> friendsL = new ArrayList<>();
+            for (String friend_id : friends){
+                // TODO Build the query
+                String query = "{\n" +
+                        "    \"query\" : {\n" +
+                        "        \"term\" : { \"userId\" : \""+friend_id+"\" }\n" +
+                        "    }\n" +
+                        "}";
+
+
+                Search search = new Search.Builder(query)
+                        .addIndex("team30_habitrabbit")
+                        .addType("User")
+                        .build();
+
+                try {
+                    SearchResult result = client.execute(search);
+                    User user = result.getSourceAsObject(User.class);
+                    if (user != null) {
+                        Friend friend = new Friend(user);
+                        friendsL.add(0, friend);
+                    } else {
+                        Log.d("Error", "The search query failed");
+                    }
+                    // TODO get the results of the query
+                } catch (Exception e) {
+                    Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+                }
+            }
+            friendsList.setList(friendsL);
+            return null;
+        }
+
+
+
+
+    }
 
    public static class GetFriendEventsTask extends AsyncTask<Friend, Void, Void>{
         @Override

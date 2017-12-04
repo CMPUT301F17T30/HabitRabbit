@@ -30,6 +30,8 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
+
 /**
  * Created by Adam on 03-Dec-17.
  */
@@ -90,8 +92,11 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
             @Override
             public void onClick(View view) {
                 //add friend to your friends list
+                userController.addFriend(request.getSender());
                 ElasticSearchController.AcceptRequestTask acceptTask = new ElasticSearchController.AcceptRequestTask();
                 acceptTask.execute(request);
+                ElasticSearchController.DeleteRequestTask deleteRequestTask = new ElasticSearchController.DeleteRequestTask();
+                deleteRequestTask.execute(request);
                 requests.remove(position);
                 notifyItemRemoved(position);
 
