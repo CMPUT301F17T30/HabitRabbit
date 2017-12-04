@@ -19,6 +19,8 @@ public class FriendList {
         this.friends = friends;
     }
 
+    public Integer getSize(){return friends.size();}
+
     public void getLatestEvents(){
         for (Friend f : friends){
             //ElasticSearchController.GetHabitsTask

@@ -312,6 +312,7 @@ public class ElasticSearchController {
         }
     }
 
+
    public static class GetFriendEventsTask extends AsyncTask<Friend, Void, Void>{
         @Override
         protected Void doInBackground(Friend...friends) {
