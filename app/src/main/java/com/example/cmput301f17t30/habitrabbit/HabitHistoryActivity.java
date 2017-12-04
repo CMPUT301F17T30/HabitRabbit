@@ -180,8 +180,9 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
             */
             for (int i =0;i<eventList.getSize(); i++){
-                if (eventList.getEvent(i).getHabitType().getTitle().toLowerCase().equals(filterString)){
-                    filteredList.add(eventList.getEvent(i));
+                HabitEvent event = eventList.getEvent(i);
+                if (event.getHabitType().getTitle().toLowerCase().equals(filterString.toLowerCase())){
+                    filteredList.add(event);
                 }
 
             }
@@ -201,8 +202,10 @@ public class HabitHistoryActivity extends AppCompatActivity {
         }
 
         habitEventadapter = new HabitHistoryLayoutAdapter(filteredList, this);
+        habitEventrecyclerView.invalidate();
         habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
+
 
     }
 

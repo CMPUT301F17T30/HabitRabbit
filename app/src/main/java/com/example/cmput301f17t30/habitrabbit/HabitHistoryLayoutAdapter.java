@@ -52,7 +52,8 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
     private int EVENT_DETAIL_REQUEST = 7;
 
     public HabitHistoryLayoutAdapter(ArrayList<HabitEvent> habitHistoryList, Context context) {
-        this.habitHistoryList = habitHistoryList;
+        this.habitHistoryList = new ArrayList<HabitEvent>();
+        this.habitHistoryList.addAll(habitHistoryList);
         Collections.sort(habitHistoryList,new HabitHistorySorter());
         this.historyContext = context;
     }
@@ -97,7 +98,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
 
     @Override
     public void onBindViewHolder(HabitHistoryLayoutAdapter.ViewHolder holder, final int position) {
-        final HabitEvent habitEvent = eventList.getEvent(position);
+        final HabitEvent habitEvent = habitHistoryList.get(position);
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String formatDate = format.format(habitEvent.getDate());
