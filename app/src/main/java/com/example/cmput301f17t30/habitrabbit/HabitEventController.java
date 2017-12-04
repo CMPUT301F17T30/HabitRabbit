@@ -34,7 +34,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.commandQueue;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 
 /**
- * Controller for Haddingm, editing, and deleting habit events
+ * Controller for adding, editing, and deleting habit events
  * Created by Irissama on 2017-11-08.
  */
 

@@ -131,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         adapter = new HabitLayoutAdapter(adapterList, this);
         recyclerView.setAdapter(adapter);
 
+
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
             @Override
