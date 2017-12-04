@@ -81,6 +81,9 @@
     <string name="filter_by_comment">Filter by comment</string>
     <string name="search">search</string>
     <string name="cancel">Cancel</string>
+    <string name="add">add</string>
+    <string name="friend_username">friend username</string>
+    <string name="accept">Accept</string>
 
 
 </resources>

@@ -159,6 +159,7 @@ public class ElasticSearchController {
                     "            }\n" +
                     "        }\n" +
                     "    }\n" +
+                    "    \"sort\": { \"date\" : \"desc\" },\n" +
                     "}";
 
 
@@ -490,11 +491,11 @@ public class ElasticSearchController {
             verifySettings();
 
             for (FriendRequest request : friendRequests) {
-                User user = request.getSender();
+                String user = request.getSender();
                 User sender = new User();
                 String query = "{\n" +
                         "    \"query\" : {\n" +
-                        "        \"term\" : { \"userId\" : \""+user.getUserId()+"\" }\n" +
+                        "        \"term\" : { \"userId\" : \""+user+"\" }\n" +
                         "    }\n" +
                         "}";
 
@@ -506,10 +507,10 @@ public class ElasticSearchController {
 
                 try {
                     SearchResult addresult = client.execute(search);
-                    if (addresult.isSucceeded()) {
-                        sender = addresult.getSourceAsObject(User.class);
-                        sender.addFriend(request.getReciever().getUserId());
-                        Index index = new Index.Builder(sender).index("team30_habitrabbit").type("User").id(user.getJestId()).build();
+                    sender = addresult.getSourceAsObject(User.class);
+                    if (sender != null) {
+                        sender.addFriend(request.getReciever());
+                        Index index = new Index.Builder(sender).index("team30_habitrabbit").type("User").id(sender.getJestId()).build();
 
                         try {
                             DocumentResult result = client.execute(index);
@@ -535,6 +536,47 @@ public class ElasticSearchController {
 
         }
     }
+
+
+    public static class GetSenderTask extends AsyncTask<String, Void, Void> {
+
+        @Override
+        protected Void doInBackground(String...user_id) {
+            verifySettings();
+
+            // TODO Build the query
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"userId\" : \""+user_id[0]+"\" }\n" +
+                    "    }\n" +
+                    "}";
+
+
+            Search search = new Search.Builder(query)
+                    .addIndex("team30_habitrabbit")
+                    .addType("User")
+                    .build();
+
+            try {
+                SearchResult result = client.execute(search);
+                User user = result.getSourceAsObject(User.class);
+                if (user != null) {
+                    userController.setUser(user);
+                } else {
+                    Log.d("Error", "The search query failed");
+                }
+                // TODO get the results of the query
+            } catch (Exception e) {
+                Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+            return null;
+        }
+
+
+
+
+    }
+
 
     public static class AddUserTask extends AsyncTask<User, Void, Void> {
 

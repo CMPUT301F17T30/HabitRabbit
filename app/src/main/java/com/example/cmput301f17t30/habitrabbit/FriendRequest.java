@@ -9,11 +9,13 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController
  */
 
 public class FriendRequest {
-    private User sender;
-    private User reciever;
+    private String sender;
+    private String reciever;
+    private User senderProfile;
 
     @JestId
     private String id;
+
 
 
     /**
@@ -21,11 +23,20 @@ public class FriendRequest {
      * @param sender the user who sent the request
      * @param reciever the user who the request was directed to
      */
-    public FriendRequest(User sender, User reciever){
+    public FriendRequest(String sender, String reciever){
         this.sender = sender;
         this.reciever = reciever;
     }
 
+
+    public User getSenderProfile(){
+        User currentUser = userController.getUser();
+        ElasticSearchController.GetSenderTask getSenderTask = new ElasticSearchController.GetSenderTask();
+        getSenderTask.execute(sender);
+        this.senderProfile = userController.getUser();
+        userController.setUser(currentUser);
+        return senderProfile;
+    }
 
     public void setId(String id){
         this.id = id;
@@ -37,7 +48,7 @@ public class FriendRequest {
     /**
      * @return the user who sent the request
      */
-    public User getSender() {
+    public String getSender() {
         return sender;
     }
 
@@ -45,21 +56,21 @@ public class FriendRequest {
      *
      * @param sender the user who sent the request
      */
-    public void setSender(User sender) {
+    public void setSender(String sender) {
         this.sender = sender;
     }
 
     /**
      * @return the user who the request was directed to
      */
-    public User getReciever() {
+    public String getReciever() {
         return reciever;
     }
 
     /**
      * @param reciever the user who the request was directed to
      */
-    public void setReciever(User reciever) {
+    public void setReciever(String reciever) {
         this.reciever = reciever;
     }
 

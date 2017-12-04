@@ -18,10 +18,13 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
+import android.widget.Button;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 
@@ -42,5 +45,35 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new FriendLayoutAdapter(friendController.getFriends(), this);
         recyclerView.setAdapter(adapter);
+
+
+
+        Button returnToMain = (Button) findViewById(R.id.main_button);
+        returnToMain.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+
+        Button filterButton = (Button) findViewById(R.id.add_accept_friend);
+        filterButton.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                AddFriendDialogue addDialog = new AddFriendDialogue(FriendActivity.this);
+                addDialog.show();
+            }
+        });
+
+        Button mapButton = (Button) findViewById(R.id.friends_map);
+        mapButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Intent map = new Intent(FriendActivity.this, EventMapsActivity.class);
+                //startActivity(map);
+            }
+        });
     }
 }
