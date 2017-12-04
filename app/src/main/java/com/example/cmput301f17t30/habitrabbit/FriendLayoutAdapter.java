@@ -38,7 +38,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendControll
 
 public class FriendLayoutAdapter extends RecyclerView.Adapter<FriendLayoutAdapter.ViewHolder> {
 
-    private ArrayList<HabitEvent> friendEvents;
+    private ArrayList<HabitEvent> friendEvents = new ArrayList<>();
     private Context friendContext;
 
 
