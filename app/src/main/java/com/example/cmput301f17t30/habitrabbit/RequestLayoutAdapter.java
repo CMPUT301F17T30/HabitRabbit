@@ -95,6 +95,7 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
                 //add friend to your friends list
                 if (NetWorkCheck.isOnline()) {
                     userController.addFriend(request.getSender());
+                    userController.saveUser();
                     ElasticSearchController.AcceptRequestTask acceptTask = new ElasticSearchController.AcceptRequestTask();
                     acceptTask.execute(request);
                     ElasticSearchController.DeleteRequestTask deleteRequestTask = new ElasticSearchController.DeleteRequestTask();
