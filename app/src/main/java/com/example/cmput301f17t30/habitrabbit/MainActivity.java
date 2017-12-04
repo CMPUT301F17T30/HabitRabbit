@@ -18,49 +18,21 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.os.AsyncTask;
-
-
-import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
-import android.util.Log;
 
-import com.searchly.jestdroid.DroidClientConfig;
-import com.searchly.jestdroid.JestClientFactory;
-import com.searchly.jestdroid.JestDroidClient;
+
 
 import java.util.ArrayList;
-import java.util.List;
-
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
-
-
-import com.searchly.jestdroid.DroidClientConfig;
-import com.searchly.jestdroid.JestClientFactory;
-import com.searchly.jestdroid.JestDroidClient;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import io.searchbox.core.Search;
-import io.searchbox.core.SearchResult;
 
 /**
  * The main activity of the app. Displays a list of habits.
