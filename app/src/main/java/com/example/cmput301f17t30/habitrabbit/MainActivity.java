@@ -177,19 +177,23 @@ public class MainActivity extends AppCompatActivity {
                 ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
                 getHabitsTask.execute(userController.getUsername());
 
-                ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
                 for (String friend_id: userController.getFriends()) {
+                    ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
                     getFriendsTask.execute(friend_id);
                 }
 
                 ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
                 getRequests.execute(userController.getUsername());
+
+                for (Friend friend: friendController.getFriends()) {
+                    ElasticSearchController.GetFriendEventsTask getEvents = new ElasticSearchController.GetFriendEventsTask();
+                    getEvents.execute(friend);
+                }
+
                 invalidateOptionsMenu();
             }
         });
 
-        ElasticSearchController.GetFriendEventsTask getEvents = new ElasticSearchController.GetFriendEventsTask();
-        getEvents.execute();
     }
 
     @Override
