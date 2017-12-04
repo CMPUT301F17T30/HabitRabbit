@@ -385,22 +385,37 @@ public class Habit {
 
     }
 
+    /**
+     * @return unique identifier for elasitc search
+     */
     public String getId() {
         return id;
     }
 
+    /**
+     * @param id unique identifier for elasitc search
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * @return the id of the user who added this habit
+     */
     public String getUserID() {
         return userID;
     }
 
+    /**
+     * @param userID the id of the user who added this habit
+     */
     public void setUserID(String userID) {
         this.userID = userID;
     }
 
+    /**
+     * @return if the habit was last completed today
+     */
     public Boolean isSameDay() {
         Date todayDate = new Date();
         Date lastCompleteDate = lastCompleted;

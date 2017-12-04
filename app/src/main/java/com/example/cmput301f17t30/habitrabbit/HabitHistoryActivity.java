@@ -36,6 +36,8 @@ import android.widget.Filterable;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
@@ -56,18 +58,23 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private int EDIT_HABIT_EVENT_REQUEST = 1;
 
     public static elasticDoneBoolean filterDone;
+    private ArrayList<HabitEvent> adapterList;
 
-
+    private Boolean filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_history);
 
+        filter = Boolean.FALSE;
+        adapterList = eventList.getList();
+        Collections.sort(adapterList,new HabitHistorySorter());
+
         habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
         habitEventlinearLayoutManager = new LinearLayoutManager(this);
         habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
-        habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
+        habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
 
         Button returnToMain = (Button) findViewById(R.id.habitHistoryFinish);
@@ -102,8 +109,10 @@ public class HabitHistoryActivity extends AppCompatActivity {
         filterDone.setListener(new elasticDoneBoolean.ChangeListener() {
             @Override
             public void onChange() {
-                ArrayList<HabitEvent> filteredList = eventList.getList();
-                habitEventadapter = new HabitHistoryLayoutAdapter(filteredList,HabitHistoryActivity.this);
+                adapterList.clear();
+                adapterList.addAll(eventList.getList());
+                Collections.sort(adapterList,new HabitHistorySorter());
+                habitEventadapter = new HabitHistoryLayoutAdapter(adapterList,HabitHistoryActivity.this);
                 habitEventrecyclerView.setAdapter(habitEventadapter);
                 habitEventadapter.notifyDataSetChanged();
             }
@@ -241,6 +250,12 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public class HabitHistorySorter implements Comparator<HabitEvent> {
+        public int compare(HabitEvent a, HabitEvent b){
+            return b.getDate().compareTo(a.getDate());
+        }
     }
 
 

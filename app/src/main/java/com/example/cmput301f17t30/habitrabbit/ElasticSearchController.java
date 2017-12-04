@@ -482,7 +482,7 @@ public class ElasticSearchController {
                 String friendId = friend.getUser().getUserId();
                 String query = "{\n" +
                         "    \"query\" : {\n" +
-                        "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
+                        "        \"term\" : { \"userID\" : \"" + friendId + "\" }\n" +
                         "    }\n" +
                         "}";
 
@@ -502,27 +502,32 @@ public class ElasticSearchController {
                             String queryEvent = "{\n" +
                                     "    \"query\" : {\n" +
                                     "       \"nested\" : {\n" +
-                                    "           \"path\" : \"habitType\",\n" +
-                                    "               \"query\" : {\n" +
-                                    "                   \"term\" : { \"id\" : \"" + friendHabit.getId() +"\" }\n" +
-                                    "                   }\n" +
+                                    "            \"path\" : \"habitType\",\n" +
+                                    "            \"score_mode\" : \"avg\",\n" +
+                                    "            \"query\" : {\n" +
+                                    "               \"bool\" : {\n" +
+                                    "                   \"must\" : [\n" +
+                                    "                       { \"term\" : {\"habitType.id\" : \"" + friendHabit.getId() + "\"} }\n" +
+                                    "                   ]\n" +
                                     "               }\n" +
+                                    "           }\n" +
+                                    "       }\n" +
                                     "    },\n" +
                                     "    \"sort\": { \"date\" : \"desc\" },\n" +
                                     "    \"size\": 1\n" +
                                     "}";
-                            Search searchEvent = new Search.Builder(query)
+                            Search searchEvent = new Search.Builder(queryEvent)
                                     .addIndex("team30_habitrabbit")
                                     .addType("HabitEvent")
                                     .build();
                             try {
-                                SearchResult resultEvent = client.execute(search);
-                                if(result.isSucceeded()){
-                                    HabitEvent friendEvent = result.getSourceAsObject(HabitEvent.class);
+                                SearchResult resultEvent = client.execute(searchEvent);
+                                if(resultEvent.isSucceeded()){
+                                    HabitEvent friendEvent = resultEvent.getSourceAsObject(HabitEvent.class);
                                     friendEvents.add(friendEvent);
                                 }
                                 else{
-                                    Log.e("Error", "The seach query failed");
+                                    Log.e("Error", "The seach query friend events failed");
                                 }
 
                             }
@@ -532,6 +537,7 @@ public class ElasticSearchController {
 
                         }
                         friend.setRecentEvents(friendEvents);
+                        Log.d("friend Event", "" + friend.getRecentEvents());
                     } else {
                         Log.e("Error", "The seach query failed");
                     }
