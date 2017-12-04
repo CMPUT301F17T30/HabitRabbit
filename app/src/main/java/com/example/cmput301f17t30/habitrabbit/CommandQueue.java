@@ -18,6 +18,8 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.util.Log;
+
 import java.util.Queue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -60,6 +62,10 @@ public class CommandQueue {
     public void executeHead(){
         if (NetWorkCheck.isOnline() && (commandQueue.peek() != null)){
             commandQueue.poll().execute();
+            Log.d("check", "executed Command");
+        }
+        else {
+            //Log.d("no","no internet, command not executed");
         }
     }
 

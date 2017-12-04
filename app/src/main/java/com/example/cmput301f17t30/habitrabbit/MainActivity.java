@@ -122,6 +122,8 @@ public class MainActivity extends AppCompatActivity {
             getUserTask.execute(username);
         }
 
+        ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
+        getFriendsTask.execute();
 
         ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
         getRequests.execute(userController.getUsername());
