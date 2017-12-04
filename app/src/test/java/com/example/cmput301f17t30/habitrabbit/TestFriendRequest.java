@@ -32,42 +32,42 @@ public class TestFriendRequest {
 
     @Test
     public void testGetSender(){
-        User sender = new User();
-        User reciever = new User();
+        String sender = "Barty";
+        String reciever = "Marty";
         FriendRequest request = new FriendRequest(sender,reciever);
         assertEquals(sender,request.getSender());
     }
     @Test
     public void testSetSender(){
-        User sender = new User();
-        User reciever = new User();
+        String sender = "Barty";
+        String reciever = "Marty";
         FriendRequest request = new FriendRequest(sender,reciever);
-        User newSender = new User();
+        String newSender = "Walter";
         request.setSender(newSender);
-        assertEquals(newSender,request.getSender());
+        assertEquals("Walter",request.getSender());
     }
     @Test
     public void testGetReciever(){
-        User sender = new User();
-        User reciever = new User();
+        String sender = "Barty";
+        String reciever = "Marty";
         FriendRequest request = new FriendRequest(sender,reciever);
         assertEquals(reciever,request.getReciever());
     }
 
     @Test
     public void testSetReciever(){
-        User sender = new User();
-        User reciever = new User();
+        String sender = "Barty";
+        String reciever = "Marty";
         FriendRequest request = new FriendRequest(sender,reciever);
-        User newReciever = new User();
+        String newReciever = "Walter";
         request.setReciever(newReciever);
         assertEquals(newReciever,request.getReciever());
     }
 
     @Test
     public void testSetAccepted(){
-        User sender = new User();
-        User reciever = new User();
+        String sender = "Barty";
+        String reciever = "Marty";
         FriendRequest request = new FriendRequest(sender,reciever);
 
 
