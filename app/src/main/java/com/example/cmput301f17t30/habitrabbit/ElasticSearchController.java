@@ -152,20 +152,6 @@ public class ElasticSearchController {
 
             ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
 
-            /*String query = "{\n" +
-                    "    \"query\" : {\n" +
-                    "        \"term\" : { \"userId\" : \"" + user_id[0] + "\" },\n" +
-                    " \"range\" : {\n" +
-                    "            \"date\" : {\n" +
-                    "                \"gte\" : \"now-4w\",\n" +
-                    "                \"lte\" :  \"now\"\n" +
-                    "            }\n" +
-                    "        }\n" +
-                    "    },\n" +
-                    "    \"sort\": { \"date\" : \"desc\" }\n" +
-                    "}";
-            */
-
             String query = "{\n" +
             "    \"query\": {\n" +
             "    \"bool\": {\n" +
@@ -212,6 +198,51 @@ public class ElasticSearchController {
         }
     }
 
+    public static class GetFilteredEventsTask extends AsyncTask<String, Void, Void> {
+        @Override
+        protected Void doInBackground(String... habitID) {
+
+            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+
+            String query = "{\n" +
+                    "   \"query\": {\n" +
+                    "       \"nested\" : {\n" +
+                    "            \"path\" : \"habitType\",\n" +
+                    "            \"score_mode\" : \"avg\",\n" +
+                    "            \"query\" : {\n" +
+                    "               \"bool\" : {\n" +
+                    "                   \"must\" : [\n" +
+                    "                       { \"term\" : {\"habitType.id\" : \"" + habitID[0] + "\"} }\n" +
+                    "                   ]\n" +
+                    "               }\n" +
+                    "           }\n" +
+                    "       }\n" +
+                    "   }\n" +
+                    "}\n";
+
+            Search search = new Search.Builder(query)
+                    .addIndex("team30_habitrabbit")
+                    .addType("HabitEvent")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<HabitEvent> foundEvents = result.getSourceAsObjectList(HabitEvent.class);
+                    events.addAll(foundEvents);
+                    eventList.setEventList(events);
+                } else {
+                    Log.e("Error", "The seach query failed");
+                }
+
+            } catch (Exception e) {
+                Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return null;
+
+        }
+
+    }
 
     public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
 

@@ -55,11 +55,15 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
 
+    private Boolean filter;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_history);
+
+        filter = Boolean.FALSE;
 
         habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
         habitEventlinearLayoutManager = new LinearLayoutManager(this);
@@ -201,12 +205,15 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         }
 
+        eventList.setEventList(filteredList);
         habitEventadapter = new HabitHistoryLayoutAdapter(filteredList, this);
         habitEventrecyclerView.invalidate();
         habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
-
+        filter = Boolean.TRUE;
 
     }
+
+
 
 }
