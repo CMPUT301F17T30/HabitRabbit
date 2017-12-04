@@ -429,7 +429,7 @@ public class ElasticSearchController {
                 String friendId = friend.getUser().getUserId();
                 String query = "{\n" +
                         "    \"query\" : {\n" +
-                        "        \"term\" : { \"userId\" : \"" + friendId + "\" }\n" +
+                        "        \"term\" : { \"userID\" : \"" + friendId + "\" }\n" +
                         "    }\n" +
                         "}";
 
