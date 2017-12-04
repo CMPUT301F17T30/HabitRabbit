@@ -80,7 +80,7 @@ public class UserProfileActivity extends AppCompatActivity {
     private final Integer IMAGE_REQUEST_CODE = 0;
     private final Integer IMAGE_RESULT = 1;
 
-    private ArrayList<Friend> friendsList;
+    private ArrayList<Friend> friends;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,11 +98,11 @@ public class UserProfileActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //initialize recyclerview for friends
-        friendsList = MainActivity.friendsList.getFriends();
+        friends = MainActivity.friendsList.getFriends();
         friendsRecyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
         friendsLinearLayoutManager = new LinearLayoutManager(this);
         friendsRecyclerView.setLayoutManager(friendsLinearLayoutManager);
-        friendsLayoutAdapter = new FriendsLayoutAdapter(friendsList, this);
+        friendsLayoutAdapter = new FriendsLayoutAdapter(friends, this);
         friendsRecyclerView.setAdapter(friendsLayoutAdapter);
 
         usernameText = (TextView) findViewById(R.id.username_text);
