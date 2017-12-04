@@ -84,12 +84,16 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
         holder.friendName.setText(friendName);
         //holder.friendProfile.setImageBitmap(friendProfilePic);
 
-        Button acceptButton = holder.itemView.findViewById(R.id.accept_request);
+        final Button acceptButton = holder.itemView.findViewById(R.id.accept_request);
 
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //add friend to your friends list
+                ElasticSearchController.AcceptRequestTask acceptTask = new ElasticSearchController.AcceptRequestTask();
+                acceptTask.execute(request);
+                requests.remove(position);
+                notifyItemRemoved(position);
 
             }
         });
@@ -99,7 +103,10 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
         denyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //deny friend
+                ElasticSearchController.DeleteRequestTask deleteTask = new ElasticSearchController.DeleteRequestTask();
+                deleteTask.execute(request);
+                requests.remove(position);
+                notifyItemRemoved(position);
 
             }
         });

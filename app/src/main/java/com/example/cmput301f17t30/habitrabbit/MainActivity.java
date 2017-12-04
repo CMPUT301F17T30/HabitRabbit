@@ -122,6 +122,9 @@ public class MainActivity extends AppCompatActivity {
             getUserTask.execute(username);
         }
 
+        ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
+        getRequests.execute();
+
         adapterList = new ArrayList<Habit>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
