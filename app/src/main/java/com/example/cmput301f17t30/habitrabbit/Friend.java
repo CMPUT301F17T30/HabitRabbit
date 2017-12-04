@@ -28,20 +28,31 @@ public class Friend{
     private ArrayList<HabitEvent> recentEvents = new ArrayList<>();
     private User user;
 
+    /**
+     * @param user a user previously added as a friend
+     */
     public Friend(User user){
         this.user = user;
     }
 
+    /**
+     * @return a user previously added as a friend
+     */
     public User getUser(){return user;}
 
+    /**
+     * @param user a user previously added as a friend
+     */
     public void setUser(User user){this.user = user;}
 
+    /**
+     * @param events the list of recent habit events completed by this friend
+     */
     public void setRecentEvents(ArrayList<HabitEvent> events){
         recentEvents = events;
     }
 
     /**
-     *
      * @return The list of events that this friend has recently completed
      */
     public ArrayList<HabitEvent> getRecentEvents(){
