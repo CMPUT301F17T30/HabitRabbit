@@ -41,9 +41,9 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
     private ArrayList<Achievement>  achievements;
     private Context profileContext;
 
-    public AchievementLayoutAdapter(ArrayList<Achievement> habitList, Context context) {
+    public AchievementLayoutAdapter(ArrayList<Achievement> achievements, Context context) {
         this.profileContext = context;
-        achievements = achievementController.getAchievements();
+        this.achievements = achievementController.getAchievements();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {

@@ -18,7 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -34,7 +33,7 @@ public class FriendActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private FriendLayoutAdapter adapter;
+    private FriendEventLayoutAdapter adapter;
 
     private ArrayList<Friend> friends;
     private ArrayList<HabitEvent> recentEvents = new ArrayList<>();
@@ -55,7 +54,7 @@ public class FriendActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new FriendLayoutAdapter(recentEvents, this);
+        adapter = new FriendEventLayoutAdapter(recentEvents, this);
         recyclerView.setAdapter(adapter);
 
 
