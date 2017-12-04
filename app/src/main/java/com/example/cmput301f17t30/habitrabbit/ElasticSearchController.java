@@ -463,18 +463,18 @@ public class ElasticSearchController {
                                     "    \"sort\": { \"date\" : \"desc\" },\n" +
                                     "    \"size\": 1\n" +
                                     "}";
-                            Search searchEvent = new Search.Builder(query)
+                            Search searchEvent = new Search.Builder(queryEvent)
                                     .addIndex("team30_habitrabbit")
                                     .addType("HabitEvent")
                                     .build();
                             try {
-                                SearchResult resultEvent = client.execute(search);
-                                if(result.isSucceeded()){
-                                    HabitEvent friendEvent = result.getSourceAsObject(HabitEvent.class);
+                                SearchResult resultEvent = client.execute(searchEvent);
+                                if(resultEvent.isSucceeded()){
+                                    HabitEvent friendEvent = resultEvent.getSourceAsObject(HabitEvent.class);
                                     friendEvents.add(friendEvent);
                                 }
                                 else{
-                                    Log.e("Error", "The seach query failed");
+                                    Log.e("Error", "The seach query friend events failed");
                                 }
 
                             }
@@ -484,6 +484,7 @@ public class ElasticSearchController {
 
                         }
                         friend.setRecentEvents(friendEvents);
+                        Log.d("friend Event", "" + friend.getRecentEvents());
                     } else {
                         Log.e("Error", "The seach query failed");
                     }
