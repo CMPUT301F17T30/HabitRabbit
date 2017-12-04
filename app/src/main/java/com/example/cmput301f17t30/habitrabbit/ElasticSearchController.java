@@ -159,6 +159,7 @@ public class ElasticSearchController {
                     "            }\n" +
                     "        }\n" +
                     "    }\n" +
+                    "    \"sort\": { \"date\" : \"desc\" },\n" +
                     "}";
 
 
