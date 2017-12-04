@@ -18,7 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -26,24 +25,36 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 
 public class FriendActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
-    private FriendLayoutAdapter adapter;
+    private FriendEventLayoutAdapter adapter;
+
+    private ArrayList<Friend> friends;
+    private ArrayList<HabitEvent> recentEvents = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
+        friends = friendController.getFriends();
+
+        for (Friend f : friends){
+            recentEvents.addAll(f.getRecentEvents());
+        }
+
+
 
         recyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
-        adapter = new FriendLayoutAdapter(friendController.getFriends(), this);
+        adapter = new FriendEventLayoutAdapter(recentEvents, this);
         recyclerView.setAdapter(adapter);
 
 

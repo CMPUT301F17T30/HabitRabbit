@@ -83,15 +83,19 @@ public class AddFriendDialogue extends Dialog {
                 //if (NetWorkCheck.isOnline()) {
                     //generate friend request
                     String newFriend = sendFriendText.getText().toString();
-                    FriendRequest request = new FriendRequest(userController.getUsername(), newFriend);
+                    if (userController.getFriends().contains(newFriend) || newFriend.equals(userController.getUsername())){
+                        Toast.makeText(activity, "Friend already added, cannot add again.", Toast.LENGTH_SHORT).show();
+                    }else {
+                        FriendRequest request = new FriendRequest(userController.getUsername(), newFriend);
 
-                    //upload request to elastic
-                    ElasticSearchController.AddFriendRequestTask addRequest = new ElasticSearchController.AddFriendRequestTask();
-                    addRequest.execute(request);
+                        //upload request to elastic
+                        ElasticSearchController.AddFriendRequestTask addRequest = new ElasticSearchController.AddFriendRequestTask();
+                        addRequest.execute(request);
 
-                    //clear textbox and notify user of success
-                    sendFriendText.setText("");
-                    Toast.makeText(activity, "Friend request sent.", Toast.LENGTH_SHORT).show();
+                        //clear textbox and notify user of success
+                        sendFriendText.setText("");
+                        Toast.makeText(activity, "Friend request sent.", Toast.LENGTH_SHORT).show();
+                    }
                // }
                // else{
                //     Toast.makeText(activity, "You are not connected to the internet", Toast.LENGTH_SHORT).show();

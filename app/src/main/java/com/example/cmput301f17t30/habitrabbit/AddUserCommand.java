@@ -36,14 +36,4 @@ public class AddUserCommand extends Command {
         * */
         //Find a way to store User ID from elasticsearch
     }
-
-    @Override
-    public void unexecute() {
-
-    }
-
-    @Override
-    public boolean isReversible() {
-        return false;
-    }
 }

@@ -41,7 +41,6 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController
 public class LoginActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
-    ElasticSearchController elasticSearchController = new ElasticSearchController();
     public static elasticDoneBoolean elasticDoneL;
 
     @Override
@@ -61,14 +60,13 @@ public class LoginActivity extends AppCompatActivity {
             final String name = usernameText.getText().toString().toLowerCase();
 
             if (name.trim().length() == 0) {
-                //Toast.makeText(LoginActivity.this, "Please enter a valid username", Toast.LENGTH_SHORT).show();
-                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.enter_valid_username, Snackbar.LENGTH_LONG);
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout),
+                        R.string.enter_valid_username, Snackbar.LENGTH_LONG);
                 mySnackbar.show();
             }
-
             else if (name.trim().length() > 20) {
-                //Toast.makeText(LoginActivity.this, "Please enter a name of 20 characters or less", Toast.LENGTH_SHORT).show();
-                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout), R.string.too_long_username, Snackbar.LENGTH_LONG);
+                Snackbar mySnackbar = Snackbar.make(findViewById(R.id.profile_layout),
+                        R.string.too_long_username, Snackbar.LENGTH_LONG);
                 mySnackbar.show();
             }
 
@@ -81,6 +79,7 @@ public class LoginActivity extends AppCompatActivity {
                 elasticDoneL.setListener(new elasticDoneBoolean.ChangeListener() {
                     @Override
                     public void onChange() {
+                        // if the username doesnt exist on elasticsearch, create a new user with that username
                         if (userController.checkUserExist() == Boolean.FALSE){
                             ElasticSearchController.AddUserTask addUserTask = new ElasticSearchController.AddUserTask();
                             User user = new User(name);
@@ -88,14 +87,14 @@ public class LoginActivity extends AppCompatActivity {
                             addUserTask.execute(user);
                         }
 
-
-
                         habitController.clearHabits();
-                        //setResult(RESULT_OK, returnIntent);
+
+                        //store the current user's username in phone preferences
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putString("username", name);
                         editor.apply();
-                        //String language = getApplicationContext().getSharedPreferences("language", 0).toString();
+
+                        //go to main activity
                         Intent mainActivityIntent = new Intent(LoginActivity.this, MainActivity.class);
                         startActivity(mainActivityIntent);
                         finish();

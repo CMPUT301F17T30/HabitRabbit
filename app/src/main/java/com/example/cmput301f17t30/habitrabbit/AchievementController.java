@@ -70,9 +70,7 @@ public class AchievementController {
     /**
      * save the progress for each achievement
      */
-    public void saveAchievementsStatus(){
-
-    }
+    public void saveAchievementsStatus(){}
 
     /**
      * updates the progress for the achievement weekendwarrior

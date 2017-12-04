@@ -18,8 +18,8 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,66 +29,56 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
-
 /**
- * Adapter for displaying the latest events complete by a users friend
- * @See FriendActivity
+ * Adapter for displaying list of friends
+ * @see com.example.cmput301f17t30.habitrabbit.UserProfileActivity
  */
 
-public class FriendLayoutAdapter extends RecyclerView.Adapter<FriendLayoutAdapter.ViewHolder> {
+public class FriendsLayoutAdapter extends RecyclerView.Adapter<FriendsLayoutAdapter.ViewHolder> {
 
-    private ArrayList<Friend> friends;
-    private Context friendContext;
+    private ArrayList<Friend> friendsList;
+    private Context profileContext;
 
-
-
-    public FriendLayoutAdapter(ArrayList<Friend> friendList, Context context) {
-        this.friendContext = context;
-
-        friends = friendController.getFriends();
-
+    public FriendsLayoutAdapter(ArrayList<Friend> friendsList, Context context) {
+        this.profileContext = context;
+        this.friendsList = friendsList;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        private TextView friendName;
-        private ImageView friendImage;
+        private TextView friendUsername;
+        private ImageView friendPicture;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            friendName = itemView.findViewById(R.id.friend_event_comment);
-            friendImage = itemView.findViewById(R.id.friend_event_image);
+            friendUsername = itemView.findViewById(R.id.friend_username);
+            friendPicture = itemView.findViewById(R.id.friend_profile_pic);
+
         }
 
         @Override
         public void onClick(View view) {
-            //go to friends profile page
+            // go to friend profile
         }
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View inflatedView = LayoutInflater.from(parent.getContext()).inflate(R.layout
-                .friend_row_layout, parent, false);
+                .friends_row_layout, parent, false);
         return new ViewHolder(inflatedView);
     }
-
     @Override
-    public void onBindViewHolder(FriendLayoutAdapter.ViewHolder holder, final int position) {
-        final Friend friend = friends.get(position);
-
-        //holder.friendName.setText(name);
-        //holder.friendImage.setImageBitmap(friendProfilePic);
-
-
+    public void onBindViewHolder(FriendsLayoutAdapter.ViewHolder holder, final int position) {
+        final Friend friend = friendsList.get(position);
+        String name = friend.getUser().getUserId();
     }
+
 
 
     @Override
     public int getItemCount() {
-
-        return friends.size();
+        return friendsList.size();
     }
 }

@@ -41,9 +41,9 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
     private ArrayList<Achievement>  achievements;
     private Context profileContext;
 
-    public AchievementLayoutAdapter(ArrayList<Achievement> habitList, Context context) {
+    public AchievementLayoutAdapter(ArrayList<Achievement> achievements, Context context) {
         this.profileContext = context;
-        achievements = achievementController.getAchievements();
+        this.achievements = achievementController.getAchievements();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -81,7 +81,8 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
         String description = achievement.getDescription();
         String progressDisplay;
 
-        if (achievement.getCompleted()){
+        //display the achievement progress if it is is incomplete
+        if (achievement.getCompleted()) {
             progressDisplay = "";
         }
         else {
@@ -89,9 +90,12 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
             String done = achievement.getProgress().toString();
             progressDisplay = ("(" + done + "/" + total + ")");
         }
+
         holder.achievementName.setText(name);
         holder.achievementDescription.setText(description);
         holder.achievementProgress.setText(progressDisplay);
+
+        //display the successful achievement image if the achievemtn is completed
         if (achievement.getCompleted() == Boolean.TRUE){
             Bitmap successImage = BitmapFactory.decodeResource(profileContext.getResources(), R.drawable.unlocked);
             holder.achievementImage.setBackground(null);

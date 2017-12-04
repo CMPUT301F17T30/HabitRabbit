@@ -34,7 +34,7 @@ public class FriendController {
 
 
     public ArrayList<Friend> getFriends(){
-        return this.friends;
+        return friendsList.getFriends();
     }
 
     public void setFriendsList(ArrayList<Friend> friends){

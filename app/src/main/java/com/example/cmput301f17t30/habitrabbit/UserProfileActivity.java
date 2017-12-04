@@ -54,6 +54,7 @@ import java.util.EmptyStackException;
 import java.util.Locale;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 public class UserProfileActivity extends AppCompatActivity {
@@ -61,6 +62,10 @@ public class UserProfileActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
     private AchievementLayoutAdapter adapter;
+
+    private RecyclerView friendsRecyclerView;
+    private LinearLayoutManager friendsLinearLayoutManager;
+    private FriendsLayoutAdapter friendsLayoutAdapter;
 
     private Bitmap profileImage;
     private String imageDecode;
@@ -82,11 +87,19 @@ public class UserProfileActivity extends AppCompatActivity {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         final ViewFlipper viewFlipper = (ViewFlipper) findViewById(R.id.profile_viewflipper);
 
+        //initialize recyclerview for achievements
         recyclerView = (RecyclerView) findViewById(R.id.achievementsLayout);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new AchievementLayoutAdapter(achievementController.getAchievements(), this);
         recyclerView.setAdapter(adapter);
+
+        //initialize recyclerview for friends
+        friendsRecyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
+        friendsLinearLayoutManager = new LinearLayoutManager(this);
+        friendsRecyclerView.setLayoutManager(friendsLinearLayoutManager);
+        friendsLayoutAdapter = new FriendsLayoutAdapter(friendsList.getFriends(), this);
+        friendsRecyclerView.setAdapter(friendsLayoutAdapter);
 
         usernameText = (TextView) findViewById(R.id.username_text);
         usernameText.setText(userController.getUsername());
@@ -119,19 +132,20 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-        Button settingsButton = (Button) findViewById(R.id.settings_button);
+        Button settingsButton = (Button) findViewById(R.id.return_to_main);
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.settingsLayout)));
+                //return to main
+                finish();
             }
         });
 
-        Button button3 = (Button) findViewById(R.id.other_button);
-        button3.setOnClickListener(new View.OnClickListener() {
+        Button friendsButton = (Button) findViewById(R.id.friends_button);
+        friendsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                viewFlipper.setDisplayedChild(3);
+                viewFlipper.setDisplayedChild(viewFlipper.indexOfChild(findViewById(R.id.friends_recycler_view)));
             }
         });
 

@@ -34,7 +34,7 @@ import java.util.Date;
 
 public class UserController {
 
-    private User user = new User();
+    private User user;
     private static Boolean userExist;
 
     public UserController(){

@@ -33,14 +33,4 @@ public class AddHabitCommand extends Command {
         ElasticSearchController.AddHabitTask addHabitTask = new ElasticSearchController.AddHabitTask();
         addHabitTask.execute(habit);
     }
-
-    @Override
-    public void unexecute() {
-
-    }
-
-    @Override
-    public boolean isReversible() {
-        return false;
-    }
 }

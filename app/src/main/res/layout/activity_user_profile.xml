@@ -65,20 +65,20 @@
             tools:layout_editor_absoluteY="482dp" />
 
         <Button
-            android:id="@+id/settings_button"
+            android:id="@+id/return_to_main"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/settings"
+            android:text="@string/main"
             tools:layout_editor_absoluteX="173dp"
             tools:layout_editor_absoluteY="482dp" />
 
         <Button
-            android:id="@+id/other_button"
+            android:id="@+id/friends_button"
             style="?android:attr/buttonBarButtonStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/friends"
+            android:text="Friends"
             tools:layout_editor_absoluteX="241dp"
             tools:layout_editor_absoluteY="482dp" />
 
@@ -127,47 +127,12 @@
             android:layout_height="match_parent"
             android:clipToPadding="false" />
 
-        <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
-            android:id="@+id/settingsLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/friends_recycler_view"
+            android:layout_width="368dp"
+            android:layout_height="0dp"
+            android:clipToPadding="false" />
 
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="SETTINGS"
-                android:textColor="@android:color/black"
-                android:textSize="24sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Switch
-                android:id="@+id/switch1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="64dp"
-                android:text="ColorBlindMode"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="150dp"
-                android:layout_height="50dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="8dp"
-                android:background="@android:drawable/btn_dropdown"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/switch1" />
-
-
-        </android.support.constraint.ConstraintLayout>
     </ViewFlipper>
 
 </android.support.constraint.ConstraintLayout>

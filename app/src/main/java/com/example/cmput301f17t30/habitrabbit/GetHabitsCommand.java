@@ -28,14 +28,4 @@ public class GetHabitsCommand extends Command {
     public void execute() {
 
     }
-
-    @Override
-    public void unexecute() {
-
-    }
-
-    @Override
-    public boolean isReversible() {
-        return false;
-    }
 }
