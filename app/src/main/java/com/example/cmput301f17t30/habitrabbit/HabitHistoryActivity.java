@@ -55,15 +55,14 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
 
-    private Boolean filter;
+    public static elasticDoneBoolean filterDone;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_habit_history);
-
-        filter = Boolean.FALSE;
 
         habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
         habitEventlinearLayoutManager = new LinearLayoutManager(this);
@@ -99,10 +98,29 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         });
 
+        filterDone = new elasticDoneBoolean();
+        filterDone.setListener(new elasticDoneBoolean.ChangeListener() {
+            @Override
+            public void onChange() {
+                ArrayList<HabitEvent> filteredList = eventList.getList();
+                habitEventadapter = new HabitHistoryLayoutAdapter(filteredList,HabitHistoryActivity.this);
+                habitEventrecyclerView.setAdapter(habitEventadapter);
+                habitEventadapter.notifyDataSetChanged();
+            }
+        });
+
+
     }
 
+    @Override
     protected void onStart(){
         super.onStart();
+        habitEventadapter.notifyDataSetChanged();
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
         habitEventadapter.notifyDataSetChanged();
     }
 
@@ -157,8 +175,9 @@ public class HabitHistoryActivity extends AppCompatActivity {
      * @param filterType 0 for filter by habit type, 1 for filter by comment text, -1 to reset
      */
     public void filterHistoryList(String filterString, Integer filterType){
+
         ArrayList<HabitEvent> originalList;
-        ArrayList<HabitEvent> filteredList;
+        final ArrayList<HabitEvent> filteredList;
 
         //maybe try getting events explicitly by position
         originalList = eventList.getList();
@@ -183,13 +202,28 @@ public class HabitHistoryActivity extends AppCompatActivity {
                 }
             }
             */
-            for (int i =0;i<eventList.getSize(); i++){
+
+
+           /* for (int i =0;i<eventList.getSize(); i++){
                 HabitEvent event = eventList.getEvent(i);
                 if (event.getHabitType().getTitle().toLowerCase().equals(filterString.toLowerCase())){
                     filteredList.add(event);
                 }
 
+            }*/
+
+            for (int i =0;i<eventList.getSize(); i++) {
+                String habitID;
+                HabitEvent event = eventList.getEvent(i);
+                if (event.getHabitType().getTitle().toLowerCase().equals(filterString.toLowerCase())) {
+                    habitID = event.getHabitType().getId();
+                    ElasticSearchController.GetFilteredEventsTask getFilteredEventsTask = new ElasticSearchController.GetFilteredEventsTask();
+                    getFilteredEventsTask.execute(habitID);
+                    break;
+                }
             }
+
+
         }
 
         else if (filterType == 1){
@@ -205,12 +239,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
             }
         }
 
-        eventList.setEventList(filteredList);
-        habitEventadapter = new HabitHistoryLayoutAdapter(filteredList, this);
-        habitEventrecyclerView.invalidate();
-        habitEventrecyclerView.setAdapter(habitEventadapter);
-        habitEventadapter.notifyDataSetChanged();
-        filter = Boolean.TRUE;
+
 
     }
 

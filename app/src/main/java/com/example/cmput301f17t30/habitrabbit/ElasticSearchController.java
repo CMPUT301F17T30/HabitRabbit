@@ -38,6 +38,7 @@ import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
+import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.filterDone;
 import static com.example.cmput301f17t30.habitrabbit.LoginActivity.elasticDoneL;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.currentUser;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
@@ -205,20 +206,10 @@ public class ElasticSearchController {
             ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
 
             String query = "{\n" +
-                    "   \"query\": {\n" +
-                    "       \"nested\" : {\n" +
-                    "            \"path\" : \"habitType\",\n" +
-                    "            \"score_mode\" : \"avg\",\n" +
-                    "            \"query\" : {\n" +
-                    "               \"bool\" : {\n" +
-                    "                   \"must\" : [\n" +
-                    "                       { \"term\" : {\"habitType.id\" : \"" + habitID[0] + "\"} }\n" +
-                    "                   ]\n" +
-                    "               }\n" +
-                    "           }\n" +
-                    "       }\n" +
-                    "   }\n" +
-                    "}\n";
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"habitType.id\" : \"" + habitID[0].toLowerCase() + "\" }\n" +
+                    "    }\n" +
+                    "}";
 
             Search search = new Search.Builder(query)
                     .addIndex("team30_habitrabbit")
@@ -241,6 +232,67 @@ public class ElasticSearchController {
             return null;
 
         }
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            filterDone.setDone(true);
+        }
+
+
+    }
+
+    public static class GetSearchedEventsTask extends AsyncTask<String, Void, Void>{
+        @Override
+        protected Void doInBackground(String... user_id) {
+            verifySettings();
+
+            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+
+            String query = "{\n" +
+                    "    \"query\": {\n" +
+                    "    \"bool\": {\n" +
+                    "        \"must\": [\n" +
+                    "        {\n" +
+                    "            \"term\": {\n" +
+                    "            \"userId\": \"" + user_id[0] + "\"\n" +
+                    "        }\n" +
+                    "        },\n" +
+                    "        {\n" +
+                    "            \"range\": {\n" +
+                    "            \"date\": {\n" +
+                    "                \"gte\": \"now-4w\",\n" +
+                    "                \"lte\": \"now\"\n" +
+                    "            }\n" +
+                    "        }\n" +
+                    "        }\n" +
+                    "       ]\n" +
+                    "    }\n" +
+                    "},\n" +
+                    "    \"sort\": { \"date\" : \"desc\" }\n" +
+                    "}\n";
+
+
+            Search search = new Search.Builder(query)
+                    .addIndex("team30_habitrabbit")
+                    .addType("HabitEvent")
+                    .build();
+            try {
+                SearchResult result = client.execute(search);
+                if (result.isSucceeded()) {
+                    List<HabitEvent> foundEvents = result.getSourceAsObjectList(HabitEvent.class);
+                    events.addAll(foundEvents);
+                    eventList.setEventList(events);
+                } else {
+                    Log.e("Error", "The seach query failed");
+                }
+
+            } catch (Exception e) {
+                Log.e("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
+            }
+
+            return null;
+        }
+
 
     }
 
@@ -269,6 +321,7 @@ public class ElasticSearchController {
             return null;
 
         }
+
     }
 
     public static class EditHabitTask extends AsyncTask<Habit, Void, Void> {
