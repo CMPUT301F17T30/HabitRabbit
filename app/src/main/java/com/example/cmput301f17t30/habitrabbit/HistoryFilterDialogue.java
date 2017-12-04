@@ -39,6 +39,7 @@ public class HistoryFilterDialogue extends Dialog {
     private HistoryFilterDialogue thisDialog;
 
     private Integer searchBy = 0;
+    private String textString;
 
     public HistoryFilterDialogue(HabitHistoryActivity context) {
         super(context);
@@ -74,7 +75,7 @@ public class HistoryFilterDialogue extends Dialog {
 
             @Override
             public void onClick(View v) {
-                String textString = searchText.getText().toString();
+                textString = searchText.getText().toString();
 
                 if (textString.trim().length() == 0){
                     Toast.makeText(activity, "Search field cannot be blank", Toast.LENGTH_SHORT).show();
