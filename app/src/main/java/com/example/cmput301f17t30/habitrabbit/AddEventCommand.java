@@ -35,13 +35,4 @@ public class AddEventCommand extends Command {
         addEventTask.execute(habitEvent);
     }
 
-    @Override
-    public void unexecute() {
-
-    }
-
-    @Override
-    public boolean isReversible() {
-        return false;
-    }
 }
