@@ -70,8 +70,13 @@ public class HabitController {
     public int getCompleted(){
         return habit.getTimesCompleted();
     }
+
     public int getFailed(){
         return habit.getTimesFailed();
+    }
+
+    public String getID() {
+        return habit.getId();
     }
 
     public ArrayList<Boolean> getDays(){

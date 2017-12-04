@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static elasticDoneBoolean elasticDone;
+    public static elasticDoneBoolean userLoad;
     public static Boolean fromMain = Boolean.FALSE;
 
     private RecyclerView recyclerView;
@@ -121,9 +122,6 @@ public class MainActivity extends AppCompatActivity {
             getUserTask.execute(username);
         }
 
-        ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
-        getHabitsTask.execute(userController.getUsername());
-
         ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
         getRequests.execute();
 
@@ -133,6 +131,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new HabitLayoutAdapter(adapterList, this);
         recyclerView.setAdapter(adapter);
+
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
@@ -170,6 +169,16 @@ public class MainActivity extends AppCompatActivity {
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
+            }
+        });
+
+        userLoad = new elasticDoneBoolean();
+        userLoad.setListener(new elasticDoneBoolean.ChangeListener() {
+            @Override
+            public void onChange() {
+                ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
+                getHabitsTask.execute(userController.getUsername());
+                invalidateOptionsMenu();
             }
         });
     }

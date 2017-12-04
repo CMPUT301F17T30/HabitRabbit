@@ -41,6 +41,7 @@ import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static java.lang.Boolean.FALSE;
 import static java.lang.Boolean.TRUE;
 
@@ -222,7 +223,14 @@ public class EditHabitActivity extends AppCompatActivity {
                     }
 
                 }
-
+                Boolean duplicateFlag = Boolean.FALSE;
+                for(int i = 0; i < habitList.getSize();i++){
+                    String valueID = habitList.getHabit(i).getTitle();
+                    String ID = habitList.getHabit(i).getId();
+                    if(valueID.equals(name.getText().toString()) && ! habitController.getID().equals(ID)){
+                        duplicateFlag = Boolean.TRUE;
+                    }
+                }
 
 
                 try {
@@ -245,9 +253,11 @@ public class EditHabitActivity extends AppCompatActivity {
                 else if (date.getText().toString().isEmpty()){
                     date.setError("Valid date required");
                 }
-
                 else if (earliestEventDate != null && newDate.before(earliestEventDate)){
                     date.setError("Date cannot be before completion date of any event");
+                }
+                else if (duplicateFlag){
+                    name.setError("Duplicate Habit name");
                 }
 
                 else {

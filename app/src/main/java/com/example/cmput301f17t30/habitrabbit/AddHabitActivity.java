@@ -190,9 +190,6 @@ public class AddHabitActivity extends AppCompatActivity {
                     if(valueID.equals(name.getText().toString())){
                         duplicateFlag = Boolean.TRUE;
                     }
-                    else {
-                        duplicateFlag = Boolean.FALSE;
-                    }
                 }
                 if (name.getText().toString().trim().isEmpty()){
                     name.setError("Habit name required");
