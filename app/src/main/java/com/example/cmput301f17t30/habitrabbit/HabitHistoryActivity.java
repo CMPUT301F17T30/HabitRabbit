@@ -153,7 +153,11 @@ public class HabitHistoryActivity extends AppCompatActivity {
      * @param filterType 0 for filter by habit type, 1 for filter by comment text, -1 to reset
      */
     public void filterHistoryList(String filterString, Integer filterType){
+        ArrayList<HabitEvent> originalList;
+        ArrayList<HabitEvent> filteredList;
 
+        originalList = eventList.getList();
+        filteredList = new ArrayList<>();
 
         if (filterType == -1){
             habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
@@ -161,16 +165,12 @@ public class HabitHistoryActivity extends AppCompatActivity {
             habitEventadapter.notifyDataSetChanged();
         }
 
-        ArrayList<HabitEvent> originalList = eventList.getList();
-        ArrayList<HabitEvent> filteredList = new ArrayList<>();
-
-        if (filterType == 0) {
+        else if (filterType == 0) {
             if (filterString.length() == 0) {
                 filteredList.addAll(originalList);
             } else {
-                final String filterPattern = filterString.toLowerCase().trim();
                 for (HabitEvent event : originalList) {
-                    if (event.getHabitType().getTitle().toLowerCase().equals(filterPattern)) {
+                    if (event.getHabitType().getTitle().toLowerCase().equals(filterString)) {
                         filteredList.add(event);
                     }
                 }
@@ -181,14 +181,14 @@ public class HabitHistoryActivity extends AppCompatActivity {
             if (filterString.length() == 0) {
                 filteredList.addAll(originalList);
             } else {
-                final String filterPattern = filterString.toLowerCase().trim();
                 for (HabitEvent event : originalList) {
-                    if (event.getComment().toLowerCase().contains(filterPattern)) {
+                    if (event.getComment().toLowerCase().contains(filterString)) {
                         filteredList.add(event);
                     }
                 }
             }
         }
+
         habitEventadapter = new HabitHistoryLayoutAdapter(filteredList, this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
