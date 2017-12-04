@@ -180,8 +180,8 @@ public class MainActivity extends AppCompatActivity {
                 ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
                 getHabitsTask.execute(userController.getUsername());
 
-                //ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
-                //getFriendsTask.execute("dummy");
+                ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
+                getFriendsTask.execute("dummy");
 
                 friendLoad.setListener(new elasticDoneBoolean.ChangeListener() {
                     @Override
