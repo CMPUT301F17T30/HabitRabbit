@@ -50,6 +50,7 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.EmptyStackException;
 import java.util.Locale;
 
@@ -79,6 +80,8 @@ public class UserProfileActivity extends AppCompatActivity {
     private final Integer IMAGE_REQUEST_CODE = 0;
     private final Integer IMAGE_RESULT = 1;
 
+    private ArrayList<Friend> friendsList;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -95,10 +98,11 @@ public class UserProfileActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //initialize recyclerview for friends
+        friendsList = MainActivity.friendsList.getFriends();
         friendsRecyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
         friendsLinearLayoutManager = new LinearLayoutManager(this);
         friendsRecyclerView.setLayoutManager(friendsLinearLayoutManager);
-        friendsLayoutAdapter = new FriendsLayoutAdapter(friendsList.getFriends(), this);
+        friendsLayoutAdapter = new FriendsLayoutAdapter(friendsList, this);
         friendsRecyclerView.setAdapter(friendsLayoutAdapter);
 
         usernameText = (TextView) findViewById(R.id.username_text);

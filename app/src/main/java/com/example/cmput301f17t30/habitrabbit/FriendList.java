@@ -16,7 +16,7 @@ public class FriendList {
     }
 
     /**
-     * @param the current user's list of friends
+     * @param friends current user's list of friends
      */
     public void setList(ArrayList<Friend> friends){
         this.friends = friends;
