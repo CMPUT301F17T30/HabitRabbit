@@ -123,7 +123,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
         ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
-        getFriendsTask.execute();
+        for (String friend_id: userController.getFriends()) {
+            getFriendsTask.execute(friend_id);
+        }
 
         ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
         getRequests.execute(userController.getUsername());

@@ -317,16 +317,14 @@ public class ElasticSearchController {
     public static class GetFriendTask extends AsyncTask<String, Void, Void> {
 
         @Override
-        protected Void doInBackground(String...friends) {
+        protected Void doInBackground(String...friend) {
             verifySettings();
-            ArrayList<Friend> friendsL = new ArrayList<>();
-            for (String friend_id : friends){
-                // TODO Build the query
-                String query = "{\n" +
-                        "    \"query\" : {\n" +
-                        "        \"term\" : { \"userId\" : \""+friend_id+"\" }\n" +
-                        "    }\n" +
-                        "}";
+            // TODO Build the query
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"userId\" : \""+friend[0]+"\" }\n" +
+                    "    }\n" +
+                    "}";
 
 
                 Search search = new Search.Builder(query)
@@ -338,8 +336,8 @@ public class ElasticSearchController {
                     SearchResult result = client.execute(search);
                     User user = result.getSourceAsObject(User.class);
                     if (user != null) {
-                        Friend friend = new Friend(user);
-                        friendsL.add(0, friend);
+                        Friend foundFriend = new Friend(user);
+                        friendsList.addFriend(foundFriend);
                     } else {
                         Log.d("Error", "The search query failed");
                     }
@@ -347,8 +345,6 @@ public class ElasticSearchController {
                 } catch (Exception e) {
                     Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
-            }
-            friendsList.setList(friendsL);
             return null;
         }
 
