@@ -155,34 +155,25 @@ public class MainActivity extends AppCompatActivity {
                 ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
                 getFriendsTask.execute("dummy");
 
-                friendLoad.setListener(new elasticDoneBoolean.ChangeListener() {
-                    @Override
-                    public void onChange() {
-                        ElasticSearchController.GetFriendEventsTask getEvents = new ElasticSearchController.GetFriendEventsTask();
-                        getEvents.execute("dummy");
-                    }
-                });
-
                 ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
                 getRequests.execute(userController.getUsername());
-
-
 
                 invalidateOptionsMenu();
-
-                ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
-                getRequests.execute(userController.getUsername());
-
-                ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
-                for (String friend_id: userController.getFriends()) {
-                    getFriendsTask.execute(friend_id);
-                }
 
                 ElasticSearchController.GetEventTask getEventTask = new ElasticSearchController.GetEventTask();
                 getEventTask.execute(userController.getUsername());
 
             }
         });
+
+        friendLoad.setListener(new elasticDoneBoolean.ChangeListener() {
+            @Override
+            public void onChange() {
+                ElasticSearchController.GetFriendEventsTask getEvents = new ElasticSearchController.GetFriendEventsTask();
+                getEvents.execute("dummy");
+            }
+        });
+
 
     }
 

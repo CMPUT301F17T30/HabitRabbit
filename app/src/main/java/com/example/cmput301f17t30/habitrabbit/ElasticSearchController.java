@@ -152,18 +152,42 @@ public class ElasticSearchController {
 
             ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
 
-            String query = "{\n" +
+            /*String query = "{\n" +
                     "    \"query\" : {\n" +
-                    "        \"term\" : { \"userId\" : \"" + user_id[0] + "\" }\n" +
+                    "        \"term\" : { \"userId\" : \"" + user_id[0] + "\" },\n" +
                     " \"range\" : {\n" +
                     "            \"date\" : {\n" +
                     "                \"gte\" : \"now-4w\",\n" +
                     "                \"lte\" :  \"now\"\n" +
                     "            }\n" +
                     "        }\n" +
-                    "    }\n" +
-                    "    \"sort\": { \"date\" : \"desc\" },\n" +
+                    "    },\n" +
+                    "    \"sort\": { \"date\" : \"desc\" }\n" +
                     "}";
+            */
+
+            String query = "{\n" +
+            "    \"query\": {\n" +
+            "    \"bool\": {\n" +
+            "        \"must\": [\n" +
+            "        {\n" +
+            "            \"term\": {\n" +
+            "            \"userId\": \"" + user_id[0] + "\"\n" +
+            "        }\n" +
+            "        },\n" +
+            "        {\n" +
+            "            \"range\": {\n" +
+            "            \"date\": {\n" +
+            "                \"gte\": \"now-4w\",\n" +
+            "                \"lte\": \"now\"\n" +
+            "            }\n" +
+            "        }\n" +
+            "        }\n" +
+            "       ]\n" +
+            "    }\n" +
+            "},\n" +
+            "    \"sort\": { \"date\" : \"desc\" }\n" +
+            "}\n";
 
 
             Search search = new Search.Builder(query)
