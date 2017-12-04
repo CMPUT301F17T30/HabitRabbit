@@ -16,9 +16,11 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package com.example.cmput301f17t30.habitrabbit;
+package com.example.cmput301f17t30.habitrabbit.MockClasses;
 
 
+
+import com.example.cmput301f17t30.habitrabbit.Habit;
 
 import java.util.ArrayList;
 import java.util.Date;

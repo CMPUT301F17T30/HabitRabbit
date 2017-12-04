@@ -81,7 +81,8 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
         String description = achievement.getDescription();
         String progressDisplay;
 
-        if (achievement.getCompleted()){
+        //display the achievement progress if it is is incomplete
+        if (achievement.getCompleted()) {
             progressDisplay = "";
         }
         else {
@@ -89,9 +90,12 @@ public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLa
             String done = achievement.getProgress().toString();
             progressDisplay = ("(" + done + "/" + total + ")");
         }
+
         holder.achievementName.setText(name);
         holder.achievementDescription.setText(description);
         holder.achievementProgress.setText(progressDisplay);
+
+        //display the successful achievement image if the achievemtn is completed
         if (achievement.getCompleted() == Boolean.TRUE){
             Bitmap successImage = BitmapFactory.decodeResource(profileContext.getResources(), R.drawable.unlocked);
             holder.achievementImage.setBackground(null);
