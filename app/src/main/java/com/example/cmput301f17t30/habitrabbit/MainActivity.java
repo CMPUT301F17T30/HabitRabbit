@@ -94,13 +94,6 @@ public class MainActivity extends AppCompatActivity {
             getUserTask.execute(username);
         }
 
-        ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
-        for (String friend_id: userController.getFriends()) {
-            getFriendsTask.execute(friend_id);
-        }
-
-        ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
-        getRequests.execute(userController.getUsername());
 
         adapterList = new ArrayList<Habit>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
@@ -156,6 +149,18 @@ public class MainActivity extends AppCompatActivity {
                 ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
                 getHabitsTask.execute(userController.getUsername());
                 invalidateOptionsMenu();
+
+                ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
+                getRequests.execute(userController.getUsername());
+
+                ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
+                for (String friend_id: userController.getFriends()) {
+                    getFriendsTask.execute(friend_id);
+                }
+
+                ElasticSearchController.GetEventTask getEventTask = new ElasticSearchController.GetEventTask();
+                getEventTask.execute(userController.getUsername());
+
             }
         });
     }
