@@ -25,6 +25,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -79,11 +80,22 @@ public class AddFriendDialogue extends Dialog {
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //generate friend request
-                String newFriend = sendFriendText.getText().toString();
-                FriendRequest request = new FriendRequest(userController.getUsername(),newFriend);
+                if (NetWorkCheck.isOnline()) {
+                    //generate friend request
+                    String newFriend = sendFriendText.getText().toString();
+                    FriendRequest request = new FriendRequest(userController.getUsername(), newFriend);
 
-                //upload request to Elastic
+                    //upload request to elastic
+                    ElasticSearchController.AddFriendRequestTask addRequest = new ElasticSearchController.AddFriendRequestTask();
+                    addRequest.execute(request);
+
+                    //clear textbox and notify user of success
+                    sendFriendText.setText("");
+                    Toast.makeText(activity, "Friend added", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(activity, "You are not connected to the internet", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 
