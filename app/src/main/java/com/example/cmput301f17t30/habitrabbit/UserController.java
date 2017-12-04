@@ -58,6 +58,8 @@ public class UserController {
         this.user = user;
     }
 
+    public User getUser(){return user;}
+
 
     /**
      * removes the current user, used when user logs out

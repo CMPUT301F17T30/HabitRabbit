@@ -560,7 +560,7 @@ public class ElasticSearchController {
                 SearchResult result = client.execute(search);
                 User user = result.getSourceAsObject(User.class);
                 if (user != null) {
-
+                    userController.setUser(user);
                 } else {
                     Log.d("Error", "The search query failed");
                 }
@@ -570,6 +570,7 @@ public class ElasticSearchController {
             }
             return null;
         }
+
 
 
 

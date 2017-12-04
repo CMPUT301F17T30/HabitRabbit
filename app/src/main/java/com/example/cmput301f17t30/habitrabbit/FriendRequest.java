@@ -28,9 +28,16 @@ public class FriendRequest {
         this.reciever = reciever;
     }
 
+    public void setSenderProfile(User senderProfile){
+        this.senderProfile = senderProfile;
+    }
+
     public User getSenderProfile(){
+        User currentUser = userController.getUser();
         ElasticSearchController.GetSenderTask getSenderTask = new ElasticSearchController.GetSenderTask();
         getSenderTask.execute(sender);
+        this.senderProfile = userController.getUser();
+        userController.setUser(currentUser);
         return senderProfile;
     }
 
