@@ -474,7 +474,6 @@ public class ElasticSearchController {
 
                         }
                         friend.setRecentEvents(friendEvents);
-                        Log.d("friend Event", "" + friend.getRecentEvents());
                     } else {
                         Log.e("Error", "The seach query failed");
                     }
