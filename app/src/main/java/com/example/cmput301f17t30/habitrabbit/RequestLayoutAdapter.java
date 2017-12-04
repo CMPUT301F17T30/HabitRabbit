@@ -78,7 +78,7 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
     }
 
     @Override
-    public void onBindViewHolder(RequestLayoutAdapter.ViewHolder holder, final int position) {
+    public void onBindViewHolder(final RequestLayoutAdapter.ViewHolder holder, final int position) {
         final FriendRequest request = requests.get(position);
 
         String friendName = request.getSender();
@@ -99,8 +99,8 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
                 acceptTask.execute(request);
                 ElasticSearchController.DeleteRequestTask deleteRequestTask = new ElasticSearchController.DeleteRequestTask();
                 deleteRequestTask.execute(request);
-                requests.remove(position);
-                notifyItemRemoved(position);
+                requests.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
 
             }
         });
@@ -112,8 +112,8 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
             public void onClick(View view) {
                 ElasticSearchController.DeleteRequestTask deleteTask = new ElasticSearchController.DeleteRequestTask();
                 deleteTask.execute(request);
-                requests.remove(position);
-                notifyItemRemoved(position);
+                requests.remove(holder.getAdapterPosition());
+                notifyItemRemoved(holder.getAdapterPosition());
 
             }
         });
