@@ -31,7 +31,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.Toast;
+
+import java.util.ArrayList;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
@@ -50,6 +54,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -143,32 +148,51 @@ public class HabitHistoryActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void searchWord(String textString) {
-        //run the elastic stuff here
-
-    }
-
     /**
-     * @param searchText the text that the user wishes to search by
-     * @param parameter 0 for filter by habit type, 1 for filter by comment text
+     * @param filterString the text that the user wishes to search by
+     * @param filterType 0 for filter by habit type, 1 for filter by comment text, -1 to reset
      */
-    public void filterHistoryList(String searchText, Integer parameter){
-        String searchType;
-        if (parameter == 0){
-            searchType = "type ";
-        }
-        else{
-            searchType = "comment ";
-        }
-        Toast.makeText(getApplicationContext(), "you searched for the " + searchType + searchText, Toast.LENGTH_LONG).show();
+    public void filterHistoryList(String filterString, Integer filterType){
 
 
-        if (parameter ==0){
-            //run elasticsearch for habit type
+        if (filterType == -1){
+            habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
+            habitEventrecyclerView.setAdapter(habitEventadapter);
+            habitEventadapter.notifyDataSetChanged();
         }
-        else if (parameter == 1){
-            //run elasticsearch for the matching comment text
+
+        ArrayList<HabitEvent> originalList = eventList.getList();
+        ArrayList<HabitEvent> filteredList = new ArrayList<>();
+
+        if (filterType == 0) {
+            if (filterString.length() == 0) {
+                filteredList.addAll(originalList);
+            } else {
+                final String filterPattern = filterString.toLowerCase().trim();
+                for (HabitEvent event : originalList) {
+                    if (event.getHabitType().getTitle().toLowerCase().equals(filterPattern)) {
+                        filteredList.add(event);
+                    }
+                }
+            }
         }
-        //refresh adapter and display new events
+
+        else if (filterType == 1){
+            if (filterString.length() == 0) {
+                filteredList.addAll(originalList);
+            } else {
+                final String filterPattern = filterString.toLowerCase().trim();
+                for (HabitEvent event : originalList) {
+                    if (event.getComment().toLowerCase().contains(filterPattern)) {
+                        filteredList.add(event);
+                    }
+                }
+            }
+        }
+        habitEventadapter = new HabitHistoryLayoutAdapter(filteredList, this);
+        habitEventrecyclerView.setAdapter(habitEventadapter);
+        habitEventadapter.notifyDataSetChanged();
+
     }
+
 }
