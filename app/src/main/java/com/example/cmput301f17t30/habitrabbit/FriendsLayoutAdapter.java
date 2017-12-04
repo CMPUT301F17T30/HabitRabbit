@@ -73,6 +73,12 @@ public class FriendsLayoutAdapter extends RecyclerView.Adapter<FriendsLayoutAdap
     public void onBindViewHolder(FriendsLayoutAdapter.ViewHolder holder, final int position) {
         final Friend friend = friendsList.get(position);
         String name = friend.getUser().getUserId();
+
+        holder.friendUsername.setText(name);
+
+        if (friend.getUser().getProfilePic() != null){
+            holder.friendPicture.setImageBitmap(friend.getUser().getProfilePic());
+        }
     }
 
 

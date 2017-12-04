@@ -149,49 +149,6 @@ public class UserProfileActivity extends AppCompatActivity {
             }
         });
 
-        /*
-        Spinner languageSpinner = (Spinner) findViewById(R.id.spinner);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.languages_array, android.R.layout.simple_spinner_item);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        languageSpinner.setAdapter(adapter);
-        languageSpinner.setSelection(0, false);
-
-        languageSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                String language = "en";
-                Locale locale;
-
-                Configuration config = new Configuration();
-                if (position == 0){
-                    language = "en";
-                }
-                else if (position == 1){
-                    language = "ru";
-
-                }
-                //Resources englishRes = getApplicationContext().getResources();
-                //DisplayMetrics dm2 = englishRes.getDisplayMetrics();
-                //android.content.res.Configuration conf1 = englishRes.getConfiguration();
-                //conf1.locale = new Locale(language);
-                //englishRes.updateConfiguration(conf1, dm2);
-                locale = new Locale(language);
-                Locale.setDefault(locale);
-                config.locale = locale;
-                getResources().updateConfiguration(config, null);
-
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // do nothing
-            }
-
-        });
-        */
     }
 
     @Override

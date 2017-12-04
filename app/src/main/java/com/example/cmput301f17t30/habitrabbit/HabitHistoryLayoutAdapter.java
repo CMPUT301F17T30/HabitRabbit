@@ -52,17 +52,12 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
     private int EVENT_DETAIL_REQUEST = 7;
 
     public HabitHistoryLayoutAdapter(ArrayList<HabitEvent> habitHistoryList, Context context) {
-        this.habitHistoryList = new ArrayList<HabitEvent>();
+        this.habitHistoryList = new ArrayList<>();
         this.habitHistoryList.addAll(habitHistoryList);
-        Collections.sort(habitHistoryList,new HabitHistorySorter());
         this.historyContext = context;
     }
 
-    public class HabitHistorySorter implements Comparator<HabitEvent>{
-        public int compare(HabitEvent a, HabitEvent b){
-            return b.getDate().compareTo(a.getDate());
-        }
-    }
+
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView eventComment;
