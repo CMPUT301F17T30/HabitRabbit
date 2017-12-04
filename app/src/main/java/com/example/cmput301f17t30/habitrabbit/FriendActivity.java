@@ -18,6 +18,7 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -82,8 +83,8 @@ public class FriendActivity extends AppCompatActivity {
         mapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent map = new Intent(FriendActivity.this, EventMapsActivity.class);
-                //startActivity(map);
+                Intent map = new Intent(FriendActivity.this, EventMapsActivity.class);
+                startActivity(map);
             }
         });
     }
