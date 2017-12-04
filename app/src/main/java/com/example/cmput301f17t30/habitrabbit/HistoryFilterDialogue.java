@@ -29,7 +29,7 @@ import android.widget.RadioGroup;
 import android.widget.Toast;
 
 /**
- * Created by Adam on 02-Dec-17.
+ * A popup dialog used to filter habit history by habit type or by comment text
  */
 
 public class HistoryFilterDialogue extends Dialog {

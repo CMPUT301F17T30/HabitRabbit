@@ -116,6 +116,9 @@ public class HabitEventController {
         habitEvent.setDate(date);
     }
 
+    /**
+     * add an event, push to elasitc and update the associated habit stats
+     */
     public void saveAddEvent(){
         eventList.addEvent(habitEvent);
         AddEventCommand addEventCommand = new AddEventCommand(habitEvent);
@@ -124,6 +127,10 @@ public class HabitEventController {
         habitEvent.getHabitType().setLastCompleted(new Date());
     }
 
+    /**
+     * deleted a habit event
+     * @param index the index of the event t be deleted
+     */
     public void deleteEvent(int index){
         eventList.deleteEvent(index);
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(habitEvent);
@@ -132,15 +139,24 @@ public class HabitEventController {
         flag = 1;
     }
 
+    /**
+     * resets the deletion flag
+     */
     public void resetDelete(){
         flag = 0;
     }
 
+    /**
+     * @return whether or not the current event has been deleted
+     */
     public int isDelete(){
 
         return flag;
     }
 
+    /**
+     * @param index the index of the habit event to be edited
+     */
     public void saveEditEvent(int index){
         eventList.editEvent(index, habitEvent);
         EditEventCommand editEventCommand = new EditEventCommand(habitEvent);
@@ -148,6 +164,9 @@ public class HabitEventController {
 
     }
 
+    /**
+     *  sorts the list of habit events by date competed
+     */
     public void sortByDate(){
 
 
@@ -163,6 +182,10 @@ public class HabitEventController {
         eventList.setEventList(list);
     }
 
+    /**
+     * deletes all habit events of a given type. used when deleting a habit
+     * @param type the type of habit event to be deleted
+     */
     public void deleteAllHabitEvents(Habit type) {
         ArrayList<HabitEvent> list = eventList.getList();
         try {
@@ -181,11 +204,16 @@ public class HabitEventController {
         eventList.setEventList(list);
     }
 
-
+    /**
+     * @return the current habit event
+     */
      public HabitEvent returnEvent(){
      return habitEvent;
     }
 
+    /**
+     * @param event the habit event to be set
+     */
     public void setEvent(HabitEvent event){
         this.habitEvent = event;
     }

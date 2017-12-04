@@ -1,7 +1,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 /**
- * Created by Jacqueline on 2017-12-02.
+ * sets a flag and a listener to notify when elastic search is done pulling
  */
 
 public class elasticDoneBoolean {

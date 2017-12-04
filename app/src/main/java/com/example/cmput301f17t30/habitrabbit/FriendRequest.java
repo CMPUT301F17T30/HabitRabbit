@@ -29,6 +29,10 @@ public class FriendRequest {
     }
 
 
+    /**
+     * gets the information on the user who sent the request
+     * @return the user who sent the firned request
+     */
     public User getSenderProfile(){
         User currentUser = userController.getUser();
         ElasticSearchController.GetSenderTask getSenderTask = new ElasticSearchController.GetSenderTask();
@@ -75,7 +79,7 @@ public class FriendRequest {
     }
 
 
-    /**
+    /*
      *  do accept and decline action in activity, call elastic search
      */
 

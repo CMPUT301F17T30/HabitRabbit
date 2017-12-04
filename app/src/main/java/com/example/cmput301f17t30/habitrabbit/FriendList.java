@@ -15,14 +15,26 @@ public class FriendList {
         this.latestEvents = new ArrayList<>();
     }
 
+    /**
+     * @param the current user's list of friends
+     */
     public void setList(ArrayList<Friend> friends){
         this.friends = friends;
     }
 
+    /**
+     * @return the size of user's friend list
+     */
     public Integer getSize(){return friends.size();}
 
+    /**
+     * @param friend the user to be added as a friend
+     */
     public void addFriend(Friend friend){friends.add(friend);}
 
+    /**
+     * @return the current user's list of friends
+     */
     public ArrayList<Friend> getFriends(){return friends;}
 
     public void getLatestEvents(){

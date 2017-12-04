@@ -125,6 +125,9 @@ public class HabitController {
         habitList.clearAll();
     }
 
+    /**
+     * pushes all current habits to elastic
+     */
     public void saveAllHabits(){
         for (int i = 0; i < habitList.getSize(); i++) {
             Habit newHabit = habitList.getHabit(i);

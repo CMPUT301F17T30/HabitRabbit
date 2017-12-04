@@ -137,7 +137,13 @@ public class User {
         this.achievementProgress.set(index,newProgress);
     }
 
+    /**
+     * @return a unique identifier used for elasticsearch
+     */
     public String getJestId(){return id;}
 
+    /**
+     * @param id a unique identifier used for elasticsearch
+     */
     public void setJestId(String id){this.id = id;}
 }

@@ -98,10 +98,16 @@ public class HabitList {
         habitList.addAll(habits);
     }
 
+    /**
+     * deletes all habits from the list
+     */
     public void clearAll(){
         habitList.clear();
     }
 
+    /**
+     * sorts the list of habits by whether they are due today or not
+     */
     public void sort(){
         ArrayList<Habit> sortedList = new ArrayList<Habit>();
         for (int i = 0; i < habitList.size(); i++){
