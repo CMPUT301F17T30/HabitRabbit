@@ -80,7 +80,7 @@ public class AddFriendDialogue extends Dialog {
         addFriendButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (NetWorkCheck.isOnline()) {
+                //if (NetWorkCheck.isOnline()) {
                     //generate friend request
                     String newFriend = sendFriendText.getText().toString();
                     FriendRequest request = new FriendRequest(userController.getUsername(), newFriend);
@@ -92,10 +92,10 @@ public class AddFriendDialogue extends Dialog {
                     //clear textbox and notify user of success
                     sendFriendText.setText("");
                     Toast.makeText(activity, "Friend added", Toast.LENGTH_SHORT).show();
-                }
-                else{
-                    Toast.makeText(activity, "You are not connected to the internet", Toast.LENGTH_SHORT).show();
-                }
+               // }
+               // else{
+               //     Toast.makeText(activity, "You are not connected to the internet", Toast.LENGTH_SHORT).show();
+               // }
             }
         });
 

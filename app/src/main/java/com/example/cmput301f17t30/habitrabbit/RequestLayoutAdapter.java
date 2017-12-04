@@ -93,19 +93,14 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
             @Override
             public void onClick(View view) {
                 //add friend to your friends list
-                if (NetWorkCheck.isOnline()) {
-                    userController.addFriend(request.getSender());
-                    userController.saveUser();
-                    ElasticSearchController.AcceptRequestTask acceptTask = new ElasticSearchController.AcceptRequestTask();
-                    acceptTask.execute(request);
-                    ElasticSearchController.DeleteRequestTask deleteRequestTask = new ElasticSearchController.DeleteRequestTask();
-                    deleteRequestTask.execute(request);
-                    requests.remove(position);
-                    notifyItemRemoved(position);
-                }
-                else{
-                    Toast.makeText(friendContext, "You are not connected to the internet", Toast.LENGTH_SHORT).show();
-                }
+                userController.addFriend(request.getSender());
+                userController.saveUser();
+                ElasticSearchController.AcceptRequestTask acceptTask = new ElasticSearchController.AcceptRequestTask();
+                acceptTask.execute(request);
+                ElasticSearchController.DeleteRequestTask deleteRequestTask = new ElasticSearchController.DeleteRequestTask();
+                deleteRequestTask.execute(request);
+                requests.remove(position);
+                notifyItemRemoved(position);
 
             }
         });
@@ -115,16 +110,11 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
         denyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (NetWorkCheck.isOnline()) {
-                    ElasticSearchController.DeleteRequestTask deleteTask = new ElasticSearchController.DeleteRequestTask();
-                    deleteTask.execute(request);
-                    requests.remove(position);
-                    notifyItemRemoved(position);
-                }
+                ElasticSearchController.DeleteRequestTask deleteTask = new ElasticSearchController.DeleteRequestTask();
+                deleteTask.execute(request);
+                requests.remove(position);
+                notifyItemRemoved(position);
 
-                else{
-                    Toast.makeText(friendContext, "You are not connected to the internet", Toast.LENGTH_SHORT).show();
-                }
             }
         });
 

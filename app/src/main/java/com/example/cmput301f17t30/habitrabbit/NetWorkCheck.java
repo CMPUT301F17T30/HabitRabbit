@@ -23,6 +23,7 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 
 import java.io.IOException;
 import java.net.InetAddress;
