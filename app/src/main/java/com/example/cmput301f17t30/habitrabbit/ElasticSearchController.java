@@ -439,6 +439,8 @@ public class ElasticSearchController {
         protected Void doInBackground(String...user_id) {
             verifySettings();
 
+            ArrayList<FriendRequest> requests = new ArrayList<>();
+
             // TODO Build the query
             String query = "{\n" +
                     "    \"query\" : {\n" +
@@ -455,8 +457,9 @@ public class ElasticSearchController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    FriendRequest request = result.getSourceAsObject(FriendRequest.class);
-                    friendRequests.addFriendRequest(request);
+                    List<FriendRequest> request = result.getSourceAsObjectList(FriendRequest.class);
+                    requests.addAll(request);
+                    friendRequests.setRequestsList(requests);
                 } else {
                     Log.d("Error", "The search query failed");
                 }
