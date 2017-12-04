@@ -34,14 +34,4 @@ public class DeleteEventCommand extends Command {
         ElasticSearchController.DeleteHabitEvent deleteHabitEvent = new ElasticSearchController.DeleteHabitEvent();
         deleteHabitEvent.execute(habitEvent);
     }
-
-    @Override
-    public void unexecute() {
-
-    }
-
-    @Override
-    public boolean isReversible() {
-        return false;
-    }
 }
