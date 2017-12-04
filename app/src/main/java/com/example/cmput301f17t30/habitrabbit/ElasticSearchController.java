@@ -449,11 +449,16 @@ public class ElasticSearchController {
                             String queryEvent = "{\n" +
                                     "    \"query\" : {\n" +
                                     "       \"nested\" : {\n" +
-                                    "           \"path\" : \"habitType\",\n" +
-                                    "               \"query\" : {\n" +
-                                    "                   \"term\" : { \"id\" : \"" + friendHabit.getId() +"\" }\n" +
-                                    "                   }\n" +
+                                    "            \"path\" : \"habitType\",\n" +
+                                    "            \"score_mode\" : \"avg\",\n" +
+                                    "            \"query\" : {\n" +
+                                    "               \"bool\" : {\n" +
+                                    "                   \"must\" : [\n" +
+                                    "                       { \"term\" : {\"habitType.id\" : \"" + friendHabit.getId() + "\"} }\n" +
+                                    "                   ]\n" +
                                     "               }\n" +
+                                    "           }\n" +
+                                    "       }\n" +
                                     "    },\n" +
                                     "    \"sort\": { \"date\" : \"desc\" },\n" +
                                     "    \"size\": 1\n" +
