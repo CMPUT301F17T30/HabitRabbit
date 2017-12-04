@@ -38,15 +38,15 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendControll
 
 public class FriendLayoutAdapter extends RecyclerView.Adapter<FriendLayoutAdapter.ViewHolder> {
 
-    private ArrayList<Friend> friends;
+    private ArrayList<HabitEvent> friendEvents;
     private Context friendContext;
 
 
 
-    public FriendLayoutAdapter(ArrayList<Friend> friendList, Context context) {
+    public FriendLayoutAdapter(ArrayList<HabitEvent> friendList, Context context) {
         this.friendContext = context;
 
-        friends = friendController.getFriends();
+        friendEvents = friendList;
 
     }
 
@@ -77,7 +77,7 @@ public class FriendLayoutAdapter extends RecyclerView.Adapter<FriendLayoutAdapte
 
     @Override
     public void onBindViewHolder(FriendLayoutAdapter.ViewHolder holder, final int position) {
-        final Friend friend = friends.get(position);
+        final HabitEvent event = friendEvents.get(position);
 
         //holder.friendName.setText(name);
         //holder.friendImage.setImageBitmap(friendProfilePic);
@@ -89,6 +89,6 @@ public class FriendLayoutAdapter extends RecyclerView.Adapter<FriendLayoutAdapte
     @Override
     public int getItemCount() {
 
-        return friends.size();
+        return friendEvents.size();
     }
 }
