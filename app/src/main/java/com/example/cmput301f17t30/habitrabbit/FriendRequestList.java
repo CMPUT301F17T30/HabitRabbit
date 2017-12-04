@@ -29,4 +29,6 @@ public class FriendRequestList {
         return requests.get(index);
     }
 
+    public void setRequestsList(ArrayList<FriendRequest> requests){this.requests = requests;}
+
 }

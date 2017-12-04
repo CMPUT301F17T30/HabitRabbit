@@ -49,6 +49,7 @@ public class User {
     }
 
     public User(){
+        friends = new ArrayList<>();
     }
 
     /**

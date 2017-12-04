@@ -317,16 +317,14 @@ public class ElasticSearchController {
     public static class GetFriendTask extends AsyncTask<String, Void, Void> {
 
         @Override
-        protected Void doInBackground(String...friends) {
+        protected Void doInBackground(String...friend) {
             verifySettings();
-            ArrayList<Friend> friendsL = new ArrayList<>();
-            for (String friend_id : friends){
-                // TODO Build the query
-                String query = "{\n" +
-                        "    \"query\" : {\n" +
-                        "        \"term\" : { \"userId\" : \""+friend_id+"\" }\n" +
-                        "    }\n" +
-                        "}";
+            // TODO Build the query
+            String query = "{\n" +
+                    "    \"query\" : {\n" +
+                    "        \"term\" : { \"userId\" : \""+friend[0]+"\" }\n" +
+                    "    }\n" +
+                    "}";
 
 
                 Search search = new Search.Builder(query)
@@ -338,8 +336,8 @@ public class ElasticSearchController {
                     SearchResult result = client.execute(search);
                     User user = result.getSourceAsObject(User.class);
                     if (user != null) {
-                        Friend friend = new Friend(user);
-                        friendsL.add(0, friend);
+                        Friend foundFriend = new Friend(user);
+                        friendsList.addFriend(foundFriend);
                     } else {
                         Log.d("Error", "The search query failed");
                     }
@@ -347,8 +345,6 @@ public class ElasticSearchController {
                 } catch (Exception e) {
                     Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
-            }
-            friendsList.setList(friendsL);
             return null;
         }
 
@@ -439,15 +435,12 @@ public class ElasticSearchController {
         protected Void doInBackground(String...user_id) {
             verifySettings();
 
+            ArrayList<FriendRequest> requests = new ArrayList<>();
+
             // TODO Build the query
             String query = "{\n" +
                     "    \"query\" : {\n" +
-                    "       \"nested\" : {\n" +
-                    "           \"path\" : \"reciever\",\n" +
-                    "               \"query\" : {\n" +
-                    "                   \"term\" : { \"userId\" : \"" + user_id[0] +"\" }\n" +
-                    "                   }\n" +
-                    "               }\n" +
+                    "                   \"term\" : { \"reciver\" : \"" + user_id[0] +"\" }\n" +
                     "    }\n" +
                     "}";
 
@@ -460,8 +453,9 @@ public class ElasticSearchController {
             try {
                 SearchResult result = client.execute(search);
                 if (result.isSucceeded()) {
-                    FriendRequest request = result.getSourceAsObject(FriendRequest.class);
-                    friendRequests.addFriendRequest(request);
+                    List<FriendRequest> request = result.getSourceAsObjectList(FriendRequest.class);
+                    requests.addAll(request);
+                    friendRequests.setRequestsList(requests);
                 } else {
                     Log.d("Error", "The search query failed");
                 }
