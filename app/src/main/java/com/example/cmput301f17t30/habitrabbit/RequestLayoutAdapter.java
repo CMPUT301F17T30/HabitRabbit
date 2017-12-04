@@ -24,6 +24,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -89,6 +90,16 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
             @Override
             public void onClick(View view) {
                 //add friend to your friends list
+
+            }
+        });
+
+        Button denyButton = holder.itemView.findViewById(R.id.deny_request);
+
+        denyButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //deny friend
 
             }
         });
