@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
     public static elasticDoneBoolean elasticDone;
     public static elasticDoneBoolean userLoad;
+    public static elasticDoneBoolean friendLoad;
     public static Boolean fromMain = Boolean.FALSE;
 
     private RecyclerView recyclerView;
@@ -170,6 +171,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        friendLoad = new elasticDoneBoolean();
+
         userLoad = new elasticDoneBoolean();
         userLoad.setListener(new elasticDoneBoolean.ChangeListener() {
             @Override
@@ -177,18 +180,21 @@ public class MainActivity extends AppCompatActivity {
                 ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
                 getHabitsTask.execute(userController.getUsername());
 
-                for (String friend_id: userController.getFriends()) {
-                    ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
-                    getFriendsTask.execute(friend_id);
-                }
+                ElasticSearchController.GetFriendTask getFriendsTask = new ElasticSearchController.GetFriendTask();
+                getFriendsTask.execute("dummy");
+
+                friendLoad.setListener(new elasticDoneBoolean.ChangeListener() {
+                    @Override
+                    public void onChange() {
+                        ElasticSearchController.GetFriendEventsTask getEvents = new ElasticSearchController.GetFriendEventsTask();
+                        getEvents.execute("dummy");
+                    }
+                });
 
                 ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
                 getRequests.execute(userController.getUsername());
 
-                for (Friend friend: friendController.getFriends()) {
-                    ElasticSearchController.GetFriendEventsTask getEvents = new ElasticSearchController.GetFriendEventsTask();
-                    getEvents.execute(friend);
-                }
+
 
                 invalidateOptionsMenu();
             }

@@ -43,6 +43,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.currentUser;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendLoad;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendRequests;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.fromMain;
@@ -315,16 +316,21 @@ public class ElasticSearchController {
     }
 
     public static class GetFriendTask extends AsyncTask<String, Void, Void> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
 
         @Override
         protected Void doInBackground(String...friend) {
             verifySettings();
             // TODO Build the query
-            String query = "{\n" +
-                    "    \"query\" : {\n" +
-                    "        \"term\" : { \"userId\" : \""+friend[0]+"\" }\n" +
-                    "    }\n" +
-                    "}";
+            for (String friend_id: userController.getFriends()) {
+                String query = "{\n" +
+                        "    \"query\" : {\n" +
+                        "        \"term\" : { \"userId\" : \"" + friend_id + "\" }\n" +
+                        "    }\n" +
+                        "}";
 
 
                 Search search = new Search.Builder(query)
@@ -345,20 +351,24 @@ public class ElasticSearchController {
                 } catch (Exception e) {
                     Log.i("Error", "Something went wrong when we tried to communicate with the elasticsearch server!");
                 }
+            }
             return null;
         }
 
-
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            friendLoad.setDone(true);
+        }
 
 
     }
 
-   public static class GetFriendEventsTask extends AsyncTask<Friend, Void, Void>{
+   public static class GetFriendEventsTask extends AsyncTask<String, Void, Void>{
         @Override
-        protected Void doInBackground(Friend...friends) {
+        protected Void doInBackground(String...nothing) {
             verifySettings();
 
-            for (Friend friend: friends) {
+            for (Friend friend: friendsList.getFriends()) {
                 ArrayList<HabitEvent> friendEvents = new ArrayList<>();
                 ArrayList<Habit> friendHabits = new ArrayList<>();
                 String friendId = friend.getUser().getUserId();
