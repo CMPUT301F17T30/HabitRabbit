@@ -156,6 +156,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
         ArrayList<HabitEvent> originalList;
         ArrayList<HabitEvent> filteredList;
 
+        //maybe try getting events explicitly by position
         originalList = eventList.getList();
         filteredList = new ArrayList<>();
 
@@ -166,6 +167,8 @@ public class HabitHistoryActivity extends AppCompatActivity {
         }
 
         else if (filterType == 0) {
+            /*
+            Toast.makeText(this, "Searched for " + filterString + " by " + filterType.toString(), Toast.LENGTH_SHORT).show();
             if (filterString.length() == 0) {
                 filteredList.addAll(originalList);
             } else {
@@ -175,9 +178,17 @@ public class HabitHistoryActivity extends AppCompatActivity {
                     }
                 }
             }
+            */
+            for (int i =0;i<eventList.getSize(); i++){
+                if (eventList.getEvent(i).getHabitType().getTitle().toLowerCase().equals(filterString)){
+                    filteredList.add(eventList.getEvent(i));
+                }
+
+            }
         }
 
         else if (filterType == 1){
+            Toast.makeText(this, "Searched for " + filterString + " by " + filterType.toString(), Toast.LENGTH_SHORT).show();
             if (filterString.length() == 0) {
                 filteredList.addAll(originalList);
             } else {
