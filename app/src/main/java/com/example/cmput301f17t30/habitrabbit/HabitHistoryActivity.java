@@ -36,6 +36,8 @@ import android.widget.Filterable;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
@@ -55,8 +57,9 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private int ADD_HABIT_EVENT_REQUEST = 0;
     private int EDIT_HABIT_EVENT_REQUEST = 1;
 
-    private Boolean filter;
+    private ArrayList<HabitEvent> adapterList;
 
+    private Boolean filter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +67,8 @@ public class HabitHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_habit_history);
 
         filter = Boolean.FALSE;
+        adapterList = eventList.getList();
+        Collections.sort(adapterList,new HabitHistorySorter());
 
         habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
         habitEventlinearLayoutManager = new LinearLayoutManager(this);
@@ -212,6 +217,12 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventadapter.notifyDataSetChanged();
         filter = Boolean.TRUE;
 
+    }
+
+    public class HabitHistorySorter implements Comparator<HabitEvent> {
+        public int compare(HabitEvent a, HabitEvent b){
+            return b.getDate().compareTo(a.getDate());
+        }
     }
 
 
