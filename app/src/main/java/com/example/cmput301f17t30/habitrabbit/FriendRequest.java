@@ -28,9 +28,6 @@ public class FriendRequest {
         this.reciever = reciever;
     }
 
-    public void setSenderProfile(User senderProfile){
-        this.senderProfile = senderProfile;
-    }
 
     public User getSenderProfile(){
         User currentUser = userController.getUser();
