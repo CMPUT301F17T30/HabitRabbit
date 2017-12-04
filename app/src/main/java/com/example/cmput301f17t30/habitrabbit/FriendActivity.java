@@ -37,7 +37,7 @@ public class FriendActivity extends AppCompatActivity {
     private FriendLayoutAdapter adapter;
 
     private ArrayList<Friend> friends;
-    private ArrayList<HabitEvent> recentEvents;
+    private ArrayList<HabitEvent> recentEvents = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
