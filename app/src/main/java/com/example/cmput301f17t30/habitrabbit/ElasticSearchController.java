@@ -440,7 +440,7 @@ public class ElasticSearchController {
             // TODO Build the query
             String query = "{\n" +
                     "    \"query\" : {\n" +
-                    "                   \"term\" : { \"reciver\" : \"" + user_id[0] +"\" }\n" +
+                    "                   \"term\" : { \"reciever\" : \"" + user_id[0] +"\" }\n" +
                     "    }\n" +
                     "}";
 
@@ -457,7 +457,7 @@ public class ElasticSearchController {
                     requests.addAll(request);
                     friendRequests.setRequestsList(requests);
                 } else {
-                    Log.d("Error", "The search query failed");
+                    Log.d("Error", "The search for request query failed");
                 }
                 // TODO get the results of the query
             } catch (Exception e) {
