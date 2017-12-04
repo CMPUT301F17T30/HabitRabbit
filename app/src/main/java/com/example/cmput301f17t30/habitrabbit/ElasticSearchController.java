@@ -48,6 +48,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.fromMain;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userLoad;
 
 /**
  * Controller to deal with elastic search online behavior.
@@ -680,6 +681,9 @@ public class ElasticSearchController {
         protected void onPostExecute(Void aVoid) {
             if (fromMain == Boolean.FALSE) {
                 elasticDoneL.setDone(true);
+            }
+            else {
+                userLoad.setDone(true);
             }
         }
 

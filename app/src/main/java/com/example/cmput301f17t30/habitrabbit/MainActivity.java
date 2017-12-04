@@ -90,6 +90,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     public static elasticDoneBoolean elasticDone;
+    public static elasticDoneBoolean userLoad;
     public static Boolean fromMain = Boolean.FALSE;
 
     private RecyclerView recyclerView;
@@ -120,9 +121,6 @@ public class MainActivity extends AppCompatActivity {
             ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
             getUserTask.execute(username);
         }
-
-        ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
-        getHabitsTask.execute(userController.getUsername());
 
         adapterList = new ArrayList<Habit>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
@@ -168,6 +166,16 @@ public class MainActivity extends AppCompatActivity {
                 adapterList.clear();
                 adapterList.addAll(habitList.getList());
                 adapter.notifyDataSetChanged();
+            }
+        });
+
+        userLoad = new elasticDoneBoolean();
+        userLoad.setListener(new elasticDoneBoolean.ChangeListener() {
+            @Override
+            public void onChange() {
+                ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
+                getHabitsTask.execute(userController.getUsername());
+                invalidateOptionsMenu();
             }
         });
     }
