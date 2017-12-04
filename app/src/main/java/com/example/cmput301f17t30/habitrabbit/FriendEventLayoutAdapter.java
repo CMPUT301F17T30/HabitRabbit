@@ -28,6 +28,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -82,12 +83,15 @@ public class FriendEventLayoutAdapter extends RecyclerView.Adapter<FriendEventLa
     public void onBindViewHolder(FriendEventLayoutAdapter.ViewHolder holder, final int position) {
         final HabitEvent event = friendEvents.get(position);
         String username = event.getUserId();
-        String date = event.getDate().toString();
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String date = format.format(event.getDate());
         String type = event.getHabitType().getTitle();
         String comment = event.getComment();
 
         holder.friendName.setText(username);
-        //holder.friendImage.
+        if (event.getImage() != null) {
+            holder.friendImage.setImageBitmap(event.getImage());
+        }
         holder.friendDate.setText(date);
         holder.friendType.setText(type);
         holder.friendComment.setText(comment);
