@@ -63,13 +63,4 @@ public class TestFriendRequest {
         request.setReciever(newReciever);
         assertEquals(newReciever,request.getReciever());
     }
-
-    @Test
-    public void testSetAccepted(){
-        String sender = "Barty";
-        String reciever = "Marty";
-        FriendRequest request = new FriendRequest(sender,reciever);
-
-
-    }
 }
