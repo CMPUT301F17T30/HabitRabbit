@@ -52,7 +52,7 @@ public class HabitHistoryLayoutAdapter extends RecyclerView.Adapter<HabitHistory
     private int EVENT_DETAIL_REQUEST = 7;
 
     public HabitHistoryLayoutAdapter(ArrayList<HabitEvent> habitHistoryList, Context context) {
-        this.habitHistoryList = new ArrayList<HabitEvent>();
+        this.habitHistoryList = new ArrayList<>();
         this.habitHistoryList.addAll(habitHistoryList);
         this.historyContext = context;
     }
