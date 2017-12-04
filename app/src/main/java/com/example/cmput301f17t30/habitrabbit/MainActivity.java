@@ -187,6 +187,9 @@ public class MainActivity extends AppCompatActivity {
                 invalidateOptionsMenu();
             }
         });
+
+        ElasticSearchController.GetFriendEventsTask getEvents = new ElasticSearchController.GetFriendEventsTask();
+        getEvents.execute();
     }
 
     @Override
