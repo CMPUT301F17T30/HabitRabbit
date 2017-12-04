@@ -28,6 +28,7 @@ import android.widget.EditText;
 
 import java.util.ArrayList;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendRequests;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**
@@ -64,14 +65,11 @@ public class AddFriendDialogue extends Dialog {
     private void initalize() {
         sendFriendText = findViewById(R.id.search_friend_username);
 
-        adapterList = new ArrayList<>();
 
-        FriendRequest testRequest = new FriendRequest("billy","tommy");
-        FriendRequest testRequest2 = new FriendRequest("franklin","tommy");
-        adapterList.add(testRequest);
-        adapterList.add(testRequest2);
+        adapterList = friendRequests.getFriendRequests();
 
-        recyclerView = (RecyclerView) findViewById(R.id.requests_recyclerview);
+
+        recyclerView = findViewById(R.id.requests_recyclerview);
         linearLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new RequestLayoutAdapter(adapterList, activity);

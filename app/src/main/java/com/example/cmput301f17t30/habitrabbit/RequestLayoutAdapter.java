@@ -99,7 +99,9 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
         denyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //deny friend
+                ElasticSearchController.DeleteRequestTask deleteTask = new ElasticSearchController.DeleteRequestTask();
+                deleteTask.execute();
+                requests.remove(position);
 
             }
         });

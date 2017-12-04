@@ -124,6 +124,9 @@ public class MainActivity extends AppCompatActivity {
         ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
         getHabitsTask.execute(userController.getUsername());
 
+        ElasticSearchController.GetFriendRequestTask getRequests = new ElasticSearchController.GetFriendRequestTask();
+        getRequests.execute();
+
         adapterList = new ArrayList<Habit>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
