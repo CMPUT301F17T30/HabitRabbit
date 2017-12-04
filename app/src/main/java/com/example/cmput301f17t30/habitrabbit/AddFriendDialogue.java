@@ -91,7 +91,7 @@ public class AddFriendDialogue extends Dialog {
 
                     //clear textbox and notify user of success
                     sendFriendText.setText("");
-                    Toast.makeText(activity, "Friend added", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(activity, "Friend request sent.", Toast.LENGTH_SHORT).show();
                // }
                // else{
                //     Toast.makeText(activity, "You are not connected to the internet", Toast.LENGTH_SHORT).show();

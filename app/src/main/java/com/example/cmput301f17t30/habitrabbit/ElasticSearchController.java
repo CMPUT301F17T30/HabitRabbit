@@ -442,12 +442,7 @@ public class ElasticSearchController {
             // TODO Build the query
             String query = "{\n" +
                     "    \"query\" : {\n" +
-                    "       \"nested\" : {\n" +
-                    "           \"path\" : \"reciever\",\n" +
-                    "               \"query\" : {\n" +
-                    "                   \"term\" : { \"userId\" : \"" + user_id[0] +"\" }\n" +
-                    "                   }\n" +
-                    "               }\n" +
+                    "                   \"term\" : { \"reciver\" : \"" + user_id[0] +"\" }\n" +
                     "    }\n" +
                     "}";
 
