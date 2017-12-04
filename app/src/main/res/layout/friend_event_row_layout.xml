@@ -33,26 +33,26 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:textSize="18sp"
+            android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/friend_event_image"
+            app:layout_constraintStart_toEndOf="@+id/friend_event_username"
+            app:layout_constraintTop_toBottomOf="@+id/friend_event_type"
+            app:layout_constraintVertical_bias="0.0"
             tools:text="comment" />
 
         <TextView
             android:id="@+id/friend_event_type"
             android:layout_width="67dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
+            android:layout_height="17dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/friend_event_image"
-            app:layout_constraintHorizontal_bias="0.101"
-            app:layout_constraintStart_toEndOf="@+id/friend_event_comment"
+            app:layout_constraintStart_toEndOf="@+id/friend_event_username"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Habit Type" />
 
@@ -79,6 +79,18 @@
             android:background="@drawable/greyrabbit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/friend_event_date"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/friend_event_username"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="FriendName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </android.support.constraint.ConstraintLayout>

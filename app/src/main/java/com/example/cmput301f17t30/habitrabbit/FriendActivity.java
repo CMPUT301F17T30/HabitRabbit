@@ -37,13 +37,14 @@ public class FriendActivity extends AppCompatActivity {
     private FriendEventLayoutAdapter adapter;
 
     private ArrayList<Friend> friends;
-    private ArrayList<HabitEvent> recentEvents = new ArrayList<>();
+    private ArrayList<HabitEvent> recentEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
+        recentEvents = new ArrayList<>();
         friends = friendController.getFriends();
 
         for (Friend f : friends){
@@ -51,13 +52,11 @@ public class FriendActivity extends AppCompatActivity {
         }
 
 
-
         recyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new FriendEventLayoutAdapter(recentEvents, this);
         recyclerView.setAdapter(adapter);
-
 
 
         Button returnToMain = (Button) findViewById(R.id.main_button);
