@@ -194,7 +194,7 @@ public class ElasticSearchController {
                 if (result.isSucceeded()) {
                     List<HabitEvent> foundEvents = result.getSourceAsObjectList(HabitEvent.class);
                     events.addAll(foundEvents);
-
+                    Log.d("elastic: ", ""+events);
                     eventList.setEventList(events);
                 } else {
                     Log.e("Error", "The seach query failed");

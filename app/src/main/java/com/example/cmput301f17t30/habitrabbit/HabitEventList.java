@@ -90,6 +90,10 @@ public class HabitEventList {
     public void setEventList(ArrayList<HabitEvent> eventList) {
         this.eventList.addAll(eventList);
     }
+
+    public void clearEventList(){
+        this.eventList.clear();
+    }
 }
 
 

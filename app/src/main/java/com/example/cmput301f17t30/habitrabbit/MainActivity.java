@@ -18,6 +18,9 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
@@ -269,15 +272,20 @@ public class MainActivity extends AppCompatActivity {
             fromMain = Boolean.FALSE;
             habitController.saveAllHabits();
             userController.clearUser();
-            Intent logout = new Intent(MainActivity.this, LoginActivity.class);
+            eventList.clearEventList();
 
             //remove user from preferences
             SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(this);
             SharedPreferences.Editor editor = mySPrefs.edit();
             editor.remove("username").apply();
 
-            startActivity(logout);
-            finish();
+            Intent mStartActivity = new Intent(this, LoginActivity.class);
+            int mPendingIntentId = 123456;
+            PendingIntent mPendingIntent = PendingIntent.getActivity(this, mPendingIntentId,    mStartActivity, PendingIntent.FLAG_CANCEL_CURRENT);
+            AlarmManager mgr = (AlarmManager)this.getSystemService(Context.ALARM_SERVICE);
+            mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+            System.exit(0);
+
         }
         if (id == R.id.user_profile_button) {
             Intent profile = new Intent(MainActivity.this, UserProfileActivity.class);
