@@ -96,7 +96,6 @@ public class AddEventActivity extends AppCompatActivity {
     private double latitude;
     private double longitude;
     private String addressName;
-    private Bitmap defaultImage;
 
     private Calendar dateSelected;
 
@@ -313,7 +312,6 @@ public class AddEventActivity extends AppCompatActivity {
     private void setDateTimeField() {
         Calendar newCalendar = dateSelected;
         final String pattern1 = "dd-MM-yyyy";
-        final DateFormat formatter = new SimpleDateFormat(pattern1);
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {

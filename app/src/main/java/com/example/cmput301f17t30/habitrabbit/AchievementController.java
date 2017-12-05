@@ -30,7 +30,6 @@ import java.util.GregorianCalendar;
 
 public class AchievementController {
     private ArrayList<Achievement> achievementList = new ArrayList<>();
-    private ArrayList<Integer> isCompletedList;
     private Achievement weekendWarriorAchievement = new Achievement(10,"Complete 10 habits on a weekend", "Weekend Warrior");
     private Achievement busyAchievement = new Achievement(3,"complete 3 habits in one day","Busy Beaver");
     private Date busyDate = new Date();
