@@ -19,8 +19,6 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 
-import com.example.cmput301f17t30.habitrabbit.model.User;
-
 import org.junit.Test;
 
 import java.util.ArrayList;

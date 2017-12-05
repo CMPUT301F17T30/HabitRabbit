@@ -20,7 +20,7 @@ package com.example.cmput301f17t30.habitrabbit.MockClasses;
 
 
 
-import com.example.cmput301f17t30.habitrabbit.model.Habit;
+import com.example.cmput301f17t30.habitrabbit.Habit;
 
 import java.util.ArrayList;
 import java.util.Date;

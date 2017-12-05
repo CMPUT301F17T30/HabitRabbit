@@ -32,20 +32,20 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.MainActivity">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.HabitHistoryActivity" />
-        <activity android:name=".Activities.ViewEventDetailActivity" />
-        <activity android:name=".Activities.AddEventActivity" />
-        <activity android:name=".Activities.AddHabitActivity" />
-        <activity android:name=".Activities.EditHabitActivity" />
-        <activity android:name=".Activities.EditEventActivity" />
-        <activity android:name=".Activities.ViewHabitDetailActivity" />
+        <activity android:name=".HabitHistoryActivity" />
+        <activity android:name=".ViewEventDetailActivity" />
+        <activity android:name=".AddEventActivity" />
+        <activity android:name=".AddHabitActivity" />
+        <activity android:name=".EditHabitActivity" />
+        <activity android:name=".EditEventActivity" />
+        <activity android:name=".ViewHabitDetailActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -59,11 +59,11 @@
             android:value="AIzaSyAAhlQkgGdQM98p1yuUHw70TYhijI1NKjc" />
 
         <activity
-            android:name=".Activities.EventMapsActivity"
+            android:name=".EventMapsActivity"
             android:label="@string/title_activity_event_maps" />
-        <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.UserProfileActivity" />
-        <activity android:name=".Activities.FriendActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".UserProfileActivity" />
+        <activity android:name=".FriendActivity"></activity>
     </application>
 
 </manifest>
