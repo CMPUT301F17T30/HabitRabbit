@@ -23,7 +23,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -72,20 +71,12 @@ public class EditEventActivity extends AppCompatActivity {
 
     private ImageController imageController = new ImageController();
 
-
-    private View layout;
-
     //location
     private Button searchButton;
     private ListView locationOuput;
 
-
     private ArrayAdapter<String> adapter;
-
     private List<String> locationNameList;
-
-
-
 
     //location
     private double latitude;
@@ -93,9 +84,6 @@ public class EditEventActivity extends AppCompatActivity {
     private String addressName;
 
     private LocationController locationController;
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +94,6 @@ public class EditEventActivity extends AppCompatActivity {
         index = intentIndex.getIntExtra("pos",1);
         eventController.editEvent(index);
 
-
         final Button addImage = (Button) findViewById(R.id.add_image);
         final Button saveButton = (Button) findViewById(R.id.save_event);
         final Button gpsButton = (Button) findViewById(R.id.gps);
@@ -116,25 +103,15 @@ public class EditEventActivity extends AppCompatActivity {
 
         comment.setText(eventController.getComment(index));
         address.setText(eventController.getLocation(index));
-
-
-
         image.setImageBitmap(eventController.getImage(index));
-
-
 
         // set the information
         selectImage = eventController.getImage(index);
         if (selectImage != null ){
             image.setImageBitmap(selectImage);
         }
-
-        comment.setText(eventController.getComment(index));
-
         // pass activity to location controller
         locationController = new LocationController(this);
-
-
 
         locationInput = (EditText) findViewById(R.id.enter_location);
         searchButton = (Button) findViewById(R.id.search_location);
@@ -153,13 +130,9 @@ public class EditEventActivity extends AppCompatActivity {
         latitude = eventController.getLatitude(index);
         longitude = eventController.getLogitude(index);
 
-
-
-
         locationNameList = new ArrayList<>(); //empty in start
         adapter = new ArrayAdapter<>(this, R.layout.list_location, locationNameList);
         locationOuput.setAdapter(adapter);
-
 
         // add image
         addImage.setOnClickListener(new View.OnClickListener() {
@@ -174,8 +147,8 @@ public class EditEventActivity extends AppCompatActivity {
             }
         });
 
-        /* select location from search result
-
+        /*
+         * select location from search result
          */
         locationOuput.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -192,7 +165,6 @@ public class EditEventActivity extends AppCompatActivity {
                 // clear the search history
                 locationNameList.clear();
                 adapter.notifyDataSetChanged();
-
 
             }
 
@@ -234,8 +206,8 @@ public class EditEventActivity extends AppCompatActivity {
             }
         });
 
-        /* create a habit event object and save
-
+        /*
+         * create a habit event object and save
          */
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -261,12 +233,9 @@ public class EditEventActivity extends AppCompatActivity {
 
                     finish();
                 }
-
-
             }
         });
     }
-
 
     /**
      * call this function to open photo gallery outside the app
@@ -299,9 +268,7 @@ public class EditEventActivity extends AppCompatActivity {
             Toast.makeText(this, "Please try again", Toast.LENGTH_LONG)
                     .show();
         }
-
     }
-
 
     /**
      * Ask user for permission at runtime
@@ -417,7 +384,6 @@ public class EditEventActivity extends AppCompatActivity {
         super.onStart();
         //eventController.editHabit(index);
     }
-
 }
 
 

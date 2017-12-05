@@ -20,11 +20,9 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.app.Dialog;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 
@@ -60,7 +58,6 @@ public class HistoryFilterDialogue extends Dialog {
         searchText = findViewById(R.id.search_text);
 
         final RadioGroup filterGroup = findViewById(R.id.radio_filter_group);
-
 
         Button cancel = findViewById(R.id.search_cancel);
         cancel.setOnClickListener(new View.OnClickListener() {

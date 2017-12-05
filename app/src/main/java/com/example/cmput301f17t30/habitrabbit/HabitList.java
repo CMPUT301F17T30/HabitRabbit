@@ -39,7 +39,6 @@ public class HabitList {
     }
 
     /**
-     *
      * @param habit the habit that we wish to add
      */
     public void addHabit(Habit habit){
@@ -48,7 +47,6 @@ public class HabitList {
     }
 
     /**
-     *
      * @param position the index of the habit that we wish to edit
      * @param habit the habit that we wish to edit
      */
@@ -57,7 +55,6 @@ public class HabitList {
     }
 
     /**
-     *
      * @param position the index of the habit that we wish to delete
      */
     public void deleteHabit(int position){
@@ -65,7 +62,6 @@ public class HabitList {
     }
 
     /**
-     *
      * @param position the index of the habit what we wish to get
      * @return the habit at the specified position
      */
@@ -75,7 +71,6 @@ public class HabitList {
     }
 
     /**
-     *
      * @return the number of hbaits in the list
      */
     public int getSize(){
@@ -83,7 +78,6 @@ public class HabitList {
     }
 
     /**
-     *
      * @return the list of habits
      */
     public ArrayList<Habit> getList(){
@@ -91,7 +85,6 @@ public class HabitList {
     }
 
     /**
-     *
      * @param habits the habits to add to habitlist
      */
     public void addAll(ArrayList<Habit> habits){
@@ -109,7 +102,7 @@ public class HabitList {
      * sorts the list of habits by whether they are due today or not
      */
     public void sort(){
-        ArrayList<Habit> sortedList = new ArrayList<Habit>();
+        ArrayList<Habit> sortedList = new ArrayList<>();
         for (int i = 0; i < habitList.size(); i++){
             Habit habit = habitList.get(i);
 
@@ -119,11 +112,7 @@ public class HabitList {
             else {
                 sortedList.add(habit);
             }
-
         }
-
         habitList = sortedList;
-
     }
-
 }

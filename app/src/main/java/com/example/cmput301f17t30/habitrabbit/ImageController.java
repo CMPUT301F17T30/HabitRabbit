@@ -33,11 +33,9 @@ public class ImageController {
     //image
     private Bitmap selectImage;
 
-
     public ImageController (){
 
     }
-
 
     /**
      * pass the file path to decode it into bitmap
@@ -87,10 +85,5 @@ public class ImageController {
         }
 
         return selectImage;
-
     }
-
-
-
-
 }

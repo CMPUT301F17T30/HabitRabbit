@@ -1,9 +1,7 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import com.robotium.solo.Solo;
@@ -27,7 +25,7 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     public ViewEventDetailActivityTest(){
         super(com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.class);
 
-        ArrayList<Boolean> days = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
+        ArrayList<Boolean> days = new ArrayList<>(Arrays.asList(new Boolean[7]));
         Collections.fill(days, Boolean.TRUE);
         Habit testHabit = new Habit("test title", days, new Date());
         habitController.addHabit("test title", days, new Date());
@@ -40,7 +38,6 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     }
 
     public void setUp()throws Exception{
-        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
     public void testViewEventActivity(){
@@ -63,7 +60,6 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     }
 
     public void tearDown() throws Exception{
-        super.tearDown();
         solo.finishOpenedActivities();
     }
 }

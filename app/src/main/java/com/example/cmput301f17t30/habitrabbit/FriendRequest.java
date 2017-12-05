@@ -16,8 +16,6 @@ public class FriendRequest {
     @JestId
     private String id;
 
-
-
     /**
      * @param sender the user who sent the request
      * @param reciever the user who the request was directed to

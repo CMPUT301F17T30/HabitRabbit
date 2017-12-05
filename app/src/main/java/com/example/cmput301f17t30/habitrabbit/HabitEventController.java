@@ -18,7 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.widget.Toast;
@@ -28,7 +27,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
-import java.util.List;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.commandQueue;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;

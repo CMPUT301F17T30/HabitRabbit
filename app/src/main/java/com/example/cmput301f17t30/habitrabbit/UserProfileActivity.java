@@ -22,8 +22,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.content.res.Configuration;
-import android.content.res.Resources;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -35,26 +33,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.DisplayMetrics;
 import android.util.Log;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewFlipper;
 
-import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.EmptyStackException;
-import java.util.Locale;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
@@ -101,7 +90,7 @@ public class UserProfileActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
 
         //initialize recyclerview for friends
-        friends = MainActivity.friendsList.getFriends();
+        friends = friendsList.getFriends();
         friendsRecyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
         friendsLinearLayoutManager = new LinearLayoutManager(this);
         friendsRecyclerView.setLayoutManager(friendsLinearLayoutManager);
@@ -172,36 +161,6 @@ public class UserProfileActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-
-        String username = userController.getUsername();
-
-        menu.findItem(R.id.user_profile_button).setTitle(username);
-        return super.onPrepareOptionsMenu(menu);
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return super.onCreateOptionsMenu(menu);
-    }
-
-    // handle menu button stuff
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.logout_button) {
-            Intent logout = new Intent(UserProfileActivity.this, LoginActivity.class);
-            SharedPreferences mySPrefs =PreferenceManager.getDefaultSharedPreferences(this);
-            SharedPreferences.Editor editor = mySPrefs.edit();
-            editor.remove("username").apply();
-            startActivity(logout);
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
     private void checkPermission(int requestType) {
 
         final String permission = Manifest.permission.READ_EXTERNAL_STORAGE;
@@ -233,11 +192,6 @@ public class UserProfileActivity extends AppCompatActivity {
         // If request is cancelled, the result arrays are empty.
         if (grantResults.length > 0
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            //Bitmap newProfilePic = imageController.decodeFile(imageDecode);
-            //profilePic.setImageBitmap(newProfilePic);
-            //userController.setProfilePicture(profileImage);
-            //userController.saveUser();
-            // permission was granted
 
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -245,10 +199,6 @@ public class UserProfileActivity extends AppCompatActivity {
             // permission denied
         }
     }
-
-
-
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -271,8 +221,5 @@ public class UserProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Please try again", Toast.LENGTH_LONG)
                     .show();
         }
-
     }
-
-
 }

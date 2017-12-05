@@ -6,7 +6,6 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**
@@ -21,7 +20,6 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     }
 
     public void setUp()throws Exception{
-        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
 
@@ -35,7 +33,6 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     }
 
     public void tearDown() throws Exception {
-        super.tearDown();
         solo.finishOpenedActivities();
     }
 

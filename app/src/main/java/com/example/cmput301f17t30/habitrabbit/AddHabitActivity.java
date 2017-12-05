@@ -84,12 +84,9 @@ public class AddHabitActivity extends AppCompatActivity {
 
         dateSelected = Calendar.getInstance();
 
-
         String pattern = "dd-MM-yyyy";
         String stringDate = new SimpleDateFormat(pattern).format(new Date());
         date.setText(stringDate);
-
-
 
 
         CheckBox mondayButton = (CheckBox) findViewById(R.id.addHabitMondayCheck);
@@ -136,7 +133,6 @@ public class AddHabitActivity extends AppCompatActivity {
             }
         };
 
-
         mondayButton.setOnCheckedChangeListener(dayCheckListener);
         tuesdayButton.setOnCheckedChangeListener(dayCheckListener);
         wednesdayButton.setOnCheckedChangeListener(dayCheckListener);
@@ -152,21 +148,12 @@ public class AddHabitActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         datePickerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 setDateTimeField();
             }
         });
-
-
-
-
-
-
 
         Button doneButton = (Button) findViewById(R.id.addHabitDone);
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -183,7 +170,6 @@ public class AddHabitActivity extends AppCompatActivity {
                 catch (Exception e){
                     date.setError("Valid date required");
                 }
-
                 Boolean duplicateFlag = Boolean.FALSE;
                 for(int i = 0; i < habitList.getSize();i++){
                     String valueID = habitList.getHabit(i).getTitle();
@@ -200,8 +186,6 @@ public class AddHabitActivity extends AppCompatActivity {
                 else if (name.getText().toString().length() > 20){
                     name.setError("Habit name too long");
                 }
-
-
                 else if (reason.getText().toString().length() > 30){
                     reason.setError("Reason text too long");
                 }
@@ -251,7 +235,6 @@ public class AddHabitActivity extends AppCompatActivity {
             if (!habitReason.trim().isEmpty()){
                 habitController.setReason(habitReason);
             }
-
 
             Intent returnToMain = new Intent();
             setResult(RESULT_OK, returnToMain);

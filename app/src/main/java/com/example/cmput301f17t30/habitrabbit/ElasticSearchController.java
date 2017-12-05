@@ -20,14 +20,12 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import com.searchly.jestdroid.JestDroidClient;
 
-import android.app.ProgressDialog;
 import android.os.AsyncTask;
 import android.util.Log;
 
 import com.searchly.jestdroid.DroidClientConfig;
 import com.searchly.jestdroid.JestClientFactory;
 
-import java.security.KeyStore;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,22 +34,18 @@ import io.searchbox.core.DocumentResult;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
-import io.searchbox.core.Update;
 
 import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.filterDone;
 import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.fromHistory;
 import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.resetHistory;
 import static com.example.cmput301f17t30.habitrabbit.LoginActivity.elasticDoneL;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.currentUser;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventLoad;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendLoad;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendRequests;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.fromMain;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userLoad;
@@ -159,7 +153,7 @@ public class ElasticSearchController {
         protected Void doInBackground(String... user_id) {
             verifySettings();
 
-            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+            ArrayList<HabitEvent> events = new ArrayList<>();
 
             String query = "{\n" +
             "    \"query\": {\n" +
@@ -224,7 +218,7 @@ public class ElasticSearchController {
         @Override
         protected Void doInBackground(String... habitID) {
 
-            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+            ArrayList<HabitEvent> events = new ArrayList<>();
 
             String query = "{\n" +
                     "    \"query\" : {\n" +
@@ -267,7 +261,7 @@ public class ElasticSearchController {
         protected Void doInBackground(String... user_id) {
             verifySettings();
 
-            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+            ArrayList<HabitEvent> events = new ArrayList<>();
 
             String query = "{\n" +
                     "    \"query\": {\n" +
@@ -407,7 +401,7 @@ public class ElasticSearchController {
         protected Void doInBackground(String...user_id){
             verifySettings();
 
-            ArrayList<Habit> habits = new ArrayList<Habit>();
+            ArrayList<Habit> habits = new ArrayList<>();
 
             String query = "{\n" +
                     "    \"query\" : {\n" +

@@ -30,9 +30,7 @@
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="520dp"
-        >
-
+        android:layout_height="520dp">
 
         <EditText
             android:id="@+id/comment"

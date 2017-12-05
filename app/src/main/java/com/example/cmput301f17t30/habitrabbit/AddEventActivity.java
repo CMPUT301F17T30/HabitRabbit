@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -97,7 +96,6 @@ public class AddEventActivity extends AppCompatActivity {
     private double latitude;
     private double longitude;
     private String addressName;
-    private Bitmap defaultImage;
 
     private Calendar dateSelected;
 
@@ -277,8 +275,6 @@ public class AddEventActivity extends AppCompatActivity {
         });
     }
 
-
-
     /**
      * call this to open photo gallery outside the app
      * then once the user select the image, get the path of the image
@@ -316,7 +312,6 @@ public class AddEventActivity extends AppCompatActivity {
     private void setDateTimeField() {
         Calendar newCalendar = dateSelected;
         final String pattern1 = "dd-MM-yyyy";
-        final DateFormat formatter = new SimpleDateFormat(pattern1);
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
 
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -365,7 +360,6 @@ public class AddEventActivity extends AppCompatActivity {
         eventController.setEvent(event);
         return Boolean.TRUE;
     }
-
 
     /**
      * Ask user for permission at runtime

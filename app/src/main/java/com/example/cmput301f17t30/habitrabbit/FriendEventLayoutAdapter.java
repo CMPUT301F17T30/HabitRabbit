@@ -26,13 +26,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
-
-import org.w3c.dom.Text;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * Adapter for displaying the latest events complete by a users friend
@@ -42,11 +37,8 @@ import java.util.Date;
 public class FriendEventLayoutAdapter extends RecyclerView.Adapter<FriendEventLayoutAdapter.ViewHolder> {
 
     private ArrayList<HabitEvent> friendEvents = new ArrayList<>();
-    private Context friendContext;
 
     public FriendEventLayoutAdapter(ArrayList<HabitEvent> friendList, Context context) {
-        this.friendContext = context;
-
         this.friendEvents = friendList;
 
     }
@@ -100,7 +92,6 @@ public class FriendEventLayoutAdapter extends RecyclerView.Adapter<FriendEventLa
         holder.friendComment.setText(comment);
 
     }
-
 
     @Override
     public int getItemCount() {

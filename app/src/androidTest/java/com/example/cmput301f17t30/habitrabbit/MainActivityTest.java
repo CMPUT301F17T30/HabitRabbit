@@ -33,7 +33,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void setUp() throws Exception {
-        super.setUp();
+        //super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
 
     }
@@ -190,7 +190,6 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2 {
     }
 
     public void tearDown() throws Exception {
-        super.tearDown();
         solo.finishOpenedActivities();
     }
 

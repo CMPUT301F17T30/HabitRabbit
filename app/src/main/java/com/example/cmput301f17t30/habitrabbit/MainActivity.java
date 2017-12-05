@@ -34,8 +34,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-
-
 import java.util.ArrayList;
 
 /**
@@ -63,7 +61,6 @@ public class MainActivity extends AppCompatActivity {
     private int HABIT_HISTORY_REQUEST = 1;
     public static int VIEW_HABIT_REQUEST = 2;
     private int FRIENDS_REQUEST = 3;
-
 
     public static elasticDoneBoolean elasticDone;
     public static elasticDoneBoolean userLoad;
@@ -93,7 +90,6 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
         else{
-            //TODO make this work offline
             String username = sharedPreferences.getString("username",null);
             fromMain = Boolean.TRUE;
             ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
@@ -101,13 +97,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        adapterList = new ArrayList<Habit>();
+        adapterList = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.recyclerView1);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         adapter = new HabitLayoutAdapter(adapterList, this);
         recyclerView.setAdapter(adapter);
-
 
         Button addHabitButton = (Button) findViewById(R.id.addHabitButton);
         addHabitButton.setOnClickListener(new View.OnClickListener() {
@@ -168,7 +163,6 @@ public class MainActivity extends AppCompatActivity {
                 ElasticSearchController.GetEventTask getEventTask = new ElasticSearchController.GetEventTask();
                 getEventTask.execute(userController.getUsername());
 
-
             }
         });
 
@@ -181,8 +175,6 @@ public class MainActivity extends AppCompatActivity {
                 getEvents.execute("dummy");
             }
         });
-
-
     }
 
     @Override

@@ -25,9 +25,7 @@ package com.example.cmput301f17t30.habitrabbit;
  */
 
 public class EditHabitCommand extends Command {
-    private Habit oldHabit;
     private Habit editedHabit;
-    private User user;
 
     public EditHabitCommand(Habit habit) {
         this.editedHabit = habit;
