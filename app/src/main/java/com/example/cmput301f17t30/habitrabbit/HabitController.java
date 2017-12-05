@@ -43,72 +43,120 @@ public class HabitController {
         habit = new Habit(title, days, startDate);
     }
 
-    public void setTitle(String title){
-        habit.setTitle(title);
-    }
-
-    public void setReason(String reason){
-        habit.setReason(reason);
-    }
-
-    public void setDays(ArrayList<Boolean> days){
-        habit.setDays(days);
-    }
-
-    public void setDate(Date date){
-        habit.setStartDate(date);
-    }
-
+    /**
+     * @return the title of the current habit
+     */
     public String getTitle(){
         return habit.getTitle();
     }
 
+    /**
+     * @param title the title of the current habit
+     */
+    public void setTitle(String title){
+        habit.setTitle(title);
+    }
+
+    /**
+     * @return the reason for completing this habit
+     */
     public String getReason(){
         return habit.getReason();
     }
 
-    public int getCompleted(){
-        return habit.getTimesCompleted();
+    /**
+     * @param reason the reason for completing this habit
+     */
+    public void setReason(String reason){
+        habit.setReason(reason);
     }
 
-    public int getFailed(){
-        return habit.getTimesFailed();
-    }
-
-    public String getID() {
-        return habit.getId();
-    }
-
+    /**
+     * @return the days on which current habit is due
+     */
     public ArrayList<Boolean> getDays(){
         return habit.getDays();
     }
 
+    /**
+     * @param days the days on which current habit is due
+     */
+    public void setDays(ArrayList<Boolean> days){
+        habit.setDays(days);
+    }
+
+    /**
+     * @param date start date of current habit
+     */
+    public void setDate(Date date){
+        habit.setStartDate(date);
+    }
+
+    /**
+     * @return number of times user has successfully completed this event
+     */
+    public int getCompleted(){
+        return habit.getTimesCompleted();
+    }
+
+    /**
+     * @return number of times user has failed to complete this event
+     */
+    public int getFailed(){
+        return habit.getTimesFailed();
+    }
+
+    /**
+     * @return the unique identifer for elastic search
+     */
+    public String getID() {
+        return habit.getId();
+    }
+
+    /**
+     * @return start date of current habit
+     */
     public Date getStartDate(){
         return habit.getStartDate();
     }
 
+    /**
+     * @return the percentage completion for the current habit
+     */
     public double getPercentageCompletion(){
         habit.updateFailed();
         return habit.getPercentCompletion();
     }
 
+    /**
+     * save current habit and add it to elastic
+     */
     public void saveAddHabit(){
         habitList.addHabit(habit);
         AddHabitCommand addHabitCommand = new AddHabitCommand(habit);
         commandQueue.addTail(addHabitCommand);
     }
 
+    /**
+     * edit the current habit and save changes in elastic
+     */
     public void saveEditHabit(){
         habitList.editHabit(position, habit);
         EditHabitCommand editHabitCommand = new EditHabitCommand(habit);
         commandQueue.addTail(editHabitCommand);
     }
 
+    /**
+     * @param position the position of the habit to get
+     */
     public void viewHabit(int position){
         habit = habitList.getHabit(position);
         this.position = position;
     }
 
+    /**
+     * delete current habit, and all associated events, locally and from elastic
+     */
     public void deleteHabit(){
         eventController.deleteAllHabitEvents(habitList.getHabit(position));
         DeleteHabitCommand deleteHabitCommand = new DeleteHabitCommand(habit);
@@ -116,11 +164,12 @@ public class HabitController {
         habitList.deleteHabit(position);
     }
 
+  //TODO remove this comment if no longer needed
   /*  public void getHabits(){
         ElasticSearchController.GetHabitsTask getHabitsTask = new ElasticSearchController.GetHabitsTask();
         getHabitsTask.execute(userController.getUsername());
     }
-*/
+   */
     public void clearHabits(){
         habitList.clearAll();
     }
