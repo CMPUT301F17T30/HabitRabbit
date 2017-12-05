@@ -19,6 +19,8 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
+import com.example.cmput301f17t30.habitrabbit.model.Habit;
+import com.example.cmput301f17t30.habitrabbit.model.HabitEvent;
 
 import org.junit.Test;
 
@@ -112,6 +114,22 @@ public class TestHabitEvent {
         assertEquals(date,event.getDate());
     }
 
+    @Test
+    public void testGetUserId(){
+        Habit habit = new MockHabit();
+        HabitEvent event = new HabitEvent(habit);
+        event.setUserId("billy");
+        assertEquals("billy", event.getUserId());
+    }
 
+    @Test
+    public void testSetUserId(){
+        Habit habit = new MockHabit();
+        HabitEvent event = new HabitEvent(habit);
+        event.setUserId("billy");
+        assertEquals("billy", event.getUserId());
+        event.setUserId("timmy");
+        assertEquals("timmy", event.getUserId());
+    }
 
 }

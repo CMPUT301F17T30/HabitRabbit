@@ -18,6 +18,8 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
+import com.example.cmput301f17t30.habitrabbit.model.FriendRequest;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;

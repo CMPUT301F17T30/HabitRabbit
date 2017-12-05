@@ -23,7 +23,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#a4c639"
-    tools:context="com.example.cmput301f17t30.habitrabbit.UserProfileActivity">
+    tools:context="com.example.cmput301f17t30.habitrabbit.Activities.UserProfileActivity">
 
     <TextView
         android:id="@+id/username_text"
@@ -95,7 +95,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/user_join_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"

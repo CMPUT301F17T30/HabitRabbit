@@ -1,11 +1,12 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import android.test.ActivityInstrumentationTestCase2;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.cmput301f17t30.habitrabbit.Activities.EditEventActivity;
+import com.example.cmput301f17t30.habitrabbit.Activities.HabitHistoryActivity;
+import com.example.cmput301f17t30.habitrabbit.model.Habit;
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+import static com.example.cmput301f17t30.habitrabbit.Activities.MainActivity.eventController;
+import static com.example.cmput301f17t30.habitrabbit.Activities.MainActivity.habitController;
 
 
 /**
@@ -25,9 +26,9 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     private Solo solo;
 
     public ViewEventDetailActivityTest(){
-        super(com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.class);
+        super(HabitHistoryActivity.class);
 
-        ArrayList<Boolean> days = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
+        ArrayList<Boolean> days = new ArrayList<>(Arrays.asList(new Boolean[7]));
         Collections.fill(days, Boolean.TRUE);
         Habit testHabit = new Habit("test title", days, new Date());
         habitController.addHabit("test title", days, new Date());
@@ -40,7 +41,6 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     }
 
     public void setUp()throws Exception{
-        super.setUp();
         solo = new Solo(getInstrumentation(), getActivity());
     }
     public void testViewEventActivity(){
@@ -63,7 +63,6 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     }
 
     public void tearDown() throws Exception{
-        super.tearDown();
         solo.finishOpenedActivities();
     }
 }
