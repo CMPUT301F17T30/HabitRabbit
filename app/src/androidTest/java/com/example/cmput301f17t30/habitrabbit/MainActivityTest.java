@@ -2,23 +2,22 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.test.ActivityInstrumentationTestCase2;
 
-import android.app.Activity;
-import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.cmput301f17t30.habitrabbit.Activities.AddHabitActivity;
+import com.example.cmput301f17t30.habitrabbit.Activities.EditHabitActivity;
+import com.example.cmput301f17t30.habitrabbit.Activities.MainActivity;
+import com.example.cmput301f17t30.habitrabbit.Activities.ViewHabitDetailActivity;
+import com.example.cmput301f17t30.habitrabbit.model.Habit;
 import com.robotium.solo.Solo;
 
-import junit.framework.TestCase;
-
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
+import static com.example.cmput301f17t30.habitrabbit.Activities.MainActivity.habitList;
 
 
 /**
@@ -29,7 +28,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2 {
     private Solo solo;
 
     public MainActivityTest(){
-        super(com.example.cmput301f17t30.habitrabbit.MainActivity.class);
+        super(MainActivity.class);
     }
 
     public void setUp() throws Exception {

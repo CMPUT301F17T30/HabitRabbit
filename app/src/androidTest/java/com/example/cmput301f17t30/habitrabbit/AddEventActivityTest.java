@@ -2,21 +2,19 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.app.Activity;
 import android.test.ActivityInstrumentationTestCase2;
-import android.util.Log;
-import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.cmput301f17t30.habitrabbit.Activities.AddEventActivity;
+import com.example.cmput301f17t30.habitrabbit.Activities.MainActivity;
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
+import static com.example.cmput301f17t30.habitrabbit.Activities.MainActivity.eventController;
+import static com.example.cmput301f17t30.habitrabbit.Activities.MainActivity.habitController;
 
 /**
  * Created by gaoxin on 2017/11/13.
@@ -26,7 +24,7 @@ public class AddEventActivityTest extends ActivityInstrumentationTestCase2<MainA
     private Solo solo;
 
     public AddEventActivityTest(){
-        super(com.example.cmput301f17t30.habitrabbit.MainActivity.class);
+        super(MainActivity.class);
         ArrayList<Boolean> days = new ArrayList<>(Arrays.asList(new Boolean[7]));
         Collections.fill(days, Boolean.TRUE);
         //Habit testHabit = new Habit();

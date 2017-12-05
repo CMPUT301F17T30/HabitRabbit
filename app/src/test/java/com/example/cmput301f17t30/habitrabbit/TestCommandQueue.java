@@ -19,7 +19,11 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 
+import com.example.cmput301f17t30.habitrabbit.Commands.AddHabitCommand;
+import com.example.cmput301f17t30.habitrabbit.Commands.Command;
+import com.example.cmput301f17t30.habitrabbit.Controllers.CommandQueue;
 import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
+import com.example.cmput301f17t30.habitrabbit.model.Habit;
 
 import org.junit.Test;
 

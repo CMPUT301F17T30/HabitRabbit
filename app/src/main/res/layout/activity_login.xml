@@ -23,7 +23,7 @@
     android:id="@+id/profile_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.cmput301f17t30.habitrabbit.LoginActivity">
+    tools:context="com.example.cmput301f17t30.habitrabbit.Activities.LoginActivity">
 
     <EditText
         android:id="@+id/userName"

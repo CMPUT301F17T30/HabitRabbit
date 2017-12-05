@@ -4,6 +4,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.example.cmput301f17t30.habitrabbit.Activities.EditEventActivity;
+import com.example.cmput301f17t30.habitrabbit.Activities.HabitHistoryActivity;
+import com.example.cmput301f17t30.habitrabbit.model.Habit;
 import com.robotium.solo.Solo;
 
 import java.util.ArrayList;
@@ -11,8 +14,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
+import static com.example.cmput301f17t30.habitrabbit.Activities.MainActivity.eventController;
+import static com.example.cmput301f17t30.habitrabbit.Activities.MainActivity.habitController;
 
 
 /**
@@ -23,7 +26,7 @@ public class ViewEventDetailActivityTest extends ActivityInstrumentationTestCase
     private Solo solo;
 
     public ViewEventDetailActivityTest(){
-        super(com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.class);
+        super(HabitHistoryActivity.class);
 
         ArrayList<Boolean> days = new ArrayList<>(Arrays.asList(new Boolean[7]));
         Collections.fill(days, Boolean.TRUE);

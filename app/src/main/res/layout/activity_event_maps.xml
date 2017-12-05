@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:onClick="highlight"
-    tools:context="com.example.cmput301f17t30.habitrabbit.EventMapsActivity"
+    tools:context="com.example.cmput301f17t30.habitrabbit.Activities.EventMapsActivity"
     tools:ignore="OnClick">
 
 
