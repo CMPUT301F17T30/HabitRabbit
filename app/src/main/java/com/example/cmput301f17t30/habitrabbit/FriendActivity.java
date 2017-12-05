@@ -109,7 +109,7 @@ public class FriendActivity extends AppCompatActivity {
             else if (right.getUserId().compareToIgnoreCase(left.getUserId()) == 0)  {
                 if (left.getHabitType().getTitle().compareToIgnoreCase(right.getHabitType().getTitle()) == -1) {
                     return -1;
-                } else if (right.getHabitType().getTitle().compareToIgnoreCase(left.getHabitType().getTitle()) == -1) {
+                } else if (right.getHabitType().getTitle().compareToIgnoreCase(left.getHabitType().getTitle()) == 1) {
                     return 1;
                 }
             }
