@@ -18,10 +18,8 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.graphics.Bitmap;
-
 /**
- * Class to model an achievement and its details
+ * Class to model an achievement and its details, and track progress towards completion
  */
 
 public class Achievement {
@@ -30,7 +28,6 @@ public class Achievement {
     private Integer progress;
     private Integer progressRequired;
     private String description;
-    private Bitmap bitmap;
     private String name;
 
     /**
