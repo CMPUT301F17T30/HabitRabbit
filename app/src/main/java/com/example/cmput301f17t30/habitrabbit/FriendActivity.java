@@ -83,6 +83,7 @@ public class FriendActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent map = new Intent(FriendActivity.this, EventMapsActivity.class);
+                map.putExtra("list", 2);
                 startActivity(map);
             }
         });
