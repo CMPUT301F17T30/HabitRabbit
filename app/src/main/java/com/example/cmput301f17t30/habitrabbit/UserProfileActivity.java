@@ -50,7 +50,9 @@ import android.widget.Toast;
 import android.widget.ViewFlipper;
 
 import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.EmptyStackException;
 import java.util.Locale;
 
@@ -73,6 +75,7 @@ public class UserProfileActivity extends AppCompatActivity {
 
     private TextView usernameText;
     private ImageView profilePic;
+    private TextView joinDateText;
 
     private ImageController imageController = new ImageController();
     SharedPreferences sharedPreferences;
@@ -107,6 +110,20 @@ public class UserProfileActivity extends AppCompatActivity {
 
         usernameText = (TextView) findViewById(R.id.username_text);
         usernameText.setText(userController.getUsername());
+        joinDateText = (TextView) findViewById(R.id.user_join_date);
+
+        if (userController.getJoinDate() != null) {
+            //set the join date
+            String pattern = "dd-MM-yyyy";
+            String stringDate = new SimpleDateFormat(pattern).format(userController.getJoinDate());
+            joinDateText.setText("Joined on " + stringDate);
+        }
+        else{
+            //user is new, use today's date
+            String pattern = "dd-MM-yyyy";
+            String stringDate = new SimpleDateFormat(pattern).format(userController.getJoinDate());
+            joinDateText.setText("Joined on " + stringDate);
+        }
 
         profilePic = (ImageView) findViewById(R.id.profile_picture);
 
