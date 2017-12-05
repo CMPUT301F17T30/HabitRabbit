@@ -93,7 +93,7 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
             @Override
             public void onClick(View view) {
                 //add friend to your friends list
-                if (userController.getFriends().contains(request.getSender())){
+                if (userController.getFriends().contains(request.getSender()) || request.getSender().equals(userController.getUsername())){
 
                 } else {
                     userController.addFriend(request.getSender());
