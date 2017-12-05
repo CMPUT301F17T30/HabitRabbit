@@ -39,6 +39,8 @@ import io.searchbox.core.SearchResult;
 import io.searchbox.core.Update;
 
 import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.filterDone;
+import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.fromHistory;
+import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.resetHistory;
 import static com.example.cmput301f17t30.habitrabbit.LoginActivity.elasticDoneL;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.currentUser;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
@@ -197,6 +199,15 @@ public class ElasticSearchController {
 
             return null;
         }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (fromHistory != null){
+                resetHistory.setDone(true);
+            }
+
+        }
     }
 
     public static class GetFilteredEventsTask extends AsyncTask<String, Void, Void> {
@@ -250,24 +261,21 @@ public class ElasticSearchController {
 
             String query = "{\n" +
                     "    \"query\": {\n" +
-                    "    \"bool\": {\n" +
-                    "        \"must\": [\n" +
-                    "        {\n" +
-                    "            \"term\": {\n" +
-                    "            \"userId\": \"" + user_id[0] + "\"\n" +
-                    "        }\n" +
-                    "        },\n" +
-                    "        {\n" +
-                    "            \"range\": {\n" +
-                    "            \"date\": {\n" +
-                    "                \"gte\": \"now-4w\",\n" +
-                    "                \"lte\": \"now\"\n" +
-                    "            }\n" +
-                    "        }\n" +
-                    "        }\n" +
-                    "       ]\n" +
-                    "    }\n" +
-                    "},\n" +
+                    "       \"bool\": {\n" +
+                    "           \"must\": [\n" +
+                    "               {\n" +
+                    "                   \"term\": {\n" +
+                    "                       \"userId\": \"" + userController.getUsername() + "\"\n" +
+                    "                   }\n" +
+                    "               },\n" +
+                    "               {\n" +
+                    "                   \"match\": {\n" +
+                    "                       \"Comment\": \"" + user_id[0].toLowerCase() + "\"\n" +
+                    "                   }\n" +
+                    "               }\n" +
+                    "           ]\n" +
+                    "       }\n" +
+                    "   },\n" +
                     "    \"sort\": { \"date\" : \"desc\" }\n" +
                     "}\n";
 
@@ -293,7 +301,11 @@ public class ElasticSearchController {
             return null;
         }
 
-
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            filterDone.setDone(true);
+        }
     }
 
     public static class AddHabitTask extends AsyncTask<Habit, Void, Void> {
