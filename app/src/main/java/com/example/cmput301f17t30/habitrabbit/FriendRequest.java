@@ -19,7 +19,6 @@ public class FriendRequest {
 
 
     /**
-     *
      * @param sender the user who sent the request
      * @param reciever the user who the request was directed to
      */
@@ -31,7 +30,7 @@ public class FriendRequest {
 
     /**
      * gets the information on the user who sent the request
-     * @return the user who sent the firned request
+     * @return the user who sent the friend request
      */
     public User getSenderProfile(){
         User currentUser = userController.getUser();
@@ -42,13 +41,20 @@ public class FriendRequest {
         return senderProfile;
     }
 
+    /**
+     * @param id unique identifier for elastic search
+     */
     public void setId(String id){
         this.id = id;
     }
 
+    /**
+     * @return unique identifier for elastic search
+     */
     public String getId(){
         return id;
     }
+
     /**
      * @return the user who sent the request
      */
