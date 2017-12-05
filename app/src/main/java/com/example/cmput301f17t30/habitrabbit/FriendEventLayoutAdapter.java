@@ -36,7 +36,7 @@ import java.util.Date;
 
 /**
  * Adapter for displaying the latest events complete by a users friend
- * @See FriendActivity
+ * @see com.example.cmput301f17t30.habitrabbit.FriendActivity
  */
 
 public class FriendEventLayoutAdapter extends RecyclerView.Adapter<FriendEventLayoutAdapter.ViewHolder> {

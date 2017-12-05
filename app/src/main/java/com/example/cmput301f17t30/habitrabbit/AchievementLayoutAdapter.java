@@ -34,7 +34,8 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.achievementCon
 
 /**
  * Adapter for displaying achievements in user profile
- * @See com.example.cmput301f17t30.habitrabbit.UserProfileActivity
+ *
+ * @see com.example.cmput301f17t30.habitrabbit.UserProfileActivity
  */
 public class AchievementLayoutAdapter extends RecyclerView.Adapter<AchievementLayoutAdapter.ViewHolder> {
 

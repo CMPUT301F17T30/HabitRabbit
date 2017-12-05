@@ -49,10 +49,9 @@ public class UserController {
         userExist = flag;
     }
 
-    //TODO fix this method
+
     /**
-     *
-     * @param user
+     * @param user the current user
      */
     public void setUser(User user){
         this.user = user;
