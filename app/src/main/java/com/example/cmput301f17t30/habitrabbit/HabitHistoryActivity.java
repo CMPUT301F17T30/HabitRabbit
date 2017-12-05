@@ -32,9 +32,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Filter;
-import android.widget.Filterable;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -145,8 +142,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
                 resetHistory.reset();
             }
         });
-
-
     }
 
     @Override
@@ -163,13 +158,11 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
-
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-        //adapterList = eventList.getList();
 
         habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
         habitEventlinearLayoutManager = new LinearLayoutManager(this);
@@ -181,8 +174,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
-
-
     }
 
     @Override
@@ -201,27 +192,17 @@ public class HabitHistoryActivity extends AppCompatActivity {
         habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
 
-
-
-    //    adapterList.clear();
-    //    adapterList.addAll(eventList.getList());
-    //    habitEventadapter.notifyDataSetChanged();
-    //    habitEventrecyclerView.invalidate();
-
-
     }
 
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_EVENT_REQUEST){
             if (resultCode == RESULT_OK){
-                //habitEventController.saveAddEvent();
                 habitEventadapter.notifyDataSetChanged();
             }
         }
         if (requestCode == EDIT_HABIT_EVENT_REQUEST){
             if (resultCode == RESULT_OK){
-                //habitEventController.saveEditEvent();
                 habitEventadapter.notifyDataSetChanged();
 
             }
@@ -264,13 +245,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
      */
     public void filterHistoryList(String filterString, Integer filterType){
 
-        ArrayList<HabitEvent> originalList;
-        final ArrayList<HabitEvent> filteredList;
-
-        //maybe try getting events explicitly by position
-        originalList = eventList.getList();
-        filteredList = new ArrayList<>();
-
         if (filterType == -1){
             habitEventadapter = new HabitHistoryLayoutAdapter(eventList.getList(), this);
             habitEventrecyclerView.setAdapter(habitEventadapter);
@@ -278,27 +252,6 @@ public class HabitHistoryActivity extends AppCompatActivity {
         }
 
         else if (filterType == 0) {
-            /*
-            Toast.makeText(this, "Searched for " + filterString + " by " + filterType.toString(), Toast.LENGTH_SHORT).show();
-            if (filterString.length() == 0) {
-                filteredList.addAll(originalList);
-            } else {
-                for (HabitEvent event : originalList) {
-                    if (event.getHabitType().getTitle().toLowerCase().equals(filterString)) {
-                        filteredList.add(event);
-                    }
-                }
-            }
-            */
-
-
-           /* for (int i =0;i<eventList.getSize(); i++){
-                HabitEvent event = eventList.getEvent(i);
-                if (event.getHabitType().getTitle().toLowerCase().equals(filterString.toLowerCase())){
-                    filteredList.add(event);
-                }
-
-            }*/
 
             for (int i =0;i<habitList.getSize(); i++) {
                 String habitID;
@@ -310,19 +263,15 @@ public class HabitHistoryActivity extends AppCompatActivity {
                     break;
                 }
             }
-
-
         }
 
         else if (filterType == 1){
-            Toast.makeText(this, "Searched for " + filterString + " by " + filterType.toString(), Toast.LENGTH_SHORT).show();
             if (filterString.length() != 0) {
                 ElasticSearchController.GetSearchedEventsTask getSearchedEventsTask = new ElasticSearchController.GetSearchedEventsTask();
                 getSearchedEventsTask.execute(filterString);
             }
         }
     }
-
 
     @Override
     public void onBackPressed() {
@@ -333,20 +282,12 @@ public class HabitHistoryActivity extends AppCompatActivity {
             ElasticSearchController.GetEventTask getEventTask = new ElasticSearchController.GetEventTask();
             getEventTask.execute(userController.getUsername());
         }
-
     }
-
-
-
 
     public class HabitHistorySorter implements Comparator<HabitEvent> {
         public int compare(HabitEvent a, HabitEvent b){
             return b.getDate().compareTo(a.getDate());
         }
     }
-
-
-
-
 
 }
