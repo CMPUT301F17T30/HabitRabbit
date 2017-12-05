@@ -40,6 +40,7 @@ import java.util.Collections;
 import java.util.Comparator;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**
@@ -58,9 +59,12 @@ public class HabitHistoryActivity extends AppCompatActivity {
     private int EDIT_HABIT_EVENT_REQUEST = 1;
 
     public static elasticDoneBoolean filterDone;
+    public static elasticDoneBoolean resetHistory;
     private ArrayList<HabitEvent> adapterList;
 
     private Boolean filter;
+
+    public static Boolean fromHistory = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +72,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
         setContentView(R.layout.activity_habit_history);
 
         filter = Boolean.FALSE;
+        fromHistory = Boolean.TRUE;
         adapterList = eventList.getList();
         Collections.sort(adapterList,new HabitHistorySorter());
 
@@ -110,12 +115,29 @@ public class HabitHistoryActivity extends AppCompatActivity {
         filterDone.setListener(new elasticDoneBoolean.ChangeListener() {
             @Override
             public void onChange() {
+                filter = Boolean.TRUE;
                 adapterList.clear();
                 adapterList.addAll(eventList.getList());
                 Collections.sort(adapterList,new HabitHistorySorter());
                 habitEventadapter = new HabitHistoryLayoutAdapter(adapterList,HabitHistoryActivity.this);
                 habitEventrecyclerView.setAdapter(habitEventadapter);
                 habitEventadapter.notifyDataSetChanged();
+                filterDone.reset();
+            }
+        });
+
+        resetHistory = new elasticDoneBoolean();
+        resetHistory.setListener(new elasticDoneBoolean.ChangeListener() {
+            @Override
+            public void onChange() {
+                filter = Boolean.FALSE;
+                adapterList.clear();
+                adapterList.addAll(eventList.getList());
+                Collections.sort(adapterList,new HabitHistorySorter());
+                habitEventadapter = new HabitHistoryLayoutAdapter(adapterList,HabitHistoryActivity.this);
+                habitEventrecyclerView.setAdapter(habitEventadapter);
+                habitEventadapter.notifyDataSetChanged();
+                resetHistory.reset();
             }
         });
 
@@ -222,11 +244,11 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
             }*/
 
-            for (int i =0;i<eventList.getSize(); i++) {
+            for (int i =0;i<habitList.getSize(); i++) {
                 String habitID;
-                HabitEvent event = eventList.getEvent(i);
-                if (event.getHabitType().getTitle().toLowerCase().equals(filterString.toLowerCase())) {
-                    habitID = event.getHabitType().getId();
+                Habit habit = habitList.getHabit(i);
+                if (habit.getTitle().toLowerCase().equals(filterString.toLowerCase())) {
+                    habitID = habit.getId();
                     ElasticSearchController.GetFilteredEventsTask getFilteredEventsTask = new ElasticSearchController.GetFilteredEventsTask();
                     getFilteredEventsTask.execute(habitID);
                     break;
@@ -238,26 +260,36 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
         else if (filterType == 1){
             Toast.makeText(this, "Searched for " + filterString + " by " + filterType.toString(), Toast.LENGTH_SHORT).show();
-            if (filterString.length() == 0) {
-                filteredList.addAll(originalList);
-            } else {
-                for (HabitEvent event : originalList) {
-                    if (event.getComment().toLowerCase().contains(filterString)) {
-                        filteredList.add(event);
-                    }
-                }
+            if (filterString.length() != 0) {
+                ElasticSearchController.GetSearchedEventsTask getSearchedEventsTask = new ElasticSearchController.GetSearchedEventsTask();
+                getSearchedEventsTask.execute(filterString);
             }
         }
+    }
 
 
+    @Override
+    public void onBackPressed() {
+        if(filter == Boolean.FALSE){
+            super.onBackPressed();
+        }
+        else {
+            ElasticSearchController.GetEventTask getEventTask = new ElasticSearchController.GetEventTask();
+            getEventTask.execute(userController.getUsername());
+        }
 
     }
+
+
+
 
     public class HabitHistorySorter implements Comparator<HabitEvent> {
         public int compare(HabitEvent a, HabitEvent b){
             return b.getDate().compareTo(a.getDate());
         }
     }
+
+
 
 
 

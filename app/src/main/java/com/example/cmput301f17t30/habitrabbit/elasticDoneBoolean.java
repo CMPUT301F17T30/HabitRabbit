@@ -19,6 +19,10 @@ public class elasticDoneBoolean {
         }
     }
 
+    public void reset() {
+        elasticDone = false;
+    }
+
     public void setListener(ChangeListener listener) {
         this.listener = listener;
     }
