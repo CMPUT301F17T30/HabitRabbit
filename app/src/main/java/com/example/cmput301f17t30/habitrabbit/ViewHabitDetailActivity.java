@@ -19,7 +19,6 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -33,7 +32,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static java.lang.Math.floor;
@@ -70,16 +68,12 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
         completed = (TextView) findViewById(R.id.viewHabitCompleted);
         grade = (ImageView) findViewById(R.id.viewHabitGrade);
 
-
         String habitTitle = habitController.getTitle();
         String habitReason = habitController.getReason();
-        Date startDate = habitController.getStartDate();
 
 
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
         String dateText = format.format(habitController.getStartDate());
-        //String dateText = startDate.toString();
-
 
         double habitPercent = habitController.getPercentageCompletion();
         String percentText = Double.toString(floor(habitPercent*100)) + "%";
@@ -146,9 +140,7 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        //delete habit here
                         habitController.deleteHabit();
-
                         dialog.dismiss();
                         finish();
                     }
@@ -166,8 +158,6 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
 
     }
 
-
-
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == 0){
@@ -175,11 +165,7 @@ public class ViewHabitDetailActivity extends AppCompatActivity {
                 Intent returnToMain = new Intent();
                 setResult(RESULT_OK, returnToMain);
                 finish();
-
             }
         }
-
     }
-
-
 }

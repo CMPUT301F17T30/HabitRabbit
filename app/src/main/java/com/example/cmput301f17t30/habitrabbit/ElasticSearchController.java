@@ -159,7 +159,7 @@ public class ElasticSearchController {
         protected Void doInBackground(String... user_id) {
             verifySettings();
 
-            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+            ArrayList<HabitEvent> events = new ArrayList<>();
 
             String query = "{\n" +
             "    \"query\": {\n" +
@@ -224,7 +224,7 @@ public class ElasticSearchController {
         @Override
         protected Void doInBackground(String... habitID) {
 
-            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+            ArrayList<HabitEvent> events = new ArrayList<>();
 
             String query = "{\n" +
                     "    \"query\" : {\n" +
@@ -267,7 +267,7 @@ public class ElasticSearchController {
         protected Void doInBackground(String... user_id) {
             verifySettings();
 
-            ArrayList<HabitEvent> events = new ArrayList<HabitEvent>();
+            ArrayList<HabitEvent> events = new ArrayList<>();
 
             String query = "{\n" +
                     "    \"query\": {\n" +
@@ -407,7 +407,7 @@ public class ElasticSearchController {
         protected Void doInBackground(String...user_id){
             verifySettings();
 
-            ArrayList<Habit> habits = new ArrayList<Habit>();
+            ArrayList<Habit> habits = new ArrayList<>();
 
             String query = "{\n" +
                     "    \"query\" : {\n" +

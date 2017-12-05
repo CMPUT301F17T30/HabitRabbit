@@ -3,7 +3,6 @@ package com.example.cmput301f17t30.habitrabbit;
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -21,7 +20,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
@@ -31,7 +29,7 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 public class EventMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private Map<Marker, Integer> importmap = new HashMap<Marker, Integer>();
+    private Map<Marker, Integer> importmap = new HashMap<>();
     private LatLng current;
     private LocationController controller;
     private Marker select;
@@ -41,7 +39,6 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
     private static Integer highlightflag = 0;
     private Integer listIndex;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +47,7 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
         Intent intentIndex = getIntent();
 
         listIndex = intentIndex.getIntExtra("list",0);
-        final Button highlightButton = (Button) findViewById(R.id.highlight);
+        final Button highlightButton = findViewById(R.id.highlight);
         icon = BitmapDescriptorFactory.fromResource(R.drawable.star);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -75,12 +72,9 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
 
                     }
                 }
-
             }
         });
-
     }
-
 
     @Override
     protected void onRestart() {
@@ -112,8 +106,6 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
                 } catch (Exception e) {
 
                 }
-
-
             }
         }
     }
@@ -232,7 +224,6 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
             Toast.makeText(getApplicationContext(), "Please turn on GPS.",
                     Toast.LENGTH_LONG).show();
         }
-
 
         if (listIndex == 1) {
             for (Map.Entry<Marker, Integer> entry : importmap.entrySet()) {

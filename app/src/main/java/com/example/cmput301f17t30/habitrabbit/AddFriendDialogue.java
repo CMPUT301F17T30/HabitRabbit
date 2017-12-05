@@ -36,7 +36,6 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController
  * Popup dialogue for adding friends, and for accepting friend requests that other
  * user have sent you
  */
-
 public class AddFriendDialogue extends Dialog {
 
     private FriendActivity activity;
@@ -93,11 +92,7 @@ public class AddFriendDialogue extends Dialog {
                     sendFriendText.setText("");
                     Toast.makeText(activity, "Friend request sent.", Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
-
-
     }
 }

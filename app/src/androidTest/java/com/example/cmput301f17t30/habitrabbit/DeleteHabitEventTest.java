@@ -28,7 +28,7 @@ public class DeleteHabitEventTest extends ActivityInstrumentationTestCase2<Habit
     public DeleteHabitEventTest(){
         super(com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.class);
 
-        ArrayList<Boolean> days = new ArrayList<Boolean>(Arrays.asList(new Boolean[7]));
+        ArrayList<Boolean> days = new ArrayList<>(Arrays.asList(new Boolean[7]));
         Collections.fill(days, Boolean.TRUE);
         Habit testHabit = new Habit("test title", days, new Date());
         habitController.addHabit("test title", days, new Date());

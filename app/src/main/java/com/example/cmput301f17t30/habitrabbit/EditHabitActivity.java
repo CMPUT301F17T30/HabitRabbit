@@ -19,7 +19,6 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 
-
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -32,7 +31,6 @@ import android.widget.EditText;
 import android.widget.CheckBox;
 import android.widget.ImageButton;
 
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -43,8 +41,6 @@ import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitList;
 import static java.lang.Boolean.FALSE;
-import static java.lang.Boolean.TRUE;
-
 
 /**
  * Activity for editing a habit object.
@@ -73,10 +69,6 @@ public class EditHabitActivity extends AppCompatActivity {
     SimpleDateFormat format;
 
 
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,7 +78,6 @@ public class EditHabitActivity extends AppCompatActivity {
         String oldName = habitController.getTitle();
         String oldReason = habitController.getReason();
         Date oldDate = habitController.getStartDate();
-
 
         name = (EditText) findViewById(R.id.editHabitName);
         reason = (EditText) findViewById(R.id.editHabitReason);
@@ -128,9 +119,6 @@ public class EditHabitActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         CheckBox mondayButton = (CheckBox) findViewById(R.id.editHabitMondayCheck);
         CheckBox tuesdayButton = (CheckBox) findViewById(R.id.editHabitTuesdayCheck);
         CheckBox wednesdayButton = (CheckBox) findViewById(R.id.editHabitWednesdayCheck);
@@ -146,7 +134,6 @@ public class EditHabitActivity extends AppCompatActivity {
         fridayButton.setChecked(days.get(FRIDAY));
         saturdayButton.setChecked(days.get(SATURDAY));
         sundayButton.setChecked(days.get(SUNDAY));
-
 
         CompoundButton.OnCheckedChangeListener dayCheckListener = new CompoundButton.OnCheckedChangeListener() {
 
@@ -183,7 +170,6 @@ public class EditHabitActivity extends AppCompatActivity {
             }
         };
 
-
         mondayButton.setOnCheckedChangeListener(dayCheckListener);
         tuesdayButton.setOnCheckedChangeListener(dayCheckListener);
         wednesdayButton.setOnCheckedChangeListener(dayCheckListener);
@@ -198,7 +184,6 @@ public class EditHabitActivity extends AppCompatActivity {
                 setDateTimeField();
             }
         });
-
 
         Button doneButton = (Button) findViewById(R.id.editHabitDone);
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -221,7 +206,6 @@ public class EditHabitActivity extends AppCompatActivity {
                             earliestEventDate = event.getDate();
                         }
                     }
-
                 }
                 Boolean duplicateFlag = Boolean.FALSE;
                 for(int i = 0; i < habitList.getSize();i++){
@@ -232,15 +216,12 @@ public class EditHabitActivity extends AppCompatActivity {
                     }
                 }
 
-
                 try {
                     Date startDate = format.parse(date.getText().toString());
                 }
-
                 catch (Exception e){
                     date.setError("Valid date required");
                 }
-
                 if (name.getText().toString().trim().isEmpty()){
                     name.setError("Habit name required");
                 }
@@ -259,7 +240,6 @@ public class EditHabitActivity extends AppCompatActivity {
                 else if (duplicateFlag){
                     name.setError("Duplicate Habit name");
                 }
-
                 else {
                     editHabitDone();
                 }
@@ -272,9 +252,7 @@ public class EditHabitActivity extends AppCompatActivity {
     private void setDateTimeField() {
         Calendar newCalendar = dateSelected;
         final String pattern1 = "dd-MM-yyyy";
-        final DateFormat formatter = new SimpleDateFormat(pattern1);
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
-
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 dateSelected.set(year, monthOfYear, dayOfMonth, 0, 0);
                 date.setText(new SimpleDateFormat(pattern1).format(dateSelected.getTime()));
@@ -282,7 +260,6 @@ public class EditHabitActivity extends AppCompatActivity {
 
         },
                 newCalendar.get(Calendar.YEAR), newCalendar.get(Calendar.MONTH), newCalendar.get(Calendar.DAY_OF_MONTH));
-        //date.setText(date.getText());
         datePickerDialog.show();
     }
 
@@ -307,5 +284,4 @@ public class EditHabitActivity extends AppCompatActivity {
             e.printStackTrace();
         }
     }
-
 }

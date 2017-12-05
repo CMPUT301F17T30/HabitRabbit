@@ -20,19 +20,15 @@ package com.example.cmput301f17t30.habitrabbit;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import java.util.Date;
-import java.util.Locale;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
@@ -72,7 +68,6 @@ public class LoginActivity extends AppCompatActivity {
 
             else {
 
-                //TODO fix this
                 ElasticSearchController.GetUserTask getUserTask = new ElasticSearchController.GetUserTask();
                 getUserTask.execute(name);
                 elasticDoneL = new elasticDoneBoolean();
@@ -86,7 +81,6 @@ public class LoginActivity extends AppCompatActivity {
                             user.setJoinDate(new Date());
                             addUserTask.execute(user);
                         }
-
                         habitController.clearHabits();
 
                         //store the current user's username in phone preferences
@@ -99,17 +93,13 @@ public class LoginActivity extends AppCompatActivity {
                         startActivity(mainActivityIntent);
                         finish();
                     }
-
                 });
         }
-
-
-
         }
     };
 
+    //override back button so user cannot go back to previous activity without logging in
     @Override
     public void onBackPressed() {
-        
     }
 }

@@ -34,8 +34,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 
@@ -90,6 +88,7 @@ public class HabitLayoutAdapter extends RecyclerView.Adapter<HabitLayoutAdapter.
         Boolean sameDay;
         sameDay = habit.isSameDay();
 
+        //set the appropriate light indicator
         if (habit.isDueToday() && (sameDay == Boolean.TRUE) )
             light = BitmapFactory.decodeResource(mainContext.getResources(), R.drawable.greenlight);
         else if (habit.isDueToday() && (sameDay == Boolean.FALSE))

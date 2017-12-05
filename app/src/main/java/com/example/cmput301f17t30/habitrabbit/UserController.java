@@ -19,8 +19,6 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 
-import java.util.ArrayList;
-
 import android.graphics.Bitmap;
 
 import java.util.ArrayList;

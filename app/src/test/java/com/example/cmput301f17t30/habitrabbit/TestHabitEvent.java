@@ -18,8 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.graphics.Bitmap;
-
 import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
 
 import org.junit.Test;

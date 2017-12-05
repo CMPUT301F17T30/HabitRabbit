@@ -24,7 +24,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v4.app.ActivityCompat;
@@ -277,8 +276,6 @@ public class AddEventActivity extends AppCompatActivity {
         });
     }
 
-
-
     /**
      * call this to open photo gallery outside the app
      * then once the user select the image, get the path of the image
@@ -365,7 +362,6 @@ public class AddEventActivity extends AppCompatActivity {
         eventController.setEvent(event);
         return Boolean.TRUE;
     }
-
 
     /**
      * Ask user for permission at runtime

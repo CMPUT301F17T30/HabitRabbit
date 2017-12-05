@@ -45,7 +45,6 @@ public class LocationController {
     private List<Address> locationList = new ArrayList<>();
     private ArrayList<String> locationNameList = new ArrayList<>();
 
-
     //location
     private LocationManager locationManager;
     private LocationListener locationListener;
@@ -133,14 +132,11 @@ public class LocationController {
                     Toast.makeText(context, "Cannot get current location so location set to 0, 0.", Toast.LENGTH_LONG).show();
                 }
 
-
             }
 
             @Override
             public void onStatusChanged(String s, int i, Bundle bundle) {
-
             }
-
 
             @Override
             public void onProviderEnabled(String s) {
@@ -148,7 +144,6 @@ public class LocationController {
 
             @Override
             public void onProviderDisabled(String s) {
-
             }
         };
         // check if the gps provider is available
@@ -157,7 +152,6 @@ public class LocationController {
         }
         return 0;
     }
-
 
     public void getGpsCoordinate(Context context) {
         try {
@@ -177,10 +171,10 @@ public class LocationController {
         return gpsLongitude;
     }
 
-/**
- * get gps service and check permission
- * if location is gotten, get the name of the location
- */
+    /**
+     * get gps service and check permission
+     * if location is gotten, get the name of the location
+     */
     public String getGpsAddressName(Context context) {
         // call to check permission to access gps
         // try to get location name
@@ -205,8 +199,5 @@ public class LocationController {
         }
         return addressName;
     }
-
-
-
 }
 

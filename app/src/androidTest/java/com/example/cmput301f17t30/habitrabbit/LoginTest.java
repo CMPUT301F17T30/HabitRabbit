@@ -6,7 +6,6 @@ import android.widget.EditText;
 
 import com.robotium.solo.Solo;
 
-import static com.example.cmput301f17t30.habitrabbit.MainActivity.habitController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**

@@ -32,7 +32,6 @@ public class FriendController {
     public FriendController(){
     }
 
-
     public ArrayList<Friend> getFriends(){
         return friendsList.getFriends();
     }

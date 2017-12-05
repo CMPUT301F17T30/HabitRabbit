@@ -18,10 +18,6 @@
 
 package com.example.cmput301f17t30.habitrabbit;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;

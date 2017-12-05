@@ -51,14 +51,23 @@ public class CommandQueue {
 
     }
 
+    /**
+     * @return the command at the head of the queue
+     */
     public Command checkHead(){
         return commandQueue.peek();
     }
 
+    /**
+     * @param command the command the be added to the tail of the queue
+     */
     public void addTail(Command command){
         commandQueue.offer(command);
     }
 
+    /**
+     * executes the first command in the queue if there is internet access
+     */
     public void executeHead(){
         if (NetWorkCheck.isOnline() && (commandQueue.peek() != null)){
             commandQueue.poll().execute();

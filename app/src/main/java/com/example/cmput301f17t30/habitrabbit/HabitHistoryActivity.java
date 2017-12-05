@@ -74,7 +74,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
         filter = Boolean.FALSE;
         fromHistory = Boolean.TRUE;
-        adapterList = new ArrayList<HabitEvent>();
+        adapterList = new ArrayList<>();
 
         adapterList.addAll(eventList.getList());
 
