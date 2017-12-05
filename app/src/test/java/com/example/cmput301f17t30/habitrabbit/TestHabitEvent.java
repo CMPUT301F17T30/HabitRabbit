@@ -19,8 +19,6 @@
 package com.example.cmput301f17t30.habitrabbit;
 
 import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
-import com.example.cmput301f17t30.habitrabbit.model.Habit;
-import com.example.cmput301f17t30.habitrabbit.model.HabitEvent;
 
 import org.junit.Test;
 

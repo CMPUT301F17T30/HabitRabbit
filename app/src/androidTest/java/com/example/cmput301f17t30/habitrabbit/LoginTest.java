@@ -4,10 +4,9 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.cmput301f17t30.habitrabbit.Activities.LoginActivity;
 import com.robotium.solo.Solo;
 
-import static com.example.cmput301f17t30.habitrabbit.Activities.MainActivity.userController;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**
  * Created by gaoxin on 2017/12/1.
@@ -17,7 +16,7 @@ public class LoginTest extends ActivityInstrumentationTestCase2<LoginActivity> {
     private Solo solo;
 
     public LoginTest(){
-        super(LoginActivity.class);
+        super(com.example.cmput301f17t30.habitrabbit.LoginActivity.class);
     }
 
     public void setUp()throws Exception{

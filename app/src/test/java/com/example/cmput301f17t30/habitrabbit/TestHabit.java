@@ -22,8 +22,6 @@ package com.example.cmput301f17t30.habitrabbit;
   Created by Adam on 11-Nov-17.
  */
 
-import com.example.cmput301f17t30.habitrabbit.model.Habit;
-
 import org.junit.Test;
 
 import java.util.ArrayList;
