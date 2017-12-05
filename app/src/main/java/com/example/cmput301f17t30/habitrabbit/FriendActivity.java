@@ -29,6 +29,8 @@ import android.widget.Button;
 import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
@@ -55,6 +57,7 @@ public class FriendActivity extends AppCompatActivity {
             recent.addAll(friend.getRecentEvents());
             recentEvents.addAll(recent);
         }
+        Collections.sort(recentEvents,new FriendEventSorter());
 
 
         recyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
@@ -92,5 +95,25 @@ public class FriendActivity extends AppCompatActivity {
                 startActivity(map);
             }
         });
+    }
+
+    public class FriendEventSorter implements Comparator<HabitEvent> {
+        public int compare(HabitEvent left, HabitEvent right) {
+            if (left.getUserId().compareToIgnoreCase(right.getUserId()) == -1) {
+                return -1;
+            }
+            else if (right.getUserId().compareToIgnoreCase(left.getUserId()) == 1) {
+                return 1;
+            }
+
+            else if (right.getUserId().compareToIgnoreCase(left.getUserId()) == 0)  {
+                if (left.getHabitType().getTitle().compareToIgnoreCase(right.getHabitType().getTitle()) == -1) {
+                    return -1;
+                } else if (right.getHabitType().getTitle().compareToIgnoreCase(left.getHabitType().getTitle()) == -1) {
+                    return 1;
+                }
+            }
+                return 0;
+        }
     }
 }
