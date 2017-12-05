@@ -20,7 +20,8 @@ package com.example.cmput301f17t30.habitrabbit;
 
 /**
  * command design pattern. this inherits from command.
- * Created by WilliamWong on 2017-11-08.
+ * @see com.example.cmput301f17t30.habitrabbit.CommandQueue
+ * @see com.example.cmput301f17t30.habitrabbit.Command
  */
 
 public class AddEventCommand extends Command {

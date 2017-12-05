@@ -39,7 +39,6 @@ public class TestAchievement {
         assertEquals(Boolean.FALSE,achievement.getCompleted());
         achievement.setCompleted();
         assertEquals(Boolean.TRUE,achievement.getCompleted());
-
     }
 
     @Test

@@ -46,7 +46,6 @@ public class HabitEvent {
     @JestId
     private String id;
 
-
     /**
      * @param habitType The type of habit that this event is an instance of
      * @param location Where this event was completed
@@ -74,26 +73,30 @@ public class HabitEvent {
         date = new Date();
     }
 
-   /* public HabitEvent(Habit habitType, String location) {
-        this.habitType = habitType;
-        Location = location;
-        date = new Date();
-
-    }
-    */
-
+    /**
+     * @param id unique identifier for elastic search
+     */
     public void setId(String id) {
         this.id = id;
     }
 
+    /**
+     * @return id unique identifier for elastic search
+     */
     public String getId(){
         return id;
     }
 
+    /**
+     * @param userId username of the user who completed this event
+     */
     public void setUserId(String userId){
         this.userId = userId;
     }
 
+    /**
+     * @return username of the user who completed this event
+     */
     public String getUserId(){
         return userId;
     }
@@ -145,7 +148,6 @@ public class HabitEvent {
      * @param location The location at which this event was completed
      */
     public void setLocation(String location) {
-
         this.Location = location;
     }
 
@@ -180,13 +182,7 @@ public class HabitEvent {
         return latitude;
     }
 
-    /*
-      @param location The location at which this event was completed
-     */
-
-
     /**
-     *
      * @return the image associated with this event
      */
     public Bitmap getImage() {

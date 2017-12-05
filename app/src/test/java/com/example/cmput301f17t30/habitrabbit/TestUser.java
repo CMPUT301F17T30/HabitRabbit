@@ -36,17 +36,20 @@ public class TestUser  {
     public TestUser(){
         super ();
     }
+
     @Test
     public void testGetId(){
         User user = new User("bob");
         assertEquals("bob",user.getUserId());
     }
+
     @Test
     public void testSetId(){
         User user = new User("bob");
         user.setUserId("timmy");
         assertEquals("timmy",user.getUserId());
     }
+
     @Test
     public void testGetJoinDate(){
         User user = new User("bob");
@@ -54,6 +57,7 @@ public class TestUser  {
         user.setJoinDate(today);
         assertEquals(today,user.getJoinDate());
     }
+
     @Test
     public void testSetJoinDate(){
         User user = new User("bob");
@@ -61,6 +65,7 @@ public class TestUser  {
         user.setJoinDate(today);
         assertEquals(today,user.getJoinDate());
     }
+
     @Test
     public void testGetFriendsList(){
         User user = new User("bob");
@@ -71,6 +76,7 @@ public class TestUser  {
         user.setFriendsList(friends);
         assertEquals(friends,user.getFriendsList());
     }
+
     @Test
     public void testAddFriend(){
         User user = new User("bob");
@@ -81,7 +87,6 @@ public class TestUser  {
         user.setFriendsList(friends);
         user.addFriend("Nebuchadnezzar");
         assertEquals("Nebuchadnezzar",user.getFriendsList().get(3));
-
     }
     @Test
     public void testGetAchievementProgress(){
@@ -91,7 +96,6 @@ public class TestUser  {
         progress.add(3);
         user.setAchievementProgress(progress);
         assertEquals(progress,user.getAchievementProgress());
-
     }
     @Test
     public void testUpdateAchievementProgress(){
@@ -103,7 +107,20 @@ public class TestUser  {
         user.setAchievementProgress(progress);
         user.updateAchievementProgress(1,5);
         assertEquals((Integer)5,user.getAchievementProgress().get(1));
+    }
 
+    @Test
+    public void testSetJestId(){
+        User user = new User("Amel-Marduk");
+        user.setJestId("12345");
+        assertEquals("12345",user.getJestId());
+    }
+
+    @Test
+    public void testGetJestId(){
+        User user = new User("Darius");
+        user.setJestId("12345");
+        assertEquals("12345",user.getJestId());
     }
 
 
