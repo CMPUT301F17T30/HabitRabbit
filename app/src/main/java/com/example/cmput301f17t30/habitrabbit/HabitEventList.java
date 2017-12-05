@@ -86,6 +86,7 @@ public class HabitEventList {
      * @param eventList the list of events
      */
     public void setEventList(ArrayList<HabitEvent> eventList) {
+        this.eventList.clear();
         this.eventList.addAll(eventList);
     }
 
