@@ -91,56 +91,44 @@ public class Habit {
     }
 
     /**
-     *
      * @return the title of the habit
      */
     public String getTitle() {
-
         return Title;
     }
 
     /**
-     *
      * @param title A unique identifier string for a type of habit
      */
     public void setTitle(String title) {
-
         Title = title;
     }
 
     /**
-     *
      * @return the reason for doing the habit
      */
     public String getReason() {
-
         return Reason;
     }
 
     /**
-     *
      * @param reason the reason for doing the habit
      */
     public void setReason(String reason) {
-
         Reason = reason;
     }
 
     /**
-     *
      * @return the days of each week that the habit will be due
      */
     public ArrayList<Boolean> getDays() {
-
         return days;
     }
 
     /**
-     *
      * @param days the days of each week that the habit will be due
      */
     public void setDays(ArrayList<Boolean> days) {
-
         this.days = days;
     }
 
@@ -207,7 +195,6 @@ public class Habit {
     }
 
     /**
-     *
      * @return number of times the user has failed to complete this habit
      */
     public Integer getTimesFailed() {
@@ -215,7 +202,6 @@ public class Habit {
     }
 
     /**
-     *
      * @param timesFailed number of times the user has failed to complete this habit
      */
     public void setTimesFailed(Integer timesFailed) {
@@ -223,7 +209,6 @@ public class Habit {
     }
 
     /**
-     *
      * @return The number of times the user has completed this habit
      */
     public Integer getTimesCompleted() {
@@ -231,7 +216,6 @@ public class Habit {
     }
 
     /**
-     *
      * @param timesCompleted Number of times user has completed this habit
      */
     public void setTimesCompleted(Integer timesCompleted) {

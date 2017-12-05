@@ -64,13 +64,38 @@ public class TestHabit {
     }
 
     @Test
+    public void testSetUserId(){
+        ArrayList<Boolean> daylist = new ArrayList<>();
+        Habit habit = new Habit("title 1","test",daylist,new Date());
+        habit.setUserID("billy");
+        assertEquals("billy",habit.getUserID());
+    }
+
+    @Test
+    public void testSetId(){
+        ArrayList<Boolean> daylist = new ArrayList<>();
+        Habit habit = new Habit("title 1","test",daylist,new Date());
+        habit.setId("123");
+        assertEquals("123",habit.getId());
+    }
+
+    @Test
+    public void testGetUserId(){
+        ArrayList<Boolean> daylist = new ArrayList<>();
+        Habit habit = new Habit("title 1","test",daylist,new Date());
+        habit.setUserID("billy");
+        assertEquals("billy",habit.getUserID());
+    }
+
+    @Test
     public void testSetReason(){
         ArrayList<Boolean> daylist = new ArrayList<>();
         Habit habit = new Habit("title 1","test",daylist,new Date());
         habit.setReason("new reason");
         assertEquals(habit.getReason(),"new reason");
-
     }
+
+
 
     @Test
     public void testGetDays(){
