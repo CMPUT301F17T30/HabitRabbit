@@ -56,13 +56,6 @@ public class FriendActivity extends AppCompatActivity {
             recentEvents.addAll(recent);
         }
 
-        Habit habit = new MockHabit();
-        HabitEvent event = new HabitEvent(habit);
-        event.setDate(new Date());
-        event.setUserId("bobby");
-        event.setComment("test comment");
-        recentEvents.add(event);
-
 
         recyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
         linearLayoutManager = new LinearLayoutManager(this);
