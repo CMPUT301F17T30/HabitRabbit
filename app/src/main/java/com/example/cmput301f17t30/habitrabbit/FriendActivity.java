@@ -47,7 +47,6 @@ public class FriendActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_friends);
 
-        recentEvents = new ArrayList<>();
         friends = friendController.getFriends();
 
         for (Friend friend : friends){
@@ -63,7 +62,7 @@ public class FriendActivity extends AppCompatActivity {
         event.setComment("test comment");
         recentEvents.add(event);
 
-
+        recentEvents = new ArrayList<>();
         recyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
@@ -99,5 +98,12 @@ public class FriendActivity extends AppCompatActivity {
                 startActivity(map);
             }
         });
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        recentEvents.clear();
+
     }
 }

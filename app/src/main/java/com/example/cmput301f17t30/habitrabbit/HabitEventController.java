@@ -132,11 +132,11 @@ public class HabitEventController {
      * @param index the index of the event t be deleted
      */
     public void deleteEvent(int index){
-        eventList.deleteEvent(index);
         DeleteEventCommand deleteEventCommand = new DeleteEventCommand(habitEvent);
         commandQueue.addTail(deleteEventCommand);
         habitEvent.getHabitType().decrementTimesCompleted();
         flag = 1;
+        eventList.deleteEvent(index);
     }
 
     /**

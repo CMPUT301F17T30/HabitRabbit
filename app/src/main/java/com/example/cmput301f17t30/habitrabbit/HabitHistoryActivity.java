@@ -147,14 +147,61 @@ public class HabitHistoryActivity extends AppCompatActivity {
     @Override
     protected void onStart(){
         super.onStart();
+
+      /*  habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
+        habitEventlinearLayoutManager = new LinearLayoutManager(this);
+        habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
+        adapterList.clear();
+        adapterList.addAll(eventList.getList());
+        Collections.sort(adapterList,new HabitHistorySorter());
+        habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
+        habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
+*/
+
     }
 
     @Override
     protected void onResume(){
         super.onResume();
+
+      /*  habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
+        habitEventlinearLayoutManager = new LinearLayoutManager(this);
+        habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
+        adapterList.clear();
+        adapterList.addAll(eventList.getList());
+        Collections.sort(adapterList,new HabitHistorySorter());
+        habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
+        habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
+*/
+
+
     }
+
+    protected void onRestart() {
+        super.onRestart();
+
+        habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
+        habitEventlinearLayoutManager = new LinearLayoutManager(this);
+        habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
+        adapterList.clear();
+        adapterList.addAll(eventList.getList());
+        Collections.sort(adapterList,new HabitHistorySorter());
+        habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
+        habitEventrecyclerView.setAdapter(habitEventadapter);
+        //habitEventadapter.notifyDataSetChanged();
+
+
+
+    //    adapterList.clear();
+    //    adapterList.addAll(eventList.getList());
+    //    habitEventadapter.notifyDataSetChanged();
+    //    habitEventrecyclerView.invalidate();
+
+
+    }
+
 
     public void onActivityResult(int requestCode, int resultCode, Intent data){
         if (requestCode == ADD_HABIT_EVENT_REQUEST){
