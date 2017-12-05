@@ -26,10 +26,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
+
 import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Adapter for displaying the latest events complete by a users friend

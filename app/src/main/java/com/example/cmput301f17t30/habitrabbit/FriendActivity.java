@@ -26,7 +26,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
+
 import java.util.ArrayList;
+import java.util.Date;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 
@@ -47,9 +50,18 @@ public class FriendActivity extends AppCompatActivity {
         recentEvents = new ArrayList<>();
         friends = friendController.getFriends();
 
-        for (Friend f : friends){
-            recentEvents.addAll(f.getRecentEvents());
+        for (Friend friend : friends){
+            ArrayList<HabitEvent> recent = new ArrayList<>();
+            recent.addAll(friend.getRecentEvents());
+            recentEvents.addAll(recent);
         }
+
+        Habit habit = new MockHabit();
+        HabitEvent event = new HabitEvent(habit);
+        event.setDate(new Date());
+        event.setUserId("bobby");
+        event.setComment("test comment");
+        recentEvents.add(event);
 
 
         recyclerView = (RecyclerView) findViewById(R.id.friends_recycler_view);
