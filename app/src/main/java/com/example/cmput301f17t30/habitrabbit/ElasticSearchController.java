@@ -44,6 +44,7 @@ import static com.example.cmput301f17t30.habitrabbit.HabitHistoryActivity.resetH
 import static com.example.cmput301f17t30.habitrabbit.LoginActivity.elasticDoneL;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.currentUser;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventLoad;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.elasticDone;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendLoad;
@@ -150,6 +151,11 @@ public class ElasticSearchController {
     public static class GetEventTask extends AsyncTask<String, Void, Void> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
         protected Void doInBackground(String... user_id) {
             verifySettings();
 
@@ -188,6 +194,7 @@ public class ElasticSearchController {
                 if (result.isSucceeded()) {
                     List<HabitEvent> foundEvents = result.getSourceAsObjectList(HabitEvent.class);
                     events.addAll(foundEvents);
+
                     eventList.setEventList(events);
                 } else {
                     Log.e("Error", "The seach query failed");
@@ -205,6 +212,9 @@ public class ElasticSearchController {
             super.onPostExecute(aVoid);
             if (fromHistory != null){
                 resetHistory.setDone(true);
+            }
+            if (eventLoad != null){
+                eventLoad.setDone(true);
             }
 
         }

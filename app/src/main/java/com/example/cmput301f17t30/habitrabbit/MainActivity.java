@@ -25,6 +25,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -65,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
     public static elasticDoneBoolean userLoad;
     public static elasticDoneBoolean friendLoad;
     public static Boolean fromMain = Boolean.FALSE;
+    public static elasticDoneBoolean eventLoad;
 
     private RecyclerView recyclerView;
     private LinearLayoutManager linearLayoutManager;
@@ -163,8 +165,11 @@ public class MainActivity extends AppCompatActivity {
                 ElasticSearchController.GetEventTask getEventTask = new ElasticSearchController.GetEventTask();
                 getEventTask.execute(userController.getUsername());
 
+
             }
         });
+
+        Log.d("eventListMain", ""+eventList.getList());
 
         friendLoad.setListener(new elasticDoneBoolean.ChangeListener() {
             @Override

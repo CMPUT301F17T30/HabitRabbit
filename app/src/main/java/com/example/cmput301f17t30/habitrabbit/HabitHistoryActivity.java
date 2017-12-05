@@ -27,6 +27,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -73,7 +74,11 @@ public class HabitHistoryActivity extends AppCompatActivity {
 
         filter = Boolean.FALSE;
         fromHistory = Boolean.TRUE;
-        adapterList = eventList.getList();
+        adapterList = new ArrayList<HabitEvent>();
+
+        adapterList.addAll(eventList.getList());
+
+        Log.d("eventListAdapter",""+adapterList);
         Collections.sort(adapterList,new HabitHistorySorter());
 
         habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
@@ -148,49 +153,53 @@ public class HabitHistoryActivity extends AppCompatActivity {
     protected void onStart(){
         super.onStart();
 
-      /*  habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
+        habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
         habitEventlinearLayoutManager = new LinearLayoutManager(this);
         habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
         adapterList.clear();
         adapterList.addAll(eventList.getList());
+        Log.d("adapterList: ", ""+adapterList);
         Collections.sort(adapterList,new HabitHistorySorter());
         habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
         habitEventadapter.notifyDataSetChanged();
-*/
 
     }
 
     @Override
     protected void onResume(){
         super.onResume();
-
-      /*  habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
-        habitEventlinearLayoutManager = new LinearLayoutManager(this);
-        habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
-        adapterList.clear();
-        adapterList.addAll(eventList.getList());
-        Collections.sort(adapterList,new HabitHistorySorter());
-        habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
-        habitEventrecyclerView.setAdapter(habitEventadapter);
-        habitEventadapter.notifyDataSetChanged();
-*/
-
-
-    }
-
-    protected void onRestart() {
-        super.onRestart();
+        //adapterList = eventList.getList();
 
         habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
         habitEventlinearLayoutManager = new LinearLayoutManager(this);
         habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
         adapterList.clear();
         adapterList.addAll(eventList.getList());
+        Log.d("adapterList: ", ""+adapterList);
         Collections.sort(adapterList,new HabitHistorySorter());
         habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
         habitEventrecyclerView.setAdapter(habitEventadapter);
-        //habitEventadapter.notifyDataSetChanged();
+        habitEventadapter.notifyDataSetChanged();
+
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        //adapterList = eventList.getList();
+
+        habitEventrecyclerView = (RecyclerView) findViewById(R.id.recyclerViewHabitEvent);
+        habitEventlinearLayoutManager = new LinearLayoutManager(this);
+        habitEventrecyclerView.setLayoutManager(habitEventlinearLayoutManager);
+        adapterList.clear();
+        adapterList.addAll(eventList.getList());
+        Log.d("adapterList: ", ""+adapterList);
+        Collections.sort(adapterList,new HabitHistorySorter());
+        habitEventadapter = new HabitHistoryLayoutAdapter(adapterList, this);
+        habitEventrecyclerView.setAdapter(habitEventadapter);
+        habitEventadapter.notifyDataSetChanged();
 
 
 

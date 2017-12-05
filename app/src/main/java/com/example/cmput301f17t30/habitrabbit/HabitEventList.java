@@ -78,6 +78,7 @@ public class HabitEventList {
         return eventList;
     }
 
+
     public int getSize(){
         return eventList.size();
     }
@@ -87,7 +88,7 @@ public class HabitEventList {
      * @param eventList the list of events
      */
     public void setEventList(ArrayList<HabitEvent> eventList) {
-        this.eventList = eventList;
+        this.eventList.addAll(eventList);
     }
 }
 
