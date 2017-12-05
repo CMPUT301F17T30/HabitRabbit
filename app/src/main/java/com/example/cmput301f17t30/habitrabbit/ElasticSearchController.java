@@ -524,12 +524,12 @@ public class ElasticSearchController {
                                     .build();
                             try {
                                 SearchResult resultEvent = client.execute(searchEvent);
-                                if(resultEvent.isSucceeded()){
-                                    HabitEvent friendEvent = resultEvent.getSourceAsObject(HabitEvent.class);
+                                HabitEvent friendEvent = resultEvent.getSourceAsObject(HabitEvent.class);
+                                if(friendEvent != null){
                                     friendEvents.add(friendEvent);
                                 }
                                 else{
-                                    Log.e("Error", "The seach query friend events failed");
+                                    Log.e("Error", "the event is null");
                                 }
 
                             }
