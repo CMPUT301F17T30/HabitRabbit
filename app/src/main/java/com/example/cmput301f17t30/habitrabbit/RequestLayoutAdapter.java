@@ -34,21 +34,16 @@ import java.util.ArrayList;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
 
 /**
- * Created by Adam on 03-Dec-17.
+ * Adapter for displaying incoming friend requests
+ * @see com.example.cmput301f17t30.habitrabbit.AddFriendDialogue
  */
 
 public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdapter.ViewHolder> {
 
     private ArrayList<FriendRequest> requests;
-    private Context friendContext;
-
-
 
     public RequestLayoutAdapter(ArrayList<FriendRequest> requests, Context context) {
-        this.friendContext = context;
-
         this.requests = requests;
-
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
@@ -66,7 +61,6 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
 
         @Override
         public void onClick(View view) {
-
         }
     }
 
@@ -83,12 +77,10 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
 
         String friendName = request.getSender();
 
-
         holder.friendName.setText(friendName);
         //holder.friendProfile.setImageBitmap(friendProfilePic);
 
-        final Button acceptButton = holder.itemView.findViewById(R.id.accept_request);
-
+        Button acceptButton = holder.itemView.findViewById(R.id.accept_request);
         acceptButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -110,7 +102,6 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
         });
 
         Button denyButton = holder.itemView.findViewById(R.id.deny_request);
-
         denyButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -118,13 +109,9 @@ public class RequestLayoutAdapter extends RecyclerView.Adapter<RequestLayoutAdap
                 deleteTask.execute(request);
                 requests.remove(holder.getAdapterPosition());
                 notifyItemRemoved(holder.getAdapterPosition());
-
             }
         });
-
-
     }
-
 
     @Override
     public int getItemCount() {

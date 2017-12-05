@@ -23,8 +23,6 @@ import com.example.cmput301f17t30.habitrabbit.MockClasses.MockHabit;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.Assert.*;
 
 /**
