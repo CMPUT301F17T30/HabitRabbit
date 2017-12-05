@@ -179,7 +179,8 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
                             if (Lat != 0 && Long != 0) {
                                 LatLng pos = new LatLng(Lat, Long);
                                 Marker marker = googleMap.addMarker(new MarkerOptions().position(pos)
-                                        .title(friend.getUser().getUserId()));
+                                        .title("Friend: " + friend.getUser().getUserId())
+                                        .snippet("HabbitType: " + friendEvent.getHabitType().getTitle()));
                                 friendMarker.add(marker);
                                 googleMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
                             }
@@ -249,7 +250,6 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
             for (Marker marker: friendMarker){
                 LatLng pos = marker.getPosition();
                 double distance = CalculationByDistance(current, pos);
-
                 if (distance <= 5) {
                     marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.star));
                 }
