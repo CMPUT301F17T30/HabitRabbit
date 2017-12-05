@@ -48,8 +48,8 @@ public class FriendActivity extends AppCompatActivity {
         setContentView(R.layout.activity_friends);
 
         recentEvents = new ArrayList<>();
+        recentEvents.clear();
         friends = friendController.getFriends();
-
         for (Friend friend : friends){
             ArrayList<HabitEvent> recent = new ArrayList<>();
             recent.addAll(friend.getRecentEvents());
