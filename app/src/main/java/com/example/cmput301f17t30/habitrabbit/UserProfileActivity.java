@@ -146,7 +146,13 @@ public class UserProfileActivity extends AppCompatActivity {
         settingsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //return to main
+                try {
+                    achievementController.saveAchievementsStatus();
+                    userController.saveUser();
+                }
+                catch (NullPointerException e){
+                    Log.d("error","unable to save achievements");
+                }
                 finish();
             }
         });

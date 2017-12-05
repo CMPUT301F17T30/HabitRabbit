@@ -24,6 +24,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.userController;
+
 /**
  * Sets achivements as complete, and loads achievment status
  */
@@ -60,12 +62,30 @@ public class AchievementController {
             }
 
         }
+        try {
+            ArrayList<Integer> progress = userController.getAchievementProgress();
+
+            for (int i = 0; i < achievementList.size(); i++) {
+                if (progress.get(i) > achievementList.get(i).getProgressRequired()) {
+                    achievementList.get(i).setCompleted();
+                }
+            }
+        }
+        catch (NullPointerException e){
+
+        }
     }
 
     /**
      * save the progress for each achievement
      */
-    public void saveAchievementsStatus(){}
+    public void saveAchievementsStatus(){
+        ArrayList<Integer> progress = new ArrayList<>();
+        for (int i=0;i<achievementList.size();i++){
+            progress.add(i,achievementList.get(i).getProgress());
+        }
+        userController.setAchievementProgress(progress);
+    }
 
     /**
      * updates the progress for the achievement weekendwarrior

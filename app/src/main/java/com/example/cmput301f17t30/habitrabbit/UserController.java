@@ -34,6 +34,7 @@ public class UserController {
 
     private User user;
     private static Boolean userExist;
+    private ArrayList<Integer> achievementProgress;
 
     public UserController(){
         userExist = Boolean.FALSE;
@@ -57,6 +58,13 @@ public class UserController {
 
     public User getUser(){return user;}
 
+    public ArrayList<Integer> getAchievementProgress() {
+        return achievementProgress;
+    }
+
+    public void setAchievementProgress(ArrayList<Integer> achievementProgress) {
+        this.achievementProgress = achievementProgress;
+    }
 
     /**
      * removes the current user, used when user logs out
