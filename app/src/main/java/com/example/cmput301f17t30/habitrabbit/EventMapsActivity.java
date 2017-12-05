@@ -26,6 +26,7 @@ import java.util.Map;
 
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventController;
 import static com.example.cmput301f17t30.habitrabbit.MainActivity.eventList;
+import static com.example.cmput301f17t30.habitrabbit.MainActivity.friendsList;
 
 public class EventMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -34,15 +35,21 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
     private LatLng current;
     private LocationController controller;
     private Marker select;
+    private ArrayList<Marker> friendMarker;
     private Integer index;
     private BitmapDescriptor icon;
     private static Integer highlightflag = 0;
+    private Integer listIndex;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_maps);
 
+        Intent intentIndex = getIntent();
+
+        listIndex = intentIndex.getIntExtra("list",0);
         final Button highlightButton = (Button) findViewById(R.id.highlight);
         icon = BitmapDescriptorFactory.fromResource(R.drawable.star);
 
@@ -79,34 +86,35 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
     protected void onRestart() {
         super.onRestart();
 
-        if (eventController.isDelete() == 1) {
-            eventController.resetDelete();
-            importmap.clear();
+        if (listIndex == 1) {
+            if (eventController.isDelete() == 1) {
+                eventController.resetDelete();
+                importmap.clear();
 
-            //drawMarker(mMap);
-            mMap.clear();
-            drawMarker(mMap);
-        }
-        else{
-            try{
-                Double Lat = eventController.getLatitude(index);
-                Double Long = eventController.getLogitude(index);
-                LatLng pos = new LatLng(Lat,Long);
-                select.setPosition(pos);
-                mMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                //drawMarker(mMap);
+                mMap.clear();
+                drawMarker(mMap);
+            } else {
+                try {
+                    Double Lat = eventController.getLatitude(index);
+                    Double Long = eventController.getLogitude(index);
+                    LatLng pos = new LatLng(Lat, Long);
+                    select.setPosition(pos);
+                    mMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
 
-                double distance = CalculationByDistance(current, pos);
+                    double distance = CalculationByDistance(current, pos);
 
-                if (distance > 5 ){
-                    select.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
+                    if (distance > 5) {
+                        select.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
 
-                    //select = marker;
+                        //select = marker;
+                    }
+                } catch (Exception e) {
+
                 }
-            }catch (Exception e){
+
 
             }
-
-
         }
     }
 
@@ -122,38 +130,64 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                select = marker;
-                Intent view = new Intent(EventMapsActivity.this, ViewEventDetailActivity.class);
-                index = importmap.get(marker);
-                view.putExtra("pos", index);
-                startActivity(view);
-                return false;
-            }
-        });
+        if (listIndex == 1) {
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+                @Override
+                public boolean onMarkerClick(Marker marker) {
+                    select = marker;
+                    Intent view = new Intent(EventMapsActivity.this, ViewEventDetailActivity.class);
+                    index = importmap.get(marker);
+                    view.putExtra("pos", index);
+                    startActivity(view);
+                    return false;
+                }
+            });
+        }
 
         drawMarker(mMap);
 
     }
 
     private void drawMarker(GoogleMap googleMap){
-        if (eventList.getSize() != 0){
-            for (Integer ind = 0; ind < eventList.getSize(); ind++) {
-                try {
-                    Double Lat = eventController.getLatitude(ind);
-                    Double Long = eventController.getLogitude(ind);
-                    if (Lat != 0 && Long != 0){
-                        LatLng pos = new LatLng(Lat, Long);
-                        Marker marker = googleMap.addMarker(new MarkerOptions().position(pos)
-                                .title(eventController.getType(ind).getTitle()));
-                        importmap.put(marker, ind);
-                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+        if (listIndex == 1) {
+            if (eventList.getSize() != 0) {
+                for (Integer ind = 0; ind < eventList.getSize(); ind++) {
+                    try {
+                        Double Lat = eventController.getLatitude(ind);
+                        Double Long = eventController.getLogitude(ind);
+                        if (Lat != 0 && Long != 0) {
+                            LatLng pos = new LatLng(Lat, Long);
+                            Marker marker = googleMap.addMarker(new MarkerOptions().position(pos)
+                                    .title(eventController.getType(ind).getTitle()));
+                            importmap.put(marker, ind);
+                            googleMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                        }
+
+                    } catch (Exception e) {
+
                     }
+                }
+            }
+        } else if(listIndex == 2){
+            friendMarker = new ArrayList<>();
+            if (friendsList.getSize() != 0) {
+                for (Friend friend:friendsList.getFriends()) {
+                    for (HabitEvent friendEvent: friend.getRecentEvents()) {
+                        try {
+                            Double Lat = friendEvent.getLatitude();
+                            Double Long = friendEvent.getLogitude();
+                            if (Lat != 0 && Long != 0) {
+                                LatLng pos = new LatLng(Lat, Long);
+                                Marker marker = googleMap.addMarker(new MarkerOptions().position(pos)
+                                        .title(friend.getUser().getUserId()));
+                                friendMarker.add(marker);
+                                googleMap.moveCamera(CameraUpdateFactory.newLatLng(pos));
+                            }
 
-                } catch (Exception e){
+                        } catch (Exception e) {
 
+                        }
+                    }
                 }
             }
         }
@@ -199,15 +233,26 @@ public class EventMapsActivity extends FragmentActivity implements OnMapReadyCal
         }
 
 
-        for (Map.Entry<Marker, Integer>  entry : importmap.entrySet())  {
+        if (listIndex == 1) {
+            for (Map.Entry<Marker, Integer> entry : importmap.entrySet()) {
 
-            Marker marker = entry.getKey();
-            LatLng pos = marker.getPosition();
+                Marker marker = entry.getKey();
+                LatLng pos = marker.getPosition();
 
-            double distance = CalculationByDistance(current, pos);
+                double distance = CalculationByDistance(current, pos);
 
-            if (distance <= 5 ){
-                marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.star));
+                if (distance <= 5) {
+                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.star));
+                }
+            }
+        } else if(listIndex == 2){
+            for (Marker marker: friendMarker){
+                LatLng pos = marker.getPosition();
+                double distance = CalculationByDistance(current, pos);
+
+                if (distance <= 5) {
+                    marker.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.star));
+                }
             }
         }
     }

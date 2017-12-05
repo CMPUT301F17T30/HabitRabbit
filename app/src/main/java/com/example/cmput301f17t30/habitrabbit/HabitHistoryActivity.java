@@ -106,6 +106,7 @@ public class HabitHistoryActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent map = new Intent(HabitHistoryActivity.this, EventMapsActivity.class);
+                map.putExtra("list", 1);
                 startActivity(map);
             }
         });

@@ -26,6 +26,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -38,25 +41,29 @@ public class FriendEventLayoutAdapter extends RecyclerView.Adapter<FriendEventLa
     private ArrayList<HabitEvent> friendEvents = new ArrayList<>();
     private Context friendContext;
 
-
-
     public FriendEventLayoutAdapter(ArrayList<HabitEvent> friendList, Context context) {
         this.friendContext = context;
 
-        friendEvents = friendList;
+        this.friendEvents = friendList;
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView friendName;
         private ImageView friendImage;
+        private TextView friendDate;
+        private TextView friendType;
+        private TextView friendComment;
 
         public ViewHolder(View itemView) {
             super(itemView);
             itemView.setOnClickListener(this);
 
-            friendName = itemView.findViewById(R.id.friend_event_comment);
+            friendName = itemView.findViewById(R.id.friend_event_username);
             friendImage = itemView.findViewById(R.id.friend_event_image);
+            friendDate = itemView.findViewById(R.id.friend_event_date);
+            friendType = itemView.findViewById(R.id.friend_event_type);
+            friendComment = itemView.findViewById(R.id.friend_event_comment);
         }
 
         @Override
@@ -75,10 +82,19 @@ public class FriendEventLayoutAdapter extends RecyclerView.Adapter<FriendEventLa
     @Override
     public void onBindViewHolder(FriendEventLayoutAdapter.ViewHolder holder, final int position) {
         final HabitEvent event = friendEvents.get(position);
+        String username = event.getUserId();
+        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+        String date = format.format(event.getDate());
+        String type = event.getHabitType().getTitle();
+        String comment = event.getComment();
 
-        //holder.friendName.setText(name);
-        //holder.friendImage.setImageBitmap(friendProfilePic);
-
+        holder.friendName.setText(username);
+        if (event.getImage() != null) {
+            holder.friendImage.setImageBitmap(event.getImage());
+        }
+        holder.friendDate.setText(date);
+        holder.friendType.setText(type);
+        holder.friendComment.setText(comment);
 
     }
 
